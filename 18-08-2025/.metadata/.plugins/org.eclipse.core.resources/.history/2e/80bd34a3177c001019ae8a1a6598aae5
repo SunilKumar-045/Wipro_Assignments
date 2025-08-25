@@ -1,0 +1,32 @@
+package com.example.main;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Text {
+	public static void main(String[] args) throws InterruptedException {
+	      
+		WebDriver driver = new ChromeDriver();
+		       driver.get("E:\\html\\text.html");
+		 
+		       // Example of contains() - locate username field using partial placeholder text
+		       WebElement usernameField = driver.findElement(By.xpath("//input[contains(@placeholder,'username')]"));
+		       usernameField.sendKeys("testuser");
+
+
+		 Thread.sleep(2000);
+		        // Example of contains() - locate password field using partial attribute value
+		       WebElement passwordField = driver.findElement(By.xpath("//input[contains(@placeholder,'password')]"));
+		       passwordField.sendKeys("testpass");
+		 
+		       Thread.sleep(2000);
+		       // Example of text() - locate link by the visible text
+		       WebElement forgotLink = driver.findElement(By.xpath("//a[text()='Forgot Password?']"));
+		      forgotLink.click();
+		 
+		       driver.quit();
+		   }
+
+}

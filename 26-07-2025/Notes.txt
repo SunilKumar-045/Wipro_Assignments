@@ -1,0 +1,540 @@
+26/07/2025
+package pkg_oops;
+// Scanner class is a part of the "java.util" package. It is used
+// for reading the input from the console.
+import java.util.Scanner;
+public class ScannerClasImpl {
+ 
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter your name: ");
+		String name = sc.nextLine();
+		System.out.println("Your age :");
+		int age = sc.nextInt();
+		System.out.println("Name is: "+name+","+"Age is: "+age);
+		// for double variable the method is: nextDouble()
+		// for boolean the method is: nextBoolean()
+	}
+
+ 
+}
+package pkg_oops;
+ 
+import java.util.Scanner;
+public class ExceptionHandlingArithmetic {
+ 
+	public static void main(String[] args) {
+	int num,den,result;
+	Scanner sc = new Scanner(System.in);
+	System.out.print("Enter the numerator: ");
+	num = sc.nextInt();
+	System.out.println("Enter the denominator: ");
+	den = sc.nextInt();
+	try {
+		result = num/den;
+		System.out.println("Result is: "+result);
+	}catch(Exception e) {
+		System.out.println("Cannot divide the numerator by zero");
+		e.printStackTrace();
+	}
+	//Optional block
+	finally{
+		result = num/30;
+		System.out.println("Result is: "+result);
+		System.out.println("Finally block will always be executed no matter exception occurs or not");
+	}
+	}
+ 
+}
+
+package pkg_oops;
+ 
+import java.util.Scanner;
+
+public class ExceptionHandlingArithmetic {
+ 
+	public static void main(String[] args) {
+
+	int num,den,result;
+
+	Scanner sc = new Scanner(System.in);
+
+	System.out.print("Enter the numerator: ");
+
+	num = sc.nextInt();
+
+	System.out.println("Enter the denominator: ");
+
+	den = sc.nextInt();
+
+	// Try block may be followed either by CATCH block or FINALLY block
+
+	try {
+
+		int[] arr = new int[4];
+
+		arr[5]=343;
+
+		result = num/den;
+
+		System.out.println("Result is: "+result);
+
+	}catch(ArithmeticException e) {
+
+		System.out.println("Cannot divide the numerator by zero");
+
+		e.printStackTrace();
+
+	}catch(ArrayIndexOutOfBoundsException ae) {
+
+		System.out.println("Index not Valid");
+
+	}
+
+	//Optional block
+
+	finally{
+
+		result = num/30;
+
+		System.out.println("Result is: "+result);
+
+		System.out.println("Finally block will always be executed no matter exception occurs or not");
+
+	}
+
+	}
+ 
+}
+
+ 
+Exception Handling
+Exception handling in Java is a powerful mechanism that allows developers to manage runtime errors, maintain normal application flow, and improve program reliability and user experience.
+What is an Exception?
+An exception is an event that occurs during the execution of a program that disrupts the normal flow of instructions. It typically occurs due to:
+Invalid user input
+File not found
+Network issues
+Division by zero
+Accessing an invalid array index, etc.
+
+Types of Exceptions in Java
+1. Checked Exceptions
+Checked at compile time.
+Must be either caught or declared to be thrown.
+Examples:
+IOException
+SQLException
+FileNotFoundException
+
+2. Unchecked Exceptions (Runtime Exceptions)
+Checked at runtime.
+Generally caused by programming bugs.
+Examples:
+ArithmeticException
+NullPointerException
+ArrayIndexOutOfBoundsException
+3. Errors
+Serious problems beyond the control of the application (e.g., memory issues).
+Example:
+OutOfMemoryError
+StackOverflowError
+Java Exception Hierarchy
+Throwable
+├── Error (not usually caught)
+└── Exception
+   ├── Checked Exceptions
+   └── RuntimeException (Unchecked Exceptions)
+Java Exception Handling Keywords
+1. try
+Contains code that might throw an exception.
+try {
+   // code that might throw an exception
+}
+2. catch
+Handles the exception thrown in try.
+catch (ExceptionType name) {
+   // handling code
+}
+3. finally (Optional block)
+Contains code that always executes, whether or not an exception occurs.
+finally {
+   // cleanup code
+}
+ 
+4. throw
+Used to explicitly throw an exception.
+throw new ArithmeticException("Division by zero");
+5. throws
+Used in method declarations to specify which exceptions can be thrown.
+public void readFile() throws IOException {
+   // method code
+}
+Example
+public class ExceptionExample {
+   public static void main(String[] args) {
+       try {
+           int data = 10 / 0;  // throws ArithmeticException
+       } catch (ArithmeticException e) {
+          System.out.println("Exception caught: " + e);
+       } finally {
+          System.out.println("Finally block always executes.");
+       }
+   }
+}
+Output:
+Exception caught: java.lang.ArithmeticException: / by zero
+Finally block always executes.
+ 
+Multiple Catch Blocks
+You can catch multiple exceptions using multiple catch blocks.
+try {
+   int a = 50 / 0;
+} catch (ArithmeticException e) {
+  System.out.println("Arithmetic Exception");
+} catch (Exception e) {
+  System.out.println("General Exception");
+}
+Note: Catch the most specific exceptions first (child classes).
+Custom Exceptions
+You can create your own exception class by extending Exception or RuntimeException.
+class MyException extends Exception {
+   MyException(String message) {
+      super(message);
+   }
+}
+Usage:
+public class TestCustomException {
+   static void checkAge(int age) throws MyException {
+       if (age < 18)
+           throw new MyException("Not eligible to vote");
+   }
+ 
+   public static void main(String[] args) {
+       try {
+          checkAge(16);
+       } catch (MyException e) {
+          System.out.println("Caught exception: " + e.getMessage());
+       }
+   }
+}
+Best Practices
+Catch specific exceptions instead of generic ones.
+Use finally for releasing resources like file streams or DB connections.
+Don't suppress exceptions silently.
+Avoid using exceptions for control flow.
+Always close resources (try-with-resources is helpful here).
+try-with-resources (Java 7+)
+Automatically closes resources like files.
+try (BufferedReader br = new BufferedReader(new FileReader("file.txt"))) {
+   String line = br.readLine();
+} catch (IOException e) {
+  e.printStackTrace();
+}
+Summary
+Keyword
+	
+Purpose
+
+
+try
+	
+Block to monitor for exceptions
+
+
+catch
+	
+Handles specific exceptions
+
+
+finally
+	
+Executes regardless of exception occurrence
+
+
+throw
+	
+Explicitly throws an exception
+
+
+throws
+	
+Declares exceptions a method may throw
+ 
+ /////////////////////////////////////////////Nested try block
+
+Exception occurs in TRY block and handles in CATCH block
+ 
+class NestedTry {
+
+    public static void main(String[] args) {
+
+		int[] numbers = {100,0};
+
+        try {
+
+            System.out.println("Outer try block");
+ 
+            try {
+
+                System.out.println("Inner try block");
+
+                int result = numbers[0] / numbers[1];  
+
+                System.out.println("Result: " + result);
+
+            } catch (ArithmeticException e) {
+
+                System.out.println("Inner try's catch: Divide by zero!");
+
+            }
+ 
+            int value = numbers[2];  
+
+            System.out.println("Value: " + value);
+ 
+        } catch (ArrayIndexOutOfBoundsException e) {
+
+            System.out.println("Outer catch: Array index out of bounds!");
+
+        }
+
+		finally{
+
+			System.out.println("Example of outer/Inner try block");
+
+		}
+
+ 
+    }
+
+}
+ 
+Enter the numerator: 222
+Enter the denominator: 
+0
+Cannot divide the numerator by zero
+Object: java.lang.ArithmeticException: / by zero
+java.lang.ArithmeticException: / by zero
+	at pkg_oops.ExceptionHandlingArithmetic.main(ExceptionHandlingArithmetic.java:20)
+Message: / by zero
+Result is: 7
+Finally block will always be executed no matter exception occurs or not
+
+e.printmessage should be printed in sysout
+
+
+program for exception in catch block
+class ExCatchBlock{
+	public static void main(String[] args){
+		try{
+			int x= 12/0;
+		}catch(ArithmeticException ae){
+			System.out.println("ArithmeticExceptiopn Caught hers: "+ae);
+			try{
+				String str=null;
+				int str_length = str.length();
+			}catch(NullPointerException ne){
+				System.out.println("NullPointerException Occured");
+			}
+		}
+		finally{
+			System.out.println("Finally block executed...."); 
+		}
+	}
+}	
+
+throw
+
+class Throw_Throws {
+ 
+    public static void checkAge(int age) {
+
+        if (age < 18) {
+
+            throw new IllegalArgumentException("Access denied – You must be at least 18 years old.");
+
+        } else {
+
+            System.out.println("Access granted – You are eligible to cast a vote!");
+
+        }
+
+    }
+ 
+    public static void main(String[] args) {
+
+        try {
+
+            checkAge(19);  
+
+        } catch (IllegalArgumentException e) {
+
+            System.out.println("Exception caught: " + e.getMessage());
+
+        }
+ 
+        System.out.println("Program continues...");
+
+    }
+
+}
+
+ 
+class ExCatchBlock{
+
+	public static void main(String[] args){
+
+		int x=0;
+
+		try{
+
+			x= 12/0;
+
+		}catch(ArithmeticException ae){
+
+			System.out.println("ArithmeticExceptiopn Caught hers: "+ae);
+
+			try{
+
+				String str=null;
+
+				int str_length = str.length();
+
+			}catch(NullPointerException ne){
+
+				System.out.println("NullPointerException Occured");
+
+			}
+
+		}
+
+		finally{
+
+				x=12/2;
+
+			System.out.println("X: "+x+" Finally block executed...."); 
+
+		}
+
+	}
+
+}	
+ 
+throws
+
+class Throw_Throws {
+ 
+    public static void checkAge(int age) throws IllegalArgumentException{
+
+        if (age < 18) {
+
+            throw new IllegalArgumentException("Access denied – You must be at least 18 years old.");
+
+        } else {
+
+            System.out.println("Access granted – You are eligible to cast a vote!");
+
+        }
+
+    }
+ 
+    public static void main(String[] args) {
+
+        try {
+
+            checkAge(19);  
+
+        } catch (IllegalArgumentException e) {
+
+            System.out.println("Exception caught: " + e.getMessage());
+
+        }
+ 
+        System.out.println("Program continues...");
+
+    }
+
+}
+
+ What Is Exception Propagation in Java?
+In Java, when an exception occurs and is not caught in the current method, it is automatically passed (propagated) to the method that called it. This continues up the call stack until the exception is either:
+Caught using a try-catch block, or
+Terminates the program if not handled anywhere.
+Java Example:
+public class ExceptionPropagation {
+   public static void methodA() {
+       methodB();
+   }
+   public static void methodB() {
+       methodC();
+   }
+   public static void methodC() {
+       // Exception occurs here
+       int result = 10 / 0; 
+   }
+   public static void main(String[] args) {
+       methodA();
+   }
+}
+What Happens Here:
+methodC() causes a divide by zero (ArithmeticException).
+There is no try-catch, so it propagates to methodB(), then to methodA(), then to main().
+Since no one handles it, the program crashes and prints a stack trace.
+ 
+Key Points:
+Propagation = passing the exception to the calling method.
+Works for both checked and unchecked exceptions.
+You can use throws in method signatures to allow exceptions to propagate for checked exceptions.
+Example with Checked Exception (IOException):
+import java.io.*;
+public class Example {
+   public static void methodA() throws IOException {
+       methodB();
+   }
+   public static void methodB() throws IOException {
+       throw new IOException("File not found");
+   }
+   public static void main(String[] args) {
+       try {
+           methodA();
+       } catch (IOException e) {
+          System.out.println("Caught exception: " + e.getMessage());
+       }
+   }
+}
+NOTE: In this case, the exception is declared with throws, and main() handles it.
+ 
+
+///////////////////////////////Custom checked exception
+class InvalidAgeException extends Exception {
+ 
+    // Default constructor
+    public InvalidAgeException() {
+        super("Invalid age provided");
+    }
+ 
+    // Constructor with custom message
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+class AgeValidator {
+    public void validate(int age) throws InvalidAgeException {
+        if (age < 18) {
+            throw new InvalidAgeException("Age must be at least 18 to cast a vote!!!!");
+        }
+    }
+ 
+    public static void main(String[] args) {
+        AgeValidator validator = new AgeValidator();
+        try {
+            validator.validate(16);
+        } catch (InvalidAgeException e) {
+            System.out.println("Caught exception: " + e.getMessage());
+        }
+    }
+}
+
+
+==========================================================================================================================================================

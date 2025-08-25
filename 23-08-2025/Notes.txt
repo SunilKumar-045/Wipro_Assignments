@@ -1,0 +1,401 @@
+23/08/2025
+
+1.What is Junit primarily used for?
+Unit testing->Junit is primarily used for unit testing where every unit is tested individually
+
+2.Which annotation is used to indicate a test method in Junit5
+@Test->this annotation marks the method as a test method to test
+
+3.what does the @BeforeEach annotation do in Junit5
+Runs before each test method->this annotation makes the method to run before each test method
+
+4.Which of the following methods is used to assert that two values are equal in junit
+assertEquals()->this method checks the whether two values are equal or not
+
+5.what is the purpose of the @AfterEach annotation
+Runs after each test method->this annotation makes the method to run after each test method
+
+6.what will happen if an assertion fails in a Junit test
+The test fails->we use assertion to test the whether the method passes/fails/skips
+
+7.which of the following junit versions introduced the org.junit.jupiter package
+Junit5->this version introduced org.junit.jupiter package, older version are from different package
+
+8.which annotation runs only once before all tests in a class
+@BeforeAll-> this annotation runs only once before all tests
+
+9.what does the @Disabled annotation do
+Skips the test->this annotation makes the method to skip from testing
+
+10.which method checks that a condition is true
+assertTrue()->this method checks the condition is true or not and return 
+true if the condition is satisified if not it return false 
+
+11.which class contains static assertion method in junit5
+Assertions class contains the static assertion method to test the method in
+junit5 where class is not required to call the method
+
+12.which of these is NOT a valid JUnit annotation
+@PreTest->this annotation is not valid and not there in junit
+
+13.what is used to group related test classes in junit 5
+@Suite is to group related test classes and execute them all
+
+14.what does the @AfterAll annotation signify
+Run once after all test methods->this makes the method to run once only after the all the test methods
+
+15.what does assertThrows() do in Junit5
+Expects an expection to be thrown->this method expects the particular expection to be thrown 
+by the test method if not the test fails
+
+16.how can you run junit tests from the command line
+JUnitCore class is the main entry point for running JUnit tests from the command line.
+
+17.which junit annotation is used to provide a custom display name for test methods
+@DisplayName -> this annotation makes the method more descriptive
+
+18.which annotation would be used to create parameterized tests in junit5
+@ParameterizedTest->this annotation makes the method executes multiple times with different data
+
+19.what is the main benefit of using unit tests
+improves code reliability->unit test makes to find bugs early in the development process
+
+20.in junit5 what is the correct way to assert that a list is not empty
+assertFalse(list.isEmpty()) this condition checks the list is empty and returns true and false if not empty
+
+==================================================================================================================================
+
+What is Git?
+Git is a distributed version control system used to track changes in source code during software development.
+It allows multiple developers to work on a project simultaneously without overwriting each other's work.
+Key Features of Git:
+Feature
+	
+Description
+
+
+Version Control
+	
+Tracks changes in files over time. You can go back to previous versions easily.
+
+
+Distributed System
+	
+Every developer has a full copy of the repository, including history. No need to be online to make commits.
+
+
+Branching & Merging
+	
+Create branches to develop features or fix bugs independently, then merge them back.
+
+
+Speed & Performance
+	
+Git is fast and efficient, even for large projects.
+
+
+Collaboration
+	
+Works seamlessly with GitHub, GitLab, Bitbucket, etc., for team collaboration.
+What Can You Do With Git?
+Save versions of your code (commits)
+Revert to older versions if something breaks
+Work on multiple features or fixes in parallel (branches)
+Collaborate with others on the same project
+Review code changes before merging (with tools like GitHub)
+Git vs GitHub
+Git
+	
+GitHub
+
+
+Local tool for version control
+	
+Cloud-based platform for hosting Git repositories
+
+
+Runs on your computer
+	
+Accessible via browser
+
+
+Open-source and free
+	
+Offers collaboration, project management, and CI/CD tools
+ 
+                                                           -----------------------
+ 
+Git Fundamentals
+Git is a version control system that lets you track changes to files and coordinate work on software projects among multiple people.
+2. Git Structure Basics
+Area
+	
+Description
+
+
+Working Directory
+	
+Your current project folder with actual files
+
+
+Staging Area (Index)
+	
+A place to prepare changes before committing
+
+
+Local Repository
+	
+Where commits (history) are stored locally
+
+
+Remote Repository
+	
+A version of your repo hosted on platforms like GitHub
+3. Fundamental Git Commands
+Initialization & Configuration
+git init                    # Start a new local Git repository
+git config --global user.name "Your Name"
+git config --global user.email "you@abc.com"
+Tracking & Saving Changes
+git status                  # Check current changes
+git add <file>               # Stage specific file(s)
+git add .                    # Stage all changed files
+git commit -m "Message"      # Commit with a message
+Viewing History
+git log                     # Show full commit history
+git log --oneline           # Condensed commit history
+git diff                    # Show unstaged changes
+Branching
+git branch                  # List all branches
+git branch <branch-name>     # Create a new branch
+git checkout <branch-name>   # Switch branches
+git checkout -b <name>       # Create and switch to new branch
+Merging & Rebasing
+git merge <branch>           # Merge a branch into current
+git rebase <branch>          # Reapply commits on top of another base (advanced)
+Working with Remote Repos (GitHub, GitLab, etc.)
+git remote add origin <url>  # Add a remote repository
+git push -u origin main     # Push code to GitHub for the first time
+git pull                    # Pull changes from remote
+git fetch                   # Download latest history (no merge)
+Undoing Changes
+git reset <file>             # Unstage a file
+git checkout -- <file>       # Discard changes in a file
+git reset --soft HEAD~1     # Undo last commit but keep changes staged
+git reset --hard HEAD~1     # Completely undo last commit and changes
+ 
+                                                                          ==========
+ Install Git on your local machine (Windows):
+For Windows:
+Download Git:
+Go to the official Git website: https://git-scm.com/download/win
+The download should start automatically.
+Run the Installer:
+Open the downloaded .exe file.
+Follow the Setup Wizard:
+Choose the default options unless you have a reason to change them.
+Important: When prompted about adjusting your PATH environment, choose "Git from the command line and also from 3rd-party software" to use Git from the Command Prompt or PowerShell.
+Continue with the defaults and finish the installation.
+Verify Installation:
+Open Command Prompt or PowerShell and type:
+git --version
+You should see the installed Git version.
+ 
+
+1. git init 
+
+
+This command creates a new, empty Git repository in the current folder
+ 
+2. git branch -M main
+
+
+This renames the current branch from master
+ 
+3. git add .
+
+
+This command adds all new and modified files in the current directory
+ 
+4.git commit -m "Initial commit"
+
+
+This command takes all the files from the staging area and saves them as a permanent commit in the local repository's history. The message "Initial commit" describes the changes made.
+ 
+5.git push -u origin main
+
+
+This is the command that uploads your local commits to the remote repository.
+ 
+ 
+Git Fundamentals
+Git is a version control system that lets you track changes to files and coordinate work on software projects among multiple people.
+2. Git Structure Basics
+Area
+	
+Description
+
+
+Working Directory
+	
+Your current project folder with actual files
+
+
+Staging Area (Index)
+	
+A place to prepare changes before committing
+
+
+Local Repository
+	
+Where commits (history) are stored locally
+
+
+Remote Repository
+	
+A version of your repo hosted on platforms like GitHub
+3. Fundamental Git Commands
+Initialization & Configuration
+git init                    # Start a new local Git repository
+git config --global user.name "Your Name"
+git config --global user.email "you@abc.com"
+Tracking & Saving Changes
+git status                  # Check current changes
+git add <file>               # Stage specific file(s)
+git add .                    # Stage all changed files
+git commit -m "Message"      # Commit with a message
+Viewing History
+git log                     # Show full commit history
+git log --oneline           # Condensed commit history
+git diff                    # Show unstaged changes
+Branching
+git branch                  # List all branches
+git branch <branch-name>     # Create a new branch
+git checkout <branch-name>   # Switch branches
+git checkout -b <name>       # Create and switch to new branch
+Merging & Rebasing
+git merge <branch>           # Merge a branch into current
+git rebase <branch>          # Reapply commits on top of another base (advanced)
+Working with Remote Repos (GitHub, GitLab, etc.)
+git remote add origin <url>  # Add a remote repository
+git push -u origin main     # Push code to GitHub for the first time
+git pull                    # Pull changes from remote
+git fetch                   # Download latest history (no merge)
+Undoing Changes
+git reset <file>             # Unstage a file
+git checkout -- <file>       # Discard changes in a file
+git reset --soft HEAD~1     # Undo last commit but keep changes staged
+git reset --hard HEAD~1     # Completely undo last commit and changes
+ 
+Summary
+1. git init
+This command creates a new, empty Git repository in the current folder
+2. git branch -M main
+This renames the current branch from master
+3. git add .
+This command adds all new and modified files in the current directory
+4.git commit -m "Initial commit"
+This command takes all the files from the staging area and saves them as a permanent commit in the local repository's history. The message "Initial commit" describes the changes made.
+5.git push -u origin main
+This is the command that uploads your local commits to the remote repository.
+===============================================================================================
+Step-by-Step: Maven + Git Java Project in Eclipse
+Prerequisites
+Ensure you have the following installed:
+Eclipse IDE (preferably Eclipse for Java Developers)
+Git (installed on your system)
+EGit plugin (comes pre-installed with Eclipse)
+Maven (comes with Eclipse via M2E)
+Step 1: Create a New Maven Project
+Open Eclipse
+Go to: File > New > Other...
+Search for Maven Project > Click Next
+Select Create a simple project (skip archetype selection) > Click Next
+Fill in:
+Group Id: com.example
+Artifact Id: hellogit
+Version: (leave default or set 1.0.0)
+Click Finish
+You now have a basic Maven project structure.
+Step 2: Add a Simple Java Class
+In src/main/java, right-click com.example > New > Class
+Name it: HelloGit
+Paste this sample code:
+package com.example;
+ 
+public class HelloGit {
+   public static void main(String[] args) {
+       System.out.println("Hello from Git + Maven project!");
+   }
+}
+Save the file.
+Step 3: Share Project with Git
+Right-click your project in the Project Explorer
+Choose: Team > Share Project
+Select: Git
+If prompted, click Create to create a new Git repository in the project folder
+Click Finish
+Your project is now initialized as a local Git repository.
+Step 4: Make Your First Commit
+Right-click project > Team > Commit
+Add a commit message (e.g., "Initial commit")
+Select files to commit (or click Select All)
+Click Commit
+Step 5: Add a Remote Repository (e.g., GitHub)
+If you have a GitHub repo created:
+Right-click your project > Team > Remote > Push
+Enter your GitHub repository URI (e.g., https://github.com/yourusername/hellogit.git)
+Add your username and personal access token (for GitHub authentication)
+Click Next
+Select the branch (usually main or master)
+Click Finish
+Your code is now pushed to GitHub.
+Step 6: Run the Java Program
+Right-click HelloGit.java > Run As > Java Application
+You should see:
+Hello from Git + Maven project!
+
+
+ 
+ Summary
+Step
+	
+Action
+
+
+1
+	
+Create Maven project
+
+
+2
+	
+Add simple Java class
+
+
+3
+	
+Share project with Git
+
+
+4
+	
+Commit changes
+
+
+5
+	
+Connect to remote Git repo
+
+
+6
+	
+Push to GitHub
+
+
+7
+	
+Run the project
+                                                                          
+ 
+ 

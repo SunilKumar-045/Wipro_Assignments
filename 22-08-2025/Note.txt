@@ -1,0 +1,1431 @@
+22-08-2025
+
+1. Which annotation is used to execute a method before any test method?
+@Before method->because it executes before all test methods atleast once
+
+2. What is the default priority of a TestNG test method if not specified?
+0->because it is the default priority if it is not specified.
+
+3. Which annotation is used to group multiple test methods together for common setup?
+@BeforeGroups → Runs before the first test method belonging to specified groups
+
+4. Which XML tag is used to include test classes in the TestNG suite file?
+<class> tag is used to include test classes in the TestNG
+
+5.Which of the following is used to ignore a test case in TestNG?
+@Test(enabled = false)-> making the enabled = false makes the test case ignore in testNG
+
+6.Which annotation runs only once before all tests in a suite?
+@BeforeSuite → Runs only once before all tests in the entire suite.
+
+7.What does the dependsOnMethods attribute do in a TestNG test?
+Runs the test after specified methods succeed->because it test to depend on another method
+
+8. How can you parameterize a test method in TestNG?
+using @parameters annotation we can pass values from the xml file it is the simple way
+
+9.What is the correct return type for a DataProvider method?
+Object[][]-> it returns 2D array rows and columns
+
+10.Which annotation is used to run a test before a group of tests?
+@BeforeGroups->this annotation runs before the first test of the group
+
+11.What will happen if a test method throws an exception not expected by TestNG?
+it will be marked as failed as it is not a expected expection
+
+12.Which feature of TestNG allows running tests concurrently?
+@parallel attribute in testng.xml
+
+13.Which annotation allows providing multiple sets of data to a test method?
+@DataProvider->Supplies multiple sets of data to a test method.
+
+14.Which listener is used to generate custom reports in TestNG?
+IReporter -> Used to generate custom reports.
+
+15.What is the purpose of the alwaysRun=true attribute in TestNG?
+Forces execution even if dependencies fail becuase it runs the test method fails also
+====================================================================================================================
+MCQs on TestNG
+1. Which annotation is used to execute a method before any test method?
+A. @AfterTest
+B. @BeforeMethod
+C. @BeforeClass
+D. @BeforeSuite
+2. What is the default priority of a TestNG test method if not specified?
+A. 1
+B. -1
+C. 0
+D. 100
+3. Which annotation is used to group multiple test methods together for common setup?
+A. @BeforeTest
+B. @BeforeClass
+C. @BeforeMethod
+D. @BeforeGroups
+4. Which XML tag is used to include test classes in the TestNG suite file?
+A. <method>
+B. <class>
+C. <group>
+D. <test-method>
+5. Which of the following is used to ignore a test case in TestNG?
+A. @SkipTest
+B. @Test(enabled = false)
+C. @Ignore
+D. @Disable
+6. Which annotation runs only once before all tests in a suite?
+A. @BeforeSuite
+B. @BeforeClass
+C. @BeforeTest
+D. @BeforeMethod
+7. What does the dependsOnMethods attribute do in a TestNG test?
+A. Skips the test
+B. Runs the test after specified methods succeed
+C. Changes test priority
+D. Runs tests in parallel
+8. How can you parameterize a test method in TestNG?
+A. Using @DataProvider only
+B. Using @Parameters annotation
+C. Using constructor arguments
+D. Using environment variables
+9. What is the correct return type for a DataProvider method?
+A. Object
+B. Object[][]
+C. List<Object>
+D. String[][]
+10. Which annotation is used to run a test before a group of tests?
+A. @BeforeMethod
+B. @BeforeTest
+C. @BeforeGroups
+D. @BeforeClass
+11. What will happen if a test method throws an exception not expected by TestNG?
+A. It will retry
+B. It will be marked as failed
+C. It will be skipped
+D. It will be ignored
+12. Which feature of TestNG allows running tests concurrently?
+A. @Concurrent
+B. @Parallel
+C. parallel attribute in testng.xml
+D. multithread=true
+13. Which annotation allows providing multiple sets of data to a test method?
+A. @Parameters
+B. @BeforeMethod
+C. @DataProvider
+D. @Factory
+14. Which listener is used to generate custom reports in TestNG?
+A. ITestConfig
+B. IReporter
+C. IExecutionListener
+D. IListener
+15. What is the purpose of the alwaysRun=true attribute in TestNG?
+A. Skips tests always
+B. Makes test run in parallel
+C. Forces execution even if dependencies fail
+D. Repeats test multiple times
+================================================================================================================================
+
+ 
+Cucumber Background
+In Cucumber (a tool for Behavior-Driven Development, or BDD), a Background section is used in feature files (.feature) to define common steps that should be run before each scenario in a feature.
+It helps reduce duplication by pulling out steps that are repeated across scenarios.
+Syntax
+Feature: Some feature
+ Background:
+   Given some precondition
+   And some other precondition
+ Scenario: First scenario
+   When something happens
+   Then some result
+ 
+ Scenario: Second scenario
+   When another action happens
+   Then another result
+Purpose of Background
+DRY principle (Don't Repeat Yourself): Moves common setup steps out of each scenario.
+Readability: Makes feature files cleaner and easier to understand.
+Reusability: Ensures all scenarios start from the same state.
+Key Points
+Background steps are run before each scenario in the same feature file.
+Only one Background section is allowed per feature file.
+The steps inside Background should be relevant to every scenario in the feature.
+When Not to Use
+Avoid using Background if:
+The steps are not common to all scenarios.
+It reduces readability instead of enhancing it.
+ 
+ 
+Cucumber Framework in Action
+Framework Components
+Layer
+	
+Purpose
+
+
+Feature Files
+	
+Describe application behavior in plain English (Gherkin)
+
+
+Step Definitions
+	
+Java methods that map to Gherkin steps
+
+
+Test Runner
+	
+Executes the Cucumber scenarios (e.g., via JUnit)
+
+
+Page Objects
+	
+Encapsulate UI element interactions (with Selenium)
+1. Feature File (login.feature)
+Feature: Login functionality for MyApp
+ Background:
+   Given the user is on the login page
+ 
+ Scenario: Successful login with valid credentials
+   When the user enters valid username and password
+   And clicks the login button
+   Then the user should be redirected to the dashboard
+ 
+ Scenario: Unsuccessful login with invalid credentials
+   When the user enters invalid username and password
+   And clicks the login button
+   Then an error message should be displayed
+2. Step Definitions (LoginSteps.java)
+public class LoginSteps {
+   WebDriver driver;
+   LoginPage loginPage;
+ 
+   @Given("the user is on the login page")
+   public void userIsOnLoginPage() {
+       driver = new ChromeDriver();
+      driver.get("https://myapp.com/login");
+       loginPage = new LoginPage(driver);
+   }
+ 
+   @When("the user enters valid username and password")
+   public void enterValidCredentials() {
+      loginPage.enterUsername("validUser");
+      loginPage.enterPassword("validPass");
+   }
+ 
+   @When("the user enters invalid username and password")
+   public void enterInvalidCredentials() {
+      loginPage.enterUsername("invalidUser");
+      loginPage.enterPassword("wrongPass");
+   }
+ 
+   @And("clicks the login button")
+   public void clickLogin() {
+      loginPage.clickLogin();
+   }
+ 
+   @Then("the user should be redirected to the dashboard")
+   public void verifyDashboard() {
+      Assert.assertTrue(driver.getCurrentUrl().contains("dashboard"));
+       driver.quit();
+   }
+ 
+   @Then("an error message should be displayed")
+   public void verifyErrorMessage() {
+      Assert.assertTrue(loginPage.isErrorDisplayed());
+       driver.quit();
+   }
+}
+ 
+
+
+ 
+3. Page Object (LoginPage.java)
+public class LoginPage {
+   WebDriver driver;
+ 
+   @FindBy(id = "username")
+   WebElement usernameField;
+ 
+   @FindBy(id = "password")
+   WebElement passwordField;
+ 
+   @FindBy(id = "login")
+   WebElement loginButton;
+ 
+   @FindBy(id = "error")
+   WebElement errorMessage;
+ 
+   public LoginPage(WebDriver driver) {
+       this.driver = driver;
+      PageFactory.initElements(driver, this);
+   }
+ 
+   public void enterUsername(String username) {
+      usernameField.sendKeys(username);
+   }
+ 
+   public void enterPassword(String password) {
+      passwordField.sendKeys(password);
+   }
+ 
+   public void clickLogin() {
+      loginButton.click();
+   }
+ 
+ 
+   public boolean isErrorDisplayed() {
+       return errorMessage.isDisplayed();
+   }
+}
+4. Test Runner (TestRunner.java)
+@RunWith(Cucumber.class)
+@CucumberOptions(
+   features = "src/test/resources/features",
+   glue = "stepDefinitions",
+   plugin = {"pretty", "html:target/cucumber-report.html"},
+//plugin --🡪 This tells Cucumber which reporting plugin to use when the test runs
+//pretty -🡪 This plugin prints the Gherkin source(feature bfile) is a readable format to the console.
+//"html:target/cucumber-report.html"--🡪 This generates an HTML report of the test execution.
+              // It is useful for reviewing the test results ina browser with visual format
+ 
+   monochrome = true
+// monochrome=true --🡪 will tell us how the output would be shown on the console like if
+// the value is true that means the report will display in a simple English language without using ant special symbols such as Tick Marks for the (Test Passed) or Cross Marks(Test Failed)              
+)
+public class TestRunner {}
+Outcome
+Non-technical stakeholders can understand the login.feature file.
+Testers and developers collaborate better by using a shared language.
+Tests are automated using Selenium and executed via JUnit.
+ 
+
+Best Practices for Writing Gherkin
+Writing effective Gherkin is key to making your Cucumber tests readable, maintainable, and meaningful for both technical and non-technical stakeholders. Here are the best practices for writing high-quality Gherkin scenarios:
+Best Practices for Writing Gherkin
+1. Write Scenarios in Business Language
+Use the language and terms your business stakeholders use.
+Avoid technical or UI-specific terms unless necessary.
+Good:
+When the user logs in with valid credentials
+Bad:
+When the user enters "john@example.com" into the username field
+2. Keep Scenarios Short and Focused
+One scenario = one behavior.
+Ideally, each scenario should have no more than 5–7 steps.
+Good:
+Scenario: Successful login
+Bad:
+Scenario: Login, check dashboard, edit profile, and logout
+3. Use Background Wisely
+Only use Background when steps are common to all scenarios in a feature.
+Don’t overload it—too many steps in Background reduce clarity.
+4. Avoid UI Details
+Focus on what the user does, not how (e.g., avoid “click” unless important).
+Keep it abstract enough to not break with minor UI changes.
+
+
+ 
+5. Use Data Tables for Clarity
+Use tables when input/output combinations matter (e.g., login attempts, pricing).
+Given the following users exist:
+ | username | password |
+ | alice    | 1234    |
+ | bob      | abcd    |
+6. Use Tags for Organization
+Add tags (@smoke, @regression, @login) for grouping and filtering.
+Helps in test suite management.
+@regression @login
+Scenario: Valid login
+7. Follow the Given-When-Then Structure Properly
+Keyword
+	
+Purpose
+
+
+Given
+	
+Setup or context
+
+
+When
+	
+User action
+
+
+Then
+	
+Expected outcome or result
+
+
+And/But
+	
+Used to add clarity and chaining
+8. Be Consistent in Wording
+Use a shared vocabulary across features.
+This makes step definitions reusable and prevents duplication.
+9. Avoid Logic in Gherkin
+Gherkin is not a scripting language—keep logic (loops, if/else) in step definitions.
+Gherkin should be descriptive, not imperative.
+10. Use Meaningful Scenario Titles
+Titles should clearly describe the behavior being tested.
+Good:
+Scenario: Show error when user enters wrong password
+ 
+Bad:
+Scenario: Test 003
+Example of a Well-Written Scenario
+Feature: Login functionality
+ Background:
+   Given the user is on the login page
+ 
+ Scenario: Successful login with valid credentials
+   When the user enters a valid username and password
+   And clicks the login button
+   Then the user should be redirected to the dashboard
+ 
+ ============================================================================================================================
+1st example
+Cucumber Test Automation using Selenium, JUnit, and the Page Object Model (POM) in Java.
+This includes:
+Maven setup
+Gherkin feature
+Step definitions
+Page object class
+JUnit test runner
+Tools & Tech Stack
+Language: Java
+BDD Framework: Cucumber
+Automation Tool: Selenium WebDriver
+Test Runner: JUnit
+Build Tool: Maven
+Design Pattern: Page Object Model (POM)
+Project Structure (Standard)
+project-root/
+├── pom.xml
+├── src/
+│   ├── main/
+│   │   └── java/
+│   │       └── pages/
+│   │           └── LoginPage.java
+│   └── test/
+│       ├── java/
+│       │   ├── stepDefinitions/
+│       │   │  └── LoginSteps.java
+│       │   └── runner/
+│       │       └── TestRunner.java
+│       └── resources/
+│           └── features/
+│               └── login.feature
+1. pom.xml – Maven Dependencies
+<project>
+<modelVersion>4.0.0</modelVersion>
+<groupId>com.example</groupId>
+<artifactId>cucumber-selenium-junit</artifactId>
+<version>1.0-SNAPSHOT</version>
+ 
+ <dependencies>
+   <!-- Cucumber -->
+   <dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-java</artifactId>
+    <version>7.15.0</version>
+  </dependency>
+   <dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-junit</artifactId>
+    <version>7.15.0</version>
+    <scope>test</scope>
+  </dependency>
+ 
+   <!-- Selenium -->
+   <dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-java</artifactId>
+    <version>4.21.0</version>
+  </dependency>
+ 
+   <!-- WebDriverManager -->
+   <dependency>
+    <groupId>io.github.bonigarcia</groupId>
+    <artifactId>webdrivermanager</artifactId>
+    <version>5.8.0</version>
+  </dependency>
+ 
+   <!-- JUnit -->
+   <dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.13.2</version>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+</project>
+2. Gherkin Feature File – login.feature
+Location: src/test/resources/features/login.feature
+Feature: Login functionality
+ 
+ Background:
+   Given the user is on the login page
+ 
+ Scenario: Successful login
+   When the user enters valid credentials
+   And clicks the login button
+   Then the user should be redirected to the dashboard
+ 
+ Scenario: Failed login
+   When the user enters invalid credentials
+   And clicks the login button
+   Then an error message should be displayed
+
+
+ 
+ 3. Page Object Class – LoginPage.java
+Location: src/main/java/pages/LoginPage.java
+package pages;
+ 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+ 
+public class LoginPage {
+ 
+   WebDriver driver;
+ 
+   @FindBy(id = "username")
+   WebElement usernameInput;
+ 
+   @FindBy(id = "password")
+   WebElement passwordInput;
+ 
+   @FindBy(id = "loginButton")
+   WebElement loginButton;
+ 
+   @FindBy(id = "error")
+   WebElement errorMessage;
+ 
+   public LoginPage(WebDriver driver) {
+       this.driver = driver;
+      PageFactory.initElements(driver, this);
+   }
+ 
+   public void enterUsername(String username) {
+      usernameInput.clear();
+      usernameInput.sendKeys(username);
+   }
+ 
+   public void enterPassword(String password) {
+      passwordInput.clear();
+      passwordInput.sendKeys(password);
+   }
+ 
+   public void clickLogin() {
+      loginButton.click();
+   }
+ 
+   public boolean isErrorVisible() {
+       return errorMessage.isDisplayed();
+   }
+}
+4. Step Definitions – LoginSteps.java
+Location: src/test/java/stepDefinitions/LoginSteps.java
+package stepDefinitions;
+ 
+import io.cucumber.java.en.*;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import pages.LoginPage;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import static org.junit.Assert.*;
+ 
+public class LoginSteps {
+ 
+   WebDriver driver;
+   LoginPage loginPage;
+ 
+ 
+ 
+// Write the code wrt the feature file included in this project
+   @Given("the user is on the login page")
+   public void user_is_on_login_page() {
+      WebDriverManager.chromedriver().setup();
+       driver = new ChromeDriver();
+      driver.get("https://mypage.com/login");
+      driver.manage().window().maximize();
+       loginPage = new LoginPage(driver);
+   }
+ 
+   @When("the user enters valid credentials")
+   public void enter_valid_credentials() {
+      loginPage.enterUsername("validUser");
+      loginPage.enterPassword("validPass");
+   }
+ 
+   @When("the user enters invalid credentials")
+   public void enter_invalid_credentials() {
+      loginPage.enterUsername("wrongUser");
+      loginPage.enterPassword("wrongPass");
+   }
+ 
+   @And("clicks the login button")
+   public void click_login_button() {
+      loginPage.clickLogin();
+   }
+ 
+   @Then("the user should be redirected to the dashboard")
+   public void user_should_see_dashboard() {
+       String url = driver.getCurrentUrl();
+      assertTrue("User is not on dashboard", url.contains("dashboard"));
+       driver.quit();
+   }
+ 
+   @Then("an error message should be displayed")
+   public void error_message_should_be_displayed() {
+      assertTrue("Error message not visible", loginPage.isErrorVisible());
+       driver.quit();
+   }
+}
+5. Test Runner – TestRunner.java
+Location: src/test/java/runner/TestRunner.java
+package runner;
+import org.junit.runner.RunWith;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+ 
+@RunWith(Cucumber.class)
+@CucumberOptions(
+   features = "src/test/resources/features",
+   glue = "stepDefinitions",
+   plugin = {"pretty", "html:target/cucumber-report.html"},
+   monochrome = true
+)
+public class TestRunner {}
+How to Run
+From IDE:
+Right-click TestRunner.java → Run as JUnit Test
+Reports
+After test execution, a Cucumber HTML report is generated here:
+target/cucumber-report.html
+ 
+ ======================================================================================
+Scenario Outline using Cucumber in Java.
+This includes:
+A feature file with Scenario Outline
+Step Definitions in Java
+A basic test runner using JUnit
+1. Feature File: login.feature
+Feature: User Login
+ 
+ Scenario Outline: Successful login with valid credentials
+   Given the user is on the login page
+   When the user enters username "<username>" and password "<password>"
+   Then the user should see the welcome message "<message>"
+   Examples:
+     | username | password | message            |
+     | user1    | pass1   | Welcome user1!     |
+     | user2    | pass2   | Welcome user2!     |
+2. Step Definitions: LoginSteps.java
+package stepDefinitions;
+ 
+import io.cucumber.java.en.*;
+import static org.junit.Assert.*;
+ 
+public class LoginSteps {
+ 
+   private String username;
+   private String password;
+   private String welcomeMessage;
+ 
+   @Given("the user is on the login page")
+   public void the_user_is_on_the_login_page() {
+       // Simulate visiting the login page
+      System.out.println("User is on login page.");
+   }
+ 
+   @When("the user enters username {string} and password {string}")
+   public void the_user_enters_username_and_password(String username, String password) {
+       this.username = username;
+       this.password = password;
+ 
+       // Simulated login logic
+       if (("user1".equals(username) && "pass1".equals(password)) ||
+           ("user2".equals(username) && "pass2".equals(password))) {
+          welcomeMessage = "Welcome " + username + "!";
+       } else {
+          welcomeMessage = "Invalid credentials";
+       }
+   }
+ 
+   @Then("the user should see the welcome message {string}")
+   public void the_user_should_see_the_welcome_message(String expectedMessage) {
+      assertEquals(expectedMessage, welcomeMessage);
+   }
+}
+3. Test Runner: TestRunner.java
+package runner;
+import org.junit.runner.RunWith;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+@RunWith(Cucumber.class)
+@CucumberOptions(
+   features = "src/test/resources/features",
+   glue = {"stepDefinitions"},
+   plugin = {"pretty", "html:target/cucumber-report.html"},
+   monochrome = true
+)public class TestRunner {}
+Project Structure
+src
+├── test
+│   ├── java
+│   │   ├── runner
+│   │   │  └── TestRunner.java
+│   │   └── stepDefinitions
+│   │       └── LoginSteps.java
+│   └── resources
+│       └── features
+│           └── login.feature
+Dependencies (Maven pom.xml)
+<dependencies>
+   <dependency>
+       <groupId>io.cucumber</groupId>
+       <artifactId>cucumber-java</artifactId>
+       <version>7.14.0</version>
+   </dependency>
+   <dependency>
+       <groupId>io.cucumber</groupId>
+       <artifactId>cucumber-junit</artifactId>
+       <version>7.14.0</version>
+       <scope>test</scope>
+   </dependency>
+   <dependency>
+       <groupId>junit</groupId>
+       <artifactId>junit</artifactId>
+       <version>4.13.2</version>
+       <scope>test</scope>
+   </dependency>
+</dependencies>
+ 
+Cucumber Java example using Data Tables to implement Data-Driven Testing,
+This is useful when you want to pass a table of data to a single scenario.
+Example Use Case: User Login with Multiple Users (via DataTable)
+1. Feature File: login_with_data_table.feature
+Feature: Login Functionality
+ 
+ Scenario: Login with multiple users using data table
+   Given the following users attempt to login:
+     | username | password |
+     | user1    | pass1   |
+     | user2    | pass2   |
+     | user3    | wrongpass |
+2. Step Definition: LoginDataTableSteps.java
+package stepDefinitions;
+ 
+import io.cucumber.java.en.Given;
+import io.cucumber.datatable.DataTable;
+ 
+import java.util.List;
+import java.util.Map;
+ 
+public class LoginDataTableSteps {
+ 
+   @Given("the following users attempt to login:")
+   public void the_following_users_attempt_to_login(DataTable dataTable) {
+       // Convert data table to List of Maps
+      List<Map<String, String>> users = dataTable.asMaps(String.class, String.class);
+ 
+       for (Map<String, String> user : users) {
+           String username = user.get("username");
+           String password = user.get("password");
+ 
+           boolean result = authenticate(username, password);
+ 
+          System.out.println("Login attempt for user: " + username +
+                  " with password: " + password +
+                  " => " + (result ? "SUCCESS" : "FAILURE"));
+       }
+   }
+ 
+   // Simulated login function
+   private boolean authenticate(String username, String password) {
+       // Simulate a database of valid credentials
+       return (username.equals("user1") && password.equals("pass1")) ||
+             (username.equals("user2") && password.equals("pass2"));
+   }
+}
+3. Test Runner: TestRunner.java
+Same as before:
+package runner;
+ 
+import org.junit.runner.RunWith;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+ 
+@RunWith(Cucumber.class)
+@CucumberOptions(
+   features = "src/test/resources/features",
+   glue = {"stepDefinitions"},
+   plugin = {"pretty", "html:target/cucumber-report.html"},
+   monochrome = true
+)
+public class TestRunner {
+}
+Important Points to Remember:
+This approach allows you to process arbitrary-length(where the length is not fixed) data tables.
+We don’t need Scenario Outline when using DataTable, making it more flexible in some cases.
+ 
+ =================================================================================================================
+
+1.What is JIRA primarily used for?
+issue tracking and project management->jira is used in sdlc.
+
+2.Which company developed JIRA?
+Atlassian->this company also provides jira cloud and jira data center
+
+3.In JIRA what is a project?
+A collection of issues representing a team or product
+->because all the issues are separted based on the project name and team
+
+4.Which of the following is NOT an issue type in JIRA by default?
+->Feature Film it is not the issue type in jira
+
+5.What does a JIRA Workflow define?
+->the lifecycle of an issue: the different statuses (To Do, In Progress, Done, etc.) 
+
+6.Which JIRA component allows visual tracking of task progress?
+->Kanban/Scrum board->it provides visual tracking like To Do, In Progress, Done.
+
+7. Which JIRA board is best suited for continuous delivery?
+->Kanban->because they work on continous flow of the work without sprinits
+
+8.What is an Epic in JIRA?
+A large body of work that can be broken down into stories
+epic enables to divides the work into small parts
+
+9.What is the default status when a new issue is created in JIRA?
+To Do (or Open) it is the starting status of a new issue
+
+10.In JIRA, a “Story” typically represents:
+A feature or user requirement -> because the it delivers value 
+to the endusers
+
+11.What is the main function of JIRA Query Language (JQL)?
+To search and filter issues -> it is used to perform advanced searches and filtering of issues
+
+12.What permission is required to transition issues in JIRA?
+Transition Issues permission allows a user to move an issue from one status to another in the workflow
+
+13.Which role can create new projects in JIRA?
+JIRA Administrator-> who has all privilages to create new projects
+
+14.Which field is typically used to assign a task to a team member?
+Assignee-> this field where we see our team members to assign the work
+
+15.Which type of board in JIRA supports sprints?
+Scrum ->it supports time-boxed feature development
+
+16.What does the 'Resolution' field in JIRA indicate?
+How the issue was closed ->the Resolution field describes the final outcome of an issue when it is closed or resolved.
+
+17.Which JIRA feature helps in generating reports like burn-down charts?
+Dashboards provide different gadgets (like burn-down charts, pie charts etc.)
+
+18. Who is the “Reporter” in a JIRA issue?
+The person who created the issue->the Reporter who raises/creates the issue.
+
+19. Which is a JIRA hosting option?
+JIRA Cloud is Atlassian’s cloud-hosted option
+
+20. In Agile, which JIRA issue type is commonly used to capture bugs?
+Bug -> bug issue type is specifically used to track defects or problems in the software.
+
+
+================================================================================================================================
+
+MCQ - JIRA
+What is JIRA primarily used for?
+
+A. Video editing
+
+B. Issue tracking and project management
+
+C. Graphic design
+
+D. File storage
+Which company developed JIRA?
+
+A. Microsoft
+
+B. Atlassian
+
+C. Google
+
+D. IBM
+In JIRA, what is a 'Project'?
+
+A. A file
+
+B. A folder of issues
+
+C. A collection of issues representing a team or product
+
+D. A plugin
+Which of the following is NOT an issue type in JIRA by default?
+
+A. Bug
+
+B. Task
+
+C. Story
+
+D. Feature Film
+What does a JIRA Workflow define?
+
+A. The lifecycle of an issue
+
+B. The number of issues
+
+C. The user access
+
+D. The project layout
+Which JIRA component allows visual tracking of task progress?
+
+A. Project navigator
+
+B. Search filter
+
+C. Kanban/Scrum board
+
+D. User permissions
+Which JIRA board is best suited for continuous delivery?
+
+A. Scrum
+
+B. Kanban
+
+C. Waterfall
+
+D. Agile
+What is an Epic in JIRA?
+
+A. A minor task
+
+B. A type of user
+
+C. A large body of work that can be broken down into stories
+
+D. A document
+What is the default status when a new issue is created in JIRA?
+
+A. Done
+
+B. In Progress
+
+C. To Do (or Open)
+
+D. Closed
+
+
+ 
+In JIRA, a “Story” typically represents:
+
+A. A bug fix
+
+B. A feature or user requirement
+
+C. A completed task
+
+D. A test case
+What is the main function of JIRA Query Language (JQL)?
+
+A. To design workflows
+
+B. To update users
+
+C. To search and filter issues
+
+D. To install plugins
+What permission is required to transition issues in JIRA?
+
+A. Browse Projects
+
+B. Assign Issues
+
+C. Transition Issues
+
+D. Edit Comments
+Which role can create new projects in JIRA?
+
+A. Project User
+
+B. Developer
+
+C. JIRA Administrator
+
+D. Scrum Master
+Which field is typically used to assign a task to a team member?
+
+A. Reporter
+
+B. Component
+
+C. Assignee
+
+D. Label
+Which type of board in JIRA supports sprints?
+
+A. Kanban
+
+B. Scrum
+
+C. Waterfall
+
+D. Linear
+What does the 'Resolution' field in JIRA indicate?
+
+A. How the issue was closed
+
+B. The issue’s priority
+
+C. Assigned user
+
+D. Comment history
+Which JIRA feature helps in generating reports like burn-down charts?
+
+A. Permissions
+
+B. Dashboards
+
+C. Labels
+
+D. Filters
+Who is the “Reporter” in a JIRA issue?
+
+A. The person who fixes the issue
+
+B. The person who created the issue
+
+C. The project manager
+
+D. The admin
+Which is a JIRA hosting option?
+
+A. JIRA Drive
+
+B. JIRA Cloud
+
+C. JIRA SharePoint
+
+D. JIRA DataLink
+
+
+ 
+In Agile, which JIRA issue type is commonly used to capture bugs?
+
+A. Story
+
+B. Epic
+
+C. Bug
+
+D. Task
+ 
+ ==============================================================================================================================================================
+
+Data-driven testing using List<String> in Java.
+Simple test scenario where we pass a list of strings (e.g., usernames) to the step definition using Cucumber's Data Table.
+Gherkin Feature File (users.feature)
+Feature: User validation with list
+ Scenario: Validate multiple usernames
+   Given the following usernames:
+     | King |
+     | Martin    |
+     | Scott |
+   When I process the usernames
+   Then I should see 3 usernames processed
+Step Definitions (UserSteps.java)
+import io.cucumber.java.en.*;
+import io.cucumber.datatable.DataTable;
+import java.util.List;
+import static org.junit.Assert.assertEquals;
+public class UserSteps {
+   private List<String> usernames;
+   @Given("the following usernames:")
+   public void the_following_usernames(DataTable dataTable) {
+       usernames = dataTable.asList(String.class); // Convert table to List<String>
+   }
+   @When("I process the usernames")
+   public void i_process_the_usernames() {
+       // Simulate some processing
+       for (String username : usernames) {
+          System.out.println("Processing user: " + username);
+       }
+   }
+ 
+   @Then("I should see {int} usernames processed")
+   public void i_should_see_usernames_processed(Integer expectedCount) {
+      assertEquals(expectedCount.intValue(), usernames.size());
+   }
+}
+Test Runner (RunCucumberTest.java)
+import org.junit.platform.suite.api.ConfigurationParameter;
+import org.junit.platform.suite.api.IncludeEngines;
+import org.junit.platform.suite.api.SelectClasspathResource;
+import org.junit.platform.suite.api.Suite;
+import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
+@Suite
+@IncludeEngines("cucumber")
+@SelectClasspathResource("features") // Make sure your .feature file is under resources/features/
+@ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
+public class RunCucumberTest {}
+Maven Dependencies (Add to pom.xml)
+<dependencies>
+   <dependency>
+       <groupId>io.cucumber</groupId>
+       <artifactId>cucumber-java</artifactId>
+       <version>7.14.0</version>
+       <scope>test</scope>
+   </dependency>
+   <dependency>
+       <groupId>io.cucumber</groupId>
+       <artifactId>cucumber-junit-platform-engine</artifactId>
+       <version>7.14.0</version>
+       <scope>test</scope>
+   </dependency>
+   <dependency>
+       <groupId>org.junit.platform</groupId>
+       <artifactId>junit-platform-suite</artifactId>
+       <version>1.10.0</version>
+       <scope>test</scope>
+   </dependency>
+</dependencies>
+ 
+ ===========================================================================================
+Data-driven testing in Cucumber with a list of user objects (e.g., name, age, email), using List<Map<String, String>> in Java.
+Goal:
+We'll pass a table of users with columns: Name, Age, and Email, and in the step definitions:
+Parse it as a List<Map<String, String>>.
+Convert each map to a User object.
+Validate both:
+Number of users.
+Specific values (e.g., email must contain "@").
+1. Define a User Model
+package model;
+public class User {
+   private String name;
+   private int age;
+   private String email;
+ 
+   public User(String name, int age, String email) {
+       this.name = name;
+       this.age = age;
+       this.email = email;
+   }
+ 
+   // Getters
+   public String getName() { return name; }
+   public int getAge() { return age; }
+   public String getEmail() { return email; }
+ 
+   @Override
+   public String toString() {
+       return name + " (" + age + ") - " + email;
+   }
+ 
+   // Equals and hashCode for testing purposes
+   @Override
+   public boolean equals(Object obj) {
+       if (!(obj instanceof User)) return false;
+       User other = (User) obj;
+       return this.name.equals(other.name) &&
+              this.age == other.age &&
+              this.email.equals(other.email);
+   }
+ 
+   @Override
+   public int hashCode() {
+       return name.hashCode() + age + email.hashCode();
+   }
+}
+2. Feature File: users.feature
+Feature: User registration
+ Scenario: Register multiple users
+   Given the following user data:
+     | name    | age | email               |
+     | Scott  | 20  | scott@example.com   |
+     | Martin     | 25 | martin@example.com     |
+     | Karen | 30  | karen@example.com |
+   When I process the user data
+   Then I should have 3 users
+   And all emails should contain "@"
+
+
+ 
+3. Step Definitions: UserSteps.java
+package steps;
+ 
+import io.cucumber.java.en.*;
+import io.cucumber.datatable.DataTable;
+import model.User;
+ 
+import java.util.*;
+import java.util.stream.Collectors;
+ 
+import static org.junit.Assert.*;
+ 
+public class UserSteps {
+ 
+   private List<User> users;
+ 
+   @Given("the following user data:")
+   public void the_following_user_data(DataTable table) {
+      List<Map<String, String>> rows = table.asMaps(String.class, String.class);
+ 
+//Java Streams ===sequence of characters
+       users = rows.stream()
+              .map(row -> new User(
+                      row.get("name"),
+                      Integer.parseInt(row.get("age")),
+                      row.get("email")))
+              .collect(Collectors.toList()); // again converts the stream to a List
+   }
+ 
+   @When("I process the user data")
+   public void i_process_the_user_data() {
+      users.forEach(user -> System.out.println("User: " + user));
+   }
+ 
+  
+@Then("I should have {int} users")
+   public void i_should_have_users(Integer expectedCount) {
+       assertEquals(expectedCount.intValue(), users.size());
+   }
+ 
+   @Then("all emails should contain \"@\"")
+   public void all_emails_should_contain_at() {
+       for (User user : users) {
+          assertTrue("Email missing '@': " + user.getEmail(), user.getEmail().contains("@"));
+       }
+   }
+}
+4. Test Runner: RunCucumberTest.java
+package runner;
+import org.junit.platform.suite.api.ConfigurationParameter;
+import org.junit.platform.suite.api.IncludeEngines;
+import org.junit.platform.suite.api.SelectClasspathResource;
+import org.junit.platform.suite.api.Suite;
+ 
+import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
+ 
+@Suite
+@IncludeEngines("cucumber")
+@SelectClasspathResource("features")
+@ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
+public class RunCucumberTest {
+}
+
+
+ 
+Console Output (Success)
+User: Scott(20) - scott@example.com
+User: Martin(25) – martin@example.com
+User: Karen (30) - karen@example.com
+1 Scenarios (1 passed)
+5 Steps (5 passed)
+0m0.145s
+Failure Example
+If one email is missing "@", e.g.:
+| Karen | 30 | karen.example.com |
+The output will include:
+java.lang.AssertionError: Email missing '@': karen.example.com
+ 
+=========================================================================================================================
+1. Which of the following is NOT a valid Selenium locator?
+href->It is not part of the locators
+
+2. What does the By.id("value") locator do?
+Finds an element by its HTML id attribute-> whose id attribute matches the specified "value".
+
+
+3. Which locator is the fastest and most preferred for locating web elements?
+id-> It is fastest and reliable for locating web elements
+
+
+4. How do you locate an element with class name in Selenium?
+By.className("classValue")->is used to locate an element with a specific CSS class.
+
+
+5. Which locator is best for locating elements with complex DOM structures?
+xpath->XPath is the most flexible locator in Selenium. It can navigate through complex DOM structures
+
+
+6. What does the locator By.linkText("Click Here") find?
+A hyperlink with visible text "Click Here"->in Selenium specifically finds an <a> tag (hyperlink) whose visible text exactly matches "Click Here".
+
+
+7. Which locator allows partial matching of link text?
+B) By.partialLinkText->locates a hyperlink <a> tag whose visible text contains the given substring.
+
+
+8. What does the following XPath expression do? //input[@type='text']
+B) Selects all input fields of type text->if filters the inputs with the type text
+
+
+9. How can you locate an element using a CSS selector in Selenium?
+B) By.cssSelector("cssValue")->allows you to locate elements using CSS selectors
+
+10. Which method is used to locate multiple elements matching a locator?
+B) findElements()->is used to find multiple elements which matches the locator
+
+11. What will By.tagName("a") locate?
+A) All anchor (<a>) tags->this finds the all anchor tags
+
+12. Which locator strategy is used in this example? driver.findElement(By.cssSelector("div#login button.submit"))
+B) CSS Selector->that is the cssselector locator find using the selector id
+
+13. Which locator works best for buttons with dynamic IDs?
+B) By.xpath with contains()->so the contains checks whether the id contains alteast subpart of the id
+
+14. What does this XPath select: //div[@class='container']/span
+C) span elements that are direct children of divs with class='container'->it finds the direct child of the div tag
+
+15. What is the syntax for locating an element by name attribute?
+B) By.name("value")->this syntax is used for locating an element by name
+
+16. What does By.xpath("//button[text()='Submit']") do?
+C) Finds a button whose visible text is 'Submit'->it finds the visible text of the button
+
+17. Which locator should be avoided if performance is critical?
+A) xpath->because traverse whole dom 
+
+18. What does the following XPath do? //*[@id='email']
+B) Finds any element with id='email'->this finds any element whose id = email
+
+19. How do you identify an element with multiple classes in CSS?
+A) By.cssSelector(".class1.class2")->by method chainig the classes we can find
+
+20. Which of the following allows you to find an element inside a specific parent in XPath?
+C) //div[@id='main']//input->this finds the element inside the parent at any level 
+
+
+==========================================================================================================================
+ 
+Dependency Injection example using Cucumber with Java,
+Shows how to share state or services (like a login service or a database connection) across step definitions using Cucumber’s built-in Dependency Injection support via PicoContainer
+Use Case: Shared Login Service via Dependency Injection
+1. Feature File: login.feature
+Feature: Login Functionality
+ 
+ Scenario: Valid user logs in
+   Given the user enters username "user1" and password "pass1"
+   When the user logs in
+   Then the user should be logged in successfully
+2. Shared Service Class: LoginService.java
+package services;
+ 
+public class LoginService {
+ 
+   private String username;
+   private String password;
+   private boolean loggedIn;
+ 
+   public void setCredentials(String username, String password) {
+       this.username = username;
+       this.password = password;
+   }
+ 
+   public void login() {
+       // Simulated authentication
+       if ("user1".equals(username) && "pass1".equals(password)) {
+           loggedIn = true;
+       } else {
+           loggedIn = false;
+       }
+   }
+ 
+   public boolean isLoggedIn() {
+       return loggedIn;
+   }
+}
+3. Step Definition 1: LoginSteps.java
+package stepDefinitions;
+ 
+import io.cucumber.java.en.Given;
+import services.LoginService;
+ 
+public class LoginSteps {
+ 
+   private final LoginService loginService;
+ 
+   public LoginSteps(LoginService loginService) {
+      this.loginService = loginService;
+   }
+ 
+   @Given("the user enters username {string} and password {string}")
+   public void the_user_enters_username_and_password(String username, String password) {
+      loginService.setCredentials(username, password);
+   }
+}
+
+
+ 
+4. Step Definition 2: LoginActionSteps.java
+package stepDefinitions;
+ 
+import io.cucumber.java.en.When;
+import io.cucumber.java.en.Then;
+import services.LoginService;
+ 
+import static org.junit.Assert.assertTrue;
+ 
+public class LoginActionSteps {
+ 
+   private final LoginService loginService;
+ 
+   public LoginActionSteps(LoginService loginService) {
+      this.loginService = loginService;
+   }
+ 
+   @When("the user logs in")
+   public void the_user_logs_in() {
+      loginService.login();
+   }
+ 
+   @Then("the user should be logged in successfully")
+   public void the_user_should_be_logged_in_successfully() {
+       assertTrue(loginService.isLoggedIn());
+   }
+}
+5. Test Runner: TestRunner.java
+package runner;
+ 
+import org.junit.runner.RunWith;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+ 
+@RunWith(Cucumber.class)
+@CucumberOptions(
+   features = "src/test/resources/features",
+   glue = {"stepDefinitions", "services"},
+   plugin = {"pretty", "html:target/cucumber-report.html"},
+   monochrome = true
+)
+public class TestRunner {
+}
+6. Project Structure
+src
+├── test
+│   ├── java
+│   │   ├── runner
+│   │   │  └── TestRunner.java
+│   │   ├── services
+│   │   │  └── LoginService.java
+│   │   └── stepDefinitions
+│   │       ├── LoginSteps.java
+│   │       └── LoginActionSteps.java
+│   └── resources
+│       └── features
+│           └── login.feature
+ 
+ 
+
+
+
+ 

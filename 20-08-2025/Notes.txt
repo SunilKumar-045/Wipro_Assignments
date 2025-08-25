@@ -1,0 +1,86 @@
+20-08-2025
+
+Exception handling in Selenium
+Exception handling is a critical part of writing stable and reliable Selenium automation scripts in Java.
+Selenium WebDriver often encounters exceptions due to timing issues, missing elements, browser crashes, etc.
+Common Selenium Exceptions
+
+Exception					Description
+
+NoSuchElementException				Element not found in the DOM.
+
+TimeoutException				Operation exceeded the defined time limit.
+
+ElementNotInteractableException			Element is not in a state to be interacted with.
+
+StaleElementReferenceException			Element is no longer attached to the DOM.
+
+
+WebDriverException
+	
+General Selenium exception.
+Basic Exception Handling Using Try-Catch
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+ 
+public class ExceptionHandlingExample {
+   public static void main(String[] args) {
+       WebDriver driver = new ChromeDriver();
+      
+       try {
+          driver.get("https://abc.com");
+           WebElement element = driver.findElement(By.id("nonexistent-id"));
+          element.click();
+       } catch (NoSuchElementException e) {
+          System.out.println("Element not found: " + e.getMessage());
+       } catch (ElementNotInteractableException e) {
+          System.out.println("Element not interactable: " + e.getMessage());
+       } catch (WebDriverException e) {
+          System.out.println("WebDriver error: " + e.getMessage());
+       } finally {
+          driver.quit();
+       }
+   }
+}
+Using WebDriverWait and ExpectedConditions
+This helps avoid exceptions like ElementNotVisibleException or TimeoutException:
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.*;
+ 
+import java.time.Duration;
+ 
+public class WaitHandlingExample {
+   public static void main(String[] args) {
+       WebDriver driver = new ChromeDriver();
+ 
+       try {
+          driver.get("https://example.com");
+ 
+          WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+           WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("some-id")));
+          element.click();
+       } catch (TimeoutException e) {
+          System.out.println("Element was not visible in time: " + e.getMessage());
+       } finally {
+          driver.quit();
+       }
+   }
+}
+
+
+Custom Utility Method for Safe Element Access
+public WebElement findElementSafely(WebDriver driver, By locator) {
+   try {
+       return driver.findElement(locator);
+   } catch (NoSuchElementException e) {
+      System.out.println("Element not found: " + locator);
+       return null;
+   }
+}
+Best Practices
+Use explicit waits instead of Thread.sleep().
+Handle specific exceptions rather than catching the general Exception.
+Add logging for better debugging.
+ 
+ 

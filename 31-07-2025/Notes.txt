@@ -1,0 +1,1232 @@
+31/07/2025
+
+Here’s a comparison table of commonly used Java collection classes and their synchronization status:
+
+Collection Class	Synchronized by Default?	Thread-Safe?	How to Make Thread-Safe (if not)?
+ArrayList			❌ No			❌ No		Collections.synchronizedList(new ArrayList<>())
+LinkedList			❌ No			❌ No		Collections.synchronizedList(new LinkedList<>())
+Vector				✅ Yes			✅ Yes		Already synchronized
+Stack				✅ Yes (inherits from Vector)✅ Yes	Already synchronized
+HashSet				❌ No			❌ No		Collections.synchronizedSet(new HashSet<>())
+LinkedHashSet			❌ No			❌ No		Collections.synchronizedSet(new LinkedHashSet<>())
+TreeSet				❌ No			❌ No		Collections.synchronizedSortedSet(new TreeSet<>())
+HashMap				❌ No			❌ No		Use Collections.synchronizedMap(new HashMap<>())
+Hashtable			✅ Yes			✅ Yes		Already synchronized
+ConcurrentHashMap	✅ Yes (special concurrency)	✅ Yes		Designed for high-concurrency use, better than Hashtable
+TreeMap				❌ No			❌ No		Collections.synchronizedSortedMap(new TreeMap<>())
+PriorityQueue			❌ No			❌ No		Use PriorityBlockingQueue for thread-safe alternative
+
+
+
+Input/Output operations in Java
+What is Java I/O?
+Java I/O (Input and Output) is used to process input and produce output.
+Java provides the java.io and java.nio packages for these operations.
+In java.nio “n” understands for New
+Two Main Types of I/O
+Byte Streams (InputStream / OutputStream)
+Used for reading and writing binary data (images, audio, etc.)
+Base classes:
+InputStream: For reading bytes
+OutputStream:  For writing bytes
+Character Streams (Reader / Writer)
+Used for reading and writing text data
+Base classes:
+Reader: For reading characters
+Writer: For writing characters
+Commonly Used I/O Classes
+Type				Class Name			Description
+
+Byte Input			FileInputStream			Reads data from a file
+
+Byte Output			FileOutputStream		Writes data to a file
+
+Character Input			FileReader			Reads characters from a file
+
+Character Output		FileWriter			Writes characters to a file
+
+Buffered Input			BufferedReader			Reads text efficiently, line by line
+
+Buffered Output			BufferedWriter			Writes text efficiently
+
+Print Output			PrintWriter			Writes formatted text to a file
+ 
+---------------------------------------------------------------------------------------------------------------
+ Java I/O Class Hierarchy (from java.io package)
+1. Byte Streams 
+Common Byte Stream Classes:
+FileInputStream / FileOutputStream
+BufferedInputStream / BufferedOutputStream
+DataInputStream / DataOutputStream
+ObjectInputStream / ObjectOutputStream
+ByteArrayInputStream / ByteArrayOutputStream
+
+2. Character Streams
+Common Character Stream Classes:
+FileReader / FileWriter
+BufferedReader / BufferedWriter
+InputStreamReader / OutputStreamWriter
+PrintWriter, CharArrayReader, StringWriter
+ 
+File Handling
+File handling in Java allows you to create, read, write, update, and delete files. It is primarily done using classes in the java.io and java.nio.file packages.
+Commonly Used Classes
+Class						Purpose
+File						Represents file/directory path
+
+FileReader / FileWriter				For reading/writing text files
+
+BufferedReader / BufferedWriter			For efficient reading/writing
+
+FileInputStream / FileOutputStream		For reading/writing binary files
+
+PrintWriter					For writing formatted text
+
+
+Files (from java.nio.file)
+	
+For advanced file operations
+Example 1: Create a File
+import java.io.File;
+import java.io.IOException;
+ 
+public class CreateFileExample {
+   public static void main(String[] args) {
+       File file = new File("myfile.txt");
+       try {
+           if (file.createNewFile()) {
+              System.out.println("File created: " + file.getName());
+           } else {
+              System.out.println("File already exists.");
+           }
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+   }
+}
+ 
+Example 2: Write to a File
+import java.io.FileWriter;
+import java.io.IOException;
+public class WriteFileExample {
+   public static void main(String[] args) {
+       try (FileWriter writer = new FileWriter("myfile.txt")) {
+          writer.write("Hello, Java File Handling!");
+       } catch (IOException e) {
+          e.printStackTrace();
+       }
+   }
+}
+Example 3: Read from a File
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+ 
+public class ReadFile {
+   public static void main(String[] args) {
+              try (BufferedReader reader = new BufferedReader(new FileReader("myfile.txt"))) {
+           String line;
+           while ((line = reader.readLine()) != null) {
+              System.out.println(line);
+           }
+       } catch (IOException e) {
+          e.printStackTrace();
+       }
+   }
+}
+
+
+ 
+Example 4: Delete a File
+import java.io.File;
+public class DeleteFile {
+   public static void main(String[] args) {
+       File file = new File("myfile.txt");
+       if (file.delete()) {
+          System.out.println("Deleted the file: " + file.getName());
+       } else {
+          System.out.println("Failed to delete the file.");
+       }
+file.close();   
+}
+}
+File Handling Tips
+Always close streams (FileReader, FileWriter, etc.) to avoid memory leaks.
+Use try-with-resources (Java 7+) to auto-close resources.
+Check file existence with file.exists() before operations.
+ 
+ important
+MCQ – Data Types (Coding)
+What will be the output of the following code?
+int a = 5;
+double b = 6.2;
+System.out.println(a + b);
+A. 11.2
+B. 11
+C. 56.2
+D. Compilation error
+
+What is the output?
+boolean flag = true;
+System.out.println(!flag);
+A. true
+B. false
+C. 0
+D. 1
+
+What is the result of this code?
+char ch = 'A';
+System.out.println((int) ch);
+A. 65
+B. A
+C. Compilation error
+D. 97
+
+What will this print?
+byte b = 127;
+b++;
+System.out.println(b);
+A. 128
+B. -128
+C. 127
+D. Error
+
+What is the output?
+short s = 32767;
+s++;
+System.out.println(s);
+A. 32768
+B. -32768
+C. 0
+D. Error
+
+Output of:
+float f = 5.5f;
+System.out.println(f);
+A. 5
+B. 5.5
+C. 5.5f
+D. Compilation error
+
+Choose the correct output:
+long l = 10000000000L;
+System.out.println(l);
+A. 1.0E10
+B. 10000000000
+C. Error
+D. Overflow
+
+
+
+ 
+Output?
+int x = 10;
+System.out.println(x / 4.0);
+A. 2.5
+B. 2
+C. 2.0
+D. 2.25
+
+Output?
+char c = 65;
+System.out.println(c);
+A. 65
+B. A
+C. Error
+D. 64
+
+What is printed?
+boolean b1 = true;
+boolean b2 = false;
+System.out.println(b1 && b2);
+A. true
+B. false
+C. 0
+D. 1
+
+Output?
+int x = (int) 5.9;
+System.out.println(x);
+A. 5
+B. 6
+C. 5.9
+D. Compilation error
+
+
+
+ 
+What is printed?
+double d = 100;
+int i = (int) d;
+System.out.println(i);
+A. 100.0
+B. 100
+C. Compilation error
+D. 0
+
+Output?
+byte b = (byte) 130;
+System.out.println(b);
+A. 130
+B. -126
+C. 126
+D. Compilation error
+
+What happens here?
+int i = 10;
+long l = i;
+System.out.println(l);
+A. 10
+B. Compilation error
+C. Runtime error
+D. 0
+
+
+
+ 
+Output?
+float f = (float) 5 / 2;
+System.out.println(f);
+A. 2
+B. 2.5
+C. 2.0
+D. 2.25
+
+Choose the correct output:
+double d = 10 / 3;
+System.out.println(d);
+A. 3
+B. 3.0
+C. 3.333...
+D. 3.3333333333333335
+
+What will be the output?
+int a = 5;
+double b = a;
+System.out.println(b);
+A. 5
+B. 5.0
+C. Error
+D. Undefined
+
+What is the result?
+char c = (char) 97;
+System.out.println(c);
+A. A
+B. a
+C. 97
+D. Error
+
+
+
+ 
+Choose output:
+double d = 5.5;
+int i = (int) d;
+System.out.println(i);
+A. 5
+B. 6
+C. Error
+D. 5.5
+
+Output?
+short s = 10;
+byte b = (byte) s;
+System.out.println(b);
+A. 10
+B. Error
+C. 0
+D. Depends on platform
+
+Output?
+Integer x = 5;
+System.out.println(x + 5);
+A. 10
+B. 55
+C. Error
+D. null
+
+What is printed?
+int x = Integer.parseInt("123");
+System.out.println(x);
+A. "123"
+B. 123
+C. Error
+D. null
+
+Output of:
+Integer i = null;
+int j = i;
+System.out.println(j);
+A. null
+B. 0
+C. Error
+D. NullPointerException
+
+What happens here?
+Double d = 10.5;
+System.out.println(d instanceof Double);
+A. true
+B. false
+C. Error
+D. null
+
+Output?
+int i = 100;
+Integer x = i;
+System.out.println(x);
+A. 100
+B. Error
+C. null
+D. 0
+
+
+
+ 
+Output?
+Integer x = new Integer(10);
+System.out.println(x.equals(10));
+A. true
+B. false
+C. Error
+D. null
+
+What does this return?
+Integer x = 128;
+Integer y = 128;
+System.out.println(x == y);
+A. true
+B. false
+C. Error
+D. null
+
+Output?
+Integer x = 100;
+Integer y = 100;
+System.out.println(x == y);
+A. true
+B. false
+C. Error
+D. null
+
+What will be printed?
+int x = Integer.valueOf("42");
+System.out.println(x);
+A. 42
+B. "42"
+C. Error
+D. null
+
+
+
+ 
+Output?
+Boolean b = Boolean.parseBoolean("TrUe");
+System.out.println(b);
+A. true
+B. false
+C. null
+D. error
+
+Serialization in Java
+Serialization is the process of converting a Java object into a byte stream so that it can be saved to a file, sent over a network, or stored in memory for later reconstruction (deserialization).
+Why Use Serialization?
+Save object state permanently (to file, database, etc.)
+Transfer objects over network (e.g., in RMI or sockets)
+Deep copy objects
+Core Classes & Interface
+
+Element				Description
+Serializable			Marker interface to make a class serializable
+ObjectOutputStream		Writes objects to an OutputStream
+ObjectInputStream		Reads objects from an InputStream
+
+NOTE: A class must implement Serializable to be eligible for serialization.
+Example
+Step 1: Create a Serializable Class
+import java.io.Serializable;
+public class Student implements Serializable {
+   private String name;
+   private int age;
+ 
+   public Student(String name, int age) {
+       this.name = name;
+       this.age = age;
+   }
+ 
+   public void display() {
+      System.out.println("Name: " + name + ", Age: " + age);
+   }
+}
+
+
+ 
+Step 2: Serialize the Object (Write to File)
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+ 
+public class SerializeExample {
+   public static void main(String[] args) {
+       Student s1 = new Student("Brian",20);
+ 
+       try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("student.ser"))) {
+          out.writeObject(s1);
+          System.out.println("Object serialized to student.ser");
+       } catch (Exception e) {
+          e.printStackTrace();
+       }
+   }
+}
+Step 3: Deserialize the Object (Read from File)
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+public class DeserializeExample {
+   public static void main(String[] args) {
+       try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("student.ser"))) {
+           Student s = (Student) in.readObject();
+          s.display();
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+   }
+}
+
+
+ 
+Points to remember:
+transient keyword: Fields marked as transient are not serialized.
+*************************Serialization does not store static fields.
+Java uses default serialization, but you can customize it with:
+Concept
+transient Keyword
+Fields marked transient are not serialized.
+transient String password; // This won't be saved during serialization
+serialVersionUID
+A unique identifier to ensure version compatibility during deserialization.
+private static final long serialVersionUID = 1L;
+If not defined, JVM generates one. If the class structure changes, deserialization may fail with InvalidClassException.
+Custom Serialization
+To control serialization manually, define these methods:
+private void writeObject(ObjectOutputStream oos) throws IOException {
+   // Custom serialization logic
+}
+private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+   // Custom deserialization logic
+}
+ 
+ 
+ Marker interfcae is that interface that has no fields and no methods
+interface Serializable{}
+
+ 
+serialVersionUID=1L
+What is serialVersionUID?
+It's a version control ID for serialized classes.
+If a class is serialized and later modified, and the serialVersionUID doesn't match during deserialization, the JVM will throw:
+java.io.InvalidClassException
+Example Without serialVersionUID
+Step 1: Original Version of the Class
+import java.io.Serializable;
+public class User implements Serializable {
+//private static final long serialVersionUID = 1L;
+   String username;
+   String email;
+Int age;
+   public User(String username, String email) {
+       this.username = username;
+       this.email = email;
+   }
+}
+Serialize This Object
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+ 
+public class SerializeUser {
+   public static void main(String[] args) throws Exception {
+       User user = new User("alice", "alice@example.com");
+      ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("user.ser"));
+      out.writeObject(user);
+       out.close();
+   }
+}
+This will create user.ser.
+Step 2: Modify the Class (Structure Change)
+Now imagine you modify the User class by adding a new field:
+import java.io.Serializable;
+public class User implements Serializable {
+   String username;
+   String email;
+   int age;  // New field has bee added
+}
+Try to Deserialize the Old File
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+public class DeserializeUser {
+   public static void main(String[] args) throws Exception {
+      ObjectInputStream in = new ObjectInputStream(new FileInputStream("user.ser"));
+       User user = (User) in.readObject();  // This will fail
+       in.close();
+   }
+}
+This Error:
+java.io.InvalidClassException: User; local class incompatible:
+stream classdesc serialVersionUID = [old], local class serialVersionUID = [new]
+Solution: Add serialVersionUID
+To maintain compatibility between versions, manually define a serialVersionUID:
+private static final long serialVersionUID = 1L;
+If both versions of the class (before and after modification) have the same serialVersionUID, deserialization will not fail, even if structure has changed — though you must handle missing fields (e.g., age will default to 0 if not present in the stream).
+
+
+ 
+Summary
+Situation
+	
+                  Result
+
+
+Class changes, no serialVersionUID
+	
+               InvalidClassException
+
+
+Class changes, same serialVersionUID
+	
+              Deserialization succeeds (with default values for new fields)
+
+
+Class unchanged
+	
+                   Always safe
+ 
+ 
+Serialization in Java
+Serialization is the process of converting a Java object into a byte stream so that it can be saved to a file, sent over a network, or stored in memory for later reconstruction (deserialization).
+Why Use Serialization?
+Save object state permanently (to file, database, etc.)
+Transfer objects over network (e.g., in RMI or sockets)
+Deep copy objects
+Core Classes & Interface
+Element
+	
+Description
+
+
+Serializable
+	
+Marker interface to make a class serializable
+
+
+ObjectOutputStream
+	
+Writes objects to an OutputStream
+
+
+ObjectInputStream
+	
+Reads objects from an InputStream
+NOTE: A class must implement Serializable to be eligible for serialization.
+Example
+Step 1: Create a Serializable Class
+import java.io.Serializable;
+public class Student implements Serializable {
+   private String name;
+   private int age;
+ 
+   public Student(String name, int age) {
+       this.name = name;
+       this.age = age;
+   }
+ 
+   public void display() {
+      System.out.println("Name: " + name + ", Age: " + age);
+   }
+}
+
+
+ 
+Step 2: Serialize the Object (Write to File)
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+ 
+public class SerializeExample {
+   public static void main(String[] args) {
+       Student s1 = new Student("Brian",20);
+ 
+       try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("student.ser"))) {
+          out.writeObject(s1);
+          System.out.println("Object serialized to student.ser");
+       } catch (Exception e) {
+          e.printStackTrace();
+       }
+   }
+}
+Step 3: Deserialize the Object (Read from File)
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+public class DeserializeExample {
+   public static void main(String[] args) {
+       try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("student.ser"))) {
+           Student s = (Student) in.readObject();
+          s.display();
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+   }
+}
+
+
+ 
+Points to remember:
+transient keyword: Fields marked as transient are not serialized.
+*************************Serialization does not store static fields.
+Java uses default serialization, but you can customize it with:
+Concept
+transient Keyword
+Fields marked transient are not serialized.
+transient String password; // This won't be saved during serialization
+serialVersionUID
+A unique identifier to ensure version compatibility during deserialization.
+private static final long serialVersionUID = 1L;
+If not defined, JVM generates one. If the class structure changes, deserialization may fail with InvalidClassException.
+Custom Serialization
+To control serialization manually, define these methods:
+private void writeObject(ObjectOutputStream oos) throws IOException {
+   // Custom serialization logic
+}
+private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+   // Custom deserialization logic
+
+
+Functional Interfaces
+Predicate<T>
+Feature
+	
+Description
+
+
+Purpose
+	
+Tests a condition on an input and returns a boolean result
+
+
+Method
+	
+boolean test(T t)
+
+
+Input
+	
+Yes (1 input of type T)
+
+
+Output
+	
+Boolean
+
+
+Use Case
+	
+Filtering, validations, conditions
+Example:
+Predicate<String> isLong = s -> s.length() > 5;
+System.out.println(isLong.test("hello")); // false
+2. Function<T, R>
+Feature
+	
+Description
+
+
+Purpose
+	
+Accepts one argument and returns a result
+
+
+Method
+	
+R apply(T t)
+
+
+Input
+	
+Yes (1 input of type T)
+
+
+Output
+	
+Yes (1 output of type R)
+
+
+Use Case
+	
+Data transformation, mapping
+Example:
+Function<String, Integer> lengthFunc = s -> s.length();
+System.out.println(lengthFunc.apply("Hello")); // 7
+3. Runnable
+Feature
+	
+Description
+
+
+Purpose
+	
+Represents a task to be run (no input/output)
+
+
+Method
+	
+void run()
+
+
+Input
+	
+No
+
+
+Output
+	
+No
+
+
+Use Case
+	
+Threads, background tasks
+ 
+Example:
+Runnable task = () -> System.out.println("Running...");
+task.run(); // Output: Running...
+4. Supplier<T>
+Feature
+	
+Description
+
+
+Purpose
+	
+Supplies a result (no input)
+
+
+Method
+	
+T get()
+
+
+Input
+	
+No
+
+
+Output
+	
+Yes (value of type T)
+
+
+Use Case
+	
+Lazy loading, generating values
+Example:
+Supplier<String> message = () -> "Hello!";
+System.out.println(message.get()); // Hello!
+Summary Table
+Interface
+	
+Input
+	
+Output
+	
+Return Type
+	
+Main Method
+	
+Use Case
+
+
+Predicate
+	
+Yes
+	
+Yes
+	
+Boolean
+	
+test(T t)
+	
+Filtering/validation
+
+
+Function
+	
+Yes
+	
+Yes
+	
+Any type R
+	
+apply(T t)
+	
+Mapping/transformation
+
+
+Runnable
+	
+No
+	
+No
+	
+Void
+	
+run()
+	
+Tasks/threads
+
+
+Supplier
+	
+No
+	
+Yes
+	
+Any type T
+	
+get()
+	
+Value generation
+ 
+  
+MCQ – Lambda Expression
+What will be the output of the following code?
+List<String> list = Arrays.asList("a", "bb", "ccc");
+list.forEach(s -> System.out.print(s.length() + " "));
+A) 1 2 3
+
+B) a bb ccc
+
+C) 3 2 1
+
+D) Compile error
+
+Answer: A
+2. Choose the correct lambda that squares an integer.
+A) (x) -> x
+
+B) (x) -> x * x
+
+C) (x) -> x + x
+
+D) x -> x * 2
+
+Answer: B
+3. Which lambda expression correctly sorts a list of strings in reverse order?
+List<String> list = Arrays.asList("a", "b", "c");
+A) list.sort((a, b) -> a.compareTo(b));
+
+B) list.sort((a, b) -> b.compareTo(a));
+
+C) list.sort((a, b) -> a.length() - b.length());
+
+D) list.sort((a, b) -> a + b);
+
+Answer: B
+4. What is the output?
+Runnable r = () -> System.out.print("Hello");
+r.run();
+A) No output
+
+B) Hello
+
+C) Compile error
+
+D) Runtime error
+
+Answer: B
+
+
+ 
+*****5. Which of these will compile?
+A) Predicate<String> p = (s) -> s.isEmpty();
+
+B) Function<Integer> f = (i) -> i * 2;
+
+C) Consumer<String> c = (s) -> return s;
+
+D) Supplier<String> s = () -> System.out.println("Hello");
+
+Answer: A
+6. Which functional interface is best for a lambda that takes two integers and returns their sum?
+A) Predicate<Integer>
+B) BiFunction<Integer, Integer, Integer>
+
+C) Supplier<Integer>
+
+D) Consumer<Integer>
+
+Answer: B
+7. What is the output?
+List<Integer> nums = Arrays.asList(1, 2, 3);
+nums.stream().map(n -> n * 2).forEach(System.out::print);
+A) 123
+
+B) 246
+
+C) 135
+
+D) 6
+
+Answer: B
+8. Choose the correct lambda for checking if a string starts with 'A':
+A) s -> s.endsWith("A")
+
+B) s -> s.startsWith("A")
+
+C) (String s) -> s.contains("A")
+
+D) () -> s.startsWith("A")
+
+Answer: B
+9. Output of the code?
+Predicate<String> p = s -> s.length() > 3;
+System.out.print(p.test("Hi"));
+A) true
+
+B) false
+
+C) Compile error
+
+D) Runtime error
+
+Answer: B
+ 
+ 
+10. Which lambda returns a constant value 10?
+A) () -> 10
+
+B) (x) -> x
+
+C) (x) -> 10 * x
+
+D) (x) -> x + 10
+
+Answer: A
+11. Output of this code:
+Stream.of("A", "B", "C").forEach(ch -> System.out.print(ch + " "));
+A) A B C
+
+B) ABC
+
+C) Compile error
+
+D) A, B, C
+
+Answer: A
+12. What is the return type of the lambda below?
+Function<String, Integer> f = s -> s.length();
+A) String
+
+B) int
+
+C) Integer
+
+D) boolean
+
+Answer: C
+13. Output of the following code:
+Function<Integer, Integer> doubleIt = x -> x * 2;
+System.out.print(doubleIt.apply(5));
+A) 10
+
+B) 25
+
+C) 5
+
+D) Compile error
+
+Answer: A
+14. Which of these is a valid Consumer lambda?
+A) x -> x * 2
+
+B) x -> return x;
+
+C) x -> System.out.println(x)
+
+D) () -> x + 2
+
+Answer: C
+ 
+ 
+15. Which lambda is valid for Supplier<String>?
+A) () -> "Hello"
+
+B) (s) -> "Hello"
+
+C) "Hello" -> ()
+
+D) s -> return "Hello"
+
+Answer: A
+16. What does this lambda do?
+Function<String, String> f = s -> s.toUpperCase();
+A) Returns lowercase
+
+B) Returns uppercase
+
+C) Returns first character
+
+D) Returns length
+
+Answer: B
+17. Output of this code?
+Predicate<Integer> isPositive = x -> x > 0;
+System.out.print(isPositive.test(-1));
+A) true
+
+B) false
+
+C) -1
+
+D) Compile error
+
+Answer: B
+ 
+18. What is true about this code?
+List<String> list = Arrays.asList("a", "ab", "abc");
+list.removeIf(s -> s.length() < 2);
+A) Removes strings of length < 2
+
+B) Adds strings of length < 2
+
+C) Sorts strings
+
+D) Filters nothing
+
+Answer: A
+19. Choose valid lambda for BiPredicate<String, String>:
+A) (s1, s2) -> s1.equals(s2)
+
+B) (s) -> s.isEmpty()
+
+C) () -> true
+
+D) (x, y, z) -> true
+
+Answer: A
+20. What is output?
+IntStream.range(1, 4).forEach(i -> System.out.print(i));
+A) 123
+
+B) 012
+
+C) 134
+
+D) 234
+
+Answer: A
+ 
+ 
+interface IEmployeeDetails {
+    void displayPersonalDetails();
+    void displayProfessionalDetails();
+}
+ 
+class Employee implements IEmployeeDetails {
+    //Personal details
+    private String name;
+    private int age;
+    private String address;
+ 
+    //Professional details
+    private String employeeId;
+    private String department;
+    private double salary;
+ 
+    public Employee(String name, int age, String address,
+                    String employeeId, String department, double salary) {
+        this.name = name;
+        this.age = age;
+        this.address = address;
+        this.employeeId = employeeId;
+        this.department = department;
+        this.salary = salary;
+    }
+ 
+    public void displayPersonalDetails() {
+        System.out.println("Personal Details:");
+        System.out.println("Name    : " + name);
+        System.out.println("Age     : " + age);
+        System.out.println("Address : " + address);
+    }
+ 
+    public void displayProfessionalDetails() {
+        System.out.println("Professional Details:");
+        System.out.println("Employee ID : " + employeeId);
+        System.out.println("Department  : " + department);
+        System.out.println("Salary      : " + salary);
+    }
+}
+ 
+public class EmployeeMain {
+    public static void main(String[] args) {
+        ArrayList<Employee> employeeList = new ArrayList<>();
+ 
+        employeeList.add(new Employee("Scott", 20, "NY", "E001", "HR", 63000));
+        employeeList.add(new Employee("John", 30, "India", "E002", "IT", 72000));
+        employeeList.add(new Employee("Scott", 25, "NY", "E003", "Finance", 81000));
+		for(Employee emp : employeeList){
+			emp.displayPersonalDetails();
+			emp.displayProfessionalDetails();	
+		}
+	}
+}interface IEmployeeDetails {
+    void displayPersonalDetails();
+    void displayProfessionalDetails();
+}
+ 
+class Employee implements IEmployeeDetails {
+    //Personal details
+    private String name;
+    private int age;
+    private String address;
+ 
+    //Professional details
+    private String employeeId;
+    private String department;
+    private double salary;
+ 
+    public Employee(String name, int age, String address,
+                    String employeeId, String department, double salary) {
+        this.name = name;
+        this.age = age;
+        this.address = address;
+        this.employeeId = employeeId;
+        this.department = department;
+        this.salary = salary;
+    }
+ 
+    public void displayPersonalDetails() {
+        System.out.println("Personal Details:");
+        System.out.println("Name    : " + name);
+        System.out.println("Age     : " + age);
+        System.out.println("Address : " + address);
+    }
+ 
+    public void displayProfessionalDetails() {
+        System.out.println("Professional Details:");
+        System.out.println("Employee ID : " + employeeId);
+        System.out.println("Department  : " + department);
+        System.out.println("Salary      : " + salary);
+    }
+}
+ 
+public class EmployeeMain {
+    public static void main(String[] args) {
+        ArrayList<Employee> employeeList = new ArrayList<>();
+ 
+        employeeList.add(new Employee("Scott", 20, "NY", "E001", "HR", 63000));
+        employeeList.add(new Employee("John", 30, "India", "E002", "IT", 72000));
+        employeeList.add(new Employee("Scott", 25, "NY", "E003", "Finance", 81000));
+		for(Employee emp : employeeList){
+			emp.displayPersonalDetails();
+			emp.displayProfessionalDetails();	
+		}
+	}
+}
+==============================================================================================================

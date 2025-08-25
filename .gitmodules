@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 [submodule "25-08-2025/ImpleUtility"]
 	path = 25-08-2025/ImpleUtility
 	url = https://github.com/SunilKumar-045/JerkinsRepo.git
+=======
+[submodule "23-08-2025/MavenProject-Git"]
+	path = 23-08-2025/MavenProject-Git
+	url = https://github.com/SunilKumar-045/maven_project-wipro.git
+>>>>>>> acd43017ef4ab64b298e1cae0701071c2de6213e

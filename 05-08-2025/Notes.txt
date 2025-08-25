@@ -1,0 +1,523 @@
+
+05/08/2025
+
+Software testing
+Software testing is the process of evaluating and verifying that a software application or system works as expected. The main goals of software testing are to:
+Ensure the software is functional – It performs the tasks it's supposed to do.
+Identify defects (bugs) – Find errors in the code or behavior.
+Ensure reliability and performance – Confirm it runs smoothly under various conditions.
+Validate user requirements – Make sure it meets the needs and expectations of users or clients.
+Types of Software Testing
+Software testing is broadly classified into two main types:
+1. Manual Testing
+Testers perform tests manually without using any automation tools.
+Examples: exploratory testing, usability testing.
+2. Automated Testing
+Uses software tools to run tests automatically.
+Examples: unit testing, regression testing using tools like Selenium, JUnit, etc.
+Common Testing Methods
+Unit Testing – Tests individual units or components of the software.
+Integration Testing – Tests combined parts of an application to ensure they work together.
+System Testing – Tests the complete system as a whole.
+Acceptance Testing – Checks if the system meets business requirements; often done by the client or end-user.
+Regression Testing – Ensures that new code changes haven’t broken existing functionality.
+Performance Testing – Measures responsiveness, speed, and stability.
+Security Testing – Checks for vulnerabilities and ensures data protection.
+Why Is Software Testing Important?
+Prevents costly bugs in production.
+Improves software quality.
+Enhances user satisfaction.
+Reduces maintenance costs.
+Ensures compliance with standards or regulations.
+
+
+Levels of Testing
+In software testing, "levels of testing" refer to the different stages at which testing is performed during the software development lifecycle (SDLC). Each level focuses on a specific part of the software system to ensure overall quality.
+Here are the four main levels of software testing:
+1. Unit Testing
+What it tests: Individual components or functions (units) of the code.
+Who performs it: Usually developers.
+Tools used: JUnit, NUnit, PyTest, etc.
+Goal: Ensure that each unit of the software performs as expected.
+Example: Testing a function that calculates the total price of a shopping cart.
+2. Integration Testing
+What it tests: Interaction between integrated units/modules.
+Who performs it: Developers or testers.
+Types: Top-down, bottom-up, sandwich, and big bang.
+Tools used: JUnit, TestNG, Postman (for APIs), etc.
+Goal: Verify that modules or services work together correctly.
+Example: Testing the interaction between a login module and a user dashboard module.
+3. System Testing
+What it tests: The complete and integrated software system.
+Who performs it: Independent testing team (QA).
+Types: Functional testing, usability testing, performance testing, etc.
+Goal: Validate the overall behavior and compliance with the specified requirements.
+Example: Testing the whole e-commerce platform — login, browse, cart, payment, and order confirmation.
+4. Acceptance Testing
+What it tests: The system’s readiness for delivery/use.
+Who performs it: End users, clients, or testers.
+Types: Alpha testing (internal), Beta testing (external).
+Goal: Confirm that the software meets business needs and is acceptable to the user.
+Example: A client tests the software in a real-world scenario to decide whether to accept it.
+Summary Table:
+Level
+	
+Focus Area
+	
+Performed By
+	
+Purpose
+
+
+Unit Testing
+	
+Individual functions/components
+	
+Developers
+	
+Ensure code correctness
+
+
+Integration Testing
+	
+Interactions between units
+	
+Developers/Testers
+	
+Validate module cooperation
+
+
+System Testing
+	
+Whole application/system
+	
+QA/Testers
+	
+Check system functionality
+
+
+Acceptance Testing
+	
+Final product vs. requirements
+	
+End Users/Clients
+	
+Approve for release or production
+                                                                          --------
+ 
+Functional, Non-functional Testing Types
+Software testing can be categorized into several types based on the purpose, approach, and scope of testing. Here’s a comprehensive list of the main types of software testing, grouped into functional, non-functional, maintenance, and other specialized testing types:
+A. Functional Testing Types
+These tests verify that the software behaves as expected based on requirements.
+Unit Testing
+Tests individual components or functions.
+Usually done by developers.
+Integration Testing
+Tests the interaction between integrated modules.
+Types: Top-down, Bottom-up, Big bang, Incremental.
+System Testing
+Tests the complete system as a whole.
+Acceptance Testing
+Verifies the system meets business requirements.
+Types:
+Alpha Testing: By internal team.
+Beta Testing: By end users.
+Smoke Testing
+A basic test to check major functionalities after a build.
+Sanity Testing
+A narrow regression test focusing on specific bug fixes or functionalities.
+Regression Testing
+Ensures new changes haven’t broken existing functionality.
+Interface Testing
+Tests the interaction between systems or software components.
+End-to-End Testing
+Simulates real user scenarios to validate the system flow.
+
+
+ 
+B. Non-Functional Testing Types
+These tests validate aspects unrelated to specific behaviors or functions.
+Performance Testing
+Measures responsiveness, stability, and scalability.
+Includes:
+Load Testing: Under expected load.
+Stress Testing: Beyond normal load.
+Spike Testing: Sudden spikes in load.
+Soak (Endurance) Testing: Long-duration load testing.
+Security Testing
+Checks for vulnerabilities and data protection.
+Includes: penetration testing, ethical hacking, vulnerability scanning.
+Usability Testing
+Evaluates user experience, interface design, and navigation.
+Compatibility Testing
+Checks performance across different browsers, OS, devices, etc.
+Reliability/Recovery Testing
+Ensures software recovers from crashes, hardware failures, or network issues.
+Maintainability Testing
+Measures how easy it is to maintain and update the software.
+Portability Testing
+Verifies software works across different environments or platforms.
+Compliance Testing
+Ensures the software adheres to industry or legal standards.
+C. Maintenance Testing Types
+Used after deployment or during upgrades.
+Regression Testing (again)
+Re-run of existing test cases after updates.
+Maintenance Testing
+Includes impact analysis and testing for enhancements or bug fixes.
+ 
+ 
+D. Specialized/Advanced Testing Types
+Exploratory Testing
+Tester explores the application freely without predefined test cases.
+Ad-hoc Testing
+Informal testing to find defects randomly.
+Mutation Testing
+Deliberate errors are introduced to evaluate the effectiveness of test cases.
+A/B Testing
+Compares two versions of a webpage or an app to see which performs better.
+Static Testing
+Code is reviewed without executing it (e.g., code review, static analysis).
+Dynamic Testing
+Code is executed during testing.
+ 
+ Ad-hoc testing: It is an informal testing method that is performed without any pre-defined
+test cases. It is basically rely on tester's experience and also the knowledge he possess
+to explore the functionalities of the application that are being missed during formal
+
+
+ 
+MCQ – Software Testing
+1. Which of the following is not a level of software testing?
+A. Unit Testing
+
+B. Integration Testing
+
+C. System Testing
+
+D. Validation Testing
+
+2. Which testing level checks individual components?
+A. Unit Testing
+
+B. System Testing
+
+C. Acceptance Testing
+
+D. Integration Testing
+
+3. What is the main purpose of integration testing?
+A. To test user requirements
+
+B. To test interactions between modules
+
+C. To test interfaces and interactions between units
+
+D. To find memory leaks
+
+4. System Testing is performed to:
+A. Test performance
+
+B. Test modules individually
+
+C. Validate the complete system
+
+D. Test code logic
+
+5. Which level of testing involves end users?
+A. Unit Testing
+
+B. System Testing
+
+C. Regression Testing
+
+D. Acceptance Testing
+
+6. Regression testing is done to:
+A. Fix broken code
+
+B. Ensure recent changes haven’t affected existing features
+
+C. Test new modules
+
+D. Test performance
+
+
+
+ 
+7. Smoke testing is also called:
+A. Build Verification Testing
+
+B. Sanity Testing
+
+C. White-box Testing
+
+D. Functional Testing
+
+8. What is the goal of sanity testing?
+A. Verify build stability
+
+B. Verify specific functionalities after minor changes
+
+C. Validate end-to-end flow
+
+D. Automate all test cases
+
+9. Alpha testing is done by:
+A. Internal testers at the developer’s site
+
+B. External users
+
+C. Automation tools
+
+D. Beta users
+
+10. Beta testing is conducted:
+A. By developers
+
+B. By real users in a real environment
+
+C. Internally only
+
+D. Before coding
+
+11. Performance testing focuses on:
+A. Logical errors
+
+B. Speed, scalability, and stability
+
+C. UI bugs
+
+D. Test case writing
+
+12. Which level of testing comes after integration testing?
+A. Unit Testing
+
+B. Acceptance Testing
+
+C. System Testing
+
+D. Smoke Testing
+Answer: C. System Testing
+13. What is the primary focus of acceptance testing?
+A. Internal logic of the code
+
+B. Meeting business requirements
+
+C. Test case coverage
+
+D. Performance tuning
+
+ANSWER KEY
+1. Which of the following is not a level of software testing?
+
+Answer: D. Validation Testing
+2. Which testing level checks individual components?
+
+Answer: A. Unit Testing
+3. What is the main purpose of integration testing?
+
+Answer: C. To test interfaces and interactions between units
+4. System Testing is performed to:
+
+Answer: C. Validate the complete system
+5. Which level of testing involves end users?
+
+Answer: D. Acceptance Testing
+6. Regression testing is done to:
+
+Answer: B. Ensure recent changes haven’t affected existing features
+7. Smoke testing is also called:
+
+Answer: A. Build Verification Testing
+8. What is the goal of sanity testing?
+
+Answer: B. Verify specific functionalities after minor changes
+9. Alpha testing is done by:
+
+Answer: A. Internal testers at the developer’s site
+10. Beta testing is conducted:
+
+Answer: B. By real users in a real environment
+11. Performance testing focuses on:
+
+Answer: B. Speed, scalability, and stability
+12. Which level of testing comes after integration testing?
+
+Answer: C. System Testing
+13. What is the primary focus of acceptance testing?
+
+Answer: B. Meeting business requirements                          
+ 
+                                                           ----------------
+ 
+
+ 
+Various Testing Techniques
+Black Box Testing
+Focus: Functionality of the application without knowledge of internal code.
+Tester’s Knowledge: No access to internal code or architecture.
+Main Goal: Validate outputs against inputs.
+Used for: Functional testing, system testing, acceptance testing.
+Examples:
+Input validation
+UI testing
+Functional test cases
+White Box Testing (aka Clear Box or Glass Box Testing)
+Focus: Internal structure and logic of the code.
+Tester’s Knowledge: Full access to source code and design.
+Main Goal: Verify internal operations and logic.
+Used for: Unit testing, security testing, code coverage.
+Examples:
+Statement coverage
+Branch coverage
+Path testing
+Grey Box Testing
+Focus: Combines elements of both black box and white box testing.
+Tester’s Knowledge: Partial knowledge of internal code/architecture.
+Main Goal: Test both user-level functionality and internal logic.
+Used for: Integration testing, penetration testing, end-to-end testing with insight.
+Examples:
+Session management testing
+API security with known endpoints
+
+
+ 
+Similar or Related Testing Techniques
+Glass Box Testing
+Another name for White Box Testing.
+Opaque Box Testing
+Another name for Black Box Testing.
+Clear Box Testing
+Synonym of White Box Testing.
+Transparent Box Testing
+Also refers to White Box Testing.
+Extended Concepts & Related Testing Types
+Testing Type
+	
+Description
+	
+Relation
+
+
+Unit Testing
+	
+Testing individual units of code
+	
+White Box
+
+
+Functional Testing
+	
+Validating application functionality against requirements
+	
+Black Box
+
+
+Integration Testing
+	
+Testing how modules work together
+	
+Grey Box / White Box
+
+
+System Testing
+	
+Testing the complete integrated system
+	
+Black Box
+
+
+Acceptance Testing (UAT)
+	
+Validating the system against business needs
+	
+Black Box
+
+
+Regression Testing
+	
+Ensuring new changes don’t affect existing features
+	
+Black/Grey Box
+
+
+Security Testing
+	
+Checking for vulnerabilities
+	
+Grey Box (esp. in penetration testing)
+
+
+Penetration Testing
+	
+Simulated attacks on system
+	
+Grey Box
+
+
+Code Coverage Analysis
+	
+Measuring how much code is tested
+	
+White Box
+
+
+Mutation Testing
+	
+Introducing small changes in code to test the test cases
+	
+White Box
+Summary Table
+Feature
+	
+Black Box
+	
+White Box
+	
+Grey Box
+
+
+Knowledge of Code
+	
+No
+	
+Yes
+	
+Partial
+
+
+Testing Type
+	
+Functional
+	
+Structural
+	
+Combination
+
+
+Example Use Case
+	
+UI Testing
+	
+Unit Testing
+	
+Security Testing
+
+
+Tester Role
+	
+End-user/tester
+	
+Developer/Tester
+	
+Developer/Test Analyst
+
+
+Speed to Execute
+	
+Faster
+	
+Slower (in-depth)
+	
+Moderate

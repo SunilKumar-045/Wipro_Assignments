@@ -1,0 +1,1064 @@
+28/07/2025
+
+class MyThread extends Thread {
+
+	public void run() {
+
+        for (int i = 1; i <= 5; i++) {
+
+            System.out.println(Thread.currentThread().getName() + " - Value: " + i);
+
+            try {
+
+                Thread.sleep(1000); // Pause for 1 second
+
+            } catch (InterruptedException e) {
+
+                System.out.println(e);
+
+            }
+
+        }
+
+    }
+ 
+public static void main(String[] args) {
+
+        MyThread t1 = new MyThread();
+
+        MyThread t2 = new MyThread();
+
+        t1.setName("Thread-1");
+
+        t2.setName("Thread-2");
+ 
+        t1.start(); // Starts the first thread
+
+        t2.start(); // Starts the  second thread
+
+    }
+
+}
+
+ 
+class MyRunnable implements Runnable {
+
+    public void run() {
+
+        for (int i = 1; i <= 5; i++) {
+
+            System.out.println(Thread.currentThread().getName() + " - Value: " + i);
+
+            try {
+
+                Thread.sleep(2000); 
+
+            } catch (InterruptedException e) {
+
+                System.out.println(e);
+
+            }
+
+        }
+
+    }
+
+    public static void main(String[] args) {
+
+        MyRunnable runnable = new MyRunnable();
+
+        Thread t1 = new Thread(runnable, "Thread-1");
+
+        Thread t2 = new Thread(runnable, "Thread-2");
+
+//The Runnable interface does not have a start() method, so we require to create the object of the Thread class
+
+        t1.start();
+
+        t2.start();
+
+    }
+
+}
+
+
+ 
+Multithreading
+What is Multithreading in Java?
+Multithreading in Java is a feature that allows the concurrent execution of two or more parts of a program 
+for maximum utilization of CPU.
+
+IMPORTANT POINT:
+“Each part of such a program is called a thread, and each thread defines a separate path of execution.”
+
+
+ is used to perform multiple tasks simultaneously, such as:
+Performing background tasks without interrupting the main program.
+Speeding up complex computations by dividing them across threads.
+Concepts
+Thread: A lightweight subprocess; the smallest unit of processing.
+Main thread: When a Java program starts, one thread (main thread) is created.
+Java Thread Lifecycle
+1. New (Created)
+A thread is created but not yet started.
+Example:
+Thread t = new Thread(); // A new Thread by the name “t” is created.
+At this point, the thread is just an object; it hasn’t started executing.
+2. Runnable state
+“t.start();”
+After you call start(), the thread moves to the Runnable state.
+It is ready to run but may or may not be running immediately (depends on thread scheduler).
+Example:
+t.start(); // internally t.start() method calls the run() method
+The thread scheduler picks a thread from the Runnable pool to run.
+3. Running state
+The thread is actively executing its run() method.
+This is technically part of the Runnable state, but here the thread is currently executing.
+
+
+ 
+4. Blocked / Waiting / Timed Waiting
+A thread can move to these states when:
+It’s waiting for a resource (e.g., waiting to acquire a lock).
+It’s waiting indefinitely (wait() method).
+It’s sleeping (sleep() method).
+It’s waiting for a specific time (join(timeout)).
+Examples:
+Thread.sleep(1000);        // Timed waiting  1 second
+synchronized(lock) { ... } // Could cause blocking
+lock.wait();               // Waiting
+t.join();                 // Waiting for another thread to finish
+
+5. Terminated (Dead)
+The thread finishes its task or is stopped.
+Once the run() method completes or the thread is stopped (deprecated), it reaches this state.
+The thread cannot be restarted once terminated.
+Example:
+// After run() completes, thread is terminated
+
+Types of Thread Pools (via Executors class):
+Method	Description
+newFixedThreadPool(n)	Pool with fixed number of threads
+newCachedThreadPool()	Creates new threads as needed, reuses idle threads
+newSingleThreadExecutor()	Only one thread — tasks run sequentially
+newScheduledThreadPool(n)	For delayed or periodic tasks
+ 
+Creating Threads: In Java, threads can be created by:
+Extending the Thread class --🡪 class MyThread extends Thread
+Implementing the Runnable interface --🡪 class MyThread implements Runnable
+ 
+Example 1: Using Thread class
+class MyThread extends Thread {
+   public void run() {
+       for (int i = 1; i <= 5; i++) {
+           System.out.println(Thread.currentThread().getName() + " - Value: " + i);
+           try {
+              Thread.sleep(1000); // Pause for 1 second
+           } catch (InterruptedException e) {
+              System.out.println(e);
+           }
+       }
+   }
+ 
+
+
+ 
+    public static void main(String[] args) {
+       MyThread t1 = new MyThread();
+       MyThread t2 = new MyThread();
+       t1.setName("Thread-1");
+       t2.setName("Thread-2");
+ 
+       t1.start(); // Start first thread
+       t2.start(); // Start second thread
+   }
+}
+Example 2: Using Runnable interface
+class MyRunnable implements Runnable {
+   public void run() {
+       for (int i = 1; i <= 5; i++) {
+           System.out.println(Thread.currentThread().getName() + " - Value: " + i);
+           try {
+              Thread.sleep(2000); 
+           } catch (InterruptedException e) {
+              System.out.println(e);
+           }
+       }
+   }
+   public static void main(String[] args) {
+       MyRunnable runnable = new MyRunnable();
+       Thread t1 = new Thread(runnable, "Thread-1");
+       Thread t2 = new Thread(runnable, "Thread-2");
+//The Runnable interface does not have a start() method, so we require to create the object of the Thread class
+       t1.start();
+       t2.start();
+   }
+}
+ 
+Benefits of Multithreading
+Improved performance on multi-core systems.
+Better resource utilization.
+Enables asynchronous programming (non-blocking).
+
+
+
+
+
+Controlled Thread
+
+class ControlledThread extends Thread {
+
+    public void run() {
+
+        for (int i = 1; i <= 3; i++) {
+
+            System.out.println(getName() + " - Count: " + i);
+
+            try {
+
+                Thread.sleep(1000); // pause for 1 second
+
+            } catch (InterruptedException e) {
+
+                System.out.println(e);
+
+            }
+
+        }
+
+    }
+ 
+    public static void main(String[] args) {
+
+        System.out.println("Main thread starts….");
+
+		ControlledThread t1 = new ControlledThread();
+
+        ControlledThread t2 = new ControlledThread();
+ 
+        t1.setName("Worker-1");
+
+        t2.setName("Worker-2");
+ 
+        System.out.println("Starting threads...");
+
+        t1.start();
+
+        try {
+
+            // Wait for t1 to finish before continuing
+
+            t1.join();
+
+        } catch (InterruptedException e) {
+
+            System.out.println(e);
+
+        }
+
+		t2.start();
+ 
+        // Check if threads are alive
+
+        System.out.println("Is " + t1.getName() + " alive? " + t1.isAlive());
+
+        System.out.println("Is " + t2.getName() + " alive? " + t2.isAlive());
+ 
+        //System.out.println("Main thread finished.");
+
+    }
+
+}
+
+ 
+Synchronized and join
+class Counter {
+
+    private int count = 0;
+
+    // synchronized method to avoid race condition
+
+    public synchronized void increment() {
+
+        //System.out.print("Count: "+count);
+
+		count++;
+
+	}
+ 
+    public int getCount() {
+
+        return count;
+
+    }
+
+}
+ 
+class SyncThread extends Thread {
+
+    Counter counter;
+ 
+    SyncThread(Counter counter) {
+
+        this.counter = counter;
+
+    }
+ 
+    public void run() {
+
+        System.out.println("Run method");
+
+		for (int i = 0; i < 1000; i++) {
+
+            counter.increment();
+
+        }
+
+    }
+ 
+    public static void main(String[] args) throws InterruptedException {
+
+        Counter counter = new Counter();
+ 
+
+//These 2 threads t1 and t2 increment the shared count variable concurrently the increment() and the get() methods are synchronized meaning only 1 thread runs at a time to avoid race condition
+        SyncThread t1 = new SyncThread(counter);
+
+        SyncThread t2 = new SyncThread(counter);
+ 
+        t1.start();
+
+        t2.start();
+
+		t1.join();
+
+		t2.join();
+
+
+        System.out.println("Final Count: " + counter.getCount()); 
+
+    }
+
+}
+
+ 
+ 
+ 
+
+ //Process Synchronization
+
+class BankAccount{
+
+	private int acct_balance = 10000; // user 1 12000
+
+	public synchronized void deposit_amt(int amount){
+
+		acct_balance = acct_balance+amount;
+
+		System.out.println("Amount Deposited: "+amount);
+
+		System.out.println("BalanceAmount: "+acct_balance);
+
+	}
+ 
+	public synchronized void withdraw_amt(int amount){
+
+		if(acct_balance>=amount){
+
+			acct_balance = acct_balance-amount;			
+
+			System.out.println("Amount Withdrawn: "+amount);
+
+			System.out.println("BalanceAmount: "+acct_balance);
+
+		}
+
+		else{
+
+			System.out.println("Insufficient Balance in your account"+acct_balance);
+
+		}
+
+	}
+
+		public int getBalance(){
+
+			return acct_balance;
+
+		}		
+
+}
+ 
+ 
+class BankTransaction{
+
+	public static void main(String[] args){
+
+		BankAccount bankAccount = new BankAccount();
+
+		Thread t1 =new Thread(
+
+		()-> {
+
+			for(int i=1;i<5;i++){
+
+				bankAccount.deposit_amt(1000);
+
+			try{
+
+				Thread.sleep(500);
+
+			}catch(InterruptedException ie){
+
+				ie.printStackTrace();	
+
+			}
+
+			}				
+
+		});
+
+		Thread t2 =new Thread(
+
+		()-> {
+
+			for(int i=1;i<5;i++){
+
+				bankAccount.withdraw_amt(3000);
+
+			try{
+
+				Thread.sleep(500);
+
+			}catch(InterruptedException ie){
+
+				ie.printStackTrace();	
+
+			}
+
+			}				
+
+		});
+
+		t1.start();
+
+		t2.start();
+
+		try{
+
+			t1.join();
+
+			t2.join();
+
+		}catch(InterruptedException ie){
+
+				ie.printStackTrace();	
+
+		}
+
+	System.out.println("Balance Left: "+bankAccount.getBalance());
+
+	}
+
+}	
+ 
+
+Simulate a Bank ATM system where multiple users withdraw 
+money simultaneously.
+ 
+Problem Statement:
+==================
+You have a bank account with a balance of 1000 units. 
+Two users try to withdraw money from this account at the 
+same time using different ATM machines (threads). 
+Implement multithreading to simulate this scenario and 
+make sure the account balance does not go below zero.
+
+
+class SharedData {
+    private int data;
+    private boolean hasData = false;
+    // Producer puts data
+    public synchronized void produce(int value) throws InterruptedException {
+        while (hasData) {
+            wait(); // wait if data is already produced
+        }
+        data = value;
+        hasData = true;
+        System.out.println("Produced: " + data);
+        notify(); // notify consumer
+    }
+ 
+    
+// Consumer gets data
+    public synchronized void consume() throws InterruptedException {
+        while (!hasData) {
+            wait(); // wait if no data is available
+        }
+        System.out.println("Consumed: " + data);
+        hasData = false;
+        notify(); // notify producer
+    }
+}
+class Producer extends Thread {
+    SharedData shared;
+    Producer(SharedData shared) {
+        this.shared = shared;
+    }
+    public void run() {
+        int value = 1;
+        try {
+            for (int i = 0; i < 5; i++) {
+                shared.produce(value++);
+                Thread.sleep(500); // simulate time delay
+            }
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
+    }
+}
+ 
+class Consumer extends Thread {
+    SharedData shared;
+ 
+    Consumer(SharedData shared) {
+        this.shared = shared;
+    }
+ 
+    public void run() {
+        try {
+            for (int i = 0; i < 5; i++) {
+                shared.consume();
+                Thread.sleep(1000); // simulate processing delay
+            }
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
+    }
+}
+ 
+class Impl{
+    public static void main(String[] args) {
+        SharedData shared = new SharedData();
+       Producer p = new Producer(shared);
+        Consumer c = new Consumer(shared);
+        p.start();
+        c.start();
+    }
+}
+
+Inter-thread communication
+Inter-thread communication in Java allows multiple threads to communicate and cooperate with each other by waiting and notifying. It’s especially useful when threads share resources and must coordinate access or execution.
+Java provides 3 key methods (from Object class):
+Method		Purpose
+wait()		->Tells the current thread to release the lock and go to sleep until another
+		 thread calls notify() or notifyAll()
+
+notify()	->Wakes up one thread waiting on the same object's monitor
+
+notifyAll()	->Wakes up all threads waiting on the same object
+
+Example: Producer-Consumer Problem (Inter-thread Communication)
+This is a classic example to demonstrate inter-thread communication using wait() and notify().
+Code:
+class SharedData {
+   private int data;
+   private boolean hasData = false;
+   // Producer puts data
+   public synchronized void produce(int value) throws InterruptedException {
+       while (hasData) {
+           wait(); // wait if data is already produced
+       }
+       data = value;
+       hasData = true;
+      System.out.println("Produced: " + data);
+       notify(); // notify consumer
+   }
+ 
+  
+ 
+ 
+// Consumer gets data
+   public synchronized void consume() throws InterruptedException {
+       while (!hasData) {
+           wait(); // wait if no data is available
+       }
+      System.out.println("Consumed: " + data);
+       hasData = false;
+       notify(); // notify producer
+   }
+}
+class Producer extends Thread {
+   SharedData shared;
+  Producer(SharedData shared) {
+       this.shared = shared;
+   }
+   public void run() {
+       int value = 1;
+       try {
+           for (int i = 0; i < 5; i++) {
+              shared.produce(value++);
+              Thread.sleep(500); // simulate time delay
+           }
+       } catch (InterruptedException e) {
+          System.out.println(e);
+       }
+   }
+}
+ 
+class Consumer extends Thread {
+   SharedData shared;
+ 
+  Consumer(SharedData shared) {
+       this.shared = shared;
+   }
+ 
+   public void run() {
+       try {
+           for (int i = 0; i < 5; i++) {
+              shared.consume();
+              Thread.sleep(1000); // simulate processing delay
+           }
+       } catch (InterruptedException e) {
+          System.out.println(e);
+       }
+   }
+}
+ 
+public class InterThreadCommunicationExample {
+   public static void main(String[] args) {
+       SharedData shared = new SharedData();
+      Producer p = new Producer(shared);
+       Consumer c = new Consumer(shared);
+       p.start();
+       c.start();
+   }
+}
+Output
+Produced: 1
+Consumed: 1
+Produced: 2
+Consumed: 2
+Produced: 3
+Consumed: 3
+...
+ 
+ 
+Key Points:
+wait() causes the current thread to wait until another thread notifies it.
+notify() or notifyAll() should be called on the same object the thread is waiting on.
+Important point :These methods must be called inside a synchronized block/method.
+Thread Priority in Java:
+Java assigns thread priorities using integers from 1 to 10, defined by constants:
+Thread.MIN_PRIORITY = 1
+Thread.NORM_PRIORITY = 5 (default)
+Thread.MAX_PRIORITY = 10
+ 
+How to Set Thread Priority:
+Thread t = new Thread();
+t.setPriority(Thread.MAX_PRIORITY); // Sets the highest priority
+You can also set it directly:
+t.setPriority(8);
+Get Thread Priority:
+int p = t.getPriority();
+System.out.println("Priority: " + p);
+Important:
+Thread priority is just a suggestion to the JVM and OS.
+Thread scheduling is platform-dependent, so priority may not guarantee execution order.
+ 
+----------
+ 
+
+t1.setPriority(5);
+
+			t2.setPriority(10);
+
+			t1.start();
+
+			t2.start();
+
+			int priority_t1 = t1.getPriority();
+
+			System.out.println("Priority: of thread t1: "+priority_t1);
+
+ 
+
+
+MCQs - Multithreading
+Which method must be implemented when you implement Runnable?
+
+A) start( )
+B) run( )
+
+C) execute( )
+
+D) thread( )
+
+Which method starts a new thread in Java?
+A) start( )
+
+B) run( )
+
+C) execute( )
+
+D) init( )
+
+******What does Thread.sleep(1000) do?
+A) Releases the lock for 1 second
+
+B) Suspends the thread execution for 1 second
+
+C) Terminates the thread
+
+D) Waits for another thread
+
+Which method is used to pause current thread until another thread finishes?
+
+A) wait( )
+
+B) notify( )
+C) join( )
+
+D) sleep( )
+
+What does isAlive() method check?
+
+A) Whether thread has started and not yet terminated
+
+B) Whether thread is sleeping
+C) Whether thread is dead
+
+D) None of the above
+
+Which keyword is used for synchronization in Java?
+
+A) locked
+
+B) mutex
+C) synchronized
+
+D) volatile
+
+What is the result of modifying a non-volatile shared variable in one thread but reading it in another without synchronization?
+
+A) Always latest value
+B) Race condition
+
+C) Compile-time error
+
+D) Deadlock
+
+*******Which interface extends Runnable and supports returning a result?
+A) Callable
+
+B) Future
+
+C) Supplier
+
+D) Executor
+
+What is the output order of start() vs run()?
+
+A) run() invokes in new thread
+
+B) start() executes in current thread
+C) run() executes directly in current thread
+
+D) start() directly calls run()
+
+Using Thread t = new Thread(runnable); t.run();…
+
+A) Creates a new thread
+B) Runs on the same (main) thread
+
+C) Causes compile error
+
+D) Runs asynchronously
+
+Which method wakes only a single waiting thread?
+
+A) notifyAll( )
+
+B) wake( )
+C) notify( )
+
+D) signal( )
+
+Which method wakes all waiting threads?
+
+A) notify( )
+
+B) busy( )
+C) notifyAll( )
+
+D) broadcast( )
+
+What's the typical use case of volatile keyword?
+
+A) Atomic operations
+B) Guarantee visibility across threads
+
+C) Locking mechanism
+
+D) Scheduling threads
+
+What happens if notify() is called but no thread is waiting?
+
+A) Exception
+B) No effect
+
+C) Deadlock
+
+D) Block current thread
+
+If two threads call synchronized method on same object, what happens?
+
+A) Both execute concurrently
+B) One executes, one blocks
+
+C) Both block
+
+D) Exception
+
+For different synchronized methods in same object, is lock shared?
+A) Yes
+
+B) No
+
+C) Only on static methods
+
+D) Depends on thread priority
+
+Which yields higher throughput?
+A) notify() over notifyAll()
+
+B) notifyAll() over notify()
+
+C) Both equal
+
+D) Neither is good
+
+******What does Thread.yield() request?
+
+A) Sleep
+B) Give up CPU momentarily
+
+C) Terminate thread
+
+D) None
+
+What is deadlock?
+A) Threads blocked forever waiting for each other
+
+B) Thread blocked waiting data
+
+C) Multiple threads sleeping
+
+D) Thread throwing exception
+
+Which mechanism helps avoid deadlock?
+
+A) Thread.yield( )
+B) Ordering lock acquisitions consistently
+
+C) notifyAll( )
+
+D) wait( )
+
+wait() must be used within…
+
+A) runnable
+B) synchronized block on same object
+
+C) static method
+
+D) main method
+
+What exception thrown if wait() is called outside synchronized?
+A) IllegalMonitorStateException
+
+B) IllegalStateException
+
+C) InterruptedException
+
+D) NullPointerException
+
+Which method interrupts a thread?
+
+A) kill()
+
+B) stop()
+C) interrupt()
+
+D) terminate()
+
+Thread.currentThread().getPriority( ) default is…
+
+A) 1
+B) 5
+
+C) 10
+
+D) OS default
+
+Which is true about Thread priorities?
+
+A) Always respected
+B) May be ignored by JVM, every OS has a different JVM(JVM is platform dependent)
+
+C) Causes thread pooling
+
+D) Determines memory allocation
+
+interrupt() on sleeping thread…
+
+A) Continues sleeping
+B) InterruptedException thrown
+
+C) Silent fail
+
+D) Terminates process
+
+---------------
+ 
+
+class StringBufferTask extends Thread {
+
+    private StringBuffer buffer;
+
+    private String text;
+ 
+    public StringBufferTask(StringBuffer buffer, String text) {
+
+        this.buffer = buffer;
+
+        this.text = text;
+
+    }
+ 
+    public void run() {
+
+        synchronized (buffer) {
+
+            for (int i = 0; i < text.length(); i++) {
+
+                buffer.append(text.charAt(i));
+
+                try {
+
+                    Thread.sleep(50); // Simulate delay
+
+                } catch (InterruptedException e) {
+
+                    System.out.println(e);
+
+                }
+
+            }
+
+            System.out.println(Thread.currentThread().getName() + " appended: " + text);
+
+        }
+
+    }
+ 
+    public static void main(String[] args) {
+
+        StringBuffer sharedBuffer = new StringBuffer();
+ 
+        StringBufferTask t1 = new StringBufferTask(sharedBuffer, "Hello");
+
+        StringBufferTask t2 = new StringBufferTask(sharedBuffer, "World");
+
+        StringBufferTask t3 = new StringBufferTask(sharedBuffer, "Java");
+ 
+        t1.start();
+
+        t2.start();
+
+        t3.start();
+ 
+        try {
+
+            t1.join();
+
+            t2.join();
+
+            t3.join();
+
+        } catch (InterruptedException e) {
+
+            System.out.println(e);
+
+        }
+ 
+        System.out.println("Final content: " + sharedBuffer.toString());
+
+    }
+
+}
+
+ 
+ 
+Multithreading with StringBuffer
+StringBuffer is a mutable, thread-safe class for working with strings.
+It is synchronized, meaning multiple threads can access it safely, but one at a time.
+Example:
+In the following example, multiple threads will append characters to a shared StringBuffer object.
+Code:
+class StringBufferTask extends Thread {
+   private StringBuffer buffer;
+   private String text;
+ 
+   public StringBufferTask(StringBuffer buffer, String text) {
+       this.buffer = buffer;
+       this.text = text;
+   }
+ 
+   public void run() {
+       synchronized (buffer) {
+           for (int i = 0; i < text.length(); i++) {
+              buffer.append(text.charAt(i));
+               try {
+                  Thread.sleep(50); // Simulate delay
+               } catch (InterruptedException e) {
+                  System.out.println(e);
+               }
+           }
+          System.out.println(Thread.currentThread().getName() + " appended: " + text);
+       }
+   }
+ 
+
+
+ 
+    public static void main(String[] args) {
+       StringBuffer sharedBuffer = new StringBuffer();
+ 
+       StringBufferTask t1 = new StringBufferTask(sharedBuffer, "Hello");
+      StringBufferTask t2 = new StringBufferTask(sharedBuffer, "World");
+      StringBufferTask t3 = new StringBufferTask(sharedBuffer, "Java");
+ 
+       t1.start();
+       t2.start();
+       t3.start();
+ 
+       try {
+           t1.join();
+           t2.join();
+           t3.join();
+       } catch (InterruptedException e) {
+          System.out.println(e);
+       }
+ 
+      System.out.println("Final content: " + sharedBuffer.toString());
+   }
+}
+Output:
+Thread-0 appended: Hello
+Thread-2 appended: Java
+Thread-1 appended: World
+Final content: HelloJavaWorld
+Note: Output order may vary due to thread scheduling.
+ 
+ ======================================================================================================================================

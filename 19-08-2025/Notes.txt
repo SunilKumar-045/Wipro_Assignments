@@ -1,0 +1,535 @@
+19/08/2025
+
+Fetch data from MySQL table
+Use-Case
+Fetch data from MySQL table (e.g., username / password)
+Use Selenium to enter the fetched values into a login form
+Step-1: MySQL Table (user_tbl)
+id
+	
+username
+	
+password
+
+
+1
+	
+Admin
+	
+admin123
+Step-2: Java Code (JDBC + Selenium)
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+ 
+public class MySQLWithSelenium {
+ 
+   public static void main(String[] args) {
+       Connection conn = null;
+       Statement stmt  = null;
+       ResultSet rs    = null;
+       WebDriver driver = null;
+ 
+       try {
+           // 1) JDBC connection
+           String url      = "jdbc:mysql://localhost:3306/java_selenium";
+           String user     = "root";
+           String password = "root@123";
+ 
+           conn = DriverManager.getConnection(url, user, password);
+           stmt = conn.createStatement();
+           rs   = stmt.executeQuery("SELECT username, password FROM user_tbl WHERE id = 1");
+ 
+           String dbUsername = null;
+           String dbPassword = null;
+ 
+           if (rs.next()) {
+              dbUsername = rs.getString("username");
+              dbPassword = rs.getString("password");
+           }
+ 
+           // 2) Selenium usage of the DB values
+          
+driver = new ChromeDriver();
+              driver.get("https://userdetails.html");
+ 
+           // Fill HTML login form using the data fetched from MySQL
+           WebElement usernameInput = driver.findElement(By.xpath("//input[@name='username']"));
+           WebElement passwordInput = driver.findElement(By.xpath("//input[@name='password']"));
+           WebElement loginBtn      = driver.findElement(By.xpath("//button[@type='submit']"));
+ 
+          usernameInput.sendKeys(dbUsername);
+          passwordInput.sendKeys(dbPassword);
+          loginBtn.click();
+ 
+       } catch (Exception e) {
+          e.printStackTrace();
+       } finally {
+           // JDBC cleanup
+           try { if (rs != null)  rs.close(); }   catch (Exception ignored) {}
+           try { if (stmt != null) stmt.close(); } catch (Exception ignored) {}
+           try { if (conn != null) conn.close(); } catch (Exception ignored) {}
+ 
+           // Close browser
+           if (driver != null) {
+              driver.quit();
+           }
+       }
+   }
+}
+Finally it :
+Connects to MySQL
+Reads username and password from user_tbl table
+Uses Selenium to enter that data into the login page and click Login
+ 
+ Drag and Drop
+Save the following HTML as dragdrop.html
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Drag and Drop Demo</title>
+ <style>
+   #drag {
+     width: 100px;
+     height: 100px;
+     background: lightgray;
+     border: 1px solid black;
+     cursor: move;
+     margin-bottom: 30px;
+   }
+ 
+   #drop {
+     width: 120px;
+     height: 120px;
+     background: lightgreen;
+     border: 1px solid black;
+   }
+ </style>
+</head>
+<body>
+ 
+<h3>Drag the box and drop it on the green area</h3>
+ 
+<div id="drag" draggable="true">Drag Me</div>
+<div id="drop">Drop Here</div>
+ 
+ 
+ 
+ 
+<script>
+// Just to give a visual confirmation when dropped
+ const drag  = document.getElementById('drag');
+ const drop  = document.getElementById('drop');
+ 
+drop.addEventListener('dragover', function(e) {
+  e.preventDefault();
+ });
+drop.addEventListener('drop', function(e) {
+   drop.innerHTML = "Dropped!";
+ });
+</script>
+ 
+</body>
+</html>
+Selenium Java Code to Perform Drag & Drop
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+ 
+import java.io.File;
+ 
+public class LocalDragAndDrop {
+   public static void main(String[] args) throws InterruptedException {
+  
+WebDriver driver = new ChromeDriver();
+// Load local HTML
+       File file = new File("C:\\selenium_test\\dragdrop.html");
+       String url = "file:///" + file.getAbsolutePath();
+      driver.get(url);
+ 
+       WebElement dragElement = driver.findElement(By.id("drag"));
+       WebElement dropElement = driver.findElement(By.id("drop"));
+ 
+       Actions actions = new Actions(driver);
+      actions.dragAndDrop(dragElement, dropElement).perform();
+      Thread.sleep(2000);
+       driver.quit();
+   }
+}
+What we’ll see
+The browser opens your local HTML file
+The gray box (“Drag Me”) is dragged onto the green box (“Drop Here”)
+The text changes to “Dropped!”
+
+Handling IFrames
+HTML file — main.html
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Page with Iframe</title>
+</head>
+<body>
+<h2>Main Page</h2>
+<!-- iframe that loads framepage.html -->
+<iframe id="myFrame" src="framepage.html" width="400" height="200"></iframe>
+</body>
+</html>
+Iframe HTML file — framepage.html
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Frame Page</title>
+</head>
+<body>
+<h3>Inside the Iframe</h3>
+<input type="text" id="message" placeholder="Type message here" />
+</body>
+</html>
+
+
+ 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import java.io.File;
+ 
+public class IframeExample {
+ 
+   public static void main(String[] args) throws InterruptedException {
+ 
+        // Initialize WebDriver
+       WebDriver driver = new ChromeDriver();
+ 
+       // Load local main.html
+       File file = new File("C:\\selenium_test\\main.html");
+       String url = "file:///" + file.getAbsolutePath();
+      driver.get(url);
+ 
+       // Switch to iframe by id
+      driver.switchTo().frame("myFrame");
+ 
+       // Now we're inside the iframe, so we can locate the input field by its id
+       WebElement messageInput = driver.findElement(By.id("message"));
+ 
+       // Type something in the input field
+      messageInput.sendKeys("Hello Learners!!!!");
+ 
+       // Optionally: wait a few seconds to visually confirm
+      Thread.sleep(2000);
+       // Switch back to main page
+      driver.switchTo().defaultContent();
+//       driver.quit();
+   }
+}
+What it does
+Opens the local main.html
+Switches into the iframe (framepage.html)
+Types “Hello Learners!!!” in the input field inside the frame
+
+Example using a basic HTML form that includes:
+A checkbox
+A radio button group
+A select dropdown
+Java Selenium code to interact with each of these elements are as follows:
+1. HTML Form Example
+Here’s a simple HTML file (form.html) you can use for testing:
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Form Example</title>
+</head>
+<body>
+  <h2>Registration Form</h2>
+   <form id="registrationForm" >
+       <!-- Radio Buttons -->
+      <label>Gender:</label><br>
+       <input type="radio" id="male" name="gender" value="male"> Male<br>
+       <input type="radio" id="female" name="gender" value="female"> Female<br><br>
+ 
+       <!-- Checkbox -->
+       <input type="checkbox" id="agree" name="terms"> I agree to the terms and conditions<br><br>
+ 
+       <!-- Dropdown -->
+       <label for="country">Country:</label>
+       <select id="country" name="country">
+           <option value="">Select Country</option>
+           <option value="IN">India</option>
+           <option value="US">United States</option>
+           <option value="UK">United Kingdom</option>
+      </select><br><br>
+       <input type="submit" value="Submit">
+   </form></body></html>
+Java Code:
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+ 
+public class FormHandlingExample {
+   public static void main(String[] args) {
+ 
+//Load the WebDriver
+WebDriver driver = new ChromeDriver();
+ 
+       try {
+           // Load the local HTML file
+          driver.get("file:///C:/path/to/your/form.html");
+ 
+           // Select radio button (e.g., Male)
+           WebElement maleRadio = driver.findElement(By.id("male"));
+           if (!maleRadio.isSelected()) {
+              maleRadio.click();
+           }
+ 
+           // Select checkbox
+           WebElement agreeCheckbox = driver.findElement(By.id("agree"));
+           if (!agreeCheckbox.isSelected()) {
+              agreeCheckbox.click();
+           }
+ 
+           // Select dropdown value (India)
+           WebElement countryDropdownElement = driver.findElement(By.id("country"));
+           Select countryDropdown = new Select(countryDropdownElement);
+          countryDropdown.selectByVisibleText("India");
+ 
+           // Print selected country
+           WebElement selected = countryDropdown.getFirstSelectedOption();
+          System.out.println("Selected Country: " + selected.getText());
+ 
+       } catch (Exception e) {
+          e.printStackTrace();
+       } finally {
+           // Close the browser
+          driver.quit();
+       }
+   }
+}
+
+
+ 
+Output
+When the script runs:
+It opens the form
+Selects the "Male" radio button
+Checks the "I agree" checkbox
+Chooses "India" from the dropdown
+Prints the selected country to the console
+Summary
+Element Type
+	
+Method Used
+
+
+Checkbox / Radio
+	
+.click() and .isSelected()
+
+
+Dropdown
+	
+Select class (selectByVisibleText(), etc.)
+Top of Form
+Bottom of Form
+
+1. Which method is used to locate an element by its ID in Selenium WebDriver?
+A) findElementByClassName("id")
+B) findElement(By.id("id")) 
+C) getElement(By.id("id"))
+D) locateElement("id")
+2. How do you click a button using Selenium WebDriver in Java?
+A) driver.click("button")
+B) element.press()
+C) element.click()
+D) click(driver, element)
+3. Which HTML tag is used to create a text input field?
+A) <textbox>
+B) <input type="text">
+C) <textarea>
+D) <input text>
+4. How do you select a value from a dropdown in Selenium WebDriver?
+A) Select select = new Select(driver);
+B) Select select = new Select(driver.findElement(By.name("dropdown"))); 
+C) driver.select("dropdown")
+D) new Dropdown(driver).select("value");
+5. What is the correct way to enter text into an input field using Selenium?
+A) element.setText("Hello")
+B) element.sendKeys("Hello") 
+C) element.type("Hello")
+D) inputText(element, "Hello")
+6. Which method clears text from an input field in Selenium?
+A) element.reset()
+B) element.clearText()
+C) element.clear() 
+D) element.remove()
+ 
+ 
+7. Which of the following HTML elements is commonly used for a button?
+A) <button> 
+B) <div>
+C) <span>
+D) <form>
+8. How do you find all elements with a specific tag name?
+A) driver.findElement(By.tagName("div"))
+B) driver.getElements("div")
+C) driver.findElements(By.tagName("div")) 
+D) find.all("div")
+9. What does getText() do in Selenium WebDriver?
+A) Gets the innerHTML of the element
+B) Returns the value of an attribute
+C) Gets the visible text of an element 
+D) Captures the screenshot
+10. How can you check if a checkbox is selected?
+A) checkbox.getAttribute("checked")
+B) checkbox.isSelected() 
+C) checkbox.checked()
+D) checkbox.isEnabled()
+11. Which method is used to submit a form in Selenium WebDriver?
+A) element.clickSubmit()
+B) driver.submit()
+C) element.submit() 
+D) form.send()
+12. How do you handle a radio button using Selenium?
+A) driver.selectRadio("option")
+B) driver.clickRadio("option")
+C) element.click() 
+D) element.select()
+//H1{ color:red;}  -🡪 H1 is the selector; color-🡪 property; red--🡪 value
+13. How do you locate an element using CSS Selector in Selenium?
+A) By.css("selector")
+B) By.cssSelector("selector") 
+C) By.style("selector")
+D) By.query("selector")
+14. Which tag is used to create a dropdown list in HTML?
+A) <select> 
+B) <dropdown>
+C) <input type="dropdown">
+D) <option>
+15. How to check if a web element is visible in Selenium?
+A) element.displayed()
+B) element.isDisplayed() 
+C) element.isVisible()
+D) element.shown()
+16. What does driver.get("http://example.com") do?
+A) Fetches the HTML of the URL
+B) Opens a new browser
+C) Navigates to the specified URL 
+D) Submits a form to the URL
+17. How can you locate an element using its class name?
+A) By.name("className")
+B) By.id("className")
+C) By.className("className") 
+D) By.class("className")
+18. What is the return type of findElements() method in Selenium?
+A) WebElement
+B) List<WebElement> 
+C) Array<WebElement>
+D) ElementsList
+19. Which Selenium class is used to work with dropdowns?
+A) DropdownElement
+B) Select 
+C) Option
+D) Dropdown
+
+
+ 
+20. How do you get the value of an attribute of an HTML element in Selenium?
+A) element.value("attribute")
+B) element.getAttr("attribute")
+C) element.getAttribute("attribute") 
+D) element.attribute("attribute")
+
+Handle multiple tabs/windows
+Open multiple windows
+Switch between them
+Close the child windows
+Return to the main window
+1. HTML Form (with 3 links opening new tabs)
+Save this as multi_tab_form.html:
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Main Window</title>
+</head>
+<body>
+   <h2>Main Form</h2>
+ 
+   <form>
+       <label for="username">Username:</label>
+       <input type="text" id="username" name="username"><br><br>
+ 
+       <!-- Links that open new windows -->
+       <a href="https://mypage.com" target="_blank" id="link1">Open Mypage</a><br>
+       <a href="https://www.wikipedia.org" target="_blank" id="link2">Open Wikipedia Page</a><br>
+       <a href="https://www.selenium.dev" target="_blank" id="link3">Open Selenium Page</a><br>
+   </form>
+</body>
+</html>
+
+
+ 
+2. Java Selenium Code for Handling Multiple Tabs
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+ 
+import java.util.Set;
+ 
+public class MultipleWindowsExample {
+   public static void main(String[] args) throws InterruptedException {
+       WebDriver driver = new ChromeDriver();
+ 
+       try {
+          driver.get("file:///C:/path/to/multi_tab_form.html");
+ 
+           // Store the main window handle
+           String mainWindow = driver.getWindowHandle();
+ 
+           // Click all three links to open new tabs
+          driver.findElement(By.id("link1")).click();
+          driver.findElement(By.id("link2")).click();
+          driver.findElement(By.id("link3")).click();
+ 
+           // Wait for tabs to open
+          Thread.sleep(3000);
+ 
+           // Get all window handles
+          Set<String> allWindows = driver.getWindowHandles();
+ 
+           // Loop through all windows
+           for (String windowHandle : allWindows) {
+               if (!windowHandle.equals(mainWindow)) {
+                  driver.switchTo().window(windowHandle);
+ 
+                  System.out.println("Switched to window: " + driver.getTitle());
+ 
+                   // Simulate some work in the child window
+                  Thread.sleep(2000);
+ 
+                   // Close the child window
+                   driver.close();
+                  System.out.println("Closed child window.");
+               }
+           }
+ 
+           // Switch back to the main window
+           driver.switchTo().window(mainWindow);
+           System.out.println("Back to main window: " + driver.getTitle());
+ 
+       } catch (Exception e) {
+          e.printStackTrace();
+       } finally {
+           // Always quit the driver at the end
+          driver.quit();
+       }
+   }
+}

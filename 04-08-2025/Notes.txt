@@ -1,0 +1,1575 @@
+04/08/2025
+Primary Key - A PK is a column or set of columns in the 
+
+table that "UNIQUELY IDENTIFIES EACH ROW" within that table.
+ 
+1.  Duplicate values are not allowed
+
+2.	No NULLs
+
+3.	There will be only 1 PK per table whether that is
+
+	column level or table level	
+
+Why we use PK?
+==============
+
+We use PK to form relation between the other tables using 
+
+Foreign Key.
+ 
+FOREIGN KEY
+
+===========
+
+A foreign key is a column or set of columns in a table 
+
+that refers to the PK column in another table.
+ 
+In FOREIGN KEY:
+
+===============
+
+1. You can enter only PK values.
+
+2. Duplicate values are NOT ALLOWED except PK values.
+
+3. NULLs are allowed.	
+ 
+ 
+Constraints
+
+============
+
+These are the rules that are imposed on the column(s) of
+
+the database tale.
+
+1.	NOT NULLs
+
+2.  UNIQUE "BUT NULLs are allowed"
+
+3.	CHECK - 
+
+4.	PK
+
+5.	FK
+
+6.	DEFAULT
+ 
+ 
+ Prepared Statement
+A PreparedStatement is used in JDBC to execute parameterized SQL queries. It's more secure and efficient than using a regular Statement, especially when dealing with user input, as it helps prevent SQL injection attacks.
+Key Features of PreparedStatement:
+Allows setting parameters dynamically using ? placeholders.
+Precompiled by the database for better performance.
+Automatically escapes strings to prevent SQL injection.
+Example: Using PreparedStatement in JDBC
+Suppose you have a users table like this:
+CREATE TABLE users (
+   id INT PRIMARY KEY AUTO_INCREMENT,
+   name VARCHAR(100),
+   email VARCHAR(100)
+);
+Java Code Example:
+import java.sql.*;
+public class PreparedStatementExample {
+   public static void main(String[] args) {
+       String url = "jdbc:mysql://localhost:3306/your_database"; // Replace with your DB URL
+       String user = "your_username";
+       String password = "your_password";
+ 
+       String insertSQL = "INSERT INTO users (name, email) VALUES (?, ?)";
+      
+       try (
+           Connection conn = DriverManager.getConnection(url, user, password);
+           PreparedStatement pstmt = conn.prepareStatement(insertSQL);
+       ) {
+           // Set values for the placeholders
+          pstmt.setString(1, "adgg@gmail.com");
+          pstmt.setString(2, "alice@example.com");
+          
+           int rowsInserted = pstmt.executeUpdate();
+           System.out.println(rowsInserted + " row(s) inserted.");
+ 
+       } catch (SQLException e) {
+          e.printStackTrace();
+       }
+   }
+}
+Explanation:
+? in the SQL string is a placeholder.
+pstmt.setString(1, "Alice") sets the first placeholder to "Alice".
+pstmt.executeUpdate() runs the query (use executeQuery() for SELECT).
+Example: SELECT with PreparedStatement
+String selectSQL = "SELECT * FROM users WHERE email = ?";
+PreparedStatement pstmt = conn.prepareStatement(selectSQL);
+pstmt.setString(1, "alice@example.com");
+ 
+ResultSet rs = pstmt.executeQuery();
+while (rs.next()) {
+  System.out.println("User: " + rs.getString("name"));
+}
+ package jdbcmysql;
+ 
+import java.sql.*;
+
+public class PreparedStatementEx{
+
+    public static void main(String[] args) {
+
+        String url = "jdbc:mysql://localhost:3306/java_Selenium"; // Replace with your DB URL
+
+        String user = "root";
+
+        String password = "root@123";
+ 
+        String insertSQL = "INSERT INTO users (name, email) VALUES (?, ?)";
+
+        String delSQL ="delete from users where name=?";
+
+        String updSQL="update users set name=? where name='Harry Potter'";
+
+        try(
+
+        		Connection conn = DriverManager.getConnection(url, user, password);
+
+        		PreparedStatement pstmtIns = conn.prepareStatement(insertSQL);
+
+        		PreparedStatement pstmtDel = conn.prepareStatement(delSQL);
+
+        		PreparedStatement pstmtUpd= conn.prepareStatement(updSQL);
+
+        	) 	
+
+        	{
+
+            // Set values for the placeholders
+
+        	pstmtIns.setString(1, "Adam");
+
+        	pstmtIns.setString(2, "adam@example.com");
+
+            //For deleting
+
+            pstmtDel.setString(1,"Adam");
+
+            //For updating
+
+            pstmtUpd.setString(1,"Harry");
+
+            int rowsInserted = pstmtIns.executeUpdate();
+
+            int rowsDeleted= pstmtDel.executeUpdate();
+
+            int rowsUpdated= pstmtUpd.executeUpdate();
+
+            System.out.println(rowsInserted + " row(s) inserted.");
+
+            System.out.println(rowsDeleted+ " row(s) deleted.");
+
+            System.out.println(rowsUpdated+ " row(s) updated.");
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+    }
+
+}
+ 
+ 
+package jdbcmysql;
+ 
+import java.sql.*;
+
+public class PreparedStatementEx{
+
+    public static void main(String[] args) {
+
+        String url = "jdbc:mysql://localhost:3306/java_selenium"; // Replace with your DB URL
+
+        String user = "root";
+
+        String password = "root@123";
+ 
+        String insertSQL = "INSERT INTO users (name, email) VALUES (?, ?)";
+
+        String delSQL ="delete from users where name=?";
+
+        //String updSQL="update users set name=? where name='Harry Potter'";
+
+        String updSQL="update users set name=? where id=8";
+
+        try(
+
+        		Connection conn = DriverManager.getConnection(url, user, password);
+
+        		PreparedStatement pstmtIns = conn.prepareStatement(insertSQL);
+
+        		PreparedStatement pstmtDel = conn.prepareStatement(delSQL);
+
+        		PreparedStatement pstmtUpd= conn.prepareStatement(updSQL);
+
+        	) 	
+
+        	{
+
+            // Set values for the placeholders
+
+        	pstmtIns.setString(1, "Adam");
+
+        	pstmtIns.setString(2, "adam@example.com");
+
+            //For deleting
+
+            pstmtDel.setString(1,"Adam");
+
+            //For updating
+
+            pstmtUpd.setString(1,"Harry");
+
+            //Result
+
+            int rowsInserted = pstmtIns.executeUpdate();
+
+            int rowsDeleted= pstmtDel.executeUpdate();
+
+            int rowsUpdated= pstmtUpd.executeUpdate();
+
+            System.out.println(rowsInserted + " row(s) inserted.");
+
+            System.out.println(rowsDeleted+ " row(s) deleted.");
+
+            System.out.println(rowsUpdated+ " row(s) updated.");
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+    }
+
+}
+ 
+ 	
+ Stored Procedure in MySQL
+
+=========================
+
+A procedure or stored procedure is a subroutine stored in 
+
+a database. 
+
+In the case of MySQL, procedures are written in MySQL and 
+
+stored in the MySQL database. 
+
+A MySQL procedure has:
+
+1.	A name,
+
+2.	A parameter list and 
+
+3.	SQL statement(s).
+ 
+There are four different types of MySQL procedures: 
+
+===================================================
+
+1. 	Procedure with no parameters: A procedure without 
+
+	parameters does not take any input or casts an output 
+
+	indirectly. It is simply called with its procedure name 
+
+	followed by () (without any parameters). 
+
+	It is used for simple queries. 
+
+	Example: Consider two tables author and book:
+ 
+create table author (author_id integer primary key, 
+
+                            authorName varchar(30), 
+
+                            email varchar (25), 
+
+			    gender varchar (6));
+ 
+create table book (BookId integer not null unique, 
+
+                        ISBN integer primary key, 
+
+                       book_name varchar (30) not null, 
+
+                        author integer, ed_num integer, 
+
+                      price integer, pages integer, 
+
+					foreign key (author) references 
+
+					author (author_id));
+ 
+Inserting values into them:
+
+===========================
+
+insert into author values 
+
+              (1, "Harry Potter", "hpotter@gmail.com", "Male");
+
+insert into author values
+
+              (2, "janet", "janet@gmail.com", "Female");
+
+insert into book values
+
+              (1, 001, "Java", 1, 1, 650, 396);
+
+insert into book values
+
+              (2, 002, "MySQL", 1, 1, 650, 396);
+
+insert into book values
+
+              (3, 003, "Oracle", 2, 1, 799, 500);
+
+insert into book values
+
+              (4, 004, "Python", 2, 1, 499, 330);
+ 
+Procedure (with no parameters) to display all the books:
+
+========================================================
+ 
+delimiter //
+
+create procedure display_book() 
+
+                      begin 
+
+                      select *from book; 
+
+                      end 
+
+//
+ 
+call display_book(); //
+ 
+ 
+2. 	Procedure with IN parameter: An IN parameter is used 
+
+	to take a parameter as input such as an attribute. 
+
+	When we define an IN parameter in a procedure, 
+
+	the calling program has to pass an argument to the 
+
+	stored procedure. In addition, the value of an IN 
+
+	parameter is protected. It means that even if the 
+
+	value of the IN parameter is changed inside the 
+
+	procedure, its original value is retained after the 
+
+	procedure ends (like pass by value). In other words, the procedure only works on the copy of the IN parameter. Example: Procedure to update price of a book taking ISBN of the book and its new price as input: (considering the tables above)
+ 
+delimiter //
+
+create procedure update_price (IN temp_ISBN varchar(10), IN new_price integer)
+
+               begin
+
+				update book set price=new_price where ISBN=temp_ISBN;
+
+               end; //
+
+call update_price(001, 600); //
+ 
+ 
+3. 	Procedure with OUT parameter: An OUT parameter is used 
+
+	to pass a parameter as output or display like the 
+
+	select operator, but implicitly (through a set value). 
+
+	The value of an OUT parameter can be changed inside the 
+
+	procedure and its new value is passed back to the 
+
+	calling program. A procedure cannot access the initial 
+
+	value of the OUT parameter when it starts. 
+
+	Example: Procedure to display the highest price among all 
+
+	the books with an output parameter:
+ 
+delimiter //
+
+create procedure disp_max(OUT highestprice integer)
+
+                 begin
+
+                 select max(price) into highestprice from book;
+
+                 end; 
+
+//
+
+call disp_max(@Max);
+
+select @Max;
+ 
+Output: 
+
++-----+
+
+| @M  |
+
++-----+
+
+| 799 |
+
++-----+
+
+1 row in set (0.0005 sec)
+ 
+ 
+4. 	Procedure with IN-OUT parameter: 
+
+	An INOUT parameter is a combination of IN and OUT 
+
+	parameters. It means that the calling program may pass 
+
+	the argument, and the stored procedure can modify the 
+
+	INOUT parameter and pass the new value back to the 
+
+	calling program.
+ 
+Example: Procedure to take gender type input 
+
+('Male'/'Female' here) with an in-out parameter which 
+
+reflects the number of authors falling in that gender 
+
+category/type:
+ 
+delimiter //
+
+create procedure disp_gender(INOUT mfgender integer, IN emp_gender varchar(6))  
+
+                     begin 
+
+                     select COUNT(gender) 
+
+                         INTO mfgender FROM author where gender = emp_gender;   
+
+                     end; 
+
+//
+
+delimiter ;
+ 
+call disp_gender(@M, "Male");
+
+select @M;
+ 
+call disp_gender(@F, "Female");
+
+select @F;
+ 
+Output: 
+
++----+
+
+| @M |
+
++----+
+
+|  1 |
+
++----+
+
+1 row in set (0.0004 sec)
+
++----+
+
+| @F |
+
++----+
+
+|  1 |
+
++----+
+
+1 row in
+
+set (0.0005 sec)
+
+ PRACTICAL - Stored Procedure MySQL
+=========================
+delimiter //
+
+create procedure display_book() 
+
+                      begin 
+
+						select * from book; 
+
+                      end 
+
+//
+ 
+call display_book();
+ 
+ 
+delimiter //
+
+create procedure update_price (IN temp_ISBN varchar(10), IN new_price integer)
+
+               begin
+
+				update book set price=new_price where ISBN=temp_ISBN;
+
+               end; 
+
+//
+ 
+call update_price(1,600);
+
+delimiter //
+
+create procedure disp_max(OUT highestprice integer)
+
+                 begin
+
+                 select max(price) into highestprice from book;
+
+                 end; 
+
+//
+ 
+ 
+call disp_max(@M);
+
+select @M;
+ 
+call disp_max(@Max);
+
+select @Max;
+ 
+delimiter //
+
+create procedure disp_gender(INOUT mfgender integer, IN emp_gender varchar(6))  
+
+                     begin 
+
+                     select COUNT(gender) 
+
+                         INTO mfgender FROM author where gender = emp_gender;   
+
+                     end; 
+
+//
+ 
+ 
+call disp_gender(@M, "Male");
+
+select @M;
+ 
+call disp_gender(@F, "Female");
+
+select @F;
+ 
+ 
+ CallableStatement
+
+=================
+
+-	In JDBC, a CallableStatement is an interface used to 
+
+	execute SQL stored procedures in a database.
+ 
+-	Stored procedures are pre-compiled SQL statements that 
+
+	reside within the database and can be called with 
+
+	parameters, offering benefits like:
+
+	1.	Improved performance and 
+
+	2.	Security.
+
+Creating a CallableStatement
+
+============================
+
+-	We can create an object of the CallableStatement 
+
+	(interface) using the prepareCall() method of the 
+
+	Connection interface. This method accepts a string 
+
+	variable representing a query to call the stored 
+
+	procedure and returns a CallableStatement object.
+ 
+-	A Callable statement can have input parameters, 
+
+	output parameters or both. To pass input parameters 
+
+	to the procedure call we can use placeholder and set 
+
+	values to these using the setter methods:
+
+	(setInt(), setString(), setFloat()) provided by the 
+
+	CallableStatement interface.
+ 
+-	Suppose we have a procedure name theProc in the 
+
+	database we can prepare a callable statement as:
+ 
+	//Preparing a CallableStatement
+
+	CallableStatement cstmt = 
+
+			con.prepareCall("{call theProc(?, ?, ?)}");	
+
+
+Setting values to the input parameters
+
+=======================================
+
+We can set values to the input parameters of the 
+
+procedure call using the setter methods.
+
+cstmt.setString(1, "xxxx");
+
+cstmt.setInt(2, 9999);
+
+cstmt.setString(3, "xxxx");	
+ 
+Executing the Callable Statement
+
+=================================
+
+Once you have created the CallableStatement object we can 
+
+execute it using one of the execute() method.
+
+- cstmt.execute();
+ 
+Use of using CallableStatement
+
+===============================
+
+- To call stored procedures or functions in a database.
+
+- Allows input, output, and INOUT parameters.
+
+- Better performance for complex logic.
+
+- Secure: avoids "SQL injection" when used properly.
+ 
+SQL Injection
+
+==============
+
+SQL Injection is a security vulnerability that allows 
+
+an attacker to interfere with the queries an application 
+
+makes to its database. It typically happens when user 
+
+input is improperly validated, allowing malicious SQL 
+
+code to be executed.
+ 
+How It Works
+
+============
+
+If a user input is directly included in a SQL query without 
+
+proper escaping or parameterization, an attacker 
+
+can "inject" SQL code.
+ 
+Vulnerable Example:
+
+==================
+
+String query = "SELECT * FROM users WHERE username = '" + user + "'";
+
+If the attacker types:
+
+'1'='1'
+
+The query becomes:
+
+SELECT * FROM users WHERE username = ('1'='1')
+
+This always returns true, potentially exposing all 
+
+users data.
+ 
+Prevent SQL Injection
+
+======================
+
+- 	Use Prepared Statements (Parameterized Queries)
+
+	with "PreparedStatement" or "CallableStatement" in JDBC
+ 
+ 
+-- Procedure
+
+delimiter //
+
+Create procedure myProcedure (IN name VARCHAR(30), 
+
+						IN sal INT, IN loc VARCHAR(45))
+
+   BEGIN
+
+	INSERT INTO Employee(empName, empSal, empId) 
+
+	VALUES (name, sal, loc);
+
+   END 
+
+//
+ 
+ 
+Impelementation - CallableStatement	
+
+===================================
+
+import java.sql.CallableStatement;
+
+import java.sql.Connection;
+
+import java.sql.DriverManager;
+
+import java.sql.SQLException;
+
+public class CallableStatementExample {
+
+   public static void main(String args[]) throws SQLException {
+
+      //Registering the Driver
+
+      DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+ 
+      //Getting the connection
+
+      String mysqlUrl = "jdbc:mysql://localhost/java_selenium";
+
+      Connection con = DriverManager.getConnection(mysqlUrl, "root", "root@123");
+
+      System.out.println("Connection established......");
+
+	  //Preparing a CallableStateement
+
+      CallableStatement cstmt = con.prepareCall("{call myProcedure(?, ?, ?)}");
+ 
+      cstmt.setString(1, "Harry");
+
+      cstmt.setInt(2, 2000);
+
+      cstmt.setString(3, "Mumabi");
+ 
+      cstmt.setString(1, "Tom");
+
+      cstmt.setInt(2, 6000);
+
+      cstmt.setString(3, "Gujarat");
+ 
+      cstmt.setString(1, "Potter");
+
+      cstmt.setInt(2, 1000);
+
+      cstmt.setString(3, "Mumbai");
+ 
+      cstmt.execute();
+
+      System.out.println("Rows inserted ....");
+
+   }
+
+}		
+ 
+package jdbcmysql;
+ 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+public class CallableStatementExample {
+   static Connection con=null;
+	public static void main(String args[]) throws Exception {
+	try {
+		// Replace with your database name
+       String url="jdbc:mysql://localhost:3306/java_selenium";
+ 
+       // Replace with your MySQL username
+       String username = "root";
+ 
+       // Replace with your MySQL password
+       String password = "root@123";
+ 
+	
+       // Load MySQL Type-4 driver class
+        Class.forName("com.mysql.cj.jdbc.Driver");
+ 
+         // Establish connection
+         con = DriverManager.getConnection(url, username, password);
+	  //Preparing a CallableStateement
+      CallableStatement cstmt = con.prepareCall("{call myProcedure(?, ?, ?)}");
+ 
+      cstmt.setString(1, "Harry");
+      cstmt.setInt(2, 2000);
+      cstmt.setInt(3, 101);
+ 
+      cstmt.setString(1, "Tom");
+      cstmt.setInt(2, 6000);
+      cstmt.setInt(3, 102);
+ 
+      cstmt.setString(1, "Potter");
+      cstmt.setInt(2, 1000);
+      cstmt.setInt(3, 103);
+ 
+      cstmt.execute();
+      System.out.println("Rows inserted ....");
+	}catch(SQLException se) {se.printStackTrace();}
+	}
+}
+
+String[] names = {"Sharath", "Mohan", "Vicky", "Dinesh"};
+			 int[] salaries = {85000, 75000, 50000, 60000};
+	         String[] locations = {"Andhra", "Telangana", "Pune", "Hyderabad"};
+for (int i = 0; i < names.length; i++) {
+	                cstmt.setString(1, names[i]);
+	                cstmt.setInt(2, salaries[i]);
+	                cstmt.setString(3, locations[i]);
+	                cstmt.execute();
+	            }
+
+System.out.println("enter the size:");
+		       int size=sc.nextInt();
+		       for(int i=0;i<size;i++){
+		    	   System.out.println("enter name:");
+		    	   String str= sc.next();
+		    	   System.out.println("enter salary:");
+		    	  double sal= sc.nextDouble();
+		    	   System.out.println("enter id:");
+		    	   int id= sc.nextInt();
+		    	   cstmt.setString(1, str);
+			       cstmt.setDouble(2,sal);
+			       cstmt.setInt(3, id);
+			       cstmt.execute();
+			       System.out.println(" 1 Row inserted ....");
+		       }
+
+MCQ – Multi Threading and Exception Handling
+Which method is used to start a thread execution in Java?
+
+A) run()
+
+B) start()
+
+C) execute()
+
+D) begin()
+Answer: B) start()
+What happens when the start() method is called on a thread?
+
+A) The run() method is called directly
+
+B) A new thread is created and the run() method is called by JVM
+
+C) The thread terminates immediately
+
+D) None of the above
+Answer: B) A new thread is created and the run() method is called by JVM
+Which of the following interface is implemented by a class to create a thread?
+
+A) Runnable
+
+B) Thread
+
+C) Callable
+
+D) Comparable
+Answer: A) Runnable
+Which method is used to pause the currently executing thread for a specified time?
+
+A) wait()
+
+B) Thread.sleep()
+
+C) suspend()
+
+D) pause()
+Answer: B) sleep()
+Which state indicates that a thread is ready to run but waiting for CPU?
+
+A) New
+
+B) Runnable state
+
+C) Blocked
+
+D) Waiting
+Answer: B) Runnable
+What is the output of calling the run() method directly on a thread object?
+
+A) Creates a new thread and runs it
+
+B) Runs the thread in the current thread's context
+
+C) Throws an exception
+
+D) None of the above
+Answer: B) Runs the thread in the current thread's context
+Which keyword is used to prevent multiple threads from accessing a block of code simultaneously?
+
+A) atomic
+
+B) volatile
+
+C) synchronized
+
+D) transient
+Answer: C) synchronized
+
+
+ 
+What happens when two threads try to access the same synchronized method of the same object?
+
+A) Both threads run simultaneously
+
+B) One thread waits for the other to release the lock
+
+C) Runtime exception occurs
+
+D) None of the above
+Answer: B) One thread waits for the other to release the lock
+Which method is used to wait for a thread to finish execution?
+
+A) wait()
+
+B) notify()
+
+C) join()
+
+D) sleep()
+Answer: C) join()
+What does the volatile keyword guarantee?
+
+A) Only one thread can access a variable at a time
+
+B) Variable is stored in main memory and changes are visible to all threads immediately
+
+C) Variable is constant
+
+D) Variable is private to thread
+Answer: B) Variable is stored in main memory and changes are visible to all threads immediately
+What is a daemon thread in Java?
+
+A) A thread that runs in the foreground
+
+B) A thread that runs in the background and terminates when all user threads finish
+
+C) A thread that never stops
+
+D) None of the above
+Answer: B) A thread that runs in the background and terminates when all user threads finish
+Which method in Thread class is used to get the currently executing thread?
+
+A) getThread()
+
+B) currentThread()
+
+C) getCurrentThread()
+
+D) thisThread()
+Answer: B) currentThread()
+What is the default priority of a thread in Java?
+
+A) 1
+
+B) 5
+
+C) 10
+
+D) 0
+Answer: B) 5
+Which of the following states does NOT exist in Java thread lifecycle?
+
+A) New
+
+B) Runnable
+
+C) Stopped
+
+D) Waiting
+Answer: C) Stopped
+Which method is deprecated in Java for suspending a thread?
+
+A) stop()
+
+B) suspend()
+
+C) resume()
+
+D) wait()
+Answer: B) suspend()
+What will happen if you call stop() method on a thread?
+
+A) Thread stops immediately and releases resources
+
+B) Thread goes to waiting state
+
+C) Deprecated and unsafe; thread may stop abruptly causing inconsistent data
+
+D) Thread pauses and can be resumed later
+Answer: C) Deprecated and unsafe; thread may stop abruptly causing inconsistent data
+Which of the following is true about thread safety?
+
+A) All code is thread-safe by default
+
+B) Thread safety means shared data is accessed correctly by multiple threads
+
+C) Thread safety means only one thread runs at a time
+
+D) None of the above
+Answer: B) Thread safety means shared data is accessed correctly by multiple threads
+Which Java package provides concurrency utilities?
+
+A) java.util.concurrent
+
+B) java.thread
+
+C) java.concurrent.thread
+
+D) java.lang.thread
+Answer: A) java.util.concurrent
+Which of these is NOT a checked exception?
+
+A) IOException
+
+B) SQLException
+
+C) RuntimeException
+
+D) ClassNotFoundException
+Answer: C) RuntimeException
+What keyword is used to manually throw an exception?
+
+A) throw
+
+B) throws
+
+C) try
+
+D) catch
+Answer: A) throw
+Which keyword is used to declare exceptions a method can throw?
+
+A) throw
+
+B) throws
+
+C) try
+
+D) catch
+Answer: B) throws
+Which block is mandatory to handle exceptions in Java?
+
+A) try
+
+B) catch
+
+C) finally
+
+D) All of the above
+Answer: A) try
+Which block is used to execute code regardless of whether an exception is thrown or not?
+
+A) try
+
+B) catch
+
+C) finally
+
+D) throw
+Answer: C) finally
+Which of the following can catch multiple exceptions?
+
+A) Multiple catch blocks
+
+B) Single catch block with pipe (|) operator
+
+C) Both A and B
+
+D) None of the above
+Answer: C) Both A and B
+What exception is thrown when an array is accessed with an illegal index?
+
+A) NullPointerException
+
+B) ArrayIndexOutOfBoundsException
+
+C) ArithmeticException
+
+D) IllegalArgumentException
+Answer: B) ArrayIndexOutOfBoundsException
+What is the superclass of all exceptions in Java?
+
+A) Throwable
+
+B) Exception
+
+C) Error
+
+D) RuntimeException
+Answer: A) Throwable
+What is the superclass of all errors in Java?
+
+A) Throwable-------------Exception & Error
+
+B) Error
+
+C) Exception
+
+D) RuntimeException
+Answer: A) Throwable
+Which of these is NOT a subclass of Exception?
+
+A) IOException
+
+B) SQLException
+
+C) Error
+
+D) InterruptedException
+Answer: C) Error
+Which of the following statements about checked exceptions is TRUE?
+
+A) Checked exceptions must be either caught or declared to be thrown
+
+B) Checked exceptions are not checked at compile time
+
+C) Checked exceptions cannot be handled
+
+D) Checked exceptions are unchecked exceptions
+Answer: A) Checked exceptions must be either caught or declared to be thrown
+Which exception occurs when division by zero is attempted for integers?
+
+A) ArithmeticException
+
+B) NullPointerException
+
+C) NumberFormatException
+
+D) IOException
+Answer: A) ArithmeticException
+ 
+Which method returns a detailed message about the exception?
+
+A) toString()
+
+B) getMessage()
+
+C) printStackTrace()
+
+D) getCause()
+Answer: B) getMessage()
+Which method prints the stack trace of an exception?
+
+A) printStackTrace()
+
+B) getMessage()
+
+C) toString()
+
+D) getCause()
+Answer: A) printStackTrace()
+What happens if an exception is not caught?
+
+A) Program terminates abnormally
+
+B) Program terminates normally
+
+C) Exception is ignored
+
+D) None of the above
+Answer: A) Program terminates abnormally
+Which of these keywords can be used to re-throw an exception?
+
+A) throw
+
+B) throws
+
+C) catch
+
+D) finally
+Answer: A) throw
+Which exception is thrown when a null object is accessed?
+
+A) NullPointerException
+
+B) IOException
+
+C) ClassCastException
+
+D) IllegalStateException
+Answer: A) NullPointerException
+Which block follows the try block and handles exceptions?
+
+A) finally
+
+B) catch
+
+C) throw
+
+D) throws
+Answer: B) catch
+Can a try block exist without a catch block?
+
+A) Yes, if followed by a finally block
+
+B) No
+
+C) Yes, always
+
+D) None of the above
+Answer: A) Yes, if followed by a finally block
+Which exception is thrown when a thread is interrupted?
+
+A) InterruptedException
+
+B) IOException
+
+C) IllegalThreadStateException
+
+D) ClassCastException
+Answer: A) InterruptedException
+Which exception indicates that a method has been called at an illegal or inappropriate time?
+
+A) IllegalStateException
+
+B) IllegalArgumentException
+
+C) NullPointerException
+
+D) RuntimeException
+Answer: A) IllegalStateException
+Which of these exceptions is unchecked?
+
+A) IOException
+
+B) SQLException
+
+C) NullPointerException
+
+D) InterruptedException
+Answer: C) NullPointerException
+Which of the following is true about the finally block?
+
+A) It always executes, except if System.exit() is called
+
+B) It never executes if an exception is thrown
+
+C) It is optional
+
+D) Both A and C
+Answer: D) Both A and C
+Which of these exceptions is used to indicate programming errors such as logic errors?
+
+A) Error
+
+B) Exception
+
+C) RuntimeException
+
+D) IOException
+Answer: C) RuntimeException
+Can you catch an Error in Java?
+
+A) Yes, Errors are throwable
+
+B) No, Errors cannot be caught
+
+C) Only some Errors can be caught
+
+D) Errors are ignored automatically
+Answer: A) Yes, Errors are throwable
+What does the throws keyword do?
+
+A) Catches exceptions
+
+B) Declares exceptions that a method might throw
+
+C) Throws an exception immediately
+
+D) None of the above
+Answer: B) Declares exceptions that a method might throw
+Which of the following is the parent class of RuntimeException?
+
+A) Exception
+
+B) Throwable
+
+C) Error
+
+D) IOException
+Answer: A) Exception
+
+
+ 
+What will happen if an exception is thrown in the method in the try block and there is no catch or finally block?
+A) Compile-time error
+
+B) Runtime error
+
+C) Exception will propagate to the caller
+
+D) None of the above
+Answer: A) Compile-time error
+Which exception is thrown when an invalid cast is performed?
+
+A) ClassCastException                                
+
+B) IllegalArgumentException
+
+C) ArrayStoreException
+
+D) RuntimeException
+Answer: A) ClassCastException
+What is the base class of all throwable errors and exceptions in Java?
+
+A) Exception
+
+B) Error
+
+C) Throwable
+
+D) RuntimeException
+Answer: C) Throwable
+If a thread throws an exception and it is not caught within the thread, what happens?
+
+A) The thread silently ignores the exception
+
+B) The thread terminates and the JVM prints the stack trace
+
+C) The exception is propagated to the main thread
+
+D) None of the above
+Answer: B) The thread terminates and the JVM prints the stack trace
+Which exception can be thrown when a thread waits indefinitely for a resource?
+
+A) InterruptedException                                process1()       process2();
+
+B) DeadlockError
+
+C) TimeoutException
+
+D) NoSuchElementException
+Answer: A) InterruptedException
+In Java, what happens if an uncaught exception is thrown in the main thread?
+
+A) JVM shuts down immediately
+B) JVM calls the default exception handler and may shut down
+
+C) The exception is ignored
+
+D) The main thread recovers automatically
+Answer: B) JVM calls the default exception handler and may shut down
+What will happen if a thread calls wait() without owning the object's monitor?
+
+A) IllegalMonitorStateException is thrown
+
+B) Thread waits successfully
+
+C) Deadlock occurs
+
+D) None of the above
+Answer: A) IllegalMonitorStateException is thrown
+Which of the following exceptions is thrown if a thread is interrupted while sleeping?
+
+A) InterruptedException
+
+B) IllegalStateException
+
+C) RuntimeException
+
+D) ThreadDeath
+Answer: A) InterruptedException
+What will happen if notify() is called but no threads are waiting?
+
+A) The notify() call has no effect           
+
+B) The program crashes
+
+C) All threads get notified
+
+D) Deadlock occurs
+Answer: A) The notify() call has no effect
+Which of these interfaces supports both checked exceptions and returning results from threads?
+
+A) Runnable
+
+B) Callable
+
+C) Thread
+
+D) Executor
+Answer: B) Callable
+Which method is used to release the lock on an object and put the thread into waiting state?
+
+A) wait()
+
+B) sleep()
+
+C) yield()
+
+D) notify()
+Answer: A) wait()
+Which method wakes up a single thread that is waiting on the object's monitor?
+
+A) notify()
+
+B) notifyAll()
+
+C) wake()
+
+D) interrupt()
+Answer: A) notify()
+ 
+ package jdbcmysql;
+ 
+import java.sql.*;
+public class PreparedStatementEx{
+    public static void main(String[] args) {
+        String url = "jdbc:mysql://localhost:3306/java_selenium"; // Replace with your DB URL
+        String user = "root";
+        String password = "root@123";
+ 
+        String insertSQL = "INSERT INTO users (name, email) VALUES (?, ?)";
+        String delSQL ="delete from users where name=?";
+        //String updSQL="update users set name=? where name='Harry Potter'";
+        String updSQL="update users set NAME=? where id=8";
+        try(
+        		Connection conn = DriverManager.getConnection(url, user, password);
+        		PreparedStatement pstmtIns = conn.prepareStatement(insertSQL);
+        		PreparedStatement pstmtDel = conn.prepareStatement(delSQL);
+        		PreparedStatement pstmtUpd= conn.prepareStatement(updSQL);
+        	) 	
+        	{
+            // Set values for the placeholders
+        	pstmtIns.setString(1, "Adam");
+        	pstmtIns.setString(2, "adam@example.com");
+        	pstmtIns.addBatch();
+        	pstmtIns.setString(1, "Kavin");
+        	pstmtIns.setString(2, "kavin@example.com");
+        	pstmtIns.addBatch();
+        	pstmtIns.setString(1, "Miller");
+        	pstmtIns.setString(2, "miller@example.com");
+        	pstmtIns.addBatch();
+        	pstmtIns.executeBatch();
+        	//conn.commit();
+        	System.out.println("Batch Executed Successfully");
+
+          /*  //For deleting
+            pstmtDel.setString(1,"Adam");
+            //For updating
+            pstmtUpd.setString(1,"Harry");
+            //Result
+            int rowsInserted = pstmtIns.executeUpdate();
+            int rowsDeleted= pstmtDel.executeUpdate();
+            int rowsUpdated= pstmtUpd.executeUpdate();
+            System.out.println(rowsInserted + " row(s) inserted.");
+            System.out.println(rowsDeleted+ " row(s) deleted.");
+            System.out.println(rowsUpdated+ " row(s) updated.");
+        */
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+ package jdbcmysql;
+ 
+import java.util.concurrent.Callable;
+
+import java.util.concurrent.ExecutorService;
+
+import java.util.concurrent.Executors;
+
+import java.util.concurrent.Future;
+ 
+// Callable is a functional interface with only 1 abstract method "call()"
+
+// It is a part of "java.util.concurrent" package.
+
+// This interface is the parent interface. Callable interface is 
+
+// not extending any Parent interface
+
+/* With Runnable interface we cannot return a value.
+
+* With Callable interface we can return a value.
+
+*/
+ 
+class MyCallable implements Callable<String>{
+
+	public String call() throws Exception{
+
+		Thread.sleep(1000);
+
+		return "With Callable interface we can return a value";
+
+	}
+
+}
+ 
+public class CallableExample {
+
+	public static void main(String[] args) throws Exception{
+
+		//Step 1 Creates a Thread pool and invoke the call() 
+
+		//method of a Callable Interface
+
+		ExecutorService executor = Executors.newSingleThreadExecutor();
+
+		// Step 2: Creates a Callable task
+
+		MyCallable task = new MyCallable(); 
+
+		//Step 3: We will return the future object
+
+		Future<String> future = executor.submit(task); 
+
+		String result = future.get();
+
+		System.out.println(result);
+
+		executor.shutdown();
+
+	}
+
+}
+
+ 

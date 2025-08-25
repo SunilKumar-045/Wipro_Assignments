@@ -1,0 +1,610 @@
+02/08/2025
+
+MYSQL
+
+show databases;
+
+create database Java_Selenium;
+
+USE Java_Selenium;
+ 
+create table employee(
+
+empId int,
+
+empName varchar(40),
+
+empSal int
+
+);
+ 
+show tables;
+ 
+insert into employee(empId,empName,empSal)values(1001,'Smith',200000);
+
+insert into employee values(1002,'Martin',300000);
+
+insert into employee values
+
+(1003,'Alex',400000),
+
+(1004,'Turner',500000),
+
+(1005,'Steve',600000),
+
+(1006,'Kavin',700000);
+ 
+insert into employee(empName,empId,empSal)values('Tom',1007,800000);
+
+select * from employee;
+ 
+-- 1. DDL Commands - (Data Definition Language) 
+
+--	  create,alter,drop,truncate,rename
+ 
+-- 2. DML Commands - Data Manipulation Language
+
+--	  insert,update,delete
+ 
+-- 3. DCL Commands - Data Control Language
+
+--	  Grant,Revoke
+ 
+-- 4. TCL Commands - Transaction Control Language
+
+--    Rollback,Commit,Savepoint	 
+
+-- 5. Data Query Language           
+
+--    SELECT            
+
+use java_selenium;
+
+update employee set empSal=900000 where empid IN(1002,1004);
+
+update employee set empSal=900000,empname='Martin Miller' 
+
+where empid =1002;
+
+select * from employee;
+
+SelecT * FrOm eMploYEE where empname='turner';
+
+delete from employee where empid=1003;
+ 
+ 
+1.	Data: Raw Facts
+ 
+2.	Information: Useful Facts
+ 
+3.	Database: It contains information in the form of tables.
+ 
+4.	Table: It is a combination of ROWS and COLUMSN.
+ 
+5.	ROW:(TUPLE) A number of objects arranged in a straight 
+
+	line.(Horizontal Manner)
+
+6.	COLUMN:	(ATTRIBUTE or FIELD) It is a VERTICAL set of 
+
+		data values within the table.
+ 
+			PID		Product			PCat
+
+			23		Gillette		2345
+
+List of Databases:
+
+==================
+
+1.	MySQL(RDBMS) - It is a product of Oracle Corporation.
+ 
+2.	SQL Server(RDBMS) - It is a product of Microsoft.
+ 
+3.	Oracle(RDBMS) - It is a product of Oracle Corporation
+ 
+4.	PostgreSQL(RDBMS) - It is not owned by a single company.
+
+	It is a open-source product developed by the large number
+
+	of community consists of developers and companies.
+ 
+5.	NoSQL - It is not owned by a single company.
+ 
+6.	Apache Cassandra - It is also not owned by any 
+
+	single company. It is managed by Apache Software Foundation(ASF)
+ 
+7.	MongoDB	- It is owned as well as developed by MongoDB Inc.  		
+
+	It is not a Relational Database Management System.
+
+	It is a NoSQL database. The information in MongoDB
+
+	is stored in DOCUMENTS.It is known as Document Oriented Database
+ 
+MOCK ASSESSMENT LINK:
+
+1. The link will be provided by the techademy team via email.
+
+2. The link will be accessible from 5:45 pm, Saturday and will remain accessible through Sunday. You can use it to access the assessment anytime but once you begin the assessment you will have no further attempts at it.
+ 
+LOGIN:
+
+1. Login using your first name and last name along with the email id that you use to access the Techademy platform.
+
+2. A field for phone number will also be present but it is optional.
+ 
+VERIFICATION:
+
+1. First a test photo will be taken for the records which will be used to verify your identity by matching it your face at a later stage of the verification process.
+
+2. Ensure that your sorroundings are well-lit. Your face and eyes should be clearly visible at the time of the verification and also throughout the whole assessment.
+
+3. Do not change your position after your verification. Ensure that you are comfortable in your place before starting the verification process.
+
+4. Allow access to your camera and microphone for the proctoring. Share your entire screen with the proctors when prompted.
+
+Take the test on a stable wifi with atleast 2mbps of speed.
+ 
+PROCTORING:
+
+1. Do not use any external monitors or displays.
+
+2. Your face should be clearly visible at all time.
+
+3. Do not move away from in front of the camera.
+
+4. Do not use your mobile or wear any earphones.
+
+5. Do not use any registers or notepad to write anything.
+
+6. Your background should be clear and preferably be a blank wall. There should be no light sources directly behind you like windows and any other lights which may interfere with the camera detecting your face.
+
+8. Do not switch tabs from the assessment window at any point during the assessment.
+
+9. All of the above offenses are considered as 'violations'. There are only a certain number of violations allowed to each person, exceeding which the assessment will be immediately terminated and you will not be allowed other attempts.
+ 
+ASSESSMENT:
+
+1. There will be separate MCQ and coding sections. You can freely swtich between the two and attempt the questions in any order you want.
+
+2. The MCQ answers that you save can be changed at any point during the test.
+
+3. The coding section will have a console in which you have to write your code by modifying the pre-existing code. There will be two sections in the coding console. One of them is not meant to be edited or changed in any way by you. It may cause the code to fail. The other section will be where you have to write your code. Both sections will be clearly marked.
+
+4. There will be a 'compile and run' button on the console which you will use to compile your code. It can only be used a maximum of 10 times after which the button will not work anymore.
+
+5. The coding section will have test cases which your code will need to pass. There will be an 'execute' button which you will use to test your code against the test cases. The 'execute' button can be used any number of times.
+
+6. After you are done with your code, you will use the 'save' button to save and submit the code. There will be no further changes to the code allowed after sacing it.
+
+7. On the completion of your assessment, use the 'Submit Assessment' button on the top-right of the screen to submit your assessment. You can submit your assessment at any time but you will not be allowed to return to your assessment after submitting it once.
+
+8. If the timer runs out before you are finished with the assessment, the answers already saved will go through, any questions not attempted will be ignored. If the code is not saved, it will be ignored. 
+
+9. If, at any point, there is a power cut or a network issue which causes your assessment to close, your progress will automatically be saved and you can login to the test again and continue from where you left off.
+ 
+RESULT:
+
+1. There is no minimum passing criteria in the MOCK assessment.
+
+2. The passing criteria for the actual milestone 1 is atleast 40% in the MCQs and atleast 60% score in the coding section.
+
+3. The result will not be disclosed to us immediately. Instead, the Techademy team will forward our scores to Wipro the team, who will handle the results at their discretion.
+
+4. For the Milestone 1, if anyone is unable to secure a passing score, there will be a second attempt for them. If they are unable to pass in the second attempt as well, their training will be terminated and they will be removed from the candidates list. No further opportunity will be provided to amend their scores.
+ 
+JDBC (Java Database Connectivity)
+JDBC is an API(Application Programming Interface) that helps applications to communicate with databases, it allows Java programs to connect to a database, run queries, retrieve, and manipulate data. Because of JDBC, Java applications can easily work with different relational databases like MySQL, Oracle, PostgreSQL, and more.
+.
+JDBC Architecture
+Explanation:
+Application: It can be a Java application or servlet that communicates with a data source.
+The JDBC API: It allows Java programs to execute SQL queries and get results from the database. Some key components of JDBC API include
+Interfaces like Driver, ResultSet, RowSet, PreparedStatement, and Connection that helps managing different database tasks.
+Classes like DriverManager, Types, Blob, and Clob that helps managing database connections.
+DriverManager: It plays an important role in the JDBC architecture. It uses some database-specific drivers to effectively connect enterprise applications to databases.
+JDBC drivers: These drivers handle interactions between the application and the database.
+The JDBC architecture consists of two-tier and three-tier processing models to access a database. They are as follows: 
+1. Two-Tier Architecture
+A Java Application communicates directly with the database using a JDBC driver. It sends queries to the database and then the result is sent back to the application. For example, in a client/server setup, the user's system acts as a client that communicates with a remote database server.
+Structure (Two-Tier Architecture)
+Java Application (Client) -> JDBC Driver -> Database
+
+
+ 
+2. Three-Tier Architecture
+In this, user queries are sent to a middle-tier services, which interacts with the database. The database results are processed by the middle tier and then sent back to the user.
+Structure:
+Java Application (Client) -> Application Server -> JDBC Driver -> Database
+JDBC Components
+There are generally 4 main components of JDBC through which it can interact with a database mentioned below:
+1. JDBC API
+It provides various methods and interfaces for easy communication with the database. It includes two key packages
+java.sql: This package, is the part of Java Standard Edition (Java SE) , which contains the core interfaces and classes for accessing and processing data in relational databases. It also provides essential functionalities like establishing connections, executing queries, and handling result sets
+javax.sql: This package is the part of Java Enterprise Edition (Java EE) , which extends the capabilities of java.sql by offering additional features like connection pooling, statement pooling, and data source management.
+It also provides a standard to connect a database to a client application.
+2. JDBC Driver Manager
+Driver manager is responsible for loading the correct database-specific driver to establish a connection with the database. It manages the available drivers and ensures the right one is used to process user requests and interact with the database.
+3. JDBC Test Suite
+It is used to test the operation (such as insertion, deletion, updating) being performed by JDBC Drivers.
+4. JDBC Drivers
+JDBC drivers are client-side adapters (installed on the client machine, not on the server) that convert requests from Java programs to a protocol that the RDBMS can understand.
+There are 4 types of JDBC drivers:
+Type-1 driver or JDBC-ODBC bridge driver
+Type-2 driver or Native-API driver (partially java driver)
+Type-3 driver or Network Protocol driver (fully java driver)
+Type-4 driver or Thin driver (completely java driver) - It is a widely used driver. 
+ 
+
+
+ 
+JDBC Classes and Interfaces
+Class/Interfaces
+	
+Description
+
+
+DriverManager
+	
+Manages JDBC drivers and establishes database connections.
+
+
+Connection
+	
+Represents a session with a specific database.
+
+
+Statement
+	
+Used to execute static SQL queries.
+
+
+PreparedStatement
+	
+Precompiled SQL statement, used for dynamic queries with parameters.
+
+
+CallableStatement
+	
+Used to execute stored procedures in the database.
+
+
+ResultSet
+	
+Represents the result set of a query, allowing navigation through the rows.
+
+
+SQLException
+	
+Handles SQL-related exceptions during database operations.
+Steps to Connect to MySQL Database Using JDBC
+Step 1: Load the JDBC Driver
+Class.forName("com.mysql.cj.jdbc.Driver");
+Step 2: Establish a Connection
+Connection connection = DriverManager.getConnection
+(
+"jdbc:mysql://localhost:3306/your_database",
+"your_username",
+"your_password"
+);
+Step 3: Create a Statement
+Statement statement = connection.createStatement();
+
+
+ 
+Step 4: Execute a Query
+String query = "INSERT INTO students (id, name) VALUES (101, 'John Doe')";
+int rowsAffected = statement.executeUpdate(query);
+System.out.println("Rows affected: " + rowsAffected);
+Step 5: Close the Connection
+statement.close();
+connection.close();
+ 
+Create a Simple JDBC Application
+Following Java program demonstrates how to establish a MYSQL database connection using JDBC and execute a query.
+A simple JDBC application
+import java.sql.*;
+public class JDBCImpl{
+   public static void main(String[] args)
+   {
+       // Database URL, username, and password
+ 
+       // Replace with your database name
+       String url
+           = "jdbc:mysql://localhost:3306/your_database";
+ 
+       // Replace with your MySQL username
+       String username = "your_username";
+ 
+       // Replace with your MySQL password
+       String password = "your_password";
+ 
+       // Updated query syntax for modern databases
+       String query
+           = "INSERT INTO emp (id, name) VALUES (1009, 'Harry')";
+ 
+       // Establish JDBC Connection
+       try {
+        
+             
+// Load MySQL Type-4 driver class
+           Class.forName("com.mysql.cj.jdbc.Driver");
+ 
+           // Establish connection
+           Connection c = DriverManager.getConnection(
+               url, username, password);
+ 
+           // Create a statement
+           Statement st = c.createStatement();
+ 
+           // Execute the query
+           int count = st.executeUpdate(query);
+           System.out.println(
+               "Number of rows affected by this query: "
+               + count);
+ 
+           // Close the connection
+           st.close();
+           c.close();
+           System.out.println("Connection closed.");
+       }
+       catch (ClassNotFoundException e) {
+           System.err.println("JDBC Driver not found: "
+                              + e.getMessage());
+       }
+       catch (SQLException e) {
+           System.err.println("SQL Error: "
+                              + e.getMessage());
+       }
+  }
+}
+ 
+                                                                          -------------------
+ 
+package jdbcmysql;
+ 
+import java.sql.*;
+
+public class JDBCImpl{
+
+    public static void main(String[] args)
+
+    {
+
+        // Database URL, username, and password
+ 
+        // Replace with your database name
+
+        String url
+
+            = "jdbc:mysql://localhost:3306/java_selenium";
+ 
+        // Replace with your MySQL username
+
+        String username = "root";
+ 
+        // Replace with your MySQL password
+
+        String password = "root@123";
+ 
+        // Updated query syntax for modern databases
+
+        String query
+
+            = "INSERT INTO employee(empid, empname,empsal) VALUES (1008, 'Harry',950000)";
+ 
+        // Establish JDBC Connection
+
+        try {
+
+
+        	// Load MySQL Type-4 driver class
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+ 
+            // Establish connection
+
+            Connection c = DriverManager.getConnection(url, username, password);
+ 
+            // Create a statement
+
+            Statement st = c.createStatement();
+ 
+            // Execute the query
+
+            int count = st.executeUpdate(query);
+
+            System.out.println(
+
+                "Number of rows affected by this query: "
+
+                + count);
+ 
+            // Close the connection
+
+            st.close();
+
+            c.close();
+
+            System.out.println("Connection closed.");
+
+        }
+
+        catch (ClassNotFoundException e) {
+
+            System.err.println("JDBC Driver not found: "
+
+                               + e.getMessage());
+
+        }
+
+        catch (SQLException e) {
+
+            System.err.println("SQL Error: "
+
+                               + e.getMessage());
+
+        }
+
+    }
+
+}
+ 
+ package jdbcmysql;
+ 
+import java.sql.*;
+
+public class JDBCImpl{
+
+    public static void main(String[] args)
+
+    {
+
+        // Database URL, username, and password
+ 
+        // Replace with your database name
+
+        String url
+
+            = "jdbc:mysql://localhost:3306/java_selenium";
+ 
+        // Replace with your MySQL username
+
+        String username = "root";
+ 
+        // Replace with your MySQL password
+
+        String password = "root@123";
+ 
+        String creatTableqry="CREATE TABLE student (id INT, name VARCHAR(50))";
+
+        // Updated query syntax for modern databases
+
+        String query = "INSERT INTO student VALUES(1001, 'ABC'),(1002, 'DEF'),(1003, 'ZXY')";   
+
+        // Establish JDBC Connection
+
+        try {
+
+
+        	// Load MySQL Type-4 driver class
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+ 
+            // Establish connection
+
+            Connection c = DriverManager.getConnection(url, username, password);
+ 
+            // Create a statement
+
+            Statement st = c.createStatement();
+ 
+            //CReate the table
+
+            st.executeUpdate(creatTableqry);
+
+            System.out.println("Table has been created successfully...");
+
+            // Execute the query
+
+            int count = st.executeUpdate(query);
+
+            System.out.println(
+
+                "Number of rows affected by this query: "
+
+                + count);
+
+            //Displaying thr student records
+
+            String selqry="select * from student";
+
+            ResultSet rs = st.executeQuery(selqry);
+
+            try {
+
+            		while(rs.next()) {
+
+            			System.out.println(rs.getInt("id")+","+rs.getString("name"));
+
+            		}
+
+            	}catch(SQLException ex) {
+
+            		ex.printStackTrace();
+
+            	}
+
+            // Close the connection
+
+            st.close();
+
+            c.close();
+
+            System.out.println("Connection closed.");
+
+        }
+
+        catch (ClassNotFoundException e) {
+
+            System.err.println("JDBC Driver not found: "
+
+                               + e.getMessage());
+
+        }
+
+        catch (SQLException e) {
+
+            System.err.println("SQL Error: "
+
+                               + e.getMessage());
+
+        }
+
+    }
+
+}
+ 
+ package jdbcmysql;
+ 
+import java.sql.Connection;
+
+import java.sql.DriverManager;
+ 
+public class JDBCConnection {
+
+	Connection con=null;
+
+	public Connection getConnection() {
+
+		try {
+
+			// Replace with your database name
+
+	        String url="jdbc:mysql://localhost:3306/java_selenium";
+ 
+	        // Replace with your MySQL username
+
+	        String username = "root";
+ 
+	        // Replace with your MySQL password
+
+	        String password = "root@123";
+ 
+				// Load MySQL Type-4 driver class
+
+	            Class.forName("com.mysql.cj.jdbc.Driver");
+
+	            // Establish connection
+
+	            con = DriverManager.getConnection(url, username, password);
+
+	        }catch(Exception e) {e.printStackTrace();}
+
+		return con;
+
+	}
+
+}
