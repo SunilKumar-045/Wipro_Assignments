@@ -1,0 +1,913 @@
+What is TestNG Framework?
+TestNG is an open-source test automation framework for Java. It is developed on the same lines as JUnit and NUnit. A few advanced and useful features provided by TestNG make it a more robust framework than its peers. The NG in TestNG stands for ‘Next Generation.’
+Created by Cedric Beust, it is used more frequently by developers and testers in test case creation owing to its ease of using multiple annotations, grouping, dependence, prioritization, and parametrization features.
+
+What is TestNG in Selenium?
+TestNG provides advanced features such as annotations, data-driven testing, test sequencing, and parallel testing to help 
+you organize and execute your Selenium tests more efficiently and effectively.
+
+Some of the benefits of using TestNG in Selenium:
+Group test cases into logical units, making managing and maintaining your test suite easier.
+Run tests in parallel, significantly reducing the time it takes to execute your test suite.
+TestNG provides a wide range of annotations that you can use to customize your tests, such as @BeforeSuite, @AfterSuite, @BeforeTest, @AfterTest, @BeforeMethod, and @AfterMethod.
+It supports data-driven testing, allowing you to run the same test case with multiple test data sets.
+Better reporting and logging features than other testing frameworks make identifying and debugging issues in your tests easier.
+Hence TestNG framework in Selenium can improve the efficiency and effectiveness of your test automation efforts.
+
+Advantages of TestNG over JUnit
+TestNG is a more flexible, powerful, and feature-rich testing framework than JUnit, making it a better choice for complex and large test automation projects.
+Here are the advantages of TestNG over JUnit:
+Flexible test configuration and execution options. For example, TestNG allows you to configure tests to run in parallel, run tests in a specific order, and run tests with different data sets.
+It supports powerful features such as test grouping, prioritization, and test dependencies, which are unavailable in JUnit.
+In TestNG, you can use the DataProvider annotation to pass data to a test method, while JUnit requires you to write custom code to handle data-driven testing.
+TestNG generates HTML reports with detailed information about test execution, including test results, failures, and errors. JUnit, on the other hand, generates simple text-based reports.
+Supports more advanced annotations such as @BeforeSuite, @AfterSuite, @BeforeTest, @AfterTest, @BeforeGroups, @AfterGroups, @BeforeClass, and @AfterClass, which allow you to configure test execution at different levels of granularity.
+
+
+ 
+Why use TestNG with Selenium?
+One of the drawbacks of Selenium is that it does not have a proper format for the test results. By using the TestNG framework in Selenium, you can:
+Generate the report in a proper format.
+Include the number of test cases run; tests passed, failed, and skipped in the report.
+(Group test cases by converting them to testing.xml)
+Use invocation count and execute multiple tests without using loops
+Perform cross browser testing
+Easily understand annotations
+ 
+Installing and Setting up TestNG
+It’s pretty easy to install TestNG. If you are using Eclipse IDE, it comes as a plugin. Below are the steps to install TestNG:
+Install Eclipse IDE from the Eclipse website. It serves as a platform for you to code on and write your test cases
+Once installed, go to help and navigate to the ‘Eclipse Marketplace’. The referenced snapshot is below: 
+
+Click on ‘Eclipse Marketplace’. You will be directed to the marketplace modal. Type TestNG in the search keyword and hit ‘Go’. The referenced snapshot is below:
+
+If TestNG is not installed in your Eclipse, rather than the ‘Installed’ button you would see ‘install’. Click on install and your TestNG framework will be installed in your Eclipse. As a good practice, Eclipse would recommend you to restart to use the features of the installed plugin
+Post-restarting your Eclipse, re-verify whether you can see options for creating a TestNG class or not as below: 
+
+ 
+TestNG Annotations
+An annotation tag provides information about the method, class, and suite. It helps to define the execution approach of your test cases and the different features associated with it. Below are the major annotations used:
+@Test– This is the root of TestNG test cases. To use TestNG, all methods should be annotated with this annotation. Below is an example:
+@Test
+public void setupTestNG()
+{
+System.out.println(“this is a test annotation method”)
+}
+
+
+ 
+A few attributes associated with the TestNG annotation are:
+Description: You can describe your test case under the description, stating what it does
+@Test(description=”This test validates login functionality”)
+Priority: We can prioritize the order of test methods by defining a priority. Based on the defined priority, the test shall execute in that order.
+@Test(priority=1)
+DependsOnMethod: This attribute works miracles if one test case is dependent on another. For example, to view your profile details, you need to login to the application. So, your profile test case is dependent on the login test case
+@Test(dependsOnMethod=”Login”)
+Enabled: Using this attribute, you can choose to execute or skip the execution of this test case. Setting it to true execute it and putting it to false will skip the test from the execution cycle
+@Test(enabled=’true’)
+Groups: Using this attribute, you can club your test cases into a single group and specify the group you wish to execute in your TestNG XML file. The test cases clubbed to that group will only be executed, and the rest will be skipped
+@Test(groups=”Smoke Suite”)
+@Test(invocationCount = 1)
+
+While the above ones should help you get started, other major annotations are:
+@BeforeMethod and @AfterMethod – These annotations run before and after each test method
+@BeforeClass and @AfterClass – These annotations run once before and after the first @test method in a class
+@BeforeTest and @AfterTest – The BeforeTest annotation runs before the @BeforeClass annotation and the AfterTest annotation runs after the @AfterClass annotation
+@BeforeSuite and @AfterSuite– These annotations run before and after any test annotated method in a class respectively. These annotations start the beginning of a test and the end of it, for all the classes in a suite
+
+Talking about the execution order of these annotations, they execute in the below order:
+@BeforeSuite -> @BeforeTest -> @BeforeClass -> @BeforeMethod -> @Test -> @AfterMethod -> @AfterClass -> @AfterCTest -> @AfterSuite
+------------------------------------------------------------------------------------------------------------------------------------
+Note: The key point to remember is apart from @BeforeMethod and @AfterMethod, all other annotations run only once, whereas the @BeforeMethod and @AfterMethod run post every @Test method.
+
+How to Write your First TestNG Test
+Using the above annotations and attributes, we will write our first test case with the TestNG framework. Let’s take the example of Browserstack, where we will open the landing page and sign up on the platform. Let’s write the code if you understand Selenium and its syntax fairly.
+Step #1 – Create your first TestNG class by right-clicking on the package and selecting the’ Other’ folder from the ‘New’ option.
+
+Step #2 – From the wizard modal, select the TestNG folder and select the TestNG class as below:
+
+Step #3 – Click the ‘New’ button and choose any predefined annotations you wish to have in your class as below:
+
+We will use BeforeMethod, AfterMethod, BeforeClass, and AfterClass along with our test annotation. Do note the XML file name is given on this modal. Using this TestNG XML file, we can choose to define our execution for the defined class or classes.
+Step #4 – Click on finish, and you are ready to start writing your first TestNG class. Reference screenshot below, containing the defined methods with the annotations chosen in the step above:
+Step #5 – We will automate the sign-up flow using these annotations in the code snippet below.
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+ 
+import java.util.concurrent.TimeUnit;
+ 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterClass;
+ 
+public class FirstTestWithTestNGFramework {
+ 
+WebDriver driver;
+ 
+@BeforeClass
+public void testSetup()
+{
+System.setProperty("webdriver.chrome.driver", ".\\Driver\\chromedriver.exe");
+driver=new ChromeDriver();
+driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+driver.manage().window().maximize();
+ 
+}
+ 
+@BeforeMethod
+public void openBrowser()
+{
+driver.get("https://www.browserstack.com/");
+driver.findElement(By.id("signupModalButton")).click();
+System.out.println("We are currently on the following URL" +driver.getCurrentUrl());
+}
+ 
+@Test(description="This method validates the sign up functionality")
+public void signUp()
+{
+driver.findElement(By.id("user_full_name")).sendKeys("user_name");
+driver.findElement(By.id("user_email_login")).sendKeys("email_id");
+driver.findElement(By.id("user_password")).sendKeys("password");
+driver.findElement(By.xpath("//input[@name='terms_and_conditions']")).click();
+driver.findElement(By.id("user_submit")).click();
+ 
+}
+ 
+@AfterMethod
+public void postSignUp()
+{
+System.out.println(driver.getCurrentUrl());
+ 
+}
+ 
+@AfterClass
+public void afterClass()
+{
+driver.quit();
+}
+ 
+}
+As you can see, in this snippet above, we have used @BeforeClass annotation to setup the browser.
+In the @BeforeMethod, we have opened the BrowserStack HomePage and navigated to the signup page.
+In the @Test annotated method, we are performing the sign-up functionality.
+In the @AfterMethod, we are printing the currentURL we are on
+And in the @AfterClass method, we are closing the browser.
+Also, note the associated attribute ‘description’ used with the test annotation. Now, you must execute this test and validate your TestNG reports and console output.
+Step #6 – To execute your report, you can either choose to run directly as a TestNG class or run the XML file created which contains the class name and details. Below is the auto-created TestNG XML file:
+<?XML version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+<test name="Test">
+<classes>
+<class name=".FirstTestWithTestNGFramework"/>
+</classes>
+</test> <!-- Test -->
+</suite> <!-- Suite -->
+You can modify the XML file and mention the various class names when executing multiple classes. You can also define the groups in the XML file you want to execute here. Once the modification is done, you can right-click on the file and run it. Your class containing the test shall be executed. Below is the referenced console output of the executed test:
+Step #7 – To access the TestNG report, you only need to refresh your project folder. A folder as ‘test output’ will be auto-generated. Within this folder, you shall see a file ‘index.html’ as below:
+Step #8 – Double click on it and you can view your TestNG reports, showing the passed and failed methods of the execution as below.
+TestNG provides various listeners to customize this default report according to your needs. Learn more about TestNG Listeners. But this default report will be more than enough at the beginner level.
+Step #9 – As a QA or tester, the next step is to validate your tests. If you did not validate your test methods, it basically means your testing process is incomplete. To validate your tests, TestNG provides assertions for it. So, let us investigate them to complete your TestNG tutorial.
+TestNG Assertions
+Like JUnit, TestNG provides multiple-level assertions to validate your actual results against your expected results. Few of the commonly used assertions are:
+assertTrue– This assertion verifies whether the defined condition is true or not. If true, it will pass the test case. If not, it will fail the test case
+Assert.assertTrue(condition);
+assertFalse– This assertion verifies whether the defined condition is false or not. If false, it will pass the test case. If not, it will fail the test case
+Assert.assertFalse(condition);
+assertEquals– This assertion compares the expected value with the actual value. If both are the same, it passes the test case. If not, it fails the test case. You can compare strings, objects, integer values etc. using this assert
+Assert.assertEquals(actual,expected);
+assertNotEquals: This is just opposite to what assertEquals does. If actual matches the expected, the test case fails, else the test case passes
+Assert.assertNotEquals(actual,expected,Message);
+An important part to note in assertions is that your tests will not execute to the next line of code if your assertions failed. It will automatically jump to the next test annotated method.
+Now, let us try to validate our code snippet below using assertions. In the snippet above, in the @AfterClass method, we will be verifying the current URL we are on and the expected URL, which should be the signup page.
+@AfterMethod
+public void postSignUp()
+{
+Assert.assertEquals(driver.getCurrentUrl(), "https://www.browserstack.com/users/sign_up");
+}
+Make this change in your code snippet above and execute it. The test case should pass. Also try giving another expected URL, to validate if the tests fail.
+What is Parameterization in TestNG?
+Parameterization is a powerful feature of TestNG that allows you to write more efficient and effective tests by reusing the same test logic with different input data.. It is useful when you need to test a particular functionality with different input values to ensure that it works correctly in all scenarios.
+ 
+
+ 
+Configure TestNG
+To configure TestNG in a Java project, follow these steps (assuming you are using Maven and IntelliJ / Eclipse) :
+Step 1. Add TestNG dependency to your project
+If you're using Maven, add this in your pom.xml:
+<dependencies>
+   <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>7.9.0</version>
+      <scope>test</scope>
+  </dependency>
+</dependencies>
+(Gradle equivalent can also be provided if needed — just ask!)
+Step 2. Create a Test Class
+import org.testng.annotations.Test;
+ 
+public class SampleTest {
+ 
+   @Test
+   public void firstTest() {
+      System.out.println("This is the first TestNG test");
+   }
+}
+Step 3. Create a testng.xml file
+Place it in your project root (or inside /src/test/resources):
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="MyTestSuite">
+   <test name="DemoTest">
+      <classes>
+           <class name="your.package.name.SampleTest"/>
+      </classes>
+   </test>
+</suite>
+Replace your.package.name with your actual package name.
+Step 4. Run the test
+In IntelliJ, right-click the testng.xml and choose Run.
+In Eclipse, right-click → Run As → TestNG Suite.
+ 
+ 
+ TestNG with Java Source Code
+Project Structure
+testng-sample-project/
+├── pom.xml
+└── src
+   ├── main
+   │   └── java
+   │       └── com/example/app
+   │           └── Calculator.java
+   └── test
+       ├── java
+       │   └── com/example/testng
+       │       └── CalculatorTest.java
+       └── resources
+           └── testng.xml
+src/main/java/com/example/app/Calculator.java
+package com.example.app;
+ 
+/**
+* Simple class for demonstration.
+*/
+public class Calculator {
+   public int add(int a, int b) {
+       return a + b;
+   }
+   public int subtract(int a, int b) {
+       return a - b;
+   }
+}
+ 
+ 
+src/test/java/com/example/testng/CalculatorTest.java
+package com.example.testng;
+ 
+import com.example.app.Calculator;
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+ 
+public class CalculatorTest {
+ 
+   private Calculator calculator;
+ 
+   @BeforeClass
+   public void setUp() {
+       calculator = new Calculator();
+   }
+ 
+   @Test
+   public void testAdd() {
+       int result = calculator.add(2, 3);
+      Assert.assertEquals(result, 5);
+   }
+ 
+   @Test
+   public void testSubtract() {
+       int result = calculator.subtract(5, 2);
+      Assert.assertEquals(result, 3);
+   }
+}
+
+
+ 
+src/test/resources/testng.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="MyTestSuite">
+   <test name="CalculatorTest">
+      <classes>
+           <class name="com.example.testng.CalculatorTest"/>
+      </classes>
+   </test>
+</suite>
+Output
+Running MyTestSuite
+PASSED: testAdd
+PASSED: testSubtract
+ 
+
+Read data from an HTML web table using Selenium in Java.
+HTML with a Table (table.html)
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Web Table Example</title>
+</head>
+<body>
+ <table id="employeeTable" border="1">
+   <thead>
+     <tr>
+       <th>Name</th>
+      <th>Department</th>
+      <th>Age</th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr>
+      <td>John</td>
+      <td>Finance</td>
+      <td>30</td>
+     </tr>
+     <tr>
+      <td>Mary</td>
+      <td>IT</td>
+      <td>27</td>
+     </tr>
+     <tr>
+      <td>David</td>
+      <td>HR</td>
+      <td>35</td>
+     </tr>
+   </tbody>
+ </table>
+</body>
+</html>
+Selenium Code to Read the Table
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+ 
+import java.io.File;
+import java.util.List;
+ 
+public class SeleniumWebTableExample {
+ 
+   public static void main(String[] args) {
+ 
+              //Load the WebDriver
+WebDriver driver = new ChromeDriver();
+ 
+       // Load local file
+       File htmlFile = new File("C:\\selenium_test\\table.html");
+       String url = "file:///" + htmlFile.getAbsolutePath();
+      driver.get(url);
+ 
+       // locate all rows inside tbody
+      List<WebElement> rows = driver.findElements(By.xpath("//table[@id='employeeTable']/tbody/tr"));
+ 
+       // iterate each row
+       //Enhanced for loop
+for (WebElement row : rows) {
+           // get all cells (td) in current row
+          List<WebElement> cells = row.findElements(By.tagName("td"));
+ 
+           // print each cell value
+           for (WebElement cell : cells) {
+              System.out.print(cell.getText() + "    ");
+           }
+          System.out.println();
+       }
+ 
+       driver.quit();
+   }
+}
+ 
+ 
+
+ 
+XPath – Xpath in Selenium is a strategy(locator) to find the web elements in a web page by navigating the HTML document.
+We can use XPath to identify the web element without using name, id or a class.
+HTML file (myhtml.html)
+<!DOCTYPE html>
+<html>               
+<head>
+ <title>My Page</title>
+</head>
+<body>
+ <h1>Search Form</h1>
+ <input type="text" id="searchBox" placeholder="Enter text here" />
+ <button class="search-button">Search</button>
+</body>
+</html>
+Save this file somewhere on your computer, for example:
+C:\selenium_test\sample.html
+Selenium Java Code (using By.xpath with the local HTML)
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+ 
+import java.io.File;
+ 
+public class SeleniumLocalHtmlByXpath {
+   public static void main(String[] args) throws InterruptedException {
+ 
+        // Initialize WebDriver
+       WebDriver driver = new ChromeDriver();
+ 
+       // Build a file:// URL for the local HTML
+       File htmlFile = new File("C:\\selenium_test\\ myhtml.html");
+       String url = "file:///" + htmlFile.getAbsolutePath();
+ 
+       // Open the local HTML file
+      driver.get(url);
+ 
+       // Locate the text field with XPath and type something
+       WebElement inputField = driver.findElement(By.xpath("//input[@id='searchBox']"));
+      inputField.sendKeys("Hello Learners!");
+ 
+       // Locate the button with XPath and click it
+       WebElement searchButton = driver.findElement(By.xpath("//button[@class='search-button']"));
+      searchButton.click();
+ 
+       // Wait a few seconds so you see the result
+      Thread.sleep(3000);
+      driver.quit();
+   }
+}
+ 
+ 
+Java Selenium example that uses only XPath (no id, name, or class) to locate the elements.
+Scenario
+<html>
+<body>
+   <form>
+       <input type="text" placeholder="Username"/>
+       <input type="password" placeholder="Password"/>
+       <input type="submit" value="Login"/>
+   </form>
+</body>
+</html>
+Selenium Java Example Using XPath
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+ 
+public class XPathExample {
+   public static void main(String[] args) {
+WebDriver driver = new ChromeDriver();
+       driver.get("file:///C:/path-to-your-html-file/example.html");
+ 
+       // Locate input field for username using only XPath (no id/name/class)
+       WebElement usernameField = driver.findElement(By.xpath("//input[@placeholder='Username']"));
+      usernameField.sendKeys("admin");
+ 
+       // Locate input field for password using only XPath
+       WebElement passwordField = driver.findElement(By.xpath("//input[@placeholder='Password']"));
+      passwordField.sendKeys("admin123");
+ 
+       // Locate submit button using only XPath
+       WebElement loginButton = driver.findElement(By.xpath("//input[@value='Login']"));
+      loginButton.click();
+ 
+       driver.quit();
+   }
+}
+ 
+ 
+ 
+Other ways of using XPath: using contains() and text()
+HTML
+<html>
+<body>
+   <h2>Login to Your Account</h2>
+   <form>
+       <input type="text" placeholder="Enter your username"/>
+       <input type="password" placeholder="Enter your password"/>
+       <input type="submit" value="Sign In"/>
+       <a href="forgot.html">Forgot Password?</a>
+       <a href="forgot.html">Forgot Password?</a>
+       <a href="forgot.html">Forgot Password?</a>
+       <a href="forgot.html">Forgot Password?</a>
+       <a href="forgot.html">Forgot Password?</a>
+       <a href="forgot.html">Forgot Password?</a>
+  
+</form>
+</body>
+</html>
+Selenium Example using contains() and text()
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+ 
+public class XPathFunctionsExample {
+   public static void main(String[] args) {
+      
+WebDriver driver = new ChromeDriver();
+       driver.get("file:///C:/path-to-your-html-file/example.html");
+ 
+       // Example of contains() - locate username field using partial placeholder text
+       WebElement usernameField = driver.findElement(By.xpath("//input[contains(@placeholder,'username')]"));
+       usernameField.sendKeys("testuser");
+
+
+ 
+        // Example of contains() - locate password field using partial attribute value
+       WebElement passwordField = driver.findElement(By.xpath("//input[contains(@placeholder,'password')]"));
+       passwordField.sendKeys("testpass");
+ 
+       // Example of text() - locate link by the visible text
+       WebElement forgotLink = driver.findElement(By.xpath("//a[text()='Forgot Password?']"));
+      forgotLink.click();
+ 
+       driver.quit();
+   }
+}
+ 
+ Common XPath Selectors / Patterns
+Type
+	
+XPath Example
+	
+Description
+
+
+Absolute
+	
+/html/body/div[1]/input
+	
+Starts from root; full path
+
+
+Relative
+	
+//input
+	
+Searches anywhere in the DOM
+
+
+Attribute
+	
+//input[@type='text']
+	
+Matches element with attribute
+
+
+Multiple attributes
+	
+//input[@type='text' and @name='username']
+	
+Combine attributes
+
+
+Contains
+	
+//a[contains(text(),'Login')]
+	
+Partial match for text
+
+
+Contains attribute
+	
+//input[contains(@id,'user')]
+	
+Partial match for attribute value
+
+
+Starts-with
+	
+//input[starts-with(@name,'user')]
+	
+Attribute starts with text
+
+
+Text()
+	
+//button[text()='Submit']
+	
+Exact text match in element
+
+
+Parent
+	
+//label[@for='email']/parent::div
+	
+Select parent element
+
+
+Following sibling
+	
+//label[@for='email']/following-sibling::input
+	
+Sibling after current element
+
+
+Preceding sibling
+	
+//input[@id='email']/preceding-sibling::label
+	
+Sibling before current
+
+
+Ancestor
+	
+//input[@id='user']/ancestor::form
+	
+Any parent/ancestor element
+
+
+Descendant
+	
+//div[@id='container']//input
+	
+Any child/descendant
+
+
+Indexing
+	
+(//input[@type='text'])[2]
+	
+Selects the 2nd matching element
+
+
+OR operator
+	
+//input[@id='username' or @name='user']
+	
+Either condition true
+
+
+Using ‘
+	
+//*[contains(@class,'btn')]
+	
+Wildcard (any tag)
+
+
+Last()
+	
+(//input[@type='text'])[last()]
+	
+Select the last element
+Selenium Locators Comparison Table
+Locator	Example	When to Use	Pros	Cons
+By.id	By.id("username")	When element has a unique id	Fast, reliable, preferred locator	Sometimes id is dynamic (changes on refresh)
+By.name	By.name("password")	If element has a unique name attribute	Easy to use, good for forms	Not all elements have a name
+By.tagName	By.tagName("button")	When working with generic tags (first match)	Useful for counting elements, e.g. all input fields	Returns first match only, may not be unique
+By.className	By.className("login-btn")	When element has a static class	Simple if classes are unique	Fails if multiple classes or not unique
+By.cssSelector	By.cssSelector("input[type='email']")	When elements don’t have unique IDs	Very powerful, flexible, fast	Can be complex to write for beginners
+By.linkText	By.linkText("Forgot Password?")	For <a> elements with visible text	Easy to use, human-readable	Only works for links, needs exact text
+By.partialLinkText	By.partialLinkText("Forgot")	For <a> elements with partial match	Flexible with links	May match wrong link if multiple similar texts
+By.xpath	By.xpath("//input[@id='username']")	Complex scenarios, no other locator works	Extremely powerful, supports parent-child, conditions	Slower than CSS, can become very long
+
+
+1. What is JUnit primarily used for?
+A) Web development
+B) Unit testing in Java
+C) Database connectivity
+D) GUI testing
+2. Which of the following annotation is used to mark a test method in JUnit 5?
+A) @TestMethod
+B) @Testing
+C) @Test
+D) @Run
+3. Which annotation is used to execute a method before each test in JUnit 5?
+A) @Before
+B) @BeforeEach
+C) @Setup
+D) @Init
+4. Which annotation is used to execute a method once before all tests in JUnit 5?
+A) @BeforeAll
+B) @BeforeClass
+C) @Initialize
+D) @SetupAll
+5. Which assertion is used to verify that two values are equal?
+A) assertEquals
+B) assertSame
+C) assertNull
+D) assertTrue
+6. Which method is used to run a JUnit test class from the command line (JUnit 4)?
+A) JUnitCore.runClasses()
+B) JUnitRunner.start()
+C) TestRunner.run()
+D) TestCore.run()
+7. Which annotation disables a test?
+A) @Disabled
+B) @Ignore
+C) @Skip
+D) @Exclude
+8. Which version introduced the Jupiter API?
+A) JUnit 3
+B) JUnit 4
+C) JUnit 5
+D) JUnit 6
+9. What is the default test runner in JUnit 4?
+A) BlockJUnit4ClassRunner
+B) SpringRunner
+C) ParameterizedRunner
+D) SuiteRunner
+10. What is the purpose of @ParameterizedTest in JUnit 5?
+A) Runs tests in parallel
+B) Allows multiple inputs for one test method
+C) Groups test methods
+D) Skips a test case
+11. Which annotation is used for cleaning up after each test method?
+A) @After
+B) @AfterEach
+C) @TearDown
+D) @Cleanup
+12. Which annotation is used for cleaning up once after all tests finish?
+A) @AfterAll
+B) @AfterClass
+C) @CleanupAll
+D) @TearDownAll
+13. In JUnit 5, which package contains the primary annotations and assertions?
+A) org.junit
+B) org.junit.jupiter.api
+C) junit.framework
+D) org.junit.vintage
+14. What does the assertion assertThrows() verify?
+A) Return value
+B) Time limit
+C) That an exception is thrown
+D) That a method is skipped
+15. Which annotation can be used to group tests into categories (tags)?
+A) @Category
+B) @Tag
+C) @Group
+D) @Suite
+16. Which assertion is used to verify that a value is true?
+A) assertSame
+B) assertNotNull
+C) assertTrue
+D) assertEquals
+17. Which annotation is used to declare a test suite in JUnit 4?
+A) @TestCollection
+B) @SuiteClasses
+C) @RunWith
+D) @Suite
+18. Which statement is correct about JUnit 3?
+A) Uses annotations
+B) Uses naming convention of test methods
+C) Supports parameterized tests by default
+D) Introduced @Test annotation
+19. What is the purpose of the @RepeatedTest annotation?
+A) To skip tests
+B) To execute a test multiple times
+C) To group tests
+D) To test performance
+20. Which annotation allows you to specify a timeout for a test (JUnit 5)?
+A) @Timeout
+B) @TimeLimit
+C) @MaxDuration
+D) @Limit
+21. Which assertion fails if two objects refer to different instances even if they contain same values?
+A) assertSame
+B) assertEquals
+C) assertNotSame
+D) assertTrue
+22. What is the purpose of assertNotNull()?
+A) To verify value is null
+B) To verify value is not null
+C) To verify objects are equal
+D) To check for exception
+23. In JUnit 5, which annotation is used for nested test classes?
+A) @Nested
+B) @Inner
+C) @TestClass
+D) @Group
+24. Which module in JUnit 5 provides backward compatibility with JUnit 4?
+A) Jupiter
+B) Vintage
+C) Platform
+D) Engine
+25. How do you conditionally disable tests based on OS in JUnit 5?
+A) @Conditional
+B) @DisabledOnOS
+C) @EnabledOnOS / @DisabledOnOS
+D) @IgnoreOS
+26. What does @RunWith(SpringRunner.class) do?
+A) Executes Spring Boot
+B) Integrates JUnit with Spring TestContext framework
+C) Enables multithreading
+D) Executes parameterized tests
+27. Which assertion is used to check if two object references point to the same object?
+A) assertEquals
+B) assertTrue
+C) assertSame
+D) assertNull
+28. The @DisplayName annotation is used to:
+A) Skip tests
+B) Repeat tests
+C) Provide custom test names
+D) Parameterize tests
+29. Which feature is NOT available in JUnit 4?
+A) Lambda support
+B) @Test annotation
+C) Assertions
+D) Test suites
+30. To enable parameterized tests in JUnit 4, you must use:
+A) @ParameterizedTest
+B) @RunWith(Parameterized.class)
+C) @Suite
+D) @TestFactory
+
+MCQ - Selenium
+Selenium WebDriver is primarily used for:
+A) Unit testing
+B) Automating web applications
+C) API testing
+D) Desktop application testing
+Which method is used to launch a new browser window in Java Selenium?
+A) open()
+B) start()
+C) get()
+D) run()
+Which WebDriver method is used to find a single web element?
+A) findElements
+B) locateElement
+C) findElement
+D) getElement
+Which of the following is NOT a valid WebDriver locator?
+A) By.id
+B) By.name
+C) By.tagName
+D) By.color
+What is the return type of findElements()?
+A) WebElement
+B) List<WebElement>
+C) String
+D) int
+Which command is used to close the current browser window?
+A) quit()
+B) close()
+C) exit()
+D) stop()
+Which of the following will close all browser windows and end the WebDriver session?
+A) driver.close()
+B) driver.quit()
+C) driver.stop()
+D) driver.exit()
+Which WebDriver method returns the title of the current page?
+A) getPageTitle()
+B) title()
+C) getTitle()
+D) fetchTitle()
+
+
+ 
+How do you handle an alert pop-up?
+A) driver.switchTo().alert()
+B) driver.alert()
+C) driver.handleAlert()
+D) driver.manageAlert()
+Which one of the following is NOT a WebDriver implementation?
+A) ChromeDriver
+B) FirefoxDriver
+C) SafariDriver
+D) SeleniumGrid
+Which method can be used to clear the value of a text field?
+A) reset()
+B) clear()
+C) remove()
+D) clean()
+How do you locate an element by XPath in Java Selenium?
+A) By.getXPath()
+B) By.xpath()
+C) By.Xpath()
+D) By.path()
+Which WebDriver method is used to submit a form?
+A) submit()
+B) sendKeys()
+C) post()
+D) apply()
+Which package contains WebDriver classes in Java?
+A) org.selenium.webdriver
+B) com.selenium.webdriver
+C) org.openqa.selenium
+D) selenium.driver
+Which method is used to maximize the browser window?
+A) maximize()
+B) driver.max()
+C) driver.window().maximize()
+D) browser.maximize()
+How do you send keys to an input box?
+A) type()
+B) write()
+C) sendKeys()
+D) enter()
+What does driver.getCurrentUrl() return?
+A) Page source
+B) Window title
+C) Current URL
+D) Domain name

@@ -1,0 +1,460 @@
+20-08-25
+
+ 
+What is Log4j2?
+Log4j2 is a powerful, flexible, and fast logging framework for Java applications, 
+used for recording runtime information (logs) such 
+
+Debugging details
+Errors and exceptions
+Application flow
+Performance metrics
+
+It is the successor to Log4j 1.x and offers significant performance improvements and 
+features over the original version.
+Core Components of Log4j2
+
+Component			Description
+Logger				Used by the application to send log messages.
+Appender			Defines where the log messages go (e.g., console, file, database).
+Layout				Defines how the log messages look (format).
+
+
+Configuration
+	
+XML, JSON, YAML, or properties file to define log behavior.
+Basic Example: Log4j2 with Java
+Step 1: Add Log4j2 to your project
+If you're using Maven, add this to pom.xml:
+<dependencies>
+   <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.20.0</version>
+  </dependency>
+   <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.20.0</version>
+  </dependency>
+</dependencies>
+ 
+ 
+Step 2: Create a Configuration File (log4j2.xml)
+Place this file in src/main/resources/:
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+   <Appenders>
+       <Console name="Console" target="SYSTEM_OUT">
+          <PatternLayout pattern="%d{HH:mm:ss} [%t] %-5level: %msg%n"/>
+      </Console>
+ 
+       <File name="FileLogger" fileName="logs/app.log" append="true">
+          <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+       </File>
+   </Appenders>
+ 
+   <Loggers>
+       <Root level="debug">
+          <AppenderRef ref="Console"/>
+          <AppenderRef ref="FileLogger"/>
+       </Root>
+   </Loggers>
+</Configuration>
+This logs:To console To a file at logs/app.log At DEBUG level and higher (DEBUG, INFO, WARN, ERROR)
+ 
+Logging Levels (in order of severity)
+Level		Purpose
+TRACE		Most detailed information (for development/debugging)
+DEBUG		General debugging information
+INFO		High-level operational messages
+WARN		Indications of possible issues
+ERROR		Errors that prevent normal flow
+FATAL		Severe errors causing shutdown
+
+
+
+Java Usage Example
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+ 
+public class Log4jExample {
+   private static final Logger logger = LogManager.getLogger(Log4jExample.class);
+ 
+   public static void main(String[] args) {
+      logger.trace("This is a TRACE log");
+       logger.debug("This is a DEBUG log");
+      logger.info("This is an INFO log");
+      logger.warn("This is a WARN log");
+      logger.error("This is an ERROR log");
+      logger.fatal("This is a FATAL log");
+   }
+}
+Why Use Log4j2?
+--------------
+Better performance than Log4j 1 and java.util.logging
+Async logging support (faster for high-throughput apps)
+Flexible configuration (XML, JSON, YAML)
+Filtering logs, email alerts, and more.
+ 
+ 
+ 
+NOTE: Full Format
+Pattern				Meaning
+%d{yyyy-MM-dd HH:mm:ss}		The timestamp of the log message, formatted as "2025-08-19 14:45:03".
+[%t]				The name of the thread that generated the log (e.g., [main]).
+%-5level			The log level (DEBUG, INFO, ERROR, etc.), left-padded to 5 characters for alignment.
+%logger{36}			The name of the logger (usually the class name). The {36} means: show up to 36 characters of the logger name.
+-				Just a separator for readability.
+%msg				The actual log message from your Java code (e.g., logger.info("Something happened");).
+%n				Newline (moves to the next line). Ensures each log entry appears on its own line.
+
+Example Log Output
+ 
+<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+ 
+2025-08-19 14:45:03 [main] INFO  com.example.MyClass - Starting test execution
+2025-08-19 14:45:05 [main] ERROR com.example.MyClass - Element not found
+Each line contains:
+The timestamp
+The thread name (main)
+The log level
+The logger name (class name)
+The message
+
+
+ 
+Customizing It
+We can modify the pattern to include more info like:
+Pattern			Description
+%M			Method name
+%L			Line number
+%F			File name
+%C			Fully qualified class name
+%X{key}			Value from a mapped diagnostic context (MDC)
+
+
+Example:
+<PatternLayout pattern="%d [%t] %-5level %C{1}.%M(%F:%L) - %msg%n"/>
+This would log:
+2025-08-19 14:45:03 [main] INFO  MyClass.myMethod(MyClass.java:42) - Some log message
+ 
+ 
+
+Log4j2 example in a Selenium Java project to help you implement logging for your test automation.
+Prerequisites
+Make sure your project setup includes:
+Java
+Selenium WebDriver
+Log4j2 dependencies
+Maven (recommended)
+Project Structure
+your-project/
+├── pom.xml
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │  └── SeleniumLog4jExample.java
+│   │   └── resources/
+│   │       └── log4j2.xml
+ 
+Maven Dependencies (pom.xml)
+Add the following to your pom.xml:
+<dependencies>
+   <!-- Selenium -->
+   <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>4.21.0</version>
+  </dependency>
+ 
+   <!-- Log4j2 -->
+   <dependency>
+       <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.20.0</version>
+  </dependency>
+   <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.20.0</version>
+  </dependency>
+</dependencies>
+Log4j2 Configuration File (log4j2.xml)
+NOTE: Place this file in src/main/resources/:
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+   <Appenders>
+       <Console name="Console" target="SYSTEM_OUT">
+          <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level - %msg%n" />
+      </Console>
+       <File name="FileLogger" fileName="logs/test-log.log" append="true">
+          <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+       </File>
+   </Appenders>
+ 
+   <Loggers>
+       <Root level="info">
+          <AppenderRef ref="Console"/>
+          <AppenderRef ref="FileLogger"/>
+       </Root>
+   </Loggers>
+</Configuration>
+ 
+
+
+ 
+Selenium Test Example with Log4j2
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+ 
+public class SeleniumLog4jExample {
+   private static final Logger logger = LogManager.getLogger(SeleniumLog4jExample.class);
+ 
+   public static void main(String[] args) {
+      logger.info("Starting the Selenium test");
+      WebDriver driver = new ChromeDriver();
+      logger.info("Chrome browser launched");
+ 
+       try {
+          driver.get("https://abc.com");
+          logger.info("Navigated to abc.com");
+ 
+           String pageTitle = driver.getTitle();
+          logger.info("Page title is: " + pageTitle);
+ 
+          
+driver.findElement(By.name("q")).sendKeys("Log4j2 in Selenium");
+ 
+       } catch (WebDriverException e) {
+          logger.error("An error occurred during the test", e);
+       } finally {
+          driver.quit();
+          logger.info("Browser closed");
+       }
+   }
+}
+ 
+ 
+Output
+Logs will be printed in the console
+Also saved in: logs/test-log.log
+--------------------------------------------------------------------------------------------------------------------
+ Reporting example in Selenium WebDriver using TestNG and ExtentReports
+Tools Used
+Selenium WebDriver
+TestNG (for test structure and execution)
+ExtentReports (for rich HTML reports)
+
+Java
+Project Setup (Maven)
+First, add the following dependencies in your pom.xml:
+<dependencies>
+   <!-- Selenium -->
+   <dependency>
+       <groupId>org.seleniumhq.selenium</groupId>
+       <artifactId>selenium-java</artifactId>
+       <version>4.19.1</version>
+   </dependency>
+ 
+   <!-- TestNG -->
+   <dependency>
+       <groupId>org.testng</groupId>
+       <artifactId>testng</artifactId>
+       <version>7.10.1</version>
+       <scope>test</scope>
+   </dependency>
+ 
+   <!-- ExtentReports -->
+   <dependency>
+       <groupId>com.aventstack</groupId>
+       <artifactId>extentreports</artifactId>
+       <version>5.1.1</version>
+   </dependency>
+</dependencies>
+Example Test with Reporting
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.*;
+import com.aventstack.extentreports.*;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+ 
+public class GoogleTestWithReport {
+   WebDriver driver;
+   ExtentReports extent;
+   ExtentTest test;
+ 
+   @BeforeSuite
+   public void setupReport() {
+     ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter("test_output_file/ExtentReport.html");
+       extent = new ExtentReports();
+      extent.attachReporter(htmlReporter);
+   }
+ 
+   @BeforeClass
+   public void setUp() {
+       driver = new ChromeDriver();
+   }
+ 
+   @Test
+   public void openGoogle() {
+       test = extent.createTest("Open Google", "Verify Google homepage loads successfully");
+       driver.get("https://www.google.com");
+       String title = driver.getTitle();
+       if (title.contains("Google")) {
+           test.pass("Google homepage opened successfully");
+       } else {
+           test.fail("Google homepage title did not match");
+       }
+   }
+ 
+   @AfterClass
+   public void tearDown() {
+       driver.quit();
+   }
+ 
+   @AfterSuite
+   public void tearDownReport() {
+      extent.flush(); // write everything to the report
+   }
+}
+Output
+After running the test, a file like test_output_file/ExtentReport.html will be created.
+Open it in a browser to view the result in a clean HTML format.
+ 
+ 
+
+Selenium + TestNG Dependency Testing
+In Selenium, dependency testing typically refers to running one test after another only if the first test passes. This is usually done using TestNG in Java, which allows you to set dependencies between test methods.
+Example: Selenium Test with Dependencies using TestNG
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.*;
+ 
+public class DependencyTestExample {
+   WebDriver driver;
+ 
+   @BeforeClass
+   public void setUp() {
+       driver = new ChromeDriver();
+   }
+ 
+   @Test
+   public void launchWebsite() {
+       driver.get("https://emppage.html");
+       String expectedTitle = "Employee Page";
+       String actualTitle = driver.getTitle();
+      Assert.assertEquals(actualTitle, expectedTitle);
+   }
+ 
+   @Test(dependsOnMethods = {"launchWebsite"})
+   public void performLogin() {
+       // Simulate login functionality
+      System.out.println("Login test running...");
+       // e.g., driver.findElement(By.id("login")).click();
+   }
+ 
+   @Test(dependsOnMethods = {"performLogin"})
+   public void verifyDashboard() {
+       // Simulate dashboard verification
+      System.out.println("Dashboard verification test running...");
+       // e.g., Assert.assertTrue(driver.findElement(By.id("dashboard")).isDisplayed());
+   }
+ 
+   @AfterClass
+   public void tearDown() {
+       driver.quit();
+   }
+}
+Explanation:
+launchWebsite() opens the website and checks the title.
+performLogin() will only run if launchWebsite() passes.
+verifyDashboard() will only run if performLogin() passes.
+This chaining prevents dependent tests from running if earlier ones fail.
+TestNG Dependency Benefits:
+IMPORTANT: Ensures critical steps like login are successful before moving on.
+Avoids misleading failures in tests that rely on a failed prerequisite.
+
+
+TestNG Listener
+In TestNG, a Listener is a powerful feature used to customize and configure the behavior of test execution.
+Listeners in TestNG allow you to run specific code before, after, or during test execution based on various events
+(like test start, success, failure, etc.).
+What Is a TestNG Listener?
+A listener in TestNG is a Java interface that allows you to listen to events like:
+Test start
+Test success
+Test failure
+Test skip
+Suite start/end
+Method invocation start/end
+You implement these by using listener interfaces provided by TestNG such as:
+Listener Interface		Description
+ITestListener			Listens to individual test case events
+ISuiteListener			Listens to test suite start and finish
+IInvokedMethodListener		Listens to method-level events
+IAnnotationTransformer		Modifies annotations at runtime
+IReporter			Customizes report generation
+IHookable 			Intercepts method calls
+
+Example: Using ITestListener
+Let's create a listener to log test case events.
+Step 1: Create the Listener Class
+import org.testng.ITestListener;
+import org.testng.ITestResult;
+ 
+public class CustomListener implements ITestListener {
+ 
+   @Override
+   public void onTestStart(ITestResult result) {
+      System.out.println("Test Started: " + result.getName());
+   }
+ 
+   @Override
+   public void onTestSuccess(ITestResult result) {
+      System.out.println("Test Passed: " + result.getName());
+   }
+ 
+   @Override
+   public void onTestFailure(ITestResult result) {
+      System.out.println("Test Failed: " + result.getName());
+   }
+ 
+   @Override
+   public void onTestSkipped(ITestResult result) {
+      System.out.println("Test Skipped: " + result.getName());
+   }
+}
+Step 2: Attach Listener to Your Test
+Option 1: Use @Listeners annotation
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
+ 
+@Listeners(CustomListener.class)
+public class MyTest {
+ 
+   @Test
+   public void testSuccess() {
+       System.out.println("Executing testSuccess...");
+   }
+ 
+   @Test
+   public void testFail() {
+      System.out.println("Executing testFail...");
+       assert false;
+   }
+}
+Option 2: Add listener in testng.xml
+<listeners>
+   <listener class-name="your.package.name.CustomListener"/>
+</listeners>
+Benefits of Listeners
+Logging test activity
+Screenshot capture on failure
+Retry failed tests
+Custom reports
+Dynamic test behavior

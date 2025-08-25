@@ -1,0 +1,157 @@
+25/07/2025
+Interface extends another interface	✅ Yes
+Interface implements a class	❌ No
+Class implements interface	✅ Yes
+Abstract class implements interface	✅ Yes
+Interface implements abstract class	❌ No
+
+Why other options are wrong:
+a) No → Incorrect. Lambdas can access variables if they're final or effectively final.
+
+c) Only static variables → ❌ Lambdas can access both static and instance variables too, not just static.
+
+d) Only class variables → ❌ They can access class variables, but also certain local variables.
+
+ This makes code shorter, more readable, and expressive — which is the main goal of lambdas.
+
+
+/*Inner class ---> A class defined in another class:
+
+1.	Outer class
+
+2. Inner class.
+ 
+Why use Inner classes:
+
+----------------------
+
+1.	To make code cleaner.
+
+2.	Private methods or instance variables in an outer class
+
+	can be accessed usin g inner class.
+
+*/
+
+class OuterClass{
+
+	private String str="Hello Learners";
+
+	class InnerClass{
+
+		public void printText(){
+
+			System.out.println("Outer class Private Variable: "+str);
+
+		}
+
+	}
+
+	public static void main(String[] args){
+
+		OuterClass outer = new OuterClass();
+
+		OuterClass.InnerClass inner= outer.new InnerClass();
+
+		//It is because the innerclass holds an implicit
+
+		// reference to the outer class instance;
+
+		inner.printText();
+
+	}
+
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+//Anonymous inner class
+ 
+interface Emp{
+
+	int empid=101;
+
+	void getEmpId();
+
+}	
+ 
+ 
+class Employee{
+
+		public static void main(String[] args){
+
+			Emp emp = new Emp(){
+
+				public void getEmpId(){
+
+					 System.out.println("EmpId of an employee is: "+	empid);
+
+				}
+
+			};
+
+			emp.getEmpId();
+
+		}
+
+}		
+ 
+//Solution:
+//---------
+interface InterestCalculator {
+    double calculateInterest(double principal, double rate, int time);  // Simple Interest
+}
+ 
+interface EMICalculator {
+    double calculateEMI(double loanAmount, double annualRate, int months);
+}
+ 
+interface CurrencyConverter {
+    double convertToUSD(double inrAmount);
+}
+ 
+class BankSystem {
+    public static void main(String[] args) {
+        InterestCalculator interestCalculator = new InterestCalculator() {
+            public double calculateInterest(double principal, double rate, int time) {
+                return (principal * rate * time) / 100;
+            }
+        };
+ 
+        EMICalculator emiCalculator = new EMICalculator() {
+            public double calculateEMI(double loanAmount, double annualRate, int months) {
+                double monthlyRate = annualRate / (12 * 100); // annual to monthly
+                return (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, months)) /
+                       (Math.pow(1 + monthlyRate, months) - 1);
+            }
+        };
+ 
+        CurrencyConverter converter = new CurrencyConverter() {
+            public double convertToUSD(double inrAmount) {
+                double conversionRate = 85.0; 
+                return inrAmount / conversionRate;
+            }
+        };
+ 
+        
+        double interest = interestCalculator.calculateInterest(100000, 7.5, 2);
+        double emi = emiCalculator.calculateEMI(500000, 10.5, 60);
+        double usd = converter.convertToUSD(10000);
+ 
+        System.out.println("Simple Interest: "+interest);
+        System.out.println("Monthly EMI: "+emi);
+        System.out.println("INR 10000 in USD: "+ usd);
+    }
+}
+
+1.completion rate.(expected to learn by learner)
+2.application rate(how effectively learner apply the knowledge)
+3.learning rate
+4.accuracy rate
+5.curosity index
+====================================================================================================================

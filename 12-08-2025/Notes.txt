@@ -1,0 +1,803 @@
+12/08/2025
+
+Create Users in Jira Software (Server/Data Center)
+1. Log in as a Jira Administrator
+Open your Jira instance in the browser (e.g., http://localhost:8080 or your server's IP/domain).
+Log in with an account that has Jira System Administrator or Jira Administrator permissions.
+2. Go to User Management
+Click the  “Administration” icon (top right).
+Choose User Management (or go directly to: http://<your-jira-url>/secure/admin/user/UserBrowser.jspa)
+3. Create a New User
+Click “Create user”.
+Fill out the form:
+Username:  
+Password: (can be set manually or let user set via email)
+Full Name
+Email Address
+Directory: If you’re using the internal directory, it will be pre-selected.
+Check “Send Notification Email” if you want the user to receive an email.
+Click “Create User”.
+4. Assign Groups (Optional but Recommended)
+After creating the user, click into their profile.
+Add them to groups like:
+jira-software-users (grants application access)
+Any custom groups for project or permission control
+Verify Application Access
+Make sure your user is in a group that has access to Jira Software:
+Go to Administration → Applications → Application Access
+Check which groups have access to Jira Software.
+Add your new user to at least one of those groups.
+ 
+ Create a Project to do CRUD operations on Employee Data.
+ 
+Create a login form UI
+Authenticate username and password
+Create UserProfile Screen
+Create an Employee class(5 employees)
+Create a UserRepository to:
+Display the employee details
+Insert the employee details
+Update the employee details
+Delete the employee details
+Create a Service class to call all the methods from UserRepository
+Show all the details of all the employees
+ 
+ 
+Steps to create a Workflow in JIRA
+Create a Project
+Create an Epic
+Create a Sprint
+Create a Story
+Create an issue
+Assign the issue(s) to the users
+Start the SPRINT
+Put the Sprint in the Done Card
+Complete the SPRINT.
+NOTE: Repeat this process for all the SPRINTS
+ 
+MCQ – JIRA
+ 
+1. What is JIRA primarily used for?
+A) Photo editing
+B) Project management and issue tracking
+C) Web development
+D) Email marketing
+
+2. Who develops JIRA?
+A) Microsoft
+B) Google
+C) Atlassian
+D) IBM
+
+3. In JIRA, what does an 'Issue' typically represent?
+A) A bug only
+B) A document
+C) A task or work item
+D) A calendar event
+
+4. What is a 'Project' in JIRA?
+A) A folder containing documents
+B) A collection of users
+C) A collection of issues
+D) A workflow
+
+5. Which of the following is not a default issue type in JIRA?
+A) Task
+B) Bug
+C) Story
+D) Note
+
+6. What is a 'Workflow' in JIRA?
+A) A series of tasks in order
+B) A defined set of statuses and transitions
+C) A report
+D) A plugin
+
+7. What JIRA feature allows you to automate repetitive tasks?
+A) Epics
+B) Boards
+C) Automation Rules
+D) Reports
+
+8. In JIRA Agile (Scrum), what is an 'Epic'?
+A) A bug with high priority
+B) A large body of work that can be broken down into stories
+C) A sprint
+D) A release
+
+9. What is the purpose of a Sprint in JIRA?
+A) To assign tasks
+B) To complete work in a fixed time-box
+C) To file bugs
+D) To create reports
+
+10. Which of the following is not a valid JIRA project type?
+A) Scrum
+B) Kanban
+C) Bug Tracker
+D) Agile
+
+11. Which field determines who is responsible for an issue?
+A) Reporter
+B) Assignee
+C) Watcher
+D) Owner
+
+12. What is a 'Board' in JIRA?
+A) A user group
+B) A set of issues presented in columns
+C) A workflow
+D) A permission scheme
+
+13. What permission allows a user to create new issues?
+A) Browse Projects
+B) Create Issues
+C) Modify Reporter
+D) Transition Issues
+
+14. Which search language is used in JIRA?
+A) SQL
+B) JSON
+C) JQL (JIRA Query Language)
+D) HTML
+
+15. What is a 'Story Point' in JIRA Agile?
+A) The number of users assigned to a story
+B) A priority indicator
+C) A measure of effort to complete a story
+D) A deadline
+
+16. What does the 'Done' status usually represent in a workflow?
+A) Issue is ready for testing
+B) Issue is open
+C) Issue has been completed
+D) Issue has been assigned
+
+17. Which JIRA component allows grouping related issues under a common goal?
+A) Sub-task
+B) Epic
+C) Component
+D) Release
+
+18. What is the difference between a Kanban and Scrum board in JIRA?
+A) Kanban is time-boxed; Scrum is not
+B) Scrum is for continuous delivery; Kanban is for sprints
+C) Scrum uses sprints; Kanban focuses on continuous flow
+D) They are identical
+
+19. Who can change the workflow in JIRA?
+A) Any user
+B) Admin only
+C) Reporter
+D) Assignee
+
+20. What is a Sub-task in JIRA?
+A) A new project
+B) A duplicate issue
+C) A smaller part of a parent issue
+D) A completed task
+
+21. What is the function of 'Components' in a JIRA project?
+A) Manage user permissions
+B) Define roles
+C) Organize issues within a project
+D) Manage workflows
+
+22. In a JIRA dashboard, what are 'Gadgets'?
+A) Plugins
+B) Tools for admins
+C) Visual components to display data
+D) Hidden features
+
+23. What is the role of a 'Reporter' in an issue?
+A) The user assigned to complete the issue
+B) The user who created the issue
+C) A user monitoring the issue
+D) A project admin
+
+24. What is the backlog in JIRA Scrum?
+A) Issues assigned to a sprint
+B) Unresolved bugs
+C) A list of issues waiting to be worked on
+D) Closed tasks
+
+25. What is the main purpose of using filters in JIRA?
+A) To backup data
+B) To create dashboards
+C) To find specific issues based on criteria
+D) To update workflows
+
+                                             -------------
+
+Automation testing
+Automation testing is a type of software testing that uses special tools and scripts to automatically execute test cases, compare actual outcomes with expected outcomes, and report the results. It’s used to check whether software works as intended, without needing a human to manually run the tests every time.
+Key Points:
+Purpose: To save time, reduce human error, and increase test coverage.
+Used for: Repetitive tasks like regression testing, load testing, and performance testing.
+Tools: Examples include Selenium, Cypress, Playwright, JUnit, TestNG, and Appium.
+Manual Testing vs Automation Testing
+Feature
+	
+Manual Testing
+	
+                                 Automation Testing
+
+
+Speed
+	
+Slower
+	
+                                 Much faster
+
+
+Reusability
+	
+Tests need to be redone
+	
+                                 Scripts can be reused
+
+
+Initial Cost
+	
+Low
+	
+                                 High (tools, setup, scripts)
+
+
+Best For
+	
+Exploratory, UI testing
+	
+                                 Regression, load, repetitive tasks
+Common Uses
+Regression Testing: Re-running old tests after code changes
+Load/Performance Testing: Testing how software behaves under pressure
+Smoke Testing: Quickly checking basic functionality
+API Testing: Validating backend logic and data flow
+Bottom of Form
+ 
+ 
+Automation Testing Tools
+There are many tools available for automation testing, and the right tool depends on what you're testing (web, mobile, API, etc.), the tech stack, and team skills.
+Popular Tools
+1. Web Application Testing Tools
+Tool
+	
+Description
+	
+Language Support
+
+
+Selenium
+	
+Most popular open-source tool for browser automation
+	
+Java, Python, C#, Ruby, etc.
+
+
+Cypress
+	
+Fast, modern JavaScript-based framework for web testing
+	
+JavaScript
+
+
+Playwright
+	
+Microsoft-backed tool for end-to-end testing across browsers
+	
+JavaScript, Python, C#, Java
+
+
+TestCafe
+	
+Node.js-based tool for web testing
+	
+JavaScript, TypeScript
+
+
+Puppeteer
+	
+Headless Chrome testing
+	
+JavaScript
+2. Mobile Application Testing Tools
+Tool
+	
+Description
+	
+Platform
+
+
+Appium
+	
+Open-source tool for iOS and Android apps
+	
+Android & iOS
+
+
+Espresso
+	
+Google’s framework for Android UI testing
+	
+Android only
+
+
+XCUITest
+	
+Apple’s framework for iOS UI testing
+	
+iOS only
+
+
+Detox
+	
+End-to-end testing for React Native apps
+	
+Android & iOS
+3. API Testing Tools
+Tool
+	
+Description
+
+
+Postman
+	
+GUI-based API testing tool with automation via Newman
+
+
+Rest Assured
+	
+Java library for REST API automation
+
+
+SoapUI
+	
+For SOAP and REST testing, with scripting support
+
+
+Karate
+	
+DSL-based tool for API and UI testing (uses Gherkin syntax)
+
+
+ 
+4. Performance / Load Testing Tools
+Tool
+	
+Description
+
+
+JMeter
+	
+Open-source tool for load testing APIs, web apps
+
+
+Gatling
+	
+Scala-based performance testing tool
+
+
+k6
+	
+Developer-centric load testing tool (JavaScript)
+
+
+Locust
+	
+Python-based load testing tool
+5. Unit Testing Frameworks (Used in Automation Scripts)
+Language
+	
+          Frameworks
+
+
+Java
+	
+          JUnit, TestNG
+
+
+Python
+	
+           PyTest, unittest
+
+
+JavaScript
+	
+          Jest, Mocha, Jasmine
+
+
+C#
+	
+          NUnit, MSTest, xUnit
+6. Test Management & CI/CD Integration Tools
+Tool
+	
+Use
+
+
+Jenkins
+	
+Automate test execution in CI pipelines
+
+
+GitHub Actions
+	
+Integrate testing in Git workflows
+
+
+TestRail / Zephyr
+	
+Test management platforms
+
+
+Allure / ExtentReports
+	
+Reporting libraries for test results
+ 
+ 
+ 
+Types of applications and the categorized automation testing tools that are typically used to test each type:
+1. Web Applications
+Web apps run in browsers and include sites like e-commerce platforms, dashboards, blogs, etc.
+Tools for Testing Web Applications:
+Tool
+	
+Type
+	
+Notes
+
+
+Selenium
+	
+UI Automation
+	
+Widely used, supports many browsers
+
+
+Cypress
+	
+End-to-End Testing
+	
+Fast, easy for JavaScript apps
+
+
+Playwright
+	
+Cross-browser E2E
+	
+Supports modern features and multiple languages
+
+
+Puppeteer
+	
+Headless Browser
+	
+Good for Chrome/Chromium
+
+
+TestCafe
+	
+UI & E2E Testing
+	
+No WebDriver needed, easy to set up
+2. Mobile Applications
+Mobile apps include native (Android/iOS), hybrid, and cross-platform apps (like React Native).
+Tools for Testing Mobile Apps:
+Tool
+	
+Type
+	
+Platform
+
+
+Appium
+	
+UI Automation
+	
+Android + iOS (cross-platform)
+
+
+Espresso
+	
+Native UI Testing
+	
+Android only
+
+
+XCUITest
+	
+Native UI Testing
+	
+iOS only
+
+
+Detox
+	
+E2E Testing
+	
+React Native
+
+
+Robot Framework
+	
+Keyword-driven
+	
+Supports mobile via Appium plugin
+3. API / Backend Applications
+APIs (REST, SOAP, GraphQL) connect frontend apps with servers or databases.
+Tools for API Testing:
+Tool
+	
+Type
+	
+Notes
+
+
+Postman
+	
+Manual + Automation
+	
+Newman CLI for automation
+
+
+Rest Assured
+	
+Java Library
+	
+Great for REST APIs
+
+
+SoapUI
+	
+SOAP/REST Automation
+	
+GUI + scripting
+
+
+Karate
+	
+DSL Testing Tool
+	
+API + UI + performance
+
+
+JMeter
+	
+Load & API Testing
+	
+Open-source, versatile
+4. Desktop Applications
+These are traditional apps installed on Windows, Mac, or Linux (e.g., MS Word, Notepad).
+Tools for Desktop Testing:
+Tool
+	
+Type
+	
+Platform
+
+
+WinAppDriver
+	
+UI Automation
+	
+Windows apps
+
+
+Winium
+	
+UI Automation
+	
+Windows, like Selenium
+
+
+AutoIt
+	
+GUI Automation
+	
+Windows, scripting
+
+
+Pywinauto
+	
+Python-based
+	
+Windows automation
+
+
+Sikuli
+	
+Image-based UI Test
+	
+Cross-platform
+5. Security & Vulnerability Testing
+Focused on identifying security issues in web/mobile/backend systems.
+Security Testing Tools:
+Tool
+	
+Purpose
+
+
+OWASP ZAP
+	
+Web app vulnerability scanner
+
+
+Burp Suite
+	
+Web security testing
+
+
+Nessus
+	
+Network vulnerability scanning
+6. Performance & Load Testing
+Checks system behavior under stress or heavy load.
+Load Testing Tools:
+Tool
+	
+Type
+
+
+JMeter
+	
+Load, stress, API testing
+
+
+k6
+	
+Developer-focused load tool (JavaScript)
+
+
+Gatling
+	
+Performance testing (Scala/Java)
+
+
+Locust
+	
+Load testing (Python)
+ 
+7. Test Management & Reporting
+These help to manage, organize, and report test cases and results.
+Test Management Tools:
+Tool
+	
+Use
+
+
+TestRail
+	
+Manual + automation test tracking
+
+
+Zephyr
+	
+Jira plugin for test management
+
+
+Xray
+	
+Test case management
+Reporting Tools:
+Tool
+	
+Use
+
+
+Allure Reports
+	
+Beautiful test reports
+
+
+ExtentReports
+	
+HTML report generation
+ 
+ 
+What is Selenium?
+Selenium is a free, open-source automation testing tool used to automate web browsers. It allows testers and developers to write scripts that automatically perform actions like clicking buttons, filling forms, and navigating web pages—just like a real user would do.
+Why Use Selenium?
+Reason
+	
+Explanation
+
+
+Browser Automation
+	
+Automates actions in all major browsers (Chrome, Firefox, Safari, etc.)
+
+
+Cross-Browser Testing
+	
+Ensures your web app works on different browsers
+
+
+Supports Multiple Languages
+	
+You can write tests in Java, Python, C#, Ruby, JavaScript, etc.
+
+
+Cross-Platform
+	
+Runs on Windows, macOS, and Linux
+
+
+Large Community
+	
+Well-supported with lots of tutorials and libraries
+
+
+Integrates Easily
+	
+Works well with test frameworks like TestNG, JUnit, PyTest, etc., and CI/CD tools like Jenkins
+Selenium Components:
+Component
+	
+Purpose
+
+
+Selenium WebDriver
+	
+“Main component used to automate browser actions.”
+
+
+Selenium IDE
+	
+Chrome/Firefox plugin for record-and-playback testing (beginner-friendly)
+
+
+Selenium Grid
+	
+Allows running tests in parallel across multiple machines/browsers
+Example Use Case:
+We are building a shopping website. Every time developers update the code, wecan run a Selenium script that:
+Opens the site
+Logs in
+Adds items to the cart
+Checks out
+Verifies the success message
+All done automatically without manual testing.
+ 
+Project Title: Java Issue Tracking System
+Technology Stack:
+Backend: Java (Spring Boot)
+Frontend: HTML/CSS + JavaScript
+Database: MySQL
+ORM: Hibernate / JPA
+Build Tool: Maven 
+Modules/Components:
+1. User Management
+Register/Login
+Role-based access: Admin, Project Manager, Developer, QA
+Profile management
+2. Project Management
+Create/Edit/Delete projects
+Assign users to projects
+Project dashboard
+3. Issue Management (Core Feature)
+Create/Edit/Delete issues (Tickets)
+Issue types: Bug, Task, Story, Epic
+Priorities: Low, Medium, High, Critical
+Status workflow: To Do → In Progress → In Review → Done
+Assign issues to users
+4. Sprint Board
+Create/manage sprints
+Drag and drop issue statuses (UI level)
+5. Comments & Attachments
+Comment on issues
+Upload and view attachments
+6. Reporting & Analytics
+Issue count by status, assignee, priority
+Burn-down charts
+Database Schema (Simplified):
+User (id, username, email, password, role)
+Project (id, name, description, createdBy)
+Issue (id, title, description, status, priority, assignee, projectId, type)
+Sprint (id, name, startDate, endDate, projectId)
+Comment (id, issueId, userId, text, timestamp)
+Attachment (id, issueId, filename, fileUrl)
+ 
+---------------
+ 
+ 

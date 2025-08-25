@@ -1,0 +1,187 @@
+Topics: WebDriver, browser commands, waits, actions, etc.
+What is Selenium?
+→ Selenium is an open-source automation tool for web application testing.
+What is WebDriver in Selenium?
+→ WebDriver is a tool used to automate web application testing by controlling browsers.
+Which programming languages are supported by Selenium?
+→ Java, Python, C#, Ruby, JavaScript, and Kotlin.
+What is the difference between Selenium 3 and Selenium 4?
+→ Selenium 4 has a W3C standard protocol, better DevTools support, and no need for a separate driver class.
+What is a headless browser?
+→ A browser that runs without a GUI; useful for faster, CI-based testing.
+How do you launch Chrome using WebDriver in Java?
+→ WebDriver driver = new ChromeDriver();
+How do you navigate to a URL in Selenium?
+→ driver.get("https://example.com");
+What does driver.quit() do?
+→ Closes all browser windows and ends the WebDriver session.
+What does driver.close() do?
+→ Closes the current browser window.
+What is an implicit wait?
+→ Waits for a specified time while locating elements.
+What is an explicit wait?
+→ Waits for a specific condition to be true before proceeding.
+What is FluentWait in Selenium?
+→ A wait with a polling frequency and ability to ignore exceptions.
+How do you handle alerts in Selenium?
+→ driver.switchTo().alert().accept();
+How to switch to a frame in Selenium?
+→ driver.switchTo().frame(index/id/name);
+How to handle multiple windows in Selenium?
+→ Use getWindowHandles() and switch using switchTo().window()
+What is the use of Actions class in Selenium?
+→ To handle mouse and keyboard interactions.
+What is the difference between get() and navigate().to()?
+→ Functionally similar; navigate().to() is more flexible.
+What is Page Object Model (POM)?
+→ A design pattern that separates test logic from locators.
+What is a WebElement in Selenium?
+→ Represents an HTML element on the web page.
+How to check if an element is visible?
+→ element.isDisplayed();
+How do you take a screenshot in Selenium?
+→ Use TakesScreenshot interface.
+What is the difference between findElement and findElements?
+→ findElement returns a single element; findElements returns a list.
+How do you maximize a browser window?
+→ driver.manage().window().maximize();
+Can Selenium automate Windows-based pop-ups?
+→ No, use tools like AutoIT or Robot for that.
+What browsers are supported by Selenium?
+→ Chrome, Firefox, Safari, Edge, Internet Explorer.
+Section 2: Selenium Locators (20 Questions)
+Topics: Types of locators, XPath, CSS, best practices.
+What are locators in Selenium?
+→ Locators help identify web elements on a page.
+Name types of locators in Selenium.
+→ ID, Name, ClassName, TagName, LinkText, PartialLinkText, XPath, CSS Selector.
+Which locator is the fastest?
+→ ID is generally the fastest and most reliable.
+What is XPath?
+→ A syntax used to navigate through elements in an XML or HTML document.
+What is absolute XPath?
+→ XPath starting from the root element (/html/body/...).
+What is relative XPath?
+→ XPath starting from a middle node (//div[@id='example']).
+What’s the difference between ‘/’ and ‘//’ in XPath?
+→ / selects from the root, // searches anywhere in the document.
+How do you select an element with text in XPath?
+→ //tag[text()='value']
+How to select element using contains in XPath?
+→ //*[contains(text(),'partial_text')]
+What is a CSS Selector?
+→ A method of locating elements using CSS syntax.
+How to select an element by class in CSS?
+→ .className
+How to select an element by ID in CSS?
+→ #id
+How to find an element with attribute using CSS?
+→ tag[attribute='value']
+Can you use multiple attributes in XPath?
+→ Yes: //input[@type='text' and @name='username']
+How to select the nth element using XPath?
+→ (//tag)[n]
+How to find sibling elements in XPath?
+→ Use following-sibling:: or preceding-sibling::
+What is the difference between By.name() and By.className()?
+→ By.name() locates by name attribute, By.className() by class.
+Is CSS faster than XPath?
+→ Yes, generally CSS is faster and preferred when possible.
+Which is more readable: XPath or CSS?
+→ CSS is simpler, but XPath is more powerful.
+Can we use text() in CSS Selector?
+→ No, text() is only used in XPath.
+Section 3: TestNG (25 Questions)
+Topics: Annotations, assertions, parallel testing, test suites.
+What is TestNG?
+→ A testing framework inspired by JUnit and NUnit for test configuration.
+What are annotations in TestNG?
+→ Annotations control the test execution flow, like @Test, @BeforeMethod.
+What is the use of @Test annotation?
+→ Marks a method as a test case.
+What is the order of execution of TestNG annotations?
+→ @BeforeSuite, @BeforeTest, @BeforeClass, @BeforeMethod, @Test, @AfterMethod, @AfterClass, @AfterTest, @AfterSuite
+How to ignore a test case in TestNG?
+→ Use enabled=false in the @Test annotation.
+How to prioritize test cases in TestNG?
+→ Use priority attribute: @Test(priority=1)
+What is dependsOnMethods in TestNG?
+→ It defines method dependencies for test execution.
+How to run tests in parallel in TestNG?
+→ Define <parallel> attribute in testng.xml.
+What is the purpose of testng.xml?
+→ It’s a configuration file to group and control test execution.
+What is a data provider in TestNG?
+→ Supplies data to tests using @DataProvider.
+How do you run a group of tests?
+→ Use @Test(groups="groupName") and define in testng.xml.
+What is soft assertion?
+→ Doesn’t throw an exception when it fails; test continues.
+What is hard assertion?
+→ Throws exception immediately on failure; test stops.
+What is @BeforeMethod used for?
+→ Executes before each @Test method.
+What is @AfterMethod used for?
+→ Executes after each @Test method.
+What is @BeforeClass used for?
+→ Executes once before any test in the current class.
+Can we have multiple testng.xml files?
+→ Yes, and they can be run together using a suite file.
+What is invocationCount in TestNG?
+→ Defines how many times a test method should run.
+How do you disable a test case?
+→ @Test(enabled=false)
+What is threadPoolSize in TestNG?
+→ Defines number of threads to run tests concurrently.
+What is the default priority of a test in TestNG?
+→ 0
+How to pass parameters from testng.xml?
+→ Use @Parameters annotation.
+What is the use of listeners in TestNG?
+→ To track test execution events like start, success, or failure.
+How to run failed test cases in TestNG?
+→ Use testng-failed.xml generated after test run.
+What is Suite in TestNG?
+→ A suite is a collection of tests defined in testng.xml.
+Section 4: JIRA (20 Questions)
+Topics: Issue types, workflows, components, Agile boards.
+What is JIRA?
+→ JIRA is an issue and project tracking tool developed by Atlassian.
+What are the issue types in JIRA?
+→ Bug, Task, Story, Epic, Sub-task.
+What is a workflow in JIRA?
+→ A set of statuses and transitions an issue follows.
+What is a Sprint in JIRA?
+→ A time-boxed iteration in Agile for completing tasks.
+What is an Epic in JIRA?
+→ A large body of work that can be broken down into Stories.
+What is a Story in JIRA?
+→ A user requirement or functionality to be implemented.
+What is a Bug in JIRA?
+→ A problem or error in the application.
+What is a Component in JIRA?
+→ A sub-part of a project used for grouping issues.
+What is a Label in JIRA?
+→ Tags added to issues for better categorization.
+What is a Watcher in JIRA?
+→ A person notified of changes to the issue.
+What is an Assignee in JIRA?
+→ The person responsible for resolving the issue.
+How do you transition an issue in JIRA?
+→ By moving it through the workflow using available transitions.
+What is the purpose of a JIRA Dashboard?
+→ To view and track issues, metrics, and charts.
+What is a JQL?
+→ JIRA Query Language used to search issues.
+How to clone an issue in JIRA?
+→ Use the "Clone" option in issue actions.
+What is a Resolution field in JIRA?
+→ Indicates how an issue was closed (Fixed, Won’t Fix, Duplicate, etc.)
+What is the difference between Status and Resolution?
+→ Status shows current workflow stage; Resolution explains the closure.
+Can workflows be customized in JIRA?
+→ Yes, workflows can be created or modified.
+What is a Kanban board in JIRA?
+→ A visual workflow board for managing ongoing work.
+What is a backlog in JIRA?
+→ A list of tasks or stories yet to be planned into a sprint.

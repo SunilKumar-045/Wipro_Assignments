@@ -1,0 +1,896 @@
+21-08-2025
+
+Cross-browser testing
+Cross-browser testing in Selenium allows you to verify that your web application works
+as expected in different web browsers (e.g., Chrome, Firefox, Edge).
+Below is a basic example of how to perform cross-browser testing using Selenium WebDriver in Java.
+Prerequisites
+Java installed
+Maven project setup (optional but recommended)
+Selenium WebDriver dependencies added
+Browser drivers (e.g., ChromeDriver, GeckoDriver)
+Maven Dependencies (in pom.xml)
+<dependencies>
+   <!-- Selenium Java -->
+   <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>4.19.1</version>
+  </dependency>
+</dependencies>
+Java Code for Cross-Browser Testing
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+ 
+public class CrossBrowserTest {
+   public static WebDriver driver;
+   public static void main(String[] args) {
+       // Set the browser to test
+       String browser = "chrome"; 
+ 
+       // Launch the desired browser
+       switch (browser.toLowerCase()) {
+           case "chrome":
+               //System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+               driver = new ChromeDriver();
+               break;
+           case "firefox":
+               //System.setProperty("webdriver.gecko.driver", "path/to/geckodriver");
+               driver = new FirefoxDriver();
+               break;
+           case "edge":
+               //System.setProperty("webdriver.edge.driver", "path/to/msedgedriver");
+               driver = new EdgeDriver();
+               break;
+           default:
+              System.out.println("Unsupported browser!");
+              return;
+       }
+ 
+       // Navigate to a website and perform actions
+      driver.get("https://example.com");
+      System.out.println("Title: " + driver.getTitle());
+ 
+       // Close the browser
+       driver.quit();
+   }
+}
+
+
+========================================================================================================================
+Selenium Grid
+Selenium Grid is a component of the Selenium Suite thatenables parallel test execution across multiple machines and browsers. It allows you to run your tests on different machines against different browsers and operating systems simultaneously.
+NOTE: This is extremely useful for cross-browser and cross-platform testing.
+Pre-requisites
+Before setting up Selenium Grid, you need:
+Java Installed (JDK 8 or higher)
+Selenium Server (Grid) JAR or use Selenium 4 which has Grid integrated.
+WebDriver Executables (e.g., chromedriver, geckodriver)
+Browsers (Chrome, Firefox, Edge, etc.)
+Basic knowledge of Selenium WebDriver
+Network connectivity (all nodes and the hub must be reachable to each other)
+Why Selenium Grid?
+Cross-browser testing: Run tests on different browsers simultaneously.
+Cross-platform testing: Execute tests on different OS environments.
+Parallel test execution: Reduces overall execution time by running multiple tests at once.
+Distributed test execution: Tests can be run on multiple remote machines.
+Efficient resource utilization: Leverages various machines for faster and scalable test execution.
+Advantages
+Time-saving: Run multiple tests in parallel, reducing test cycle time.
+Cross-environment testing: Test across different browsers and OS combinations.
+Scalable: Easily add more machines (nodes) to increase capacity.
+Central control: One central hub manages all test executions.
+Efficient debugging: Issues can be isolated to specific configurations (e.g., browser versions).
+Supports CI/CD: Easily integrates into Continuous Integration pipelines (e.g., Jenkins).
+
+
+ 
+Architecture
+Selenium Grid uses a Hub-Node model:
+1. Hub (Central Server)
+Acts as a central server.
+Receives test requests and routes them to the appropriate registered nodes.
+Only one hub per grid.
+2. Node
+Machine that executes the tests.
+Registers itself to the hub with details like OS, browser, version, etc.
+Can run multiple instances of browsers.
+Architecture Flow Diagram (Textual):
+      +----------------+
+       |     Hub       |
+       | (Central Server)|
+      +----------------+
+              |
+ ----------------------------
+  |           |            |
++------+  +--------+   +--------+
+| Node |   | Node   |   | Node   |
+| Win  |   | Mac   |   | Linux  |
+| Chrome|  | Safari |   | Firefox|
++------+  +--------+   +--------+
+In Selenium 4
+Selenium Grid comes with built-in support for Docker, distributed tracing, and fully distributed mode.
+You can run Selenium Grid in 3 modes:
+Standalone
+Hub & Node
+Fully Distributed
+ 
+ 
+Set up a Selenium Grid in standalone mode and run a Java test
+Step 1: Download Selenium Server
+Go to the official Selenium website:
+https://www.selenium.dev/downloads/
+Download the latest Selenium Server (Grid) jar — for example:
+selenium-server-<version>.jar (e.g., selenium-server-4.21.0.jar)
+Step 2: Start Selenium Grid (Standalone Mode)
+Open a terminal or command prompt and navigate to the directory where the JAR is located. Then run:
+java -jar selenium-server-4.21.0.jar standalone
+This starts the Grid in standalone mode with both the hub and node in one process.
+Hub URL: http://localhost:4444/
+Web UI: http://localhost:4444/ui
+Step 3: Maven Project Setup
+pom.xml:
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                           http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ <modelVersion>4.0.0</modelVersion>
+ <groupId>com.example</groupId>
+ <artifactId>selenium-grid-java</artifactId>
+ <version>1.0-SNAPSHOT</version>
+ 
+ <dependencies>
+   <dependency>
+     <groupId>org.seleniumhq.selenium</groupId>
+     <artifactId>selenium-java</artifactId>
+     <version>4.21.0</version>
+   </dependency>
+ </dependencies>
+</project>
+Step 4: Java Code Example
+SeleniumGridTest.java
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+ 
+import java.net.MalformedURLException;
+import java.net.URL;
+public class SeleniumGridTest {
+   public static void main(String[] args) {
+       try {
+           // URL of the Selenium Grid hub
+           URL gridURL = new URL("http://localhost:4444");
+ 
+           // Set Chrome options or other browser options
+           ChromeOptions options = new ChromeOptions();
+ 
+           // Initialize RemoteWebDriver with Grid URL and browser options
+           WebDriver driver = new RemoteWebDriver(gridURL, options);
+ 
+           // Navigate to a site
+          driver.get("https://www.mypage.com");
+          System.out.println("Page Title is: " + driver.getTitle());
+ 
+           // Close the browser
+          driver.quit();
+ 
+       } catch (MalformedURLException e) {
+          e.printStackTrace();
+       }
+   }
+}
+================================================================================================================
+BDD (Behavior Driven Development)
+BDD (Behavior Driven Development) is a software development approach that builds on Test Driven Development (TDD) by encouraging collaboration between developers, QA, and non-technical or business participants (like product owners) in a software project. The goal of BDD is to improve communication and ensure that all stakeholders have a shared understanding of how the application should behave.
+Key Concepts of BDD:
+Focus on Behavior:
+BDD focuses on the behavior of the application from the perspective of the user or stakeholder, rather than the internal implementation.
+Collaboration:
+Encourages team collaboration to define requirements and scenarios using a shared language.
+Ubiquitous Language:
+Uses a common language that can be understood by all stakeholders (often using plain English or Gherkin syntax).
+Executable Specifications:
+Requirements are written as scenarios that can be executed as automated tests.
+Gherkin Syntax (Given-When-Then):
+BDD often uses Gherkin to define test cases in a human-readable format:
+Feature: Login functionality
+Scenario: Successful login with valid credentials
+   Given the user is on the login page
+   When the user enters valid credentials
+   Then the user should be redirected to the dashboard
+Given: Initial context or setup
+When: Action taken by the user
+Then: Expected outcome
+BDD Tools
+Cucumber (for Java, Ruby, JavaScript, etc.)
+SpecFlow (.NET)
+Behave (Python)
+JBehave (Java)
+Benefits of BDD
+Improved communication between business and technical teams
+Clear, unambiguous requirements
+Living documentation (scenarios describe system behavior in real-time)
+Early detection of bugs and miscommunication
+Test automation built into the requirement
+ 
+ ------------------------------------------------------------------------------------------------
+
+Agile and BDD (Behavior Driven Development)
+Agile and BDD (Behavior Driven Development) relate to each other, and how a BDD framework fits into Agile software development.
+Agile + BDD: How They Work Together
+Agile is a software development methodology:
+Focuses on iterative, incremental delivery.
+Emphasizes collaboration, customer feedback, and responding to change.
+Uses frameworks like Scrum, Kanban, or XP to organize development.
+BDD is a practices-based approach within Agile:
+It fits naturally within Agile because both value collaboration, early feedback, and delivering working software.
+BDD helps Agile teams clarify user stories, define acceptance criteria, and automate tests using business-readable scenarios.
+NOTE: Think of BDD as a tool that helps Agile teams build the right thing, and build it right.
+BDD Framework in Agile
+A BDD framework is a structured way to write and execute tests that describe user behavior in a format that non-technical stakeholders can understand and technical teams can automate.
+Components of a BDD Framework:
+Component
+	
+Description
+
+
+Feature Files
+	
+Written in Gherkin language. Describe the behavior in Given-When-Then format.
+
+
+Step Definitions
+	
+Code that maps each step (Given/When/Then) to actual automation logic.
+
+
+Test Runner
+	
+Executes the scenarios and generates reports.
+
+
+Reports
+	
+Visualize which scenarios passed/failed, often in HTML or JSON format.
+Typical Agile + BDD Workflow:
+User Story Creation (Agile)
+Product owner writes a user story:
+“As a user, I want to log in so I can access my dashboard.”
+
+
+ 
+Define Scenarios (BDD)
+Team collaborates to define behavior:
+Scenario: Successful login
+ Given the user is on the login page
+ When they enter valid credentials
+ Then they should be redirected to the dashboard
+Automate the Scenario (BDD Framework)
+Developers map Gherkin steps to code.
+Run Tests & Deliver (Agile Iteration)
+Automated tests run during CI/CD pipeline.
+Feedback loop ensures the feature behaves as expected.
+ 
+ --------------------------------------------------------------------------------------------------------
+Three Amigos Session
+The Three Amigos Session is a key practice in Agile and Behavior-Driven Development (BDD) that brings together three key roles to define and refine requirements before development begins.
+What is a Three Amigos Session?
+A Three Amigos Session is a collaborative meeting between:
+Role
+	
+Responsibility
+
+
+Developer
+	
+Builds the solution and understands system behavior
+
+
+Tester (QA)
+	
+Ensures testability and defines acceptance criteria
+
+
+Product Owner/Business Analyst
+	
+Defines the business needs and priorities
+The goal is to create a shared understanding of what needs to be built and how it should behave.
+Purpose of the Session
+Clarify user stories
+Identify acceptance criteria
+Prevent miscommunication
+Spot edge cases or missing requirements
+Write BDD scenarios (Given-When-Then)
+When Does It Happen?
+Typically happens during backlog refinement or before development starts in a sprint.
+Output of the Session
+Clear, testable acceptance criteria
+
+Shared understanding of business goals
+
+Drafted BDD scenarios in Gherkin
+
+Actionable user stories ready for development
+
+
+ 
+Example Output (from a Three Amigos Session):
+User Story:
+As a registered user, I want to reset my password so I can access my account if I forget it.
+Scenario: Successful password reset
+Given I am on the "Forgot Password" page
+When I enter my registered email and click on the "Reset Password" button
+Then I should receive a reset link via email
+And I should see a confirmation message on the screen
+Benefits
+Reduces rework by catching misunderstandings early
+Encourages cross-functional collaboration
+Produces better-defined, testable requirements
+Helps teams follow BDD practices more effectively
+
+Best Practices
+Keep it time-boxed (15–45 mins)
+Focus on one story at a time
+Encourage open, respectful communication
+Capture outcomes directly into your user story system (e.g., Jira, Azure DevOps)
+Automate scenarios where possible after the session
+ 
+ 
+------Finished--------
+ 
+ What is Selenium primarily used for?
+a) Unit testing
+b) Performance testing
+c) Automation of web applications 
+d) Manual testing
+1.Selenium is primarily used to automate browser actions like 
+clicking, typing, navigation, etc., across multiple browsers.
+
+Which component of Selenium supports multiple programming languages?
+a) Selenium IDE
+b) Selenium Grid
+c) Selenium WebDriver 
+d) Selenium RC
+2. selenium webdriver supports all programing languages.
+
+Which of the following is NOT a valid WebDriver method?
+a) get()
+b) navigate()
+c) quit()
+d) shutdown()
+3.shutdown() because we don't have this method in webdriver
+
+Which programming languages does Selenium support?
+a) Java
+b) Python
+c) C#
+d) All of the above
+4.all the above as it supports java python and C# 
+
+Which of the following is used to manage multiple browser windows?
+a) getWindowName()
+b) getWindowHandles() 
+c) switchToWindow()
+d) browserHandle()
+5.getWindowsHandles()->because it returns all opened windows
+
+Which command is used to navigate to a web page in WebDriver?
+a) driver.navigate()
+b) driver.run()
+c) driver.load()
+d) driver.get()
+6.driver.get()->because it opens specific url in the browser
+
+Which of the following is the latest version of Selenium architecture?
+a) Selenium 1
+b) Selenium 2
+c) Selenium 3
+d) Selenium 4
+7.selenium 4 because 1 2 3 are older versions
+
+Selenium Grid is used for:
+a) Testing desktop apps
+b) Parallel execution of test cases 
+c) Data-driven testing
+d) Security testing
+8.parallel execution of test cases because it follows server
+client architecuture where multiple clients access server ip to 
+run test in their system simutaneously
+
+What does driver.close() do?
+a) Closes all browser windows
+b) Closes the current browser tab 
+c) Ends the WebDriver session
+d) Minimizes the browser
+9.closes the current browser tab only
+
+What is the default timeout for implicitlyWait() in WebDriver if not set?
+a) 0 seconds 
+b) 10 seconds
+c) 15 seconds
+d) 30 seconds
+10. 0 seconds because the implicit wait doesnot wait until you use explicit wait
+
+Locators in Selenium (10 MCQs)
+Which locator strategy is the fastest in Selenium?
+a) Name
+b) ID 
+c) XPath
+d) CSS Selector
+11. id because of it is unique and can find the element fast
+
+What does the XPath //input[@type='submit'] select?
+a) All buttons
+b) Submit forms
+c) All input elements with type "submit" 
+d) The first input field
+12. all input elements with type="submit" because in xpath input type = submit is given so there can be many with the input type = submit
+
+
+Which of the following is not a valid locator in WebDriver?
+a) By.id
+b) By.linkText
+c) By.tagName
+d) By.text
+13.By.text because webdriver don't have this locator
+
+What is the correct way to find an element using a CSS selector?
+a) By.cssSelector("button.submit") 
+b) By.Css("button.submit")
+c) By.getCss("button.submit")
+d) By.findCss("button.submit")
+14.By.cssSelector("button.submit") because it is the crt syntax of using css selector
+
+To select a link by its text, you use:
+a) By.linkText() 
+b) By.text()
+c) By.href()
+d) By.anchor()
+15.By.linkText() because where we provide hyperlink and text of the link to find link
+
+Which XPath selects all elements with the class 'btn'?
+a) //[@class='btn']
+b) //*[@class='btn'] 
+c) //class='btn'
+d) //div.class='btn'
+Which locator is more reliable in dynamic web pages?
+a) ID
+b) XPath
+c) CSS Selector 
+d) Name
+What is the output of findElements() if no elements are found?
+a) null
+b) Exception
+c) Empty list 
+d) None
+Which XPath syntax is correct for finding an element with text "Login"?
+a) //*[text()='Login'] 
+b) //text='Login'
+c) //[text=Login]
+d) //div[text()='Login']
+Which locator would you use for partial text in a hyperlink?
+a) By.text()
+b) By.partialLinkText() 
+c) By.link()
+d) By.href()
+TestNG (10 MCQs)
+What is TestNG used for?
+a) UI design
+b) Unit and functional testing 
+c) Database testing
+d) Java compilation
+Which annotation is used to define a test method in TestNG?
+a) @Start
+b) @BeforeTest
+c) @Test 
+d) @Method
+Which file is used to configure TestNG tests?
+a) test.xml
+b) config.xml
+c) testng.xml 
+d) runner.xml
+Which annotation runs before any test method in a class?
+a) @BeforeMethod 
+b) @BeforeClass
+c) @BeforeSuite
+d) @BeforeTest
+How do you group tests in TestNG?
+a) @Test(group="smoke")
+b) @Test(groups="smoke") 
+c) @Group("smoke")
+d) @TestGroup("smoke")
+What does priority in TestNG define?
+a) Order of parameter execution
+b) Order of test method execution 
+c) Thread execution
+d) Timeout handling
+Which annotation is executed only once before the entire suite runs?
+a) @BeforeClass
+b) @BeforeTest
+c) @BeforeSuite 
+d) @BeforeMethod
+How can you skip a test in TestNG?
+a) @Test(enabled=false) 
+b) @Test(skip=true)
+c) @SkipTest
+d) Remove @Test annotation
+Which annotation is used to run a method after each test method?
+a) @AfterSuite
+b) @AfterTest
+c) @AfterMethod 
+d) @AfterClass
+TestNG allows parallel execution of tests using:
+a) testng.xml <test> tag
+b) testng.xml <suite> tag 
+c) Java Threads
+d) @Parallel annotation
+
+===============================================================================================================
+Cucumber
+Cucumber is an open-source tool that supports Behavior-Driven Development (BDD) 
+by allowing you to write software tests in plain, human-readable language using Gherkin.
+
+What Does Cucumber Do?
+Cucumber lets you:
+Write test scenarios in natural language using the Gherkin syntax.
+Automatically execute those scenarios by linking them to code (called step definitions).
+Bridge the gap between non-technical stakeholders (e.g., product managers) and developers/testers.
+Core Concepts
+1. Gherkin Language
+A simple syntax used to describe features and test cases in plain English.
+Example:
+Feature: User login
+ Scenario: Successful login
+   Given the user is on the login page
+   When the user enters valid credentials
+   Then they should be redirected to the dashboard
+2. Feature Files
+Text files ending by an extension  .feature that contain Gherkin scenarios.
+3. Step Definitions
+Code that defines what each Gherkin step actually does. This connects the natural-language steps to automation code.
+In Java:
+@Given("the user is on the login page")
+public void userOnLoginPage() {
+   // code to navigate to login page
+}
+
+
+ 
+How Cucumber Works
+You write your scenarios in .feature files.
+You write step definitions in a programming language like Java, JavaScript, or Python.
+You run the tests using a test runner.
+Cucumber maps the steps to code and executes the test.
+Benefits of Cucumber
+Readable: Easy for non-technical people to understand.
+Collaboration: Promotes collaboration between devs, QA, and business owners.
+Living documentation: Feature files describe the current behavior of the system.
+Reusable steps: Step definitions can be reused across scenarios.
+Common Cucumber Language Support
+Java – via Cucumber-JVM
+JavaScript/TypeScript – via Cucumber.js
+Python – via tools like Behave (not officially part of Cucumber)
+----------------------------------------------------------------------------- 
+ Gherkin Language – Overview
+Gherkin is a domain-specific language used in BDD (Behavior Driven Development) for writing test scenarios in a human-readable, structured format.
+It allows teams to define application behavior without specifying how that behavior is implemented, bridging the gap between business and technical teams.
+Key Features of Gherkin
+Readable by everyone – business, QA, developers
+Written in plain English (or other supported languages)
+Uses a structured format: Given, When, Then, etc.
+Supports reusability and modular tests
+Used by tools like Cucumber, SpecFlow, Behave, etc.
+Gherkin Keywords
+Keyword		Purpose
+
+Feature			Describes the high-level feature or functionality
+Scenario		A concrete example of how the system should behave
+Given			The initial context or preconditions
+When			The action or event
+Then			The expected outcome or result
+And / But		Used to chain steps for readability
+Scenario Outline	Used for data-driven tests with multiple examples
+Examples		A table of values used with Scenario Outline
+Background        	used to define a set of common steps that need to be executed before each scenario
+			within a feature file.
+
+ 
+Simple Example: Login Feature
+Feature: User Login
+ Scenario: Successful login
+   Given the user is on the login page
+   When the user enters valid credentials
+   Then they should be redirected to the dashboard
+ 
+ 
+ 
+ Scenario: Login with invalid credentials
+   Given the user is on the login page
+   When the user enters invalid credentials
+   Then they should see an error message
+Example: Using Scenario Outline
+Feature: User Login
+ Scenario Outline: Login with multiple credentials
+   Given the user is on the login page
+   When the user enters "<username>" and "<password>"
+   Then they should see "<result>"
+   Examples:
+     | username | password | result               |
+     | user1    | pass123 | dashboard            |
+     | user2    | wrongpassword    | error message shown  |
+
+Best Practices
+Use concise and clear language
+Focus on behavior, not implementation
+Keep scenarios independent and testable
+Avoid logic or conditionals in scenarios
+Write reusable steps
+Tools That Support Gherkin
+Cucumber (Java, JavaScript, Ruby, etc.)
+SpecFlow (.NET)
+Behave (Python)
+JBehave (Java)
+----------------------
+Feature Files in BDD
+Feature files are the backbone of BDD using Gherkin. 
+They contain executable specifications written in plain language that describe 
+how a system should behave from a user’s perspective.
+
+Important Note:
+These files are used by BDD tools (like Cucumber, SpecFlow, or Behave) to link business-readable scenarios to automated test code.
+
+What is a Feature File?
+A .feature file is a text file written in Gherkin syntax
+Each file focuses on a single feature or functional area
+It includes one or more scenarios that define examples of behavior
+
+Structure of a Feature File
+Feature: Title of the feature
+ Background:
+   Given some common precondition
+ Scenario: First scenario title
+   Given some initial context
+   When an event occurs
+   Then verify the outcome
+ Scenario: Another scenario
+   ...
+Components Explained
+Section					Description
+Feature					High-level description of a feature or requirement
+Background				(Optional) Shared steps that run before each scenario
+Scenario				A single example of feature behavior
+Scenario Outline			For data-driven tests using different inputs
+Examples				A table of input values used with Scenario Outline
+Given / When / Then / And / But		Gherkin steps that define the flow
+ 
+Example Feature File – User Login
+Feature: User Login
+Background:
+  Given the user is on the login page
+ 
+ Scenario: Successful login
+   When the user enters valid credentials
+   Then they should be redirected to the dashboard
+ Scenario: Invalid login
+   When the user enters invalid credentials
+   Then an error message should be shown
+              
+ Scenario Outline: Login attempts with different credentials
+   When the user enters "<username>" and "<password>"
+   Then the system should display "<message>"
+   Examples:
+     | username | password | message              |
+     | user1    | pass123 | dashboard            |
+     | user2    | wrong   | invalid credentials  |
+Naming & Organization Tips
+One feature per file
+
+Save files with a .feature extension (e.g., login.feature)
+
+Use descriptive titles and concise steps
+
+Place feature files in a structured folder (e.g., features/)
+
+Keep language consistent across scenarios
+What Happens After You Write a Feature File?
+Each step (Given, When, Then) is linked to a step definition in code (usually via regular expressions).
+The BDD tool (e.g., Cucumber or Behave) reads the .feature file and executes matching code.
+
+
+ 
+BDD Tool Workflow (Simplified)
+Write .feature file with scenarios
+Implement step definitions in code
+Run feature file using the BDD tool
+View test results
+ 
+------------------------------------
+  
+Parameterization in Gherkin
+Gherkin is the language used for writing Cucumber tests in a Given/When/Then format.
+Parameterization in Gherkin allows you to write reusable and readable test scenarios by replacing hard-coded values with placeholders or variables.
+Parameterize Gherkin scenarios:
+1. Scenario Outline + Examples Table (Classic Parameterization)
+This is the most common way to pass multiple values to a scenario.
+Feature: Login functionality
+  Scenario Outline: User logs-in with valid credentials
+   Given the user navigates to the login page
+   When the user logs in with username "<username>" and password "<password>"
+   Then the login should be "<result>"
+   Examples:
+     | username | password | result  |
+     | user1    | pass1   | success |
+     | user2    | pass2   | failure |
+In your step definitions, you can access those values like this (in Java, for example):
+@When("the user logs in with username {string} and password {string}")
+public void login(String username, String password) {
+   // Code to handle login
+}
+2. Inline Parameters in Steps
+Even without a Scenario Outline, you can use parameters by using quoted strings in your step definitions:
+Scenario: Search for a product
+ Given the user is on the homepage
+ When the user searches for "laptop"
+ Then results for "laptop" should be displayed
+
+
+ 
+Step definition:
+@When("the user searches for {string}")
+public void searchProduct(String productName) {
+   // Perform search code here
+}
+3. Data Tables for Multiple Values (Structured Parameterization)
+Useful when passing structured data like lists or key-value pairs.
+Scenario: Register a new user
+ Given the following user details:
+   | name     | email              | password |
+   | Scott| scott@tiger.com   | secret  |
+Step definition:
+@Given("the following user details:")
+public void userDetails(DataTable table) {
+  List<Map<String, String>> data = table.asMaps(String.class, String.class);
+   // Access with data.get(0).get("name")
+}
+
+When converted by table.asMaps(String.class, String.class), you get:
+
+[
+  {name=Sunil,  email=sunil@test.com,  age=25},
+  {name=Anjali, email=anjali@test.com, age=30}
+]
+
+
+This is a List with 2 Maps.
+
+Each Map has keys "name", "email", "age".
+Summary Table
+Method
+	
+Use Case
+	
+Keyword Used
+
+
+Scenario Outline
+	
+Parameterizing values across iterations
+	
+<placeholder>
+
+
+Inline Parameters
+	
+Passing a string or value in step
+	
+"value" or {}
+
+
+Data Tables
+	
+Structured inputs (like form fields)
+	 
+ 
+              
+ 1. What is the primary purpose of Cucumber in software development?
+A. Writing backend logic
+
+B. Database management
+
+C. Behavior-driven development (BDD)--->cucumber supports (BDD) and helps us to write the test cases in human
+readable lanuage using the Gherkins
+
+D. Code compilation
+-------------------------------------------------------------------------------------
+2. Which language is used to write test scenarios in Cucumber?
+A. Python
+
+B. Ruby
+
+C. Gherkin-It is used to write test scenarios in cucumber because it supports (BDD)
+
+D. JavaScript
+-----------------------------------------------------------------------------------
+3. What keyword is used to define a feature in Gherkin?
+A. Scenario
+
+B. Feature-This keyword is used to define feature because the keyword itself says it as feature
+
+C. Background
+
+D. Given
+------------------------------------------------------------------------------------
+4. Which of the following is not a Gherkin keyword?
+A. Then
+
+B. And
+
+C. Given
+
+D. Expect-This is not part of the Gherkin keyword
+-------------------------------------------------------------------------
+5. In a Gherkin scenario, what does the keyword Given typically represent?
+A. Precondition or context----------the starting stage of the scenario
+
+B. The action to be performed
+
+C. The result of the action
+
+D. An assertion
+----------------------------------------------------------------------------
+6. What is the file extension for a Cucumber feature file?
+A. .txt
+
+B. .feature--this is the extension file
+
+C. .gherkin
+
+D. .step
+-------------------------------------------------------------------------
+7. Which keyword is used to define multiple test steps with the same intent?
+A. But
+
+B. When
+
+C. And
+
+D. Scenario
+-----------------------------------------------------------------------------------
+8. What is the purpose of the Background keyword in a feature file?
+A. To define expected outcomes
+
+B. To set up steps common to all scenarios- Background keyword sets the common steps for the all the scenarios
+
+C. To define optional scenarios
+
+D. To ignore a scenario
+----------------------------------------------------------------------------------------------------
+9. What happens if a step definition is missing for a Gherkin step?
+A. The test is skipped
+
+B. The test fails with an undefined step error-----because to pass all the step definition should present
+
+C. The test passes automatically
+
+D. The test is converted into a feature
+----------------------------------------------------------------------------------------------------
+10. Which of the following tools is most commonly integrated with Cucumber for Java projects?
+A. Mocha
+
+B. PyTest
+
+C. JUnit---only it supports
+
+D. Jasmine
+================================================================================================================ 
+ Cucumber, Hooks and Tags
+In Cucumber, Hooks and Tags help manage test execution flow and configuration.
+They’re essential for setting up, tearing down, and organizing your test scenarios.
+1. Cucumber Hooks
+Hooks allow you to run code before or after each scenario (or step), similar to setup/teardown logic in traditional test frameworks.
+Common Hooks
+@Before: runs before each scenario
+@After: runs after each scenario
+@BeforeStep and @AfterStep: run before/after each step (less common)

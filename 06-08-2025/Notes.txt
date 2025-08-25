@@ -1,0 +1,378 @@
+06/08/2025
+
+ 
+What is JUnit in Java?
+JUnit is a unit testing framework for the Java programming language. It is used to write and run repeatable tests to ensure that individual parts (units) of your program (usually methods in classes) work as expected.
+JUnit is part of the xUnit family of testing frameworks and is one of the most popular testing tools in Java development. It is widely used for Test-Driven Development (TDD).
+Key Features of JUnit:
+Annotations to identify test methods
+Assertions to test expected vs actual results
+Test runners to execute tests
+Integration with build tools (e.g., Maven, Gradle) and IDEs (e.g., IntelliJ, Eclipse)
+Common JUnit Annotations
+Annotation
+	
+Description
+
+
+@Test
+	
+Marks a method as a test method
+
+
+@BeforeEach
+	
+Runs before each test method
+
+
+@AfterEach
+	
+Runs after each test method
+
+
+@BeforeAll
+	
+Runs once before all tests in the class
+
+
+@AfterAll
+	
+Runs once after all tests in the class
+
+
+@Disabled
+	
+Disables a test method
+
+
+@DisplayName
+	
+Sets a custom name for the test method
+Common JUnit Methods (Assertions)
+JUnit provides a set of assertion methods to check values.
+Method
+	
+Purpose
+
+
+assertEquals(expected, actual)
+	
+Checks if two values are equal
+
+
+assertNotEquals(expected, actual)
+	
+Checks if two values are not equal
+
+
+assertTrue(condition)
+	
+Checks if the condition is true
+
+
+assertFalse(condition)
+	
+Checks if the condition is false
+
+
+assertNull(value)
+	
+Checks if the value is null
+
+
+assertNotNull(value)
+	
+Checks if the value is not null
+
+
+assertThrows(Exception.class, () -> ...)
+	
+Expects an exception to be thrown
+
+
+assertAll(...)
+	
+Group multiple assertions
+
+
+fail()
+	
+Forces a test to fail
+Example JUnit Test
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+ 
+public class CalculatorTest {
+ 
+   @Test
+   void testAddition() {
+       int result = 2 + 3;
+       assertEquals(5, result);
+   }
+ 
+   @Test
+   void testIsEven() {
+       boolean isEven = (4 % 2 == 0);
+      assertTrue(isEven);
+   }
+ 
+   @Test
+   void testNullValue() {
+       String str = null;
+       assertNull(str);
+   }
+}
+ 
+ package main.java;
+ 
+public class Calculator {
+
+	public int add(int a,int b) {
+
+		return a+b;
+
+	}
+
+	public int sub(int a,int b) {
+
+		return a-b;
+
+	}
+
+	public int mul(int a,int b) {
+
+		return a*b;
+
+	}
+
+	public int div(int a,int b) {
+
+		return a/b;
+
+	}
+
+}
+
+ 
+package test.java;
+ 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+ 
+import org.junit.Test;
+
+import main.java.Calculator;
+ 
+public class CalculatorTest {
+
+	Calculator calc = new Calculator();
+
+	@Test
+
+	public void testAdd() {
+
+		assertEquals(64,calc.add(60, 4));
+
+	}
+
+	@Test
+
+	public void testSub() {
+
+		assertEquals(20,calc.sub(50, 30));
+
+	}
+
+	@Test
+
+	public void testMul() {
+
+		assertEquals(100,calc.mul(10, 10));
+
+	}
+
+	@Test
+
+	public void testDiv() {
+
+		assertEquals(25,calc.div(100, 4));
+
+	}
+
+}
+
+  
+Case	Suggested Delta
+High-precision math	0.000001 or smaller
+Typical calculations	0.0001
+Approximate comparisons	0.01 or larger
+Percentages or estimations	0.1 or 1.0
+
+class CalculateTest{
+ 
+	@BeforeEach
+
+	public void setUp(){
+
+		Calculator calc = new Calculator();
+
+	}
+
+	public void getConn(){
+
+		// Connection details
+
+	}
+
+	@Test
+
+	public void addTest(){
+
+		assertEquals(10,calc.add(5,5));
+
+	}
+ 
+	@Disabled("This test will remain disabled till the code in the main java file gets fixed") 
+
+	@Test
+
+	public void subTest(){
+
+		assertEquals(0,calc.add(5,5));
+
+	}
+
+	@DisplayName("Test for multiplication");
+
+	@Test
+
+	public void mulTest(){
+
+		assertEquals(25,calc.add(5,5));
+
+	}
+ 
+	@AfterEach
+
+	public void closeConn(){
+
+		con.close();
+
+	}
+ package main.java;
+ 
+ 
+import java.sql.*;
+ 
+public class Assessment {
+ 
+    public Connection con = null;
+ 
+    public void connect() throws SQLException {
+    	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/junit_test", "root", "Wasteoftime@3110");
+    }
+ 
+    public int insertStudent(int id, String name) throws SQLException {
+        PreparedStatement stmt = con.prepareStatement("INSERT INTO student VALUES (?, ?)");
+        stmt.setInt(1, id);
+        stmt.setString(2, name);
+        return stmt.executeUpdate();
+    }
+ 
+    public int updateStudent(int id, String newName) throws SQLException {
+        PreparedStatement stmt = con.prepareStatement("UPDATE student SET name=? WHERE id=?");
+        stmt.setString(1, newName);
+        stmt.setInt(2, id);
+        return stmt.executeUpdate();
+    }
+ 
+    public int deleteStudent(int id) throws SQLException {
+        PreparedStatement stmt = con.prepareStatement("DELETE FROM student WHERE id=?");
+        stmt.setInt(1, id);
+        return stmt.executeUpdate();
+    }
+ 
+    public void closing() throws SQLException {
+        if (con != null) con.close();
+    }
+}
+ 
+package test.java;
+ 
+import main.java.Assessment;
+import org.junit.jupiter.api.*;
+ 
+import static org.junit.jupiter.api.Assertions.*;
+ 
+import java.sql.Connection;
+ 
+public class AssessmentTest {
+ 
+    static Assessment assess;
+    static Connection con;
+ 
+    @BeforeEach
+    public void setUp() throws Exception {
+        assess = new Assessment();
+        assess.connect();
+        System.out.println("Connection created....");
+    }
+ 
+    @Test
+    public void testInsertStudent() throws Exception {
+        int result = assess.insertStudent(1, "Sai");
+        assertEquals(1, result);
+    }
+ 
+    @Test
+    public void testUpdateStudent() throws Exception {
+        assess.insertStudent(2, "Bharath");
+        int result = assess.updateStudent(2, "Divya");
+        assertEquals(1, result);
+    }
+ 
+    @Test
+    public void testDeleteStudent() throws Exception {
+        assess.insertStudent(3, "Meghu");
+        int result = assess.deleteStudent(3);
+        assertEquals(1, result);
+    }
+ 
+    @AfterEach
+    public void closing() throws Exception {
+        assess.closing();
+    }
+}
+ 
+
+
+Calculator.java
+
+==============
+
+public int divide(int a,int b){
+
+	if(b==0) throw new IllegalArgumentException("Cannot divide by zero");
+
+	return a/b;	
+
+}
+ 
+ 
+CalculatorTest.java
+
+===================
+
+@Test
+
+public void testDivide(){
+
+	Exception ex = assertThrows
+
+	(IllegalArgumentException.class,
+
+	   ()->calculator.divide(5,0);
+
+	assertEquals("cannot Divide By Zero",ex.getMessage());
+
+	});	
+ 

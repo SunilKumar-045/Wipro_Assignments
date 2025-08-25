@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-08-18T21:12:00 IST" name="All Test Suite" finished-at="2025-08-18T21:12:00 IST" duration-ms="163">
+    <groups>
+      <group name="sub">
+        <method signature="CalculationTest.testdiv()[pri:0, instance:CalculationTest@353d0772]" name="testdiv" class="CalculationTest"/>
+        <method signature="CalculationTest.testmul()[pri:0, instance:CalculationTest@353d0772]" name="testmul" class="CalculationTest"/>
+      </group> <!-- sub -->
+    </groups>
+    <test started-at="2025-08-18T21:12:00 IST" name="caltest" finished-at="2025-08-18T21:12:00 IST" duration-ms="163">
+      <class name="CalculationTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:CalculationTest@353d0772]" started-at="2025-08-18T21:12:00 IST" name="setup" finished-at="2025-08-18T21:12:00 IST" duration-ms="27" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testdiv()[pri:0, instance:CalculationTest@353d0772]" started-at="2025-08-18T21:12:00 IST" name="testdiv" finished-at="2025-08-18T21:12:00 IST" duration-ms="6" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testdiv -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:CalculationTest@353d0772]" started-at="2025-08-18T21:12:00 IST" name="setup" finished-at="2025-08-18T21:12:00 IST" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testmul()[pri:0, instance:CalculationTest@353d0772]" started-at="2025-08-18T21:12:00 IST" name="testmul" finished-at="2025-08-18T21:12:00 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testmul -->
+      </class> <!-- CalculationTest -->
+    </test> <!-- caltest -->
+  </suite> <!-- All Test Suite -->
+</testng-results>

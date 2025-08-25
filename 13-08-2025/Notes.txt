@@ -1,0 +1,798 @@
+13/0/2025
+
+Selenium vs Other Automation Tools
+-------------------------------------
+Feature / Tool			Type				Platform Support
+	
+Selenium		Web automation tool			Web (Desktop & Mobile Browsers)
+	
+Cypress			Web E2E testing framework		Web (Modern Browsers only)
+		
+Playwright		Cross-browser automation		Web (Desktop & Mobile Browsers)
+	
+Appium			Mobile automation tool			Mobile apps (Android & iOS)
+	
+TestCafe		Web automation framework		Web (Desktop Browsers)
+
+
+
+-----------------
+
+Languages Supported
+	
+Java, Python, C#, Ruby, JS, etc.
+	
+JavaScript, TypeScript
+	
+JS, Python, Java, C#
+	
+Java, Python, JS, Ruby, etc.
+	
+JavaScript, TypeScript
+
+
+Cross-Browser Testing
+	
+Yes
+	
+Limited (Chromium-based only)
+	
+Yes (Chromium, Firefox, WebKit)
+	
+No (Mobile only)
+	
+Yes (but less reliable)
+
+
+Test Speed
+	
+Moderate
+	
+Fast (runs inside browser)
+	
+Fast + parallel support
+	
+Slower (depends on emulator/device)
+	
+Moderate
+
+
+Setup Complexity
+	
+Medium (WebDriver setup needed)
+	
+Simple (built-in test runner)
+	
+Medium
+	
+Medium-High
+	
+Easy
+
+
+Mobile Testing
+	
+Limited (via 3rd party)
+	
+No
+	
+Partial (browser only)
+	
+Yes (native, hybrid, web apps)
+	
+No
+
+
+Community Support
+	
+Huge
+	
+Growing
+	
+Growing (by Microsoft)
+	
+Large
+	
+Moderate
+
+
+Headless Testing
+	
+Yes
+	
+Yes
+	
+Yes
+	
+No (emulator/device required)
+	
+Yes
+	
+ 
+When to Use Each Tool
+Scenario
+	
+Best Tool
+
+
+Automating web app across browsers
+	
+Selenium or Playwright
+
+
+Fast testing for JS frameworks (React, Angular, Vue)
+	
+Cypress
+
+
+Full mobile app testing (iOS/Android)
+	
+Appium
+
+
+Record & playback simple tests
+	
+Selenium IDE
+
+
+Quick setup and JS-only team
+	
+TestCafe
+
+
+Need modern browser automation + API control
+	
+Playwright
+                                                           ------   
+==========================================================================================================================
+
+Introduction to Selenium WebDriver and its architecture,
+What is Selenium WebDriver?
+Selenium WebDriver is a tool for automating web application testing. It allows you to control browsers programmatically, simulating real user interactions like:
+Clicking buttons
+Typing text
+Navigating between pages
+Extracting content
+
+Key Features:
+Supports multiple programming languages: Java, Python, C#, Ruby, JavaScript
+Works with major browsers: Chrome, Firefox, Microsoft Edge, Safari, etc.
+Enables cross-browser testing
+Can be integrated with testing frameworks like TestNG, JUnit, PyTest
+Used in CI/CD pipelines with tools like Jenkins, GitHub Actions
+
+Selenium WebDriver Architecture
+Selenium WebDriver follows a client-server architecture, especially from Selenium 4 onward (which uses the W3C WebDriver standard).
+ 
+Key Components:
+1. Test Script (Client Code)
+Written in any supported programming language like Java,Python
+Uses WebDriver APIs to send commands (e.g., driver.get(), driver.find_element())
+
+2. WebDriver API (Client Library)
+Library that converts high-level commands into HTTP requests
+Example: webdriver.Chrome() initializes a session with Chrome browser
+
+3. JSON Wire Protocol / W3C WebDriver Protocol
+Protocol used for communication between client and browser driver
+Selenium 4 uses the W3C protocol for better standardization
+
+4. Browser Driver (e.g., chromedriver, geckodriver)
+Acts as a bridge between Selenium commands and the actual browser
+Accepts commands via HTTP, executes them in the browser, and returns responses
+Different browser = different driver:
+Chrome → chromedriver
+Firefox → geckodriver
+Edge → msedgedriver
+
+5. Browser
+The actual web browser that the automation runs in
+Executes the actions like clicking, typing, etc.
+Flow Diagram (Textual)
+[Test Script] 
+    ↓
+[WebDriver Client Library (API)]
+    ↓
+[W3C Protocol via HTTP]
+    ↓
+[Browser Driver (e.g., chromedriver)]
+    ↓
+[Browser (e.g., Chrome)]
+    ↑
+[Response back through the same path]
+ 
+ 
+                                                           ------------
+ Selenium Flavours
+Selenium comes in several "flavours" or components, each serving different purposes depending on your testing or automation needs.
+Main Flavours:
+1. Selenium WebDriver
+Purpose: Automates browser actions like clicking, typing, navigation, etc.
+Languages Supported: Java, Python, C#, Ruby, JavaScript, Kotlin
+Browsers Supported: Chrome, Firefox, Safari, Edge, Opera
+Usage: Most widely used for UI testing of web applications.
+
+2. Selenium IDE (Integrated Development Environment)
+Purpose: Record-and-playback tool for quickly creating test cases without coding.
+Platform: Browser extension (Chrome and Firefox)
+Best For: Beginners, quick prototyping
+Pros: No programming skills needed
+Limitations: Limited flexibility and maintainability for complex tests
+
+3. Selenium Grid
+Purpose: Run tests on multiple machines and browsers in parallel
+Use Case: Cross-browser, parallel, or distributed testing
+How it Works: Consists of a Hub (central point) and multiple Nodes (test environments)
+Ideal For: Large test suites, CI/CD pipelines
+
+4. Selenium Manager (New in Selenium 4.6+)
+Purpose: Automatically manages browser drivers for you
+Use Case: Simplifies WebDriver setup (no need to manually download chromedriver, etc.)
+Example: You can just write webdriver.Chrome() and it will work without setting paths
+ 
+========================================================================================================================= 
+What is TestNG Framework?
+TestNG is an open-source test automation framework for Java. It is developed on the same lines as JUnit and NUnit. A few advanced and useful features provided by TestNG make it a more robust framework than its peers. The NG in TestNG stands for ‘Next Generation.’
+Created by Cedric Beust, it is used more frequently by developers and testers in test case creation owing to its ease of using multiple annotations, grouping, dependence, prioritization, and parametrization features.
+What is TestNG in Selenium?
+TestNG provides advanced features such as annotations, data-driven testing, test sequencing, and parallel testing to help you organize and execute your Selenium tests more efficiently and effectively.
+Some of the benefits of using TestNG in Selenium:
+Group test cases into logical units, making managing and maintaining your test suite easier.
+Run tests in parallel, significantly reducing the time it takes to execute your test suite.
+TestNG provides a wide range of annotations that you can use to customize your tests, such as @BeforeSuite, @AfterSuite, @BeforeTest, @AfterTest, @BeforeMethod, and @AfterMethod.
+It supports data-driven testing, allowing you to run the same test case with multiple test data sets.
+Better reporting and logging features than other testing frameworks make identifying and debugging issues in your tests easier.
+Hence TestNG framework in Selenium can improve the efficiency and effectiveness of your test automation efforts.
+Advantages of TestNG over JUnit
+TestNG is a more flexible, powerful, and feature-rich testing framework than JUnit, making it a better choice for complex and large test automation projects.
+Here are the advantages of TestNG over JUnit:
+Flexible test configuration and execution options. For example, TestNG allows you to configure tests to run in parallel, run tests in a specific order, and run tests with different data sets.
+It supports powerful features such as test grouping, prioritization, and test dependencies, which are unavailable in JUnit.
+In TestNG, you can use the DataProvider annotation to pass data to a test method, while JUnit requires you to write custom code to handle data-driven testing.
+TestNG generates HTML reports with detailed information about test execution, including test results, failures, and errors. JUnit, on the other hand, generates simple text-based reports.
+Supports more advanced annotations such as @BeforeSuite, @AfterSuite, @BeforeTest, @AfterTest, @BeforeGroups, @AfterGroups, @BeforeClass, and @AfterClass, which allow you to configure test execution at different levels of granularity.
+
+
+ 
+Why use TestNG with Selenium?
+One of the drawbacks of Selenium is that it does not have a proper format for the test results. By using the TestNG framework in Selenium, you can:
+Generate the report in a proper format.
+Include the number of test cases run; tests passed, failed, and skipped in the report.
+Group test cases by converting them to testing.xml
+Use invocation count and execute multiple tests without using loops
+Perform cross browser testing
+Easily understand annotations
+ 
+Installing and configuring Selenium in Eclipse for Java involves several steps:
+1. Prerequisites:
+Install Java Development Kit (JDK): Ensure you have a compatible JDK installed on your system.
+Install Eclipse IDE for Java Developers: Download and install the appropriate version of Eclipse.
+
+2. Download Selenium WebDriver Libraries:
+Download Selenium Client & WebDriver Language Bindings for Java:
+Visit the official Selenium website (Selenium.dev) and download the latest stable version of the Selenium Java client.
+This will be a ZIP file.
+Download Browser Driver:
+Download the specific WebDriver for the browser you intend to automate (e.g., ChromeDriver for Chrome, GeckoDriver for Firefox). Place this executable in a known location or add its directory to your system's PATH variable.
+
+3. Configure Selenium in Eclipse:
+Create a New Java Project:
+Open Eclipse.
+Go to File > New > Java Project.
+Give your project a name and click Finish.
+Add Selenium JARs to the Project's Build Path:
+Right-click on your newly created project in the Package Explorer.
+Select Build Path > Configure Build Path.
+In the Java Build Path window, go to the Libraries tab.
+Click Add External JARs....
+Navigate to the location where you extracted the Selenium Java client ZIP file.
+Select the main selenium-java-x.x.x.jar file and all the JAR files within the libs folder.
+Click Open, then Apply and Close.
+
+4. Create and Run a Basic Selenium Test:
+Create a New Class:
+Right-click on the src folder within your project.
+Select New > Class.
+Give it a name (e.g., FirstSeleniumTest) and include a main method if desired.
+
+
+ 
+
+Run the Test: Right-click on your class file and select Run As > Java Application.
+This process will set up your Eclipse environment to begin developing and executing Selenium automation scripts in Java.
+ 
+=================================================================================================================------------------------------------------- 
+Write Your Selenium Code:
+   import org.openqa.selenium.WebDriver;
+
+    import org.openqa.selenium.chrome.ChromeDriver;
+
+    public class FirstSeleniumTest {
+
+        public static void main(String[] args) {
+// Set the path to your browser driver executable
+
+            System.setProperty("webdriver.chrome.driver", "path/to/chromedriver.exe"); 
+
+            WebDriver driver = new ChromeDriver(); // Initialize the browser
+
+            driver.get("https://www.google.com"); // Navigate to a website
+
+            System.out.println("Title: " + driver.getTitle()); // Print the page title
+
+            driver.quit(); // Close the browser
+
+        }
+
+    }
+Run the Test: Right-click on your class file and select Run As > Java Application.
+This process will set up your Eclipse environment to begin developing and executing Selenium automation scripts in Java.
+ 
+---------------------------------------------------------------------------------------------------------------------------
+Common Website Elements and Their id / name Attributes
+Website	Element
+	
+Locator
+	
+Example Selenium Code
+
+
+Google
+	
+Search input
+	
+name="q"
+	
+driver.find_element(By.NAME, "q")
+
+
+YouTube
+	
+Search input
+	
+name="search_query"
+	
+driver.find_element(By.NAME, "search_query")
+
+ 	
+Search button
+	
+id="search-icon-legacy"
+	
+driver.find_element(By.ID, "search-icon-legacy")
+
+
+Facebook
+	
+Email/phone input
+	
+id="email"
+	
+driver.find_element(By.ID, "email")
+
+ 	
+Password input
+	
+id="pass"
+	
+driver.find_element(By.ID, "pass")
+
+ 	
+Login button
+	
+name="login"
+	
+driver.find_element(By.NAME, "login")
+
+
+Twitter
+	
+Username/email
+	
+name="text" (on login page)
+	
+driver.find_element(By.NAME, "text")
+
+ 	
+Password input
+	
+name="password"
+	
+driver.find_element(By.NAME, "password")
+
+
+Gmail
+	
+Email input
+	
+id="identifierId"
+	
+driver.find_element(By.ID, "identifierId")
+
+ 	
+Password input
+	
+name="Passwd"
+	
+driver.find_element(By.NAME, "Passwd")
+
+
+Amazon
+	
+Search input
+	
+id="twotabsearchtextbox"
+	
+driver.find_element(By.ID, "twotabsearchtextbox")
+
+ 	
+Search button
+	
+id="nav-search-submit-button"
+	
+driver.find_element(By.ID, "nav-search-submit-button")
+
+
+Instagram
+	
+Username input
+	
+name="username"
+	
+driver.find_element(By.NAME, "username")
+
+ 	
+Password input
+	
+name="password"
+	
+driver.find_element(By.NAME, "password")
+
+ 	
+Login button
+	
+type="submit" (use CSS/XPath)
+	
+driver.find_element(By.CSS_SELECTOR, "button[type='submit']")
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+public class ElementNames{
+	public static void main(String[] args) {
+		WebDriver driver = null;
+		try {
+			// Launch Chrome browser
+			driver = new ChromeDriver();
+			// Go to Google
+			driver.get("https://www.youtube.com");
+			// Find the search box and type a query
+			WebElement searchBox = driver.findElement(By.name("search_query"));
+			searchBox.sendKeys("iphone 16 pro max");
+			// Submit the search form
+			searchBox.submit();
+			WebElement searchButton = driver.findElement(By.cssSelector("search-icon-legacy")); 
+			searchButton.click();
+			// Wait a bit (basic pause, not best practice)
+			//Thread.sleep(2000); // Wait 2 seconds for results to load
+		} catch (Exception e) {
+			// e.printStackTrace();
+		}
+		// Print the title of the results page
+		System.out.println("Search Results Page Title: " + driver.getTitle());
+		// Close the browser
+		driver.quit();
+	}
+}
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+ 
+import java.util.List;
+ 
+public class ListALlAttributes {
+    public static void main(String[] args) {
+ 
+        // Set up WebDriver
+        //System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        WebDriver driver = new ChromeDriver();
+ 
+        try {
+             // 1. Open target website
+            driver.get("https://www.normalwebsite.com");
+            driver.manage().window().maximize();
+ 
+            // 2. Extract all links
+            List<WebElement> allLinks = driver.findElements(By.tagName("a"));
+            System.out.println("Links:");
+            for (WebElement link : allLinks) {
+                System.out.println(link.getText() + " -> " + link.getAttribute("href"));
+            }
+ 
+            // 3. Extract all input fields
+            List<WebElement> allInputs = driver.findElements(By.tagName("input"));
+            System.out.println("Input Fields:");
+            for (WebElement input : allInputs) {
+                System.out.println("Type: " + input.getAttribute("type") + " | Placeholder: " + input.getAttribute("placeholder"));
+            }
+ 
+            // 4. Extract all buttons
+            List<WebElement> allButtons = driver.findElements(By.tagName("button"));
+            System.out.println("Buttons:");
+            for (WebElement button : allButtons) {
+                System.out.println("Text: " + button.getText());
+            }
+ 
+            // 5. Extract all headings (h1–h6)
+            System.out.println("Headings:");
+            for (int i = 1; i <= 6; i++) {
+                List<WebElement> headings = driver.findElements(By.tagName("h" + i));
+                for (WebElement heading : headings) {
+                    System.out.println("H" + i + ": " + heading.getText());
+                }
+            }
+ 
+            // 6. Extract all paragraphs
+            List<WebElement> allParagraphs = driver.findElements(By.tagName("p"));
+            System.out.println("Paragraphs:");
+            for (WebElement para : allParagraphs) {
+                System.out.println(para.getText());
+            }
+ 
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // 7. Close browser
+            driver.quit();
+        }
+    }
+}
+
+MCQ – Software Testing
+Which of the following is not a level of software testing?
+A) Unit Testing
+B) Integration Testing
+C) Execution Testing
+D) System Testing
+
+Which of the following is the primary goal of software testing?
+A) Debugging the code
+B) Ensure system runs faster
+C) Identify errors
+D) Improve code readability
+
+Verification is concerned with:
+A) Executing the software
+B) Validating the end product
+C) Evaluating intermediate work products
+D) All of the above
+
+Which of these is a static testing technique?
+A) System testing
+B) Unit testing
+C) Walkthrough
+D) Regression testing
+
+Which is not a part of the software testing life cycle (STLC)?
+A) Requirement analysis
+B) Test case design
+C) Coding
+D) Test closure
+
+Alpha testing is typically done by:
+A) End users
+B) Developers
+C) QA team at the developer’s site
+D) Test automation engineers
+
+Beta testing is performed:
+A) At the developer’s site
+B) In the lab environment
+C) At the end-user's site
+D) By the testing team
+
+ 
+ 
+Which type of testing is concerned with the internal logic of the software?
+A) Black-box testing
+B) White-box testing
+C) Beta testing
+D) Usability testing
+
+Boundary value analysis belongs to which testing technique?
+A) Structural
+B) Regression
+C) Black-box
+D) Integration
+
+Which of the following best defines “test case”?
+A) A debugging tool
+B) A set of inputs and expected results
+C) An error log
+D) A code snippet
+
+Which level of testing is first in the V-model?
+A) System testing
+B) Unit testing
+C) Integration testing
+D) Acceptance testing
+
+Integration testing aims to test:
+A) Individual units of code
+B) Interactions between modules
+C) GUI performance
+D) Final product
+
+System testing is primarily performed to verify:
+A) Code syntax
+B) Application modules
+C) Overall system functionality
+D) Developer tools
+
+Acceptance testing is usually performed by:
+A) QA team
+B) Developers
+C) End users or clients
+D) Business analysts
+
+Which testing level comes after integration testing?
+A) Unit testing
+B) Regression testing
+C) System testing
+D) Sanity testing
+
+Which type of testing checks the correctness of data flow between modules?
+A) Unit testing
+B) System testing
+C) Integration testing
+D) Functional testing
+
+Regression testing is best applied after:
+A) Installation
+B) Bug fixes or new features added
+C) Acceptance testing
+D) Beta release
+
+Which testing level verifies that all components work together as expected?
+A) Unit
+B) Integration
+C) System
+D) Acceptance
+
+Unit testing is often performed using:
+A) User interfaces
+B) Test harness
+C) Integration servers
+D) Production data
+
+Which test ensures the product meets the business needs?
+A) Smoke testing
+B) Load testing
+C) Acceptance testing
+D) Performance testing
+
+Equivalence partitioning divides inputs into:
+A) Input ranges
+B) Equal-sized parts
+C) Valid and invalid classes
+D) Repetitive loops
+
+White-box testing focuses on:
+A) User interface
+B) Internal logic
+C) Requirements
+D) Code coverage only
+
+
+
+ 
+Which is not a black-box testing technique?
+A) Decision table
+B) Equivalence partitioning
+C) Statement coverage
+D) Boundary value analysis
+
+Code coverage is used in:
+A) Black-box testing
+B) Grey-box testing
+C) White-box testing
+D) Acceptance testing
+
+Which technique tests decision points in the code?
+A) Path testing
+B) Decision coverage
+C) Statement coverage
+D) Loop testing
+
+Error guessing is based on:
+A) Test plans
+B) Developer logic
+C) Tester’s experience
+D) Flow charts
+
+Path testing ensures:
+A) Maximum execution speed
+B) Each line of code is executed
+C) All possible paths in code are tested
+D) User inputs are validated
+
+Which technique identifies values at the boundaries of input?
+A) Equivalence class
+B) Decision table
+C) Boundary value analysis
+D) Branch coverage
+
+Gray-box testing is performed with:
+A) Full internal knowledge
+B) No internal knowledge
+C) Partial internal knowledge
+D) Only test cases
+
+Statement coverage helps to identify:
+A) How many decisions were made
+B) Whether all statements have been executed
+C) All functions tested
+D) All test cases passed
+
+Which type of testing checks if new changes have not broken existing functionality?
+A) Unit testing
+B) Regression testing
+C) Load testing
+D) Volume testing
+
+Smoke testing is also known as:
+A) Build verification testing
+B) System testing
+C) Unit testing
+D) Functional testing
+
+Sanity testing is done to:
+A) Test full functionality
+B) Check basic functionality after minor changes
+C) Test UI responsiveness
+D) Confirm installation
+
+Performance testing checks:
+A) Code quality
+B) User-friendliness
+C) Speed and scalability
+D) Test coverage
+
+Usability testing focuses on:
+A) Functionality
+B) Load capacity
+C) End-user experience
+D) Security flaws
+
+Which type of testing simulates multiple users?
+A) Load testing
+B) Unit testing
+C) Smoke testing
+D) Functional testing
+
+Security testing checks for:
+A) Database efficiency
+B) Authentication and data protection
+C) UI bugs
+D) Response time
+
+Compatibility testing checks if software runs on:
+A) Developer system
+B) Target environments like browsers and OS
+C) Virtual machines
+D) Cloud platforms only
+
+Which of the following is a non-functional testing type?
+A) Regression testing
+B) Sanity testing
+C) Performance testing
+D) Integration testing
+
+Which testing type verifies data confidentiality and integrity?
+A) Unit testing
+B) System testing
+C) Security testing
+D) Acceptance testing

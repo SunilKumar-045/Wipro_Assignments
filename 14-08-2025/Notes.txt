@@ -1,0 +1,435 @@
+14/08/2025
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.List;
+
+public class ListAttributesCustomHTML {
+    public static void main(String[] args){
+
+        WebDriver driver = new ChromeDriver();
+
+        try{
+            // open target website
+            driver.get("file:///C:/Users/namde/OneDrive/Desktop/Wipro%20Training%20Techademy/Day%2022%2014082025/Employees.html");
+            driver.manage().window().maximize();
+
+            Thread.sleep(30000);
+
+            // extract all links from the website
+            List<WebElement> allLinks = driver.findElements(By.tagName("a"));
+            System.out.println("Links: \n");
+            for( WebElement links: allLinks){
+                System.out.println(links.getText()+" -> "+ links.getAttribute("href"));
+            }
+
+            // extract all inputs from the website
+            List<WebElement> allInputs = driver.findElements(By.tagName("input"));
+            System.out.println("\nInputs: \n");
+            for( WebElement input: allInputs){
+                System.out.println("Type: "+input.getAttribute("type")+" | Placeholder: "+input.getAttribute("placeholder"));
+            }
+
+            // extract all buttons
+            List<WebElement> allButtons = driver.findElements(By.tagName("button"));
+            System.out.println("\nButtons: \n");
+            for( WebElement button: allButtons){
+                System.out.println("Text: "+button.getText());
+            }
+
+            // extract all headings
+            System.out.println("\nHeadings: \n");
+            for( int i=1; i<=6; i++){
+                List<WebElement> allHeadings = driver.findElements(By.tagName("h"+ i));
+                for( WebElement heading: allHeadings){
+                    System.out.println("H"+i+" : "+heading.getText());
+                }
+            }
+
+            // extract all paragraphs
+            List<WebElement> allParagraphs = driver.findElements(By.tagName("p"));
+            System.out.println("\nParagraphs: \n");
+            for (WebElement para : allParagraphs) {
+                System.out.println(para.getText());
+            }
+
+            // display employee id
+            WebElement empIDElement = driver.findElement(By.name("empId"));
+            String eId_value = empIDElement.getAttribute("value");
+            System.out.println("Employee Id: " + eId_value);
+
+            // display employee name
+            WebElement empNameElement = driver.findElement(By.name("empName"));
+            String ename_value = empNameElement.getAttribute("value");
+            System.out.println("Employee Name: " + ename_value);
+
+            // display employee email
+            WebElement empMailElement = driver.findElement(By.name("email"));
+            String email_value = empMailElement.getAttribute("value");
+            System.out.println("Employee Email: " + email_value);
+
+            // display employee phone number
+            WebElement empPhoneElement = driver.findElement(By.name("mobile"));
+            String ephone_value = empPhoneElement.getAttribute("value");
+            System.out.println("Employee Phone: " + ephone_value);
+
+        }catch( Exception e){
+            e.getMessage();
+
+        }finally {
+            driver.quit();
+        }
+
+    }
+}
+
+Page Object Model (POM)
+The Page Object Model (POM) is a design pattern in Selenium that helps you write clean, maintainable, and scalable test automation code by separating the page structure (locators) from the test logic.
+Page Object Model (POM)
+
+👉 Page Object Model (POM) is a design pattern in Selenium (or any test automation) where:
+
+Each web page (or part of a page) in your application is represented as a class.
+
+The elements on that page are stored as variables (locators).
+
+The actions you can perform on that page are stored as methods.
+
+This makes test code clean, reusable, and easy to maintain.
+Why Use POM?
+Benefit		Description		Reusability
+	
+Common elements and methods are centralized.
+
+
+Maintainability
+	
+Changes in the UI affect only one place.
+
+
+Readability
+	
+Test code looks clean and readable.
+
+
+Separation of concerns
+	
+Test logic is separate from page structure.
+Basic Structure of POM
+1. Page Class (for each webpage)
+Contains:
+Web elements (locators)
+Actions/methods (like fillForm, clickSubmit, etc.)
+2. Test Class
+Contains:
+Test logic (e.g., fill the form and assert something)
+Example: POM for Employee Form
+Project Folder Structure (Example)
+src/
+├── pages/
+│   └── EmployeeFormPage.java
+├── tests/
+│   └── EmployeeFormTest.java
+ 
+ 
+ 
+ 
+ 
+Step 1: Create EmployeeFormPage.java
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+ 
+public class EmployeeFormPage {
+   WebDriver driver;
+ 
+   // Constructor
+   public EmployeeFormPage(WebDriver driver) {
+       this.driver = driver;
+   }
+ 
+   // Locators
+   By empIdField = By.id("empid");
+   By empNameField = By.id("empname");
+   By dobField = By.id("dob");
+   By addressField = By.id("address");
+   By contactNoField = By.id("contactno");
+   By emailField = By.id("email");
+   By submitButton = By.cssSelector("input[type='submit']");
+   By messageText = By.id("message");
+ 
+   // Actions
+   public void enterEmpId(String empId) {
+      driver.findElement(empIdField).sendKeys(empId);
+   }
+ 
+   public void enterEmpName(String empName) {
+      driver.findElement(empNameField).sendKeys(empName);
+   }
+ 
+   public void enterDOB(String dob) {
+      driver.findElement(dobField).sendKeys(dob);
+   }
+ 
+   public void enterAddress(String address) {
+      driver.findElement(addressField).sendKeys(address);
+   }
+ 
+   public void enterContactNo(String contactNo) {
+      driver.findElement(contactNoField).sendKeys(contactNo);
+   }
+ 
+   public void enterEmail(String email) {
+      driver.findElement(emailField).sendKeys(email);
+   }
+ 
+   public void clickSubmit() {
+      driver.findElement(submitButton).click();
+   }
+ 
+   public String getConfirmationMessage() {
+       WebElement message = driver.findElement(messageText);
+       return message.isDisplayed() ? message.getText() : null;
+   }
+}
+Step 2: Create Test Class EmployeeFormTest.java
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+ 
+public class EmployeeFormTest {
+   public static void main(String[] args) {
+       //System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+       WebDriver driver = new ChromeDriver();
+ 
+      
+try {
+          driver.get("file:///path/to/employee_form.html");
+ 
+           // Step 1: Initialize the Page Object
+           EmployeeFormPage formPage = new EmployeeFormPage(driver);
+ 
+           // Step 2: Use page methods
+           formPage.enterEmpId("101");
+          formPage.enterEmpName("Harry");
+          formPage.enterDOB("2001-01-11");
+          formPage.enterAddress("123 ABC");
+          formPage.enterContactNo("7777777777");
+          formPage.enterEmail("harry@example.com");
+          formPage.clickSubmit();
+ 
+           // Wait and validate
+           Thread.sleep(1000);
+           String message = formPage.getConfirmationMessage();
+           if (message != null) {
+              System.out.println("Success: " + message);
+           } else {
+              System.out.println("Submission failed or message not shown.");
+           }
+ 
+       } catch (Exception e) {
+          e.printStackTrace();
+       } finally {
+          driver.quit();
+       }
+   }
+}
+ 
+ //Alert
+     // Trigger the alert
+        driver.findElement(By.id("triggerAlert")).click();
+ 
+        // Switch to alert
+        Alert alert = driver.switchTo().alert();
+ 
+        // Read alert text
+        String alertMessage = alert.getText();
+        System.out.println("Alert message: " + alertMessage);
+ 
+        // Accept the alert
+        alert.accept();
+
+//Confirm and Prompt
+
+        // Click the button that triggers the confirm box
+
+        driver.findElement(By.id("confirmButton")).click(); // Replace with actual ID
+ 
+        // Wait for the alert
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.alertIsPresent());
+ 
+        // Switch to alert (confirm box)
+
+        Alert confirm = driver.switchTo().alert();
+ 
+        // Get confirm message
+
+        System.out.println("Confirm says: " + confirm.getText());
+ 
+        // To accept (click OK)
+
+        confirm.accept();
+ 
+        // OR to cancel (click Cancel)
+
+        // confirm.dismiss();
+ 
+        // driver.quit(); // Optional		
+ 
+
+======================================================================================================================
+
+Keyword-Driven Framework
+The Keyword-Driven Framework in Selenium is a type of test automation framework that separates test logic 
+from test data by using keywords (human-readable action words like click, input, verify, etc.) 
+defined in an external file (like Excel, CSV, or JSON). This allows non-programmers to 
+write tests by using these keywords.
+
+Keyword-Driven Framework: Overview
+Component			Purpose
+Driver Script			Reads test data and keywords, controls test execution
+Keyword Functions		Java methods that implement actions (e.g., click, type, open browser)
+Test Data File			Stores test steps in keyword format (Excel, CSV, JSON, etc.)
+ 
+Example: Build a Basic Keyword-Driven Framework in Java + Selenium
+Let’s use Excel to define test steps and Apache POI to read Excel in Java.
+
+Step-by-Step Implementation
+Step 1: Excel Test File
+Create an Excel file TestSteps.xlsx with this structure:
+	
+Keyword	Locator Type	Locator Value	Data
+openBrowser			chrome
+openURL			E:\\\\Html\\\\index.html
+inputText	id		empId	45
+inputText	id		empName	Sunil
+inputText	id		dob	07-06-2003
+inputText	id		address	Hyderabad
+inputText	id		mobile	8186963985
+inputText	id		email	sunil@gmail.com
+Click		cssSelector	input[type='submit']	
+closeBrowser			
+
+	 	 	 
+Step 2: Maven Dependencies (pom.xml)
+<dependencies>
+ <dependency>
+  <groupId>org.seleniumhq.selenium</groupId>
+  <artifactId>selenium-java</artifactId>
+  <version>4.20.0</version>
+ </dependency>
+ <dependency>
+  <groupId>org.apache.poi</groupId>
+  <artifactId>poi-ooxml</artifactId>
+  <version>5.2.3</version>
+ </dependency>
+</dependencies>
+Step 3: Java Code – KeywordDrivenTest.java
+//package com.example.myexcelsele;
+ 
+package com.java.excelselenium;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+ 
+import java.io.File;
+import java.io.FileInputStream;
+ 
+public class App {
+	static WebDriver driver;
+ 
+	public static void main(String[] args) {
+		try {
+			FileInputStream file = new FileInputStream(new File("TestSteps.xlsx"));
+			Workbook workbook = new XSSFWorkbook(file);
+			Sheet sheet = workbook.getSheetAt(0);
+ 
+			for (Row row : sheet) {
+				if (row.getRowNum() == 0)
+					continue; // skip header
+ 
+				String keyword = row.getCell(1).getStringCellValue();
+				String locatorType = getCellValue(row.getCell(2));
+				String locatorValue = getCellValue(row.getCell(3));
+				String data = getCellValue(row.getCell(4));
+ 
+				executeStep(keyword, locatorType, locatorValue, data);
+			}
+ 
+			workbook.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+ 
+	public static String getCellValue(Cell cell) {
+		if (cell == null)
+			return "";
+		switch (cell.getCellType()) {
+		case STRING:
+			return cell.getStringCellValue();
+		case NUMERIC:
+			return String.valueOf((int) cell.getNumericCellValue());
+		default:
+			return "";
+		}
+	}
+ 
+	public static void executeStep(String keyword, String locatorType, String locatorValue, String data) {
+		switch (keyword.toLowerCase()) {
+		case "openbrowser":
+			// System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+			driver = new ChromeDriver();
+			break;
+ 
+		case "openurl":
+			driver.get(data);
+			break;
+ 
+		case "inputtext":
+			getElement(locatorType, locatorValue).sendKeys(data);
+			break;
+ 
+		case "click":
+			getElement(locatorType, locatorValue).click();
+			break;
+ 
+		case "closebrowser":
+			driver.quit();
+			break;
+ 
+		default:
+			System.out.println("Unknown keyword: " + keyword);
+		}
+	}
+ 
+	public static WebElement getElement(String type, String value) {
+		switch (type.toLowerCase()) {
+		case "id":
+			return driver.findElement(By.id(value));
+		case "name":
+			return driver.findElement(By.name(value));
+		case "cssselector":
+			return driver.findElement(By.cssSelector(value));
+		case "xpath":
+			return driver.findElement(By.xpath(value));
+		default:
+			throw new IllegalArgumentException("Invalid locator type: " + type);
+		}
+	}
+}
+Output (Console)
+When you run KeywordDrivenTest.java, it will:
+Open Chrome
+Navigate to the employee form
+Fill the form using the Excel instructions
+Submit it
+Close the browser
+ 
+ 

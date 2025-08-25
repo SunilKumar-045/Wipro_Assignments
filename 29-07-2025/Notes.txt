@@ -1,0 +1,2372 @@
+29/07/2025
+
+Precedence of Operators
+Precedence Level
+	
+Operators
+	
+Associativity
+	
+Description
+
+
+1 (highest)
+	
+[], (), .
+	
+Left to Right
+	
+Array access, method call, member access
+
+
+2
+	
+++, -- (postfix)
+	
+Left to Right
+	
+Post-increment/decrement
+
+
+3
+	
+++, --, +, -, ~, !
+	
+Right to Left
+	
+Unary plus/minus, bitwise NOT, logical NOT
+
+
+4
+	
+*, /, %
+	
+Left to Right
+	
+Multiplication, division, modulo
+
+
+5
+	
++, -
+	
+Left to Right
+	
+Addition, subtraction (also string concat)
+
+
+6
+	
+<<, >>, >>>
+	
+Left to Right
+	
+Bitwise shift
+
+
+7
+	
+<, <=, >, >=, instanceof
+	
+Left to Right
+	
+Comparison, type comparison
+
+
+8
+	
+==, !=
+	
+Left to Right
+	
+Equality
+
+
+9
+	
+&
+	
+Left to Right
+	
+Bitwise AND
+
+
+10
+	
+^
+	
+Left to Right
+	
+Bitwise XOR
+
+
+11
+	
+`
+	
+`
+	
+Left to Right
+
+
+12
+	
+&&
+	
+Left to Right
+	
+Logical AND
+
+
+13
+	
+`
+	 	
+`
+
+
+14
+	
+?:
+	
+Right to Left
+	
+Ternary conditional
+
+
+15
+	
+=, +=, -=, *=, /=, %=, &=, `
+	
+=, ^=, <<=, >>=, >>>=`
+	
+Right to Left
+
+
+16 (lowest)
+	
+,
+	
+Left to Right
+	
+Comma operator
+
+
+Wrapper Classes
+Wrapper classes are used to convert primitive data types into objects. Each primitive type has a corresponding wrapper class in the “java.lang package”.
+Why Wrapper Classes?
+Java is an object-oriented language, but primitive types (like int, double) are not objects. There are situations where objects are required, such as:
+When working with collections like ArrayList, which only store objects (not primitives).
+For utility methods in classes like Integer, Double, etc.
+For using features like autoboxing and unboxing.
+Primitive Types vs Wrapper Classes
+Primitive Type
+	
+Wrapper Class
+
+
+byte
+	
+Byte
+
+
+short
+	
+Short
+
+
+int
+	
+Integer
+
+
+Long
+	
+Long
+
+
+Float
+	
+Float
+
+
+double
+	
+Double
+
+
+Char
+	
+Character
+
+
+boolean
+	
+Boolean
+ 
+Example
+int num = 10;                      // primitive data type
+Integer obj = Integer.valueOf(num); // manual boxing
+int x = obj.intValue();           // manual unboxing
+
+
+ 
+Autoboxing and Unboxing (Automatic Conversion)
+Java 5+ supports autoboxing and unboxing, which automatically converts between primitives and their wrappers.
+Integer obj = 5;    // autoboxing: int -> Integer
+int num = obj;      // auto-unboxing: Integer -> int
+
+Use Case: Collections
+ArrayList<Integer> list = new ArrayList<>();
+list.add(10);  // autoboxed from int to Integer
+NOTE: We can't use ArrayList<int> because collections require objects.
+Common Methods in Wrapper Classes
+Integer.parseInt("123");  // Converts String to int
+Double.parseDouble("3.14"); //autoboxing
+Boolean.parseBoolean("true");
+These are static utility methods provided by wrapper classes.
+Summary
+Wrapper classes "wrap" primitive types in objects.
+They allow primitives to be used in object-oriented features (like collections).
+Java supports autoboxing/unboxing to simplify their use.
+Each primitive type has a corresponding wrapper class.
+ 
+ wrapper classes using constructor are depricated.
+ex Integer int = new Integer(10);
+instead use valueOf()
+ex Integer int = Integer.valueOf(10);
+
+Constructors and Methods of Wrapper classes
+Constructors of Wrapper Classes
+Most wrapper classes (except Character and Boolean) have constructors that are deprecated as of Java 9 because autoboxing and static methods like valueOf() are preferred.
+Example: Deprecated Constructors
+Integer intObj = new Integer(10);          // Deprecated
+Double doubleObj = new Double("3.14");     // Deprecated
+Use valueOf() instead:
+Integer intObj = Integer.valueOf(10);   
+
+   // Preferred
+2. Common Static Methods
+All wrapper classes provide useful static methods for conversion and parsing.
+valueOf()
+Converts a primitive or a String to a wrapper object.
+Integer i = Integer.valueOf(100);
+Double d = Double.valueOf("12.34");
+parse<Type>()
+Converts a String to a primitive.
+int i = Integer.parseInt("123");       // returns int
+double d = Double.parseDouble("3.14");
+boolean b = Boolean.parseBoolean("true");
+ 
+3. Instance Methods
+Wrapper objects provide methods to get the primitive value, compare values, or convert to Strings.
+<datatype>Value() methods
+Returns the primitive value of the object.
+Integer i = 42;
+int primitive = i.intValue();     // returns int 42
+double d = i.doubleValue();      // returns 42.0
+compareTo()
+Compares two wrapper objects.
+Integer a = 10;
+Integer b = 20;
+int result = a.compareTo(b); // returns -1 (because 10 < 20)
+equals(Object obj)
+Checks for value equality.
+Integer a = 100;
+Integer b = 100;
+System.out.println(a.equals(b));  // true
+toString()
+Converts the object to a String.
+Integer a = 50;
+String s = a.toString(); // "50"
+4. Special Methods in Some Classes
+Character class:
+isDigit(char ch)
+isLetter(char ch)
+toLowerCase(char ch)
+toUpperCase(char ch)
+char c = 'A';
+System.out.println(Character.isLetter(c));  // true
+Boolean class:
+parseBoolean(String s)
+valueOf(String s)
+booleanValue()
+ 
+ 
+class WClass{
+
+	public static void main(String[] args){
+
+		int x=10;
+
+		// auto-boxing - Converting primitive data type to wrapper class object. 
+
+		//Integer ibox = x;
+
+		//Integer ibox = 40;	
+
+		Integer ibox = Integer.valueOf(x); 
+
+		System.out.println("Autoboxing: "+ibox);
+
+		// auto-unboxing - Converting back the wrapper class object
+
+		// 		      to the primitive data type.	
+
+		int unbox = ibox;
+
+		System.out.println("Auto-Unboxing: "+unbox);
+
+		//Constructors
+
+		Integer intObj = new Integer(10);// Deprecated
+
+		System.out.println("Deprecated using Constructor: "+ intObj);
+
+		//Use valueOf() method
+
+		Integer vintObj = Integer.valueOf(10);
+
+		System.out.println("Use valueOf() method instead: "+vintObj);
+
+		String str ="100";
+
+		int istr = Integer.parseInt(str);
+
+		System.out.println("Convert a string to an integer: "+(istr+100));
+
+		//Returns the primitive value of the object.
+
+		Integer objInt = 300;
+
+		int primInt = objInt.intValue();
+
+		System.out.println("The int value for a wrapperclass object: "+primInt);
+
+		//floating type wrapper class object
+
+		Float objFloat = 23.45f;
+
+		float primFloat = objFloat.floatValue();
+
+		System.out.println("The float value for a wrapperclass object: "+primFloat);
+
+		//compareTo() 
+
+		//returns 0 when 2 wrapper class objects are equal.
+
+		// returns 1 if first WC object is greater than the second.
+
+		// returns -1 if first WC object is less than the second	
+
+		Integer a = 100;
+
+		Integer b = 100;
+
+		int result = a.compareTo(b);  // returns -1 (because 10 < 20)
+
+		System.out.println("Comapring 2 wrapper class objects: "+result);
+
+		//equals(Object obj)
+
+		//Checks for value equality.
+
+		Integer obj1 = 100;
+
+		Integer obj2 = 100;
+
+		System.out.println("Checks value equality for WC objects: "+(obj1.equals(obj2)));
+
+		//toString() - Converts the object to a String.
+
+		Integer a1 = 50;
+
+		String s = a1.toString();  // "50"
+
+		System.out.println("Converting the WC object to a String value: "+(s+100));
+
+		//isLetter()
+
+		char c = 'A';
+
+		System.out.println(Character.isLetter(c));  // true
+
+		//isDigit()
+
+		char ch = '2';
+
+		System.out.println(Character.isDigit(ch));
+ 
+		char theChar='V';
+
+		char lCase = Character.toLowerCase(theChar);
+
+		System.out.println("To LowerCase: "+lCase);
+
+		char uCase = Character.toUpperCase(theChar);
+
+		System.out.println("To UpperCase: "+uCase);
+
+
+	}	
+
+ 
+}	
+ Class hierarchy for wrapper classes in Java:
+java.lang.Object
+    ├── java.lang.Number
+    │    ├── java.lang.Byte
+    │    ├── java.lang.Short
+    │    ├── java.lang.Integer
+    │    ├── java.lang.Long
+    │    ├── java.lang.Float
+    │    └── java.lang.Double
+    ├── java.lang.Character
+    └── java.lang.Boolean
+ 
+ 
+
+Wrapper Class
+	
+Primitive             Type
+	
+                                                           Superclass
+	
+Implements
+
+
+Integer
+	
+int
+	
+Number → Object
+	
+Comparable<Integer>
+
+
+Double
+	
+double
+	
+Number → Object
+	
+Comparable<Double>
+
+
+Float
+	
+float
+	
+Number → Object
+	
+Comparable<Float>
+
+
+Long
+	
+long
+	
+Number → Object
+	
+Comparable<Long>
+
+
+Short
+	
+short
+	
+Number → Object
+	
+Comparable<Short>
+
+
+Byte
+	
+byte
+	
+Number → Object
+	
+Comparable<Byte>
+
+
+Character
+	
+char
+	
+Object
+	
+Comparable<Character>
+
+
+Boolean
+	
+boolean
+	
+Object
+	
+Comparable<Boolean>
+
+
+MCQ – Wrapper classes
+Which of the following is not a wrapper class in Java?
+
+a) Integer
+
+b) Double
+c) String
+
+d) Boolean
+
+What package contains the wrapper classes in Java?
+a) java.lang
+
+b) java.util
+
+c) java.io
+
+d) java.wrapper
+
+What is the wrapper class for int?
+a) Integer
+
+b) Int
+
+c) intObject
+
+d) Number
+
+Which of the following is the correct way to create an Integer object?
+
+a) Integer i = 10;
+
+b) Integer i = new Integer(10);
+
+c) Integer i = Integer.valueOf(10);
+d) All of the above
+
+Autoboxing is:
+
+a) Converting wrapper to primitive
+b) Converting primitive to wrapper
+
+c) A type of inheritance
+
+d) None of the above
+
+Unboxing refers to:
+a) Converting wrapper to primitive
+
+b) Converting primitive to object
+
+c) Boxing a class
+
+d) None of the above
+
+Which of the following is immutable in Java?
+
+a) String
+
+b) Integer
+
+c) Boolean
+d) All of the above
+
+
+
+ 
+What is returned by Integer.parseInt("123")?
+
+a) "123"
+
+b) Integer object
+c) int primitive 123
+
+d) Exception
+
+What happens if you parse a non-numeric string using Integer.parseInt("abc")?
+
+a) Returns 0
+
+b) Returns null
+c) Throws NumberFormatException
+
+d) Compiles but does nothing
+
+Which method returns the double value of a Double object?
+
+a) getDouble()
+b) doubleValue()
+
+c) valueOf()
+
+d) parseDouble()
+
+valueOf() in wrapper classes returns:
+
+a) A primitive
+b) A wrapper object
+
+c) An array
+
+d) A string
+
+Which method is static in Integer class?
+
+a) intValue()
+b) parseInt(String s) 
+
+c) doubleValue()
+
+d) None
+
+Which method converts Boolean to primitive boolean?
+
+a) getBoolean()
+b) booleanValue()
+
+c) valueOf()
+
+d) toBoolean()
+
+Which of these is not a valid wrapper class constructor?
+
+a) new Integer("10")
+
+b) new Double(10.5)
+
+c) new Boolean(true)
+d) new Character("c")
+
+Which wrapper class method compares two objects numerically?
+
+a) equals()
+b) compareTo()
+
+c) toString()
+
+d) valueOf()
+
+Which version of Java introduced autoboxing?
+
+a) JDK 1.2
+
+b) JDK 1.3
+c) JDK 1.5
+
+d) JDK 1.8
+
+Autoboxing allows conversion from:
+
+a) Wrapper to primitive
+b) Primitive to wrapper
+
+c) Object to primitive
+
+d) String to wrapper
+
+Select the option:
+Integer i = 10;
+int a = i;
+a) Invalid
+
+b) Autoboxing
+c) Unboxing
+
+d) Compilation error
+
+Which of the following is unboxing?
+a) int a = new Integer(5);
+
+b) Integer i = 5;
+
+c) Integer i = new Integer(5);
+
+d) int a = 5;
+
+Which wrapper class supports character data type?
+
+a) Char
+
+b) String
+c) Character
+
+d) Text
+
+Which is more memory-efficient: primitive or wrapper class?
+a) Primitive
+
+b) Wrapper
+
+c) Both same
+
+d) Depends on context
+
+
+
+ 
+Wrapper classes are mainly used for:
+
+a) UI design
+
+b) Multithreading
+c) Working with collections
+
+d) None of the above
+
+What is the result of Integer.valueOf("abc")?
+
+a) 0
+
+b) "abc"
+c) Throws NumberFormatException
+
+d) null
+
+new Integer(10).equals(10) returns:
+a) true
+
+b) false
+
+c) Compile error
+
+d) Exception
+
+Which is not a wrapper class method?
+
+a) valueOf()
+
+b) toString()
+
+c) intValue()
+d) get()
+
+Which of these does not support autoboxing?
+
+a) int
+
+b) double
+c) void
+
+d) char
+
+What is the output of Integer.compare(3, 5)?
+a) -1
+
+b) 1
+
+c) 0
+
+d) Error
+
+What is returned by Boolean.parseBoolean("true")?
+a) true
+
+b) false
+
+c) Boolean object
+
+d) null
+
+Which one is not overloaded in Integer class?
+
+a) parseInt()
+
+b) valueOf()
+c) equals()
+
+d) toBinaryString()
+
+Wrapper classes extend which class?
+
+a) Object
+
+b) Number (except Character and Boolean)
+
+c) Wrapper
+d) a and b
+
+ 
+ Generics===============================
+
+
+
+Assessment - 1 (Generic Class)
+
+==============================
+ 
+create a Generic Box class and calculate:
+
+1.	Area of the rectangle using Integer wrapper class.
+
+2.	Area of the circle using Double wrapper class.
+
+3.	Perimeter of a square using Float wrapper class.
+
+4.	Area of a triangle using Double wrapper class.
+
+5.	Display the text:
+
+		Above the the complete examples of Generic class using
+
+		String class.	
+ 
+ 
+ 
+Generics
+What are Generics?
+Generics enable classes, interfaces, and methods to operate on typed parameters—this means more reusable and type-safe code.
+Example: Generic Class for a Container
+Let's create a generic class Box that can store any type of object.
+// Generic class
+class Box<T> {
+   private T item;
+   public void set(T item) {
+       this.item = item;
+   }
+   public T get() {
+       return item;
+   }
+}
+public class Main {
+   public static void main(String[] args) {
+       // Box for Integer
+      Box<Integer> intBox = new Box<>();
+      intBox.set(100);
+      System.out.println("Integer value: " + intBox.get());
+       // Box for String
+      Box<String> strBox = new Box<>();
+      strBox.set("Implementing Generics");
+      System.out.println("String value: " + strBox.get());
+              
+ // Box for Double
+Box<Double> dVar = new Box<>();
+dvar.set(3543.33);
+System.out.println("Double value: “+dvar.get());     
+ 
+}
+}
+Output
+Integer value: 100
+String value: Generics in Java
+
+
+ 
+Benefits
+No need to write separate classes for Integer, String, etc.
+Type safety: You can't accidentally store a String in a Box<Integer>.
+2. Use of Wrapper Classes in Java
+What are Wrapper Classes?
+Wrapper classes convert primitive data types into objects so they can be used in:
+Generics (which require objects)
+Collections like ArrayList
+Utility methods (like parsing Strings)
+Primitive
+	
+Wrapper Class
+
+
+Int
+	
+Integer
+
+
+Double
+	
+Double
+
+
+Char
+	
+Character
+
+
+Boolean
+	
+Boolean
+Example: Using Wrapper Classes with Generics (ArrayList)
+import java.util.ArrayList;
+public class WrapperExample {
+   public static void main(String[] args) {
+      ArrayList<Integer> numbers = new ArrayList<>();
+ 
+       // Autoboxing: int → Integer
+      numbers.add(10);
+      numbers.add(20);
+      numbers.add(30);
+ 
+       int sum = 0;
+ 
+       for (Integer num : numbers) {
+           // Unboxing: Integer → int
+           sum += num;
+       }
+ 
+      System.out.println("Sum: " + sum);
+   }
+}
+Output
+Sum: 60
+Understand the concept
+int values are autoboxed into Integer objects.
+The generic ArrayList<Integer> stores these objects.
+On retrieval, they’re unboxed back into int.
+Wrapping It All Up
+Feature
+	
+Description
+	
+Example
+
+
+Generics
+	
+Create reusable, type-safe classes/methods
+	
+Box<T>, ArrayList<T>
+
+
+Wrapper Classes
+	
+Convert primitives to objects for generic use
+	
+Integer, Double, etc.
+
+
+Autoboxing
+	
+Java converts primitive to wrapper automatically
+	
+list.add(10); // int → Integer
+
+
+Unboxing
+	
+Java converts wrapper to primitive automatically
+	
+int x = list.get(0);
+ 
+ A R = ℓ × w
+
+A C = Pi*r^2
+
+P = 4 × side
+
+Area of a Triangle = A = ½ (b × h) square units
+
+Arrays
+Arrays in Java are the objects that store the elements in contiguous locations.
+Arrays are fixed in size.
+Example:
+int[] arr = new int[4];
+arr[5]=42362; //Incorrect
+Collection and Collections Framework
+What is Collection in Java?
+In Java, Collection is a root interface in the java.util 
+package. It represents a group of objects, known as elements.
+ The Collection interface is the foundation of the Java Collections Framework, which is used for storing, retrieving, and manipulating data in data structures like lists, sets, and queues.
+Key Points about Collection:
+It is part of the Java Collections Framework.
+It defines the basic operations like adding, removing, and checking elements.
+It is a generic interface: Collection<E>, where E is the type of elements.
+Commonly used through its subinterfaces:
+List – ordered collection (e.g., ArrayList)
+Set – no duplicates (e.g., HashSet)
+Queue – ordered for processing (e.g., PriorityQueue)
+ 
+What is the Collections Framework in Java?
+The Java Collections Framework is a unified architecture for storing, managing, and manipulating groups of objects. It is part of the java.util package and provides interfaces, classes, and algorithms to work with different types of data structures like lists, sets, queues, and maps.
+Key Components of the Collections Framework:
+1. Interfaces (Blueprints)
+Define the standard ways to work with collections:
+Interface
+	
+Description
+
+
+Collection<E>
+	
+Root interface of the framework
+
+
+List<E>
+	
+Ordered collection (duplicates allowed)
+
+
+Set<E>
+	
+Unordered collection (no duplicates)
+
+
+Queue<E>
+	
+Collection designed for holding elements prior to processing
+
+
+Deque<E>
+	
+Double-ended queue
+
+
+Map<K, V>
+	
+Key-value pairs (not a true subinterface of Collection)
+
+
+ 
+2. Implementations (Concrete Classes)
+These are actual data structure classes that implement the interfaces:
+Interface
+	
+Implementation Classes
+
+
+List
+	
+ArrayList, LinkedList, Vector
+
+
+Set
+	
+HashSet, LinkedHashSet, TreeSet
+
+
+Queue
+	
+PriorityQueue, ArrayDeque, LinkedList
+
+
+Map
+	
+HashMap, TreeMap, LinkedHashMap, Hashtable
+
+
+Collections Framework = Data Structures + Algorithms
+	
+ 
+3. Algorithms (via Collections utility class)
+The java.util.Collections class provides static methods for tasks like:
+Sorting: Collections.sort(list)
+Shuffling: Collections.shuffle(list)
+Finding min/max: Collections.max(set)
+Reversing: Collections.reverse(list)
+4. Iterator and Iterable
+Used to loop over collections:
+Iterator<String> it = list.iterator();
+while(it.hasNext()) {
+   System.out.println(it.next());
+}
+Benefits of Using Collections Framework
+Standardized API: All collections follow the same rules and interfaces.
+Code Reusability: Write general code for any type of collection.
+Efficiency: Well-optimized data structures.
+Type Safety (Generics): Prevents runtime type errors.
+
+
+ 
+Example:
+import java.util.*;
+public class FrameworkExample {
+   public static void main(String[] args) {
+      List<String> names = new ArrayList<>();
+       names.add("Alice");
+       names.add("Bob");
+       names.add("Charlie");
+ 
+      Collections.sort(names);
+      System.out.println("Sorted: " + names);
+   }
+}
+Summary
+Concept
+	
+Description
+
+
+Collections Framework
+	
+Complete set of interfaces, implementations, and utility classes for managing data structures.
+
+
+Includes
+	
+List, Set, Map, Queue, Collections class
+
+
+Purpose
+	
+To provide reusable, efficient, and flexible tools for handling data.
+ 
+
+//Step 1
+
+import java.util.*;
+
+class FrameworkExample {
+
+    public static void main(String[] args) {
+
+        //Step 2 - create an object of the ArrayList bclass
+
+		List<String> names = new ArrayList<>();
+
+		//Step 3 - Add elements to the list
+
+		names.add("Steven");
+
+        names.add("Bob");
+
+        names.add("Alex");
+
+		names.add("Alex");
+
+		names.add("Turner");
+
+		names.add("Martin");
+
+		names.add("Fox");
+
+		names.add("Jack");
+
+		names.add("Lily");
+
+		//names.add(null);
+
+		System.out.println("Before the sorting......"+names);
+ 
+        Collections.sort(names);
+
+        System.out.println("After the Sorting: " + names);
+
+    }
+
+}
+
+ List Interface
+What is List in Java Collections Framework?
+In Java, List is an interface in the Collections Framework, found in the java.util package. It extends the Collection interface and represents an ordered collection (also known as a sequence).
+interface List extends Collection{}
+Key Features of List:
+Ordered: Maintains insertion order.
+Indexed: Elements can be accessed by their index.
+Allows duplicates.
+Supports null values (depends on implementation).
+Common implementations:
+ArrayList (resizable array)---------------default size is 10--Initial default capacity of an ArrayList =10
+Resize growing capacity = oldcapacity*1.5
+
+LinkedList (doubly-linked list)
+
+Vector (synchronized version of ArrayList)
+
+Stack (LIFO stack)
+
+Common Methods of List Interface
+Method
+	
+Description
+	
+Example
+
+
+add(E e)
+	
+Adds an element to the list
+	
+list.add("Apple");
+
+
+add(int index, E element)
+	
+Inserts element at specified position
+	
+list.add(1, "Banana");
+
+
+get(int index)
+	
+Returns element at index
+	
+list.get(0);
+
+
+set(int index, E element)
+	
+Replaces element at index
+	
+list.set(0, "Grapes");
+
+
+remove(int index)
+	
+Removes element at index
+	
+list.remove(1);
+
+
+remove(Object o)
+	
+Removes the first occurrence of the object
+	
+list.remove("Apple");
+
+
+indexOf(Object o)
+	
+Returns first index of element
+	
+list.indexOf("Apple");
+
+
+lastIndexOf(Object o)
+	
+Returns last index of element
+	
+list.lastIndexOf("Apple");
+
+
+contains(Object o)
+	
+Checks if element exists
+	
+list.contains("Apple");
+
+
+isEmpty()
+	
+Checks if list is empty
+	
+list.isEmpty();
+
+
+size()
+	
+Returns number of elements
+	
+list.size();
+
+
+clear()
+	
+Removes all elements
+	
+list.clear();
+
+
+subList(int fromIndex, int toIndex)
+	
+Returns a view (slice) of part of the list
+	
+list.subList(1, 3);
+
+
+iterator()
+	
+Returns an iterator for the list
+
+List-(Common Methods)
+1.add(e)
+2.add(index,element)
+3.get(index)
+4.set(index,element)
+5.remove(i)
+6.remove(obj)-first occurence
+7.indexOf(obj)
+8.lastIndexOf(obj)-removes last occurence
+9.contains(obj)
+10.isEmpty()
+11.size()
+12.clear()
+13.subList(starti, endind)
+14.iterator()returns iterator for the list
+	
+list.iterator();
+Example Code Using ArrayList:
+import java.util.*;
+public class ListExample {
+   public static void main(String[] args) {
+      List<String> fruits = new ArrayList<>();
+      fruits.add("Apple");
+      fruits.add("Banana");
+      fruits.add("Cherry");
+      fruits.add("Apple");
+      System.out.println("Original List: " + fruits);
+      System.out.println("Element at index 1: " + fruits.get(1));
+       fruits.set(2, "Blueberry");
+      System.out.println("After set: " + fruits);
+      fruits.remove("Apple"); // Removes first "Apple"
+      System.out.println("After removing 'Apple': " + fruits);
+      System.out.println("Index of Banana: " + fruits.indexOf("Banana"));
+      System.out.println("Size: " + fruits.size());
+      System.out.println("Sublist (0 to 2): " + fruits.subList(0, 2));
+      fruits.clear();
+      System.out.println("Is empty? " + fruits.isEmpty());
+   }
+}
+ 
+                                                           -------------------------
+ 
+import java.util.*;
+
+class ListExample {
+
+    public static void main(String[] args) {
+
+        List<String> fruits = new ArrayList<>();
+
+        fruits.add("Apple");
+
+        fruits.add("Banana");
+
+        fruits.add("Cherry");
+
+        fruits.add("Apple");
+
+		System.out.println("Original List: " + fruits);
+
+        System.out.println("Element at index 1: " + fruits.get(1));
+
+        fruits.set(2, "Blueberry");
+
+        System.out.println("After set: " + fruits);
+
+        fruits.remove("Apple"); // Removes first "Apple"
+
+        System.out.println("After removing 'Apple': " + fruits);
+
+        System.out.println("Index of Banana: " + fruits.indexOf("Banana"));
+
+        System.out.println("Size: " + fruits.size());
+
+        System.out.println("Sublist (0 to 2): " + fruits.subList(0, 2));
+
+        fruits.clear();
+
+		System.out.println("Empty List: "+fruits);
+
+        System.out.println("Is empty? " + fruits.isEmpty());
+
+    }
+
+}
+
+ import java.util.ArrayList;
+
+import java.util.List;
+
+import java.util.Scanner;
+
+class Employee {
+
+    private int id;
+
+    private String name;
+
+    private String department;
+ 
+    public Employee(int id, String name, String department) {
+
+        this.id = id;
+
+        this.name = name;
+
+        this.department = department;
+
+    }
+ 
+    public int getId() {
+
+        return id;
+
+    }
+ 
+    public String getName() {
+
+        return name;
+
+    }
+ 
+    public String getDepartment() {
+
+        return department;
+
+    }
+ 
+    @Override
+
+    public String toString() {
+
+        return "Employee{" +
+
+                "ID=" + id +
+
+                ", Name='" + name + '\'' +
+
+                ", Department='" + department + '\'' +
+
+                '}';
+
+    }
+
+}
+ 
+class EmployeeListExample {
+
+    public static void main(String[] args) {
+
+        List<Employee> employeeList = new ArrayList<>();
+
+        Scanner scanner = new Scanner(System.in);
+ 
+        // Adding Employees
+
+        employeeList.add(new Employee(101, "Alice", "HR"));
+
+        employeeList.add(new Employee(102, "Bob", "IT"));
+
+        employeeList.add(new Employee(103, "Charlie", "Finance"));
+ 
+        // Display All Employees
+
+        System.out.println("All Employees:");
+
+        for (Employee emp : employeeList) {
+
+            System.out.println(emp);
+
+        }
+ 
+        // Search by ID
+
+        System.out.print("\nEnter Employee ID to search: ");
+
+        int searchId = scanner.nextInt();
+
+        boolean found = false;
+
+
+		for (Employee emp : employeeList) {
+
+            if (emp.getId() == searchId) {
+
+                System.out.println("Found: " + emp);
+
+                found = true;
+
+                break;
+
+            }
+
+        }
+
+        if (!found) {
+
+            System.out.println("Employee with ID " + searchId + " not found.");
+
+        }
+ 
+        // Remove by ID
+
+        System.out.print("\nEnter Employee ID to remove: ");
+
+        int removeId = scanner.nextInt();
+
+        Employee toRemove = null;
+
+        for (Employee emp : employeeList) {
+
+            if (emp.getId() == removeId) {
+
+                toRemove = emp;
+
+                break;
+
+            }
+
+        }
+ 
+        if (toRemove != null) {
+
+            employeeList.remove(toRemove);
+
+            System.out.println("Employee removed.");
+
+        } else {
+
+            System.out.println("Employee with ID " + removeId + " not found.");
+
+        }
+ 
+        // Final List
+
+        System.out.println("\nUpdated Employee List:");
+
+        for (Employee emp : employeeList) {
+
+            System.out.println(emp);
+
+        }    }}
+
+ 
+import java.util.ArrayList;
+
+import java.util.Iterator;
+ 
+class ArrayListIteratorExample {
+
+    public static void main(String[] args) {
+
+        // Create an ArrayList
+
+        ArrayList<String> fruits = new ArrayList<>();
+ 
+        // Add elements to the ArrayList
+
+        fruits.add("Apple");
+
+        fruits.add("Banana");
+
+        fruits.add("Mango");
+
+        fruits.add("Orange");
+ 
+			/* 
+
+        	Creating a reference of type Iterator<String>, 
+
+			which points to an object that is an instance of a  
+
+         	class that implements the Iterator interface.
+
+           */
+
+		Iterator<String> iterator = fruits.iterator();
+
+        // Traverse the ArrayList using Iterator
+
+        System.out.println("Fruits in the list:");
+
+        while (iterator.hasNext()) {
+
+            String fruit = iterator.next();
+
+            System.out.println(fruit);
+
+		}    
+
+		//Enhanced for loop
+
+		for(String favfruits:fruits){
+
+			System.out.println(favfruits);
+
+		}
+
+	} 
+
+}
+
+ 
+import java.util.ArrayList;
+
+import java.util.Iterator;
+ 
+class ArrayListIteratorExample {
+
+    public static void main(String[] args) {
+
+        // Create an ArrayList
+
+        ArrayList<String> fruits = new ArrayList<>();
+ 
+        // Add elements to the ArrayList
+
+        fruits.add("Apple");
+
+        fruits.add("Banana");
+
+        fruits.add("Mango");
+
+        fruits.add("Orange");
+ 
+			/* 
+
+        	Creating a reference of type Iterator<String>, 
+
+			which points to an object that is an instance of a  
+
+         	class that implements the Iterator interface.
+
+           */
+
+		Iterator<String> iterator = fruits.iterator();
+
+        // Traverse the ArrayList using Iterator
+
+        System.out.println("Fruits in the list:");
+
+        while (iterator.hasNext()) {
+
+            String fruit = iterator.next();
+
+            System.out.println(fruit);
+
+		}    
+
+		//Enhanced for loop
+
+		for(String favfruits:fruits){
+
+			System.out.println(favfruits);
+
+		}
+
+	} 
+
+}
+
+So the key difference is:
+Comparison Type	          == Works?	    .equals()           Needed?	                 Example
+int, long, char	               ✅             Yes	    ❌ Not needed	   emp.getId() == searchId
+String, Integer, etc.	       ❌              No	        ✅ Yes	        cust.getCustomer_id().equals(id)
+
+ Iterator in CollectionsFramework
+What is an Iterator in Java?
+java.util.Iterator is a generic interface that provides methods for iterating over collections.
+It is part of the Java Collections Framework.
+It provides a way to traverse (loop through) a collection like ArrayList, HashSet, etc., one element at a time.
+It's part of the java.util package and is useful when you want to:
+Go through each element in a collection.
+Optionally remove elements while looping.
+Avoid using a traditional for-loop (especially when collection type may change).
+Decalration:
+public interface Iterator<E> {
+   boolean hasNext();
+   E next();
+   void remove(); // optional
+}
+ 
+Example: Using ArrayList with Iterator
+import java.util.ArrayList;
+import java.util.Iterator;
+ 
+class ArrayListIteratorExample {
+   public static void main(String[] args) {
+       // Create an ArrayList
+      ArrayList<String> fruits = new ArrayList<>();
+ 
+       // Add elements to the ArrayList
+       fruits.add("Apple");
+      fruits.add("Banana");
+      fruits.add("Mango");
+      fruits.add("Orange");
+ 
+      
+ 
+ 
+/* 
+              Creating a reference of type Iterator<String>, which points to an object that is an instance of a 
+              class that implements the Iterator interface.
+          */
+Iterator<String> iterator = fruits.iterator();
+       // Traverse the ArrayList using Iterator
+      System.out.println("Fruits in the list:");
+       while (iterator.hasNext()) {
+           String fruit = iterator.next();
+          System.out.println(fruit);
+       }    } }
+
+import java.util.LinkedList;
+
+import java.util.ListIterator;
+ 
+class ListIteratorExample {
+
+    public static void main(String[] args) {
+
+        LinkedList<String> list = new LinkedList<>();
+
+        list.add("A");
+
+        list.add("B");
+
+        list.add("C");
+ 
+        ListIterator<String> iterator = list.listIterator();
+ 
+        // Traverse forward
+
+        while (iterator.hasNext()) {
+
+            System.out.println("Next: " + iterator.next());
+
+        }
+ 
+        // Traverse backward
+
+        while (iterator.hasPrevious()) {
+
+            System.out.println("Previous: " + iterator.previous());
+
+        }
+ 
+        // Modify during iteration
+
+        while (iterator.hasNext()) {
+
+            String element = iterator.next();
+
+            if (element.equals("B")) {
+
+                iterator.set("Bee");        // Replace "B" with "Bee"
+
+                iterator.add("D");          // Add "D" after "Bee"
+
+            }
+
+        }
+ 
+        System.out.println("Modified list: " + list);
+
+    }
+
+}
+
+ 
+import java.util.*;
+
+class SetExample {
+
+    public static void main(String[] args) {
+
+        Set<String> fruits = new HashSet<>();
+
+        fruits.add("Apple");
+
+        fruits.add("Banana");
+
+        fruits.add("Orange");
+
+		fruits.add("Blueberry");
+
+        fruits.add("Grapes");
+
+        fruits.add("Guava");
+
+        fruits.add(null);
+
+		fruits.add(null);
+
+		fruits.add(null);
+
+		fruits.add("Mango");
+
+        fruits.add("PineApple");
+
+        fruits.add("Papaya");
+
+		fruits.add("Pomegranate");
+
+		//No compilation error will be shown
+
+		fruits.add("Apple"); // Duplicate - won't be added
+
+        fruits.add("Apple"); // Duplicate - won't be added
+
+        fruits.add("Apple"); // Duplicate - won't be added
+
+        fruits.add("Apple"); // Duplicate - won't be added
+
+        fruits.add("Apple"); // Duplicate - won't be added
+
+
+        System.out.println("Fruits set: " + fruits);
+
+    }
+
+}
+
+  
+MCQ – List and Set interface
+Which interface does ArrayList implement directly?
+A) Map   B) List     C) Set   D) Queue
+What’s the default initial capacity of an ArrayList created with new ArrayList<>()?
+A) 8   B) 10     C) 16   D) 0
+Which is not a valid way to iterate over an ArrayList<String> list?
+A) for (String s : list){...}
+B) Iterator<String> it = list.iterator();
+C) for (Iterator<String> it : list) 
+D) for (int i = 0; i < list.size(); i++) {...}
+What does list.add(index, element) do?
+A) Replaces the element at index
+B) Appends to end
+C) Inserts at index, shifts others right 
+D) Inserts at index, shifting left
+Which Resize strategy does ArrayList follow when growing?
+A) doubles capacity
+B) +1 each time
+C) increases by (old * 1.5) 
+D) no resize
+Which method returns true if the list contains no elements?
+A) isEmpty()     B) size() == 0   C) contains(null)   D) clear()
+What does list.remove(Object o) return?
+A) removed element   B) boolean indicating success 
+C) index of element   D) void
+What happens when you call ensureCapacity()?
+A) shrinks the list
+B) sets min capacity 
+C) clears older elements
+D) throws exception if full
+ 
+
+
+ 
+Which method does not belong to Iterator?
+A) hasNext() 
+B) next() 
+C) remove() 
+D) replace() ✘ (does not exist)
+What happens if remove() is called before next()?
+A) removes a previous element
+B) throws IllegalStateException 
+C) removes nothing
+D) compiler error
+Which method allows safe removal during iteration?
+A) List.iterator().remove() 
+B) list.removeAll()
+C) list.clear()
+D) forEach() + removal
+What interface extends Iterator to add forEachRemaining()?
+A) Iterable
+B) ListIterator 
+C) Closer
+D) AutoCloseable
+Which is not a capability of ListIterator?
+A) add(E)   B) previous()   C) remove()   D) setIndex(int)
+Iterator over a Set returns items in which order?
+A) Sorted   B) Insertion   C) Unspecified     D) Frequency
+Which is valid code to iterate using Iterator<String> itr?
+A) while (itr.next()) {...}
+B) while (itr.hasNext()){itr.next();} 
+C) for (itr.next(); itr.hasNext(); ) {...}
+D) for (String s: itr)
+
+
+ 
+Which method supports functional iteration on Iterable?
+A) iterator()
+B) forEach()  enhanced for loop
+C) loop()
+D) stream()
+Calling iterator.remove() twice after one next() will cause:
+A) successful second remove
+B) IllegalStateException 
+C) NullPointerException
+D) nothing
+Which interface does HashSet implement?
+A) List
+B) Set 
+C) Map
+D) Collection
+Does HashSet allow duplicate elements?
+A) Yes
+B) No 
+What order does HashSet maintain?
+A) Sorted
+B) Insertion
+C) Unspecified 
+D) Reverse
+Which method returns the number of elements in a HashSet?
+A) length()
+B) size() 
+C) count()
+D) elements()
+Which method removes all elements from a HashSet?
+A) removeAll()
+B) clear() 
+C) empty()
+D) erase()
+What’s the difference between List and Set?
+A) List ordered, allows duplicates; Set unordered, unique 
+B) List unordered, unique; Set ordered, allows duplicates
+C) Same except method names
+D) List always synchronized
+Which keeps insertion order: HashSet or LinkedHashSet?
+A) HashSet
+B) LinkedHashSet 
+C) TreeSet
+D) None
+Which allows randomized iteration?
+A) TreeSet
+B) HashSet 
+C) ArrayList
+D) LinkedHashSet
+What happens if null is added twice to HashSet<String>?
+A) Only one null stored 
+B) Two nulls
+C) Error
+D) Removes null
+Which supports direct index access?
+A) HashSet
+B) TreeSet
+C) ArrayList 
+D) Set interface
+------------------------------
+
+when to use
+when to use on real time scenarios an array list is for storing and accesing data, and linked list to manipulate data
+ 
+ 
+LinkedList
+
+In Java's Collections Framework, a LinkedList is a class that implements both the List and Deque interfaces. It is part of the java.util package.
+LinkedList features:
+A doubly linked list implementation of the List and Deque interfaces.
+Allows duplicates.
+Maintains insertion order.
+Efficient for frequent insertions/deletions, especially at the beginning or middle.
+Declaration:
+import java.util.LinkedList;
+LinkedList<String> list = new LinkedList<>();
+Common LinkedList Methods (with Examples):
+1. add() – Adds element
+list.add("Apple");            // Add at end
+list.add(1, "Banana");        // Add at index
+list.addFirst("Start");       // Add at beginning
+list.addLast("End");          // Add at end
+2. get() – Access element
+String item = list.get(1);   // Get element at index 1
+list.getFirst();             // First element
+list.getLast();              // Last element
+3. set() – Replace element
+list.set(1, "Orange");        // Replace index 1 with "Orange"
+
+
+ 
+4. remove() – Remove elements
+list.remove();               // Remove first
+list.remove(2);              // Remove by index
+list.remove("Banana");        // Remove by value
+list.removeFirst();          // Remove first element
+list.removeLast();           // Remove last element
+5. size() – List size
+int size = list.size();
+6. contains() – Check if element exists
+boolean exists = list.contains("Apple");
+7. clear() – Remove all elements
+list.clear();
+8. isEmpty() – Check if list is empty
+boolean empty = list.isEmpty();
+9. iterator() – Traverse list
+for (String item : list) {
+  System.out.println(item);
+}
+OR
+Iterator<String> it = list.iterator();
+while(it.hasNext()) {
+   String item = it.next();
+  System.out.println(item);
+}
+Summary
+Feature
+	
+LinkedList
+
+
+Type
+	
+Doubly Linked List
+
+
+Allows duplicates?
+	
+Yes
+
+
+Maintains order?
+	
+Yes (insertion order)
+
+
+Implements
+	
+List, Deque, Queue
+
+
+Performance
+	
+Fast insert/delete, slow random access
+                                                                          --------------------
+ import java.util.LinkedList;
+
+import java.util.ListIterator;
+ 
+class ListIteratorExample {
+
+    public static void main(String[] args) {
+
+        LinkedList<String> list = new LinkedList<>();
+
+        list.add("A");
+
+        list.add("B");
+
+        list.add("C");
+ 
+        ListIterator<String> iterator = list.listIterator();
+ 
+        // Traverse forward
+
+        while (iterator.hasNext()) {
+
+            System.out.println("Next: " + iterator.next());
+
+        }
+ 
+        // Traverse backward
+
+        while (iterator.hasPrevious()) {
+
+            System.out.println("Previous: " + iterator.previous());
+
+        }
+ 
+        // Modify during iteration
+
+        while (iterator.hasNext()) {
+
+            String element = iterator.next();
+
+            if (element.equals("B")) {
+
+                iterator.set("Bee");        // Replace "B" with "Bee"
+
+                iterator.add("D");          // Add "D" after "Bee"
+
+            }
+
+        }
+ 
+        System.out.println("Modified list: " + list);
+
+    }
+
+}
+
+ ListIterator
+What is ListIterator?
+It's an interface in java.util that allows bidirectional traversal of a List.
+Extends the basic Iterator interface by adding more functionality.
+Supports moving forward and backward, adding, removing, and modifying elements during iteration.
+Key Features of ListIterator:
+Feature
+	
+Description
+
+
+Traverse forward
+	
+hasNext() and next() methods
+
+
+Traverse backward
+	
+hasPrevious() and previous() methods
+
+
+Get index of next or previous
+	
+nextIndex() and previousIndex()
+
+
+Modify list during iteration
+	
+add(E e), remove(), and set(E e) methods
+Important Methods
+Method
+	
+Description
+
+
+boolean hasNext()
+	
+Returns true if there’s a next element
+
+
+E next()
+	
+Returns next element and moves cursor forward
+
+
+boolean hasPrevious()
+	
+Returns true if there’s a previous element
+
+
+E previous()
+	
+Returns previous element and moves cursor backward
+
+
+int nextIndex()
+	
+Returns index of next element
+
+
+int previousIndex()
+	
+Returns index of previous element
+
+
+void remove()
+	
+Removes the last element returned by next() or previous()
+
+
+void set(E e)
+	
+Replaces the last element returned with e
+
+
+void add(E e)
+	
+Inserts element e immediately before next element
+Example usage of ListIterator
+import java.util.LinkedList;
+import java.util.ListIterator;
+ 
+public class ListIteratorExample {
+   public static void main(String[] args) {
+      LinkedList<String> list = new LinkedList<>();
+      list.add("A");
+      list.add("B");
+      list.add("C");
+ 
+      ListIterator<String> iterator = list.listIterator();
+ 
+       // Traverse forward
+       while (iterator.hasNext()) {
+          System.out.println("Next: " + iterator.next());
+       }
+ 
+       // Traverse backward
+       while (iterator.hasPrevious()) {
+          System.out.println("Previous: " + iterator.previous());
+       }
+ 
+       // Modify during iteration
+       while (iterator.hasNext()) {
+           String element = iterator.next();
+           if (element.equals("B")) {
+              iterator.set("Bee");       // Replace "B" with "Bee"
+              iterator.add("D");         // Add "D" after "Bee"
+           }
+       }
+ 
+      System.out.println("Modified list: " + list);
+   }
+}
+
+
+ 
+How it works
+The iterator starts before the first element.
+next() moves forward, returning elements.
+previous() moves backward.
+set() modifies the last returned element.
+add() inserts a new element right before the next element to be returned.
+ 
+  
+Set Interface
+In Java's Collections Framework, the Set interface is a part of the java.util package and represents a collection that does not allow duplicate elements. It models the mathematical set abstraction.
+Key Features of Set Interface:
+No duplicates allowed.
+At most one null element is allowed (in some implementations like HashSet).
+Unordered by default (unless using a sorted or ordered implementation).
+
+Common Implementations of Set:
+Implementation     	HashSet		LinkedHashSet				TreeSet
+	
+Ordering           	No order 	Insertion order				Sorted (natural or custom comparator)
+	
+Thread Safety		No		No					No
+
+	
+Performance		Fast		Slightly slower than HashSet		Slower than HashSet
+	
+Allows null?		Yes (1 null)	Yes					No (throws NullPointerException)
+
+Set Interface Hierarchy:
+java.util.Collection
+       ↳ java.util.Set
+Example:
+import java.util.*;
+public class SetExample {
+   public static void main(String[] args) {
+      Set<String> fruits = new HashSet<>();
+       fruits.add("Apple");
+       fruits.add("Banana");
+       fruits.add("Apple"); // Duplicate - won't be added
+       fruits.add("Orange");
+ 
+       System.out.println("Fruits set: " + fruits);
+   }
+}
+Common Methods in Set:
+Method
+	
+Description
+
+
+add(E e)
+	
+Adds the specified element
+
+
+remove(Object o)
+	
+Removes the specified element
+
+
+contains(Object o)
+	
+Returns true if the element exists
+
+
+size()
+	
+Returns the number of elements
+
+
+isEmpty()
+	
+Checks if the set is empty
+
+
+clear()
+	
+Removes all elements
+
+
+iterator()
+	
+Returns an iterator for traversal
+ 
+ 
+import java.util.*;
+
+class SetExample {
+
+    public static void main(String[] args) {
+
+        Set<String> fruits = new HashSet<>();
+
+        fruits.add("Apple");
+
+        fruits.add("Banana");
+
+        fruits.add("Orange");
+
+		fruits.add("Blueberry");
+
+        fruits.add("Grapes");
+
+        fruits.add("Guava");
+
+        fruits.add(null);
+
+		fruits.add(null);
+
+		fruits.add(null);
+
+		fruits.add("Mango");
+
+        fruits.add("PineApple");
+
+        fruits.add("Papaya");
+
+		fruits.add("Pomegranate");
+
+		//No compilation error will be shown
+
+		fruits.add("Apple"); // Duplicate - won't be added
+
+        fruits.add("Apple"); // Duplicate - won't be added
+
+        fruits.add("Apple"); // Duplicate - won't be added
+
+        fruits.add("Apple"); // Duplicate - won't be added
+
+        fruits.add("Apple"); // Duplicate - won't be added
+
+
+        System.out.println("Fruits set: " + fruits);
+
+    }
+
+}
+
+ HashSet
+The HashSet class in Java is part of the Collections Framework and implements the Set interface backed by a HashMap. It is used to store unique elements and allows at most one null value.
+Key Features of HashSet:
+No duplicates
+Unordered (no guarantee of insertion order)
+Allows one null value
+Not synchronized (not thread-safe)
+Faster than TreeSet and LinkedHashSet for basic operations like add(), remove(), contains()
+Yes, it is necessary to override both the hashCode() and equals() methods when using custom objects in a HashSet.
+It is not necessary to override hashCode() and equals() methods for non-custom objects (i.e., built-in Java classes like String, Integer, Double, etc.) when using them in a HashSet.
+To print actual object content, override toString() in your class.
+
+❌ If not overridden, Java prints a reference-like string, not meaningful data.
+HashSet Class Declaration:
+public class HashSet<E> extends AbstractSet<E>
+   implements Set<E>, Cloneable, java.io.Serializable
+Example: HashSet
+import java.util.HashSet;
+public class HashSetExample {
+   public static void main(String[] args) {
+       // Creating a HashSet of Strings
+      HashSet<String> cities = new HashSet<>();
+       // Adding elements
+       cities.add("Delhi");
+       cities.add("Mumbai");
+       cities.add("Kolkata");
+       cities.add("Delhi"); // Duplicate - will not be added
+       cities.add(null);    // null is allowed
+       cities.add(null);    // Duplicate null - ignored
+ 
+       // Displaying the HashSet
+      System.out.println("Cities in HashSet: " + cities);
+ 
+       // Checking existence
+      System.out.println("Contains Mumbai? " + cities.contains("Mumbai"));
+ 
+       // Removing an element
+       cities.remove("Kolkata");
+      System.out.println("After removing Kolkata: " + cities);
+   }
+}
+Common Operations and Their Time Complexity:
+Operation
+	
+Time Complexity
+
+add()
+	
+O(1) average
+
+
+remove()
+	
+O(1) average
+
+
+contains()
+	
+O(1) average
+
+
+iteration
+	
+O(n)

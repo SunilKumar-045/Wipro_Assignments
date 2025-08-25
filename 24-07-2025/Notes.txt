@@ -1,0 +1,983 @@
+24/07/2025
+package pkg_oops;
+
+//Abstract class
+
+//We cannot instantiate the object of an abstract class.
+
+abstract class Animal {
+
+	//Constructor
+
+	Animal(){
+
+		System.out.println("Abstract class Constructor");
+
+	}
+
+	//abstract method
+
+	abstract void sound();  // Abstract method
+ 
+//concrete method
+
+	void sleep() {  // Concrete method
+
+     System.out.println("Sleeping...");
+
+}
+
+	//Fields
+
+	static int abs_var;
+
+	int non_static_field;
+
+	//static methods
+
+	static String animalStay(String loc) {
+
+		return loc;
+
+	}
+
+}
+ 
+//Subclass that provides implementation
+
+class Dog extends Animal {
+
+Dog(){
+
+	 //This has to be the 1st statement in child class Constructor.
+
+	 super();
+
+	 System.out.println("Dog class Constructor...");
+
+}
+
+	void sleep() {
+
+		super.sleep();
+
+		System.out.println("Dog is sleeping");
+
+	}
+
+	void sound() {
+
+     System.out.println("Dog barks");
+
+}
+
+}
+ 
+ 
+class AbstractClassEx {
+
+public static void main(String[] args) {
+
+     Dog myDog = new Dog();
+
+     myDog.sound();  // Outputs: Dog barks
+
+     myDog.sleep();  // Outputs: Sleeping...
+
+     Dog.abs_var=1001;
+
+     System.out.println("Variable in an abstract class: "+Dog.abs_var);
+
+     System.out.println(Dog.animalStay("Farm House"));
+
+}
+
+}
+ 
+ 
+Abstract class
+An abstract class is a class that cannot be instantiated on its own and may contain abstract methods (methods without a body) as well as concrete methods (methods with a body). It serves as a base class that other classes can extend to provide implementations for the abstract methods.
+Syntax of an Abstract Class
+abstract class Animal {
+   // Abstract method (no body)
+   abstract void sound();
+ 
+   // Concrete method
+   void eat() {
+      System.out.println("This animal eats food.");
+   }
+}
+Example: Abstract Class
+// Abstract class
+abstract class Animal {
+   abstract void sound();  // Abstract method
+ 
+   void sleep() {  // Concrete method
+      System.out.println("Sleeping...");
+   }
+}
+ 
+// Subclass that provides implementation
+class Dog extends Animal {
+   void sound() {
+      System.out.println("Dog barks");
+   }
+}
+ 
+ 
+public class Main {
+   public static void main(String[] args) {
+       Animal myDog = new Dog();
+       myDog.sound();  // Outputs: Dog barks
+      myDog.sleep();  // Outputs: Sleeping...
+   }
+}
+Key Points
+An abstract class cannot be instantiated directly.
+It can have both abstract and non-abstract methods.
+A class that extends the abstract class must implement all its abstract methods, unless it's also declared abstract.
+Abstract classes can have constructors, fields, and static methods.
+When to Use Abstract Classes
+Use abstract classes when:
+You want to define a common base class with default behavior.
+You expect subclasses to implement specific methods.
+You want to enforce a contract but also provide partial implementation.
+ 
+ package pkg_oops;
+ 
+public interface ICar {
+
+	public abstract void gears();
+
+	void engine();
+
+	void color();
+
+	void frontMirror();
+
+	void rearMirror();
+
+	void brakeSystem();
+
+	void acceleration();
+
+	void tyreDia();
+
+	void fuelTank();
+
+	void airBags();
+
+	void soundSystem();
+
+	void steeringType();
+
+	void maxSpeed();
+
+	void mileage();
+
+	void bootSpace();
+
+	void seatingCapacity();
+
+}
+
+interface ICar2 extends ICar{
+
+	void autoParking();
+
+}
+ 
+package pkg_oops;
+ 
+//class Mercedez implements ICar,ICar2{
+
+class Mercedez implements ICar2{
+ 
+	public void gears() {
+
+		System.out.println("7 gears");
+
+	}
+
+	public void steeringType() {
+
+		System.out.println("With Sound Controls and Cruise Control");
+
+	}
+
+	public void tyreDia() {
+
+		System.out.println("90 cms");
+
+	}
+
+	public void engine() {
+
+		System.out.println("1600 cc");
+
+	}
+
+	public void mileage() {
+
+		System.out.println("12 kms");
+
+	}
+
+	public void acceleration() {
+
+		System.out.println("0 to 100 in 10 secs");
+
+	}
+
+	public void seatingCapacity() {
+
+		System.out.println("7 seater");
+
+	}
+
+	public void color() {
+
+		System.out.println("Black");
+
+	}
+
+	public void bootSpace() {
+
+		System.out.println("450 Ltr.");
+
+	}
+
+	public void frontMirror() {
+
+		System.out.println("2 front mirrors");
+
+	}
+
+	public void rearMirror() {
+
+		System.out.println("4 rear mirrors");
+
+	}
+
+	public void fuelTank() {
+
+		System.out.println("60 litres");
+
+	}
+
+	public void soundSystem() {
+
+		System.out.println("JBL Sound System");
+
+	}
+
+	public void airBags() {
+
+		System.out.println("8 airbags");
+
+	}
+
+	public void maxSpeed() {
+
+		System.out.println("Maxspeed: 350");
+
+	}
+
+	public void brakeSystem() {
+
+		System.out.println("Dual ATS brake System");
+
+	}
+
+	@Override
+
+	public void autoParking() {
+
+		System.out.println("AutoParking Fetaure is present in Mercedez G9");
+
+	}
+
+}
+
+ 
+package pkg_oops;
+ 
+public class CarReady {
+ 
+	public static void main(String[] args) {
+
+		ICar2 mercedez = new Mercedez();
+
+		mercedez.acceleration();
+
+		mercedez.airBags();
+
+		mercedez.bootSpace();
+
+		mercedez.brakeSystem();
+
+		mercedez.color();
+
+		mercedez.engine();
+
+		mercedez.frontMirror();
+
+		mercedez.fuelTank();
+
+		mercedez.gears();
+
+		mercedez.maxSpeed();
+
+		mercedez.mileage();
+
+		mercedez.rearMirror();
+
+		mercedez.seatingCapacity();
+
+		mercedez.soundSystem();
+
+		mercedez.steeringType();
+
+		mercedez.tyreDia();
+
+		mercedez.autoParking();
+
+	}
+ 
+}
+
+ Interface in Java
+An interface is a reference type that defines a contract for what a class can do, without specifying how it does it. It is a blueprint of a class, containing only abstract methods (until Java 7), and from Java 8 onwards, it can also contain default and static methods.
+Syntax of an Interface
+interface Car{
+   void sound(); // abstract method
+}
+Example: Interface in Action
+// Define an interface
+interface Animal {
+   void sound();  // abstract method
+}
+ 
+// Implementing the interface
+class Dog implements Animal {
+   public void sound() {
+      System.out.println("Dog barks");
+   }
+}
+ 
+class Cat implements Animal {
+   public void sound() {
+      System.out.println("Cat meows");
+   }
+}
+ 
+public class Main {
+   public static void main(String[] args) {
+       Animal myDog = new Dog();
+       Animal myCat = new Cat();
+ 
+      myDog.sound();  // Outputs: Dog barks
+      myCat.sound();  // Outputs: Cat meows
+   }
+}
+Key Features of Interfaces
+ 
+Feature
+	
+Description
+
+
+Methods
+	
+Abstract by default (until Java 7). Java 8+ allows default and static methods.
+
+
+Fields
+	
+public, static, and final by default (constants).
+
+
+Inheritance
+	
+A class can implement multiple interfaces (unlike extending only one class).
+
+
+Access Modifiers
+	
+All interface methods are implicitly public abstract.
+
+
+MCQ – Interface and an Abstract class in Java
+Which of the following can an interface contain in Java 7?
+
+A. Constructors
+
+B. Instance variables
+
+C. Abstract methods
+
+D. Static blocks
+Answer: C
+What is the default modifier for members in an interface?
+
+A. private
+
+B. protected
+
+C. public and abstract
+
+D. default
+Answer: C
+Which keyword is used to implement an interface in a class?
+
+A. extends
+
+B. inherits
+
+C. interface
+
+D. implements
+Answer: D
+Which of the following is NOT allowed in a Java 7 interface?
+
+A. public abstract methods
+
+B. constants
+
+C. method body
+
+D. multiple inheritance
+Answer: C
+What happens if a class does not implement all methods of an interface?
+
+A. Compilation succeeds
+
+B. Compilation fails
+
+C. Runtime error
+
+D. It becomes a final class
+Answer: B
+Can interfaces be instantiated directly in Java?
+
+A. Yes
+
+B. No
+
+C. Only if static
+
+D. Only in Java 8
+Answer: B
+How many interfaces can a class implement in Java?
+
+A. One
+
+B. Two
+
+C. Multiple
+
+D. Depends on JVM
+Answer: C
+
+
+ 
+Which of the following is a valid interface declaration?
+
+A. interface Test { void run(); }
+
+B. abstract interface Test { void run(); }
+
+C. interface Test() {}
+
+D. class interface Test {}
+Answer: A
+In Java 7, all variables declared in an interface are implicitly:
+
+A. private and static
+
+B. public and final
+
+C. public, static, and final
+
+D. protected and abstract
+Answer: C
+What type of inheritance is allowed with interfaces in Java 7?
+
+A. Single
+
+B. Hybrid
+
+C. Multilevel
+
+D. Multiple 
+Answer: D
+Which method is used to resolve conflicts when two interfaces have the same method signature?
+
+A. super.methodName()
+
+B. InterfaceName.super.methodName()
+
+C. Override in the class
+
+D. Cannot resolve
+Answer: C
+Can an interface extend multiple interfaces in Java 7?
+
+A. Yes
+
+B. No
+
+C. Only one
+
+D. It depends
+Answer: A
+Which of the following statements is true about interfaces in Java?
+
+A. An interface can have private methods
+
+B. Interfaces can have constructors
+
+C. An interface can extend a class
+
+D. An interface can extend multiple interfaces
+Answer: D
+Which file extension is used for compiled Java interfaces?
+
+A. .int
+
+B. .interface
+
+C. .java
+
+D. .class
+Answer: D
+
+
+ 
+Which of the following is true about interface methods in Java 7?
+
+A. They are always static
+
+B. They must have a body
+
+C. They are abstract by default
+
+D. They can be protected
+Answer: C
+
+
+ 
+Which keyword is used to declare an abstract class in Java?
+
+A. virtual
+
+B. interface
+
+C. abstract
+
+D. static
+Answer: C
+What is the main purpose of an abstract class?
+
+A. To create static methods only
+
+B. To avoid inheritance
+
+C. To provide partial implementation
+
+D. To define constants
+Answer: C
+Can an abstract class be instantiated?
+
+A. Yes
+
+B. No
+
+C. Only in main method
+
+D. If it has only static methods
+Answer: B
+Which of the following is NOT allowed in an abstract class?
+
+A. Constructors
+
+B. Abstract methods
+
+C. Static methods
+
+D. Direct object instantiation
+Answer: D
+Which of the following is true about abstract methods?
+
+A. They can have a body
+
+B. They must be declared in abstract classes only
+
+C. They are optional in abstract classes
+
+D. They must be private
+Answer: B
+What happens if a class extends an abstract class but does not implement all abstract methods?
+
+A. Compilation succeeds
+
+B. The class becomes abstract
+
+C. It becomes an interface
+
+D. Compilation fails
+Answer: D
+****Can an abstract class implement an interface in Java 7?
+
+A. No
+
+B. Yes, and implement all methods
+
+C. Yes, even without implementing all methods
+
+D. Only if the class is final
+Answer: C
+
+
+ 
+Which of the following is a correct abstract method declaration?
+
+A. public void run() {}
+
+B. public abstract void run();
+
+C. private abstract void run();
+
+D. abstract run();
+Answer: B
+What can an abstract class have that an interface in Java 7 cannot?
+
+A. Constant variables
+
+B. Static methods
+
+C. Constructors and non-abstract methods
+
+D. Abstract methods
+Answer: C
+Which statement is true about abstract classes and interfaces in Java 7?
+
+A. Both can have constructors
+
+B. Interfaces can have implemented methods
+
+C. Abstract classes can have both abstract and concrete methods
+
+D. Interfaces are used only for inheritance
+Answer: C
+ 
+ Java 8 interface enhancements
+Java 8 introduced significant enhancements to interfaces, allowing them to include behavior (code), not just declarations. This was a major shift from previous versions of Java.
+Java 8 Interface Enhancements
+Default Methods
+Static Methods
+Functional Interfaces – This interface has only 1 abstract method and if you annotate the interface with @FunctionalInterface then you cannot ADD ANOTHER ABSTRACT METHOD.
+@FunctionalInterface Annotation
+1. Default Methods
+Allow interfaces to have concrete methods with default implementation.
+Useful for adding methods to existing interfaces without breaking implementing classes.
+interface MyInterface {
+   default void show() {
+      System.out.println("Default show implementation");
+   }
+}
+Implementing class can use or override this method.
+class MyClass implements MyInterface {
+   // Optional override
+}
+2. Static Methods in Interfaces
+Interfaces can now have static utility methods.
+interface MyInterface {
+   static void display() {
+      System.out.println("Static method in interface");
+   }
+}
+Called using the interface name:
+MyInterface.display();
+3. Functional Interfaces
+An interface with only one abstract method (can have multiple default/static methods).
+Used heavily in lambda expressions and Streams API.
+@FunctionalInterface
+interface Calculator {
+   int operate(int a, int b);
+}
+Example with lambda:
+Calculator add = (a, b) -> a + b;
+System.out.println(add.operate(5, 3)); // Output: 8
+4. @FunctionalInterface Annotation
+Optional but helpful annotation.
+Ensures the interface has exactly one abstract method.
+Compiler will throw an error if more than one is added.
+@FunctionalInterface
+interface Converter {
+   String convert(String input);
+}
+ 
+Summary Table
+Feature
+	
+Description
+
+
+default methods
+	
+Concrete methods with default logic
+
+
+static methods
+	
+Utility methods called via interface name
+
+
+Functional interfaces
+	
+One abstract method (used with lambdas)
+
+
+@FunctionalInterface
+	
+Compile-time validation for functional interfaces
+ 
+  
+Lambda Expression
+Lambda expressions in Java were introduced in Java 8 as part of the effort to support functional programming. They provide a clear and concise way to represent one method interface (i.e., functional interfaces) using an anonymous function—meaning a function without a name.
+What Is a Lambda Expression?
+A lambda expression is a short block of code that takes in parameters and returns a value. It can be passed around and executed later.
+Basic Syntax:
+()-> expression
+Or
+(parameters) -> expression
+Or:
+(parameters) -> {statements;}
+Lambda Expression Syntax
+Component
+	
+Example
+	
+Description
+
+
+No parameters
+	
+() -> System.out.println("Hi")
+	
+No input arguments
+
+
+One parameter
+	
+x -> x * x
+	
+Parentheses optional for one arg
+
+
+Multiple params
+	
+(x, y) -> x + y
+	
+Must use parentheses
+
+
+With body
+	
+(x, y) -> { return x + y; }
+	
+Use {} when multiple statements
+Example Using Custom Functional Interface
+// Step 1: Create a functional interface
+@FunctionalInterface
+interface Greet {
+   void sayHello();   // No parameters
+}
+public class LambdaNoParam {
+   public static void main(String[] args) {
+       // Step 2: Use lambda expression to implement the interface
+       Greet greet = () -> System.out.println("Hello from lambda!");
+       // Step 3: Call the method
+      greet.sayHello();
+   }
+}
+Example 2
+Custom Functional Interface with parameters
+@FunctionalInterface
+interface MathOperation {
+   int operate(int a, int b);
+}
+ 
+public class LambdaExample {
+   public static void main(String[] args) {
+       MathOperation add = (a, b) -> a + b;
+      System.out.println(add.operate(5, 3)); 
+   }
+}
+Example with Body (Custom Functional Interface)
+@FunctionalInterface
+interface Greet {
+   void sayHello();
+}
+public class LambdaExample {
+   public static void main(String[] args) {
+       // Lambda with a multi-line body
+       Greet greet = () -> {
+          System.out.println("Hello!");
+          System.out.println("This is a multi-line lambda body.");
+       };
+      greet.sayHello();
+   }
+}
+
+
+ 
+Example: Add, Subtract, Multiply, Divide Using Lambdas
+// Step 1: Create a functional interface
+@FunctionalInterface
+interface MathOperation {
+   double operate(double a, double b);
+}
+class Main{
+   public static void main(String[] args) {
+       // Step 2: Define lambda expressions for each operation
+       MathOperation add = (a, b) -> a + b;
+       MathOperation subtract = (a, b) -> a - b;
+       MathOperation multiply = (a, b) -> a * b;
+       MathOperation divide = (a, b) -> {
+           if (b == 0) {
+              System.out.println("Cannot divide by zero");
+               return 0;
+           }
+           return a / b;
+       };
+       // Step 3: Use the lambdas
+       double x = 100, y = 50;
+      System.out.println("Addition: " + add.operate(x, y));       
+      System.out.println("Subtraction: " + subtract.operate(x, y)); 
+      System.out.println("Multiplication: " + multiply.operate(x, y)); 
+      System.out.println("Division: " + divide.operate(x, y)); 
+   }
+}
+
+
+ 
+Example with return statement
+@FunctionalInterface
+interface MathOperation {
+   double operate(double a, double b);
+}
+ 
+public class LambdaExample {
+   public static void main(String[] args) {
+       // Lambda expressions with return statements
+       MathOperation add = (a, b) -> { return a + b; };
+       MathOperation subtract = (a, b) -> { return a - b; };
+       MathOperation multiply = (a, b) -> { return a * b; };
+       MathOperation divide = (a, b) -> {
+           if (b == 0) {
+              System.out.println("Cannot divide by zero");
+               return 0;
+           }
+           return a / b;
+       };
+ 
+       double x = 100, y = 40;
+ 
+      System.out.println("Addition: " + add.operate(x, y));         
+      System.out.println("Subtraction: " + subtract.operate(x, y)); 
+      System.out.println("Multiplication: " + multiply.operate(x, y)); 
+      System.out.println("Division: " + divide.operate(x, y));   
+   }
+}
+
+Packages
+
+In Java, packages are used to group related classes, interfaces, and sub-packages together. They help:
+
+· Organize code logically
+
+· Avoid class name conflicts
+
+· Control access using access modifiers
+
+· Make code easier to maintain and reuse
+
+
+Types of Packages in Java
+
+1. Built-in Packages
+
+o Provided by Java API
+
+o Examples:
+
+§ java.lang – core classes (String, Math, etc.)
+
+§ java.util – data structures (ArrayList, HashMap)
+
+§ java.io – input/output classes
+
+§ java.net – networking
+
+§ javax.swing – GUI components
+
+§ java.sql - JDBC
+
+2. User-defined Packages
+
+o Created by the programmer to organize their own classes
+
+
+Creating a Package (User-defined)
+
+1. Create a file called MyClass.java:
+
+package mypackage; // Declare package at the top
+
+public class MyClass {
+
+public void display() {
+
+System.out.println("Hello from MyClass in mypackage!");
+
+}
+
+}
+
+
+2. Compile with:
+
+javac -d . MyClass.java
+
+This creates a folder named mypackage with the compiled class inside.
+
+
+Using a Package
+
+import mypackage.MyClass;
+
+public class Test {
+
+public static void main(String[] args) {
+
+MyClass obj = new MyClass();
+
+obj.display();
+
+}
+
+}
+
+Compile both classes, then run the Test class.
+
+
+Important Points
+
+· package declaration must be the first line (excluding comments).
+
+· Use import to access classes from other packages.
+
+· The -d flag in javac sets the destination for class files, helping maintain package structure.
+ 

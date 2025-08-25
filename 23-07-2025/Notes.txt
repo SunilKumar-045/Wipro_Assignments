@@ -1,0 +1,913 @@
+23/07/2025
+
+package pkg_oops;
+ 
+class Car{
+	//class variables or instance variables
+	private String model;
+	private int make_year;
+	//Constructor
+	//1. A constructor always has the same name as class name.
+	//2. Whenever the object of the class is created or
+	//   instantiated, the default[Car(){}] or user-defined constructor
+	//   of that class is INVOKED and all the class variales
+	//   are initialized to their DEFAULT VALUE.
+	Car(String model,int make_year){
+		//this refers to the object of the current class.
+		this.model=model;
+		this.make_year=make_year;
+	}
+	//Business Logic
+	 public void printDetails() {
+		 System.out.println("Model of the Car is: "+model);
+		 System.out.println("Year: "+make_year);
+	 }
+}
+ 
+public class WB7JS {
+	public static void main(String[] args) {
+		//create an object of the class
+		Car car = new Car("Mercedez",2025);
+		car.printDetails();
+	}
+}
+ What is a Class?
+A class in Java is a blueprint or template for creating objects. It defines fields (class variables) and methods (functions) that describe the behavior and properties of the object.
+Syntax:
+class ClassName {
+   // Fields (variables)
+   int number;
+   String name;
+ 
+   // Method
+   void display() {
+      System.out.println("Number: " + number + ", Name: " + name);
+   }
+}
+What is an Object?
+An object is an instance of a class. When a class is defined, no memory is allocated until an object of that class is created using the new keyword.
+Syntax:
+ClassName obj = new ClassName(); // obj is created using new keyword
+Example:
+// Define a class
+class Car {
+   // Fields
+   String model;
+   int year;
+   // Method
+   void displayDetails() {
+      System.out.println("Model: " + model);
+      System.out.println("Year: " + year);
+   }
+}
+ 
+// Main class
+public class Main {
+   public static void main(String[] args) {
+       // Create an object
+       Car myCar = new Car();
+      
+       // Assign values
+       myCar.model = "Honda";
+       myCar.year = 2025;
+ 
+       // Call method
+      myCar.displayDetails();
+   }
+}
+Output:
+Model: Honda
+Year: 2025
+Key Points:
+Term
+	
+Description
+
+
+Class
+	
+Template/blueprint for objects
+
+
+Object
+	
+Instance of a class
+
+
+Fields
+	
+Variables defined in a class
+
+
+Methods
+	
+Functions defined in a class
+
+
+new
+	
+Keyword to create objects
+ 
+                                                                          ------------
+ Template for the class CAR
+-----------------------------
+package pkg_oops;
+ 
+class Car{
+
+	//class variables or instance variables
+
+	private String model;
+
+	private int make_year;
+
+
+	public Car() {
+
+		System.out.println("Demo Car for trial run");
+
+	}
+ 
+	//Constructor using fields 
+
+	public Car(String model, int make_year) {
+
+		this.model = model;
+
+		this.make_year = make_year;
+
+	}
+ 
+	//Getters and Setters
+
+	public String getModel() {
+
+		return model;
+
+	}
+ 
+	public void setModel(String model) {
+
+		this.model = model;
+
+	}
+ 
+	public int getMake_year() {
+
+		return make_year;
+
+	}
+ 
+	public void setMake_year(int make_year) {
+
+		this.make_year = make_year;
+
+	}
+ 
+	@Override
+
+	public String toString() {
+
+		return "Car [model=" + model + ", make_year=" + make_year + "]";
+
+	}
+
+}
+
+ CarImpl class
+---------------
+package pkg_oops;
+ 
+public class CarImpl {
+ 
+	public static void main(String[] args) {
+		Car car = new Car("Mercedez",2025);
+		System.out.println(car);
+		Car newcar = new Car("BMW",2025);
+		System.out.println(newcar);
+		Car democar = new Car();
+	}
+ 
+}
+
+package pkg_oops;
+ 
+public class ClassVar {
+
+	private int id;
+
+	private String name;
+
+	public void getData() {
+
+		id=102;
+
+		name="Steve";
+
+	}
+
+	public void printData() {
+
+		System.out.println("Id: "+id);
+
+		System.out.println("Name: "+name);
+
+	}
+
+	public static void main(String[] args) {
+
+		// TODO Auto-generated method stub
+
+		ClassVar obj = new ClassVar ();
+
+		obj.getData();
+
+		obj.printData();
+
+	}
+ 
+}
+
+ 
+package pkg_oops;
+
+class Student{
+
+	//instance variables belong to the object
+
+	int id;
+
+	String name;
+
+	int rollNo;
+
+	//static varibales belong to the class
+
+	// A single copy in the memory and shared by every object.
+
+	static int groupId;
+
+}
+
+public class ClassVar {
+
+	public static void main(String[] args) {
+
+		Student s1 = new Student();
+
+		s1.id=101;
+
+		System.out.println("Student 1 Id: "+s1.id);
+
+		Student s2 = new Student();
+
+		System.out.println("Student 2 Id: "+s2.id);
+
+		Student s3 = new Student();
+
+		Student s4 = new Student();
+
+		Student s5 = new Student();
+
+		s3.groupId=101;
+
+		System.out.println("Group Id for Student 3: "+s3.groupId);
+
+		System.out.println("Group Id for Student 4: "+s4.groupId);
+
+		s5.groupId=105;
+
+		System.out.println("Group Id for Student 3: "+s3.groupId);
+
+		System.out.println("Group Id for Student 4: "+s4.groupId);
+
+		System.out.println("Group Id for Student 5: "+s3.groupId);
+
+
+
+	}
+ 
+}
+
+ 
+ 
+Variable Types in Java
+In Java, variables are containers that hold data values. Each variable must be declared with a type, which determines the size and layout of the variable’s memory.
+Types of Variables in Java
+Java variables can be categorized in two main ways:
+1. Based on Data Type:
+Primitive Types (8 types)
+Type
+	
+Size
+	
+Example
+	
+Description
+
+
+byte
+	
+1 byte
+	
+byte b = 10;
+	
+Small integers (-128 to 127)
+
+
+short
+	
+2 bytes
+	
+short s = 1000;
+	
+Larger than byte -32768 to +32767
+
+
+Int
+	
+4 bytes
+	
+int x = 25;
+	
+Common for integers
+
+
+long
+	
+8 bytes
+	
+long l = 123456L;
+	
+Very large integers
+
+
+float
+	
+4 bytes
+	
+float f = 2.5f;
+	
+Decimal numbers (less precision)
+
+
+double
+	
+8 bytes
+	
+double d = 3.1415;
+	
+Decimal numbers (more precision)
+
+
+char
+	
+2 bytes
+	
+char c = 'A';
+	
+Single characters
+
+
+boolean
+	
+1 bit
+	
+boolean b = true;
+	
+True or false
+Reference or Non-Primitive  Types
+Store references (addresses) to objects.
+Examples:
+String name = "Alice"; // String is a reference type
+int[] arr = {1, 2, 3}; // Arrays are reference types
+Car myCar = new Car(); // Custom class object
+2. Based on Scope and Lifetime:
+Local Variables
+Declared inside methods or blocks.
+Only accessible within the method.
+Must be initialized before use.
+
+
+ 
+void print() {
+   int x = 10; // local variable
+  System.out.println(x);
+}
+Instance Variables (Non-static Fields)
+Declared inside a class but outside methods.
+Each object gets its own copy.
+class Dog {
+   String breed; // instance variable
+}
+Static Variables (Class Variables)
+Declared with the static keyword.
+Shared among all instances of the class.
+class Counter {
+   static int count = 0; // static variable
+}
+Summary Table:
+Variable Type
+	
+Scope
+	
+Stored in
+	
+Example
+
+
+Local Variable
+	
+Method/block
+	
+Stack
+	
+int x = 5; in a method
+
+
+Instance Variable
+	
+Object
+	
+Heap
+	
+String name; in a class
+
+
+Static Variable
+	
+Class
+	
+Method Area
+	
+static int count = 0;
+ 
+ Person Class
+---------------
+package pkg_oops;
+ 
+// Implementing one of the OOPS principles - Encapsulation
+
+public class Person {
+
+	// Private variables - data hiding
+
+	private String name;
+
+	private int age;
+ 
+	// Public getter method for name
+
+	public String getName() {
+
+		return name;
+
+	}
+ 
+	// Public setter method for name
+
+	public void setName(String newName) {
+
+		name = newName;
+
+	}
+ 
+	// Public getter method for age
+
+	public int getAge() {
+
+		return age;
+
+	}
+ 
+	// Public setter method for age
+
+	public void setAge(int newAge) {
+
+		if (newAge > 0) {
+
+			age = newAge;
+
+		} else {
+
+			System.out.println("Age must be positive.");
+
+		}
+
+	}
+
+}
+
+
+ 
+Person Implementation
+--------------------------
+package pkg_oops;
+ 
+public class PersonImpl {
+ 
+	public static void main(String[] args) {
+
+		// TODO Auto-generated method stub
+
+		Person person = new Person();
+
+		//Setting the variable values
+
+		person.setName("Alex");
+
+		person.setAge(21);
+
+		//Getting the Person details
+
+		System.out.println("Person Name: "+person.getName());
+
+		System.out.println("Person Age: "+person.getAge());
+
+	}
+ 
+}
+
+ 
+ 
+ 
+
+Encapsulation in Java
+Definition:
+Encapsulation is one of the four fundamental Object-Oriented Programming (OOP) principles. It refers to the practice of wrapping data (variables) and code (methods) together into a single unit (class), and restricting direct access to some of the object's components. This is usually done by:
+Making variables private.
+Providing public getter and setter methods to access and update the values.
+This helps protect the internal state of an object from unintended or harmful modifications and promotes modular, maintainable code.
+Example in Java:
+// A simple example of encapsulation
+ 
+public class Person {
+   // Private variables - data hiding
+   private String name;
+   private int age;
+ 
+   // Public getter method for name
+   public String getName() {
+       return name;
+   }
+ 
+   // Public setter method for name
+   public void setName(String newName) {
+       name = newName;
+   }
+ 
+   // Public getter method for age
+   public int getAge() {
+       return age;
+   }
+ 
+ 
+   // Public setter method for age
+   public void setAge(int newAge) {
+       if (newAge > 0) {
+           age = newAge;
+       } else {
+          System.out.println("Age must be positive.");
+       }
+   }
+}
+Implementation:
+public class Main {
+   public static void main(String[] args) {
+       Person p = new Person();
+      
+      p.setName("Alice");
+       p.setAge(25);
+ 
+      System.out.println("Name: " + p.getName());
+      System.out.println("Age: " + p.getAge());
+   }
+}
+Benefits of Encapsulation:
+Protects data from unwanted access or modification.
+Makes code easier to maintain and understand.
+Enables control over how data is accessed or modified (e.g., through validation in setters).
+Increases flexibility and reusability of code.
+ 
+-----------
+
+Abstraction in Java:
+Definition:
+Abstraction is an Object-Oriented Programming (OOP) principle that hides complex internal implementation and shows only the essential features of an object.
+In Java, abstraction is achieved using:
+Abstract classes
+Interfaces
+This allows the user to focus on what an object does, instead of how it does it.
+ 
+Abstraction Example using java.lang.Number
+java.lang.Number is an abstract class in Java. It serves as a base class for numeric wrapper classes like Integer, Double, Float, etc.
+Hierarchy Overview:
+java.lang.Number (abstract)
+│
+├── Integer
+├── Double
+├── Float
+├── Long
+└── Short
+ 
+Here's how it works:
+Number defines abstract methods like intValue(), doubleValue(), etc.
+Subclasses like Integer and Double implement those methods.
+Example:
+public class AbstractionExample{
+   public static void main(String[] args) {
+       // Using the abstract class Number via its subclass Integer
+       Number num = new Integer(42);
+ 
+      System.out.println("Integer value: " + num.intValue());
+      System.out.println("Double value: " + num.doubleValue());
+   }
+}
+Explanation:
+Number is abstract — you can't create an instance of it directly.
+Integer is a concrete subclass of Number.
+The intValue() and doubleValue() methods are abstract methods in Number, implemented by Integer.
+Conclusion:
+This is a real-world abstraction example in the Java core API:
+The Number class hides the implementation details.
+Concrete subclasses like Integer and Double provide specific behaviors.
+ 
+ 
+ 
+ //CreditCardPayment
+
+class CreditCardPayment {
+
+	public void makePayment(double amount) {
+
+		amount = amount-(0.2*amount);
+
+		System.out.println("Credit card payment of $" + amount + " processed.");
+
+	}
+
+}
+
+//PayPalPayment
+
+class PayPalPayment {
+
+	public void makePayment(double amount) {
+
+		amount = amount-100;
+
+		System.out.println("PayPal payment of $" + amount + " processed.");
+
+	}
+
+}
+
+class CreditCard {
+
+	public static void main(String[] args) {
+
+		CreditCardPayment creditPay = new CreditCardPayment();
+
+		creditPay.makePayment(1000.0);
+ 
+		PayPalPayment paypal = new PayPalPayment();
+
+		paypal.makePayment(2000.0);
+ 
+	}
+
+}
+
+ What is Inheritance in Java?
+Inheritance is a feature in Java where a class (called subclass or child) inherits fields and methods from another class (called superclass or parent).
+
+It promotes code reusability and establishes a parent-child relationship between classes.
+Syntax:
+class Child extends Parent {
+   // Child class inherits Parent's properties and methods
+}
+Types of Inheritance in Java
+1. Single Inheritance
+One class inherits from one superclass.
+class Animal {
+   void sound() {
+      System.out.println("Animal makes a sound");
+   }
+}
+ 
+class Dog extends Animal {
+void bark() {
+      System.out.println("Dog barks");
+   }
+}
+ 
+public class Main {
+   public static void main(String[] args) {
+       Dog d = new Dog();
+       d.sound(); // Inherited method
+       d.bark();
+   }
+}
+
+
+ 
+2. Multilevel Inheritance
+A class inherits from another class, which itself inherits from another.
+class Grandparent {
+   void show1() {
+      System.out.println("Grandparent method");
+   }
+}
+ 
+class Parent extends Grandparent {
+   void show2() {
+      System.out.println("Parent method");
+   }
+}
+class Child extends Parent {
+   void show3() {
+      System.out.println("Child method");
+   }
+}
+ 
+public class Main {
+   public static void main(String[] args) {
+       Child c = new Child();
+       c.show1(); // from Grandparent
+       c.show2(); // from Parent
+       c.show3(); // from Child
+   }
+}
+
+
+ 
+3. Hierarchical Inheritance
+Multiple classes inherit from a single parent class.
+class Vehicle {
+   void start() {
+      System.out.println("Vehicle started");
+   }
+}
+ 
+class Car extends Vehicle {
+   void drive() {
+      System.out.println("Car is driving");
+   }
+}
+ 
+class Bike extends Vehicle {
+   void ride() {
+      System.out.println("Bike is riding");
+   }
+}
+ 
+public class Main {
+   public static void main(String[] args) {
+       Car car = new Car();
+       Bike bike = new Bike();
+       car.start();
+       car.drive();
+       bike.start();
+       bike.ride();
+   }
+}
+4. Multiple Inheritance (using Interfaces)
+Java doesn't support multiple inheritance with classes, but you can achieve it using interfaces.
+ 
+ class MathUtils {
+
+    // Method with 1 int parameter
+
+    int add(int a) {
+
+        return a;
+
+    }
+ 
+    // Method with 2 int parameters
+
+    int add(int a, int b) {
+
+        return a + b;
+
+    }
+ 
+    // Method with 3 int parameters
+
+    int add(int a, int b, int c) {
+
+        return a + b + c;
+
+    }
+
+	double add(double a,int b,int c){
+
+		return a*b*c;
+
+	}
+
+}
+ 
+class Main {
+
+    public static void main(String[] args) {
+
+        MathUtils mu = new MathUtils();
+
+        System.out.println(mu.add(5));            // Output: 5
+
+        System.out.println(mu.add(5, 10));        // Output: 15
+
+        System.out.println(mu.add(5, 10, 15));    // Output: 30
+
+		System.out.println(mu.add(5.0, 10, 15));    // Output: 30
+
+	}
+
+}
+
+  
+Polymorphism
+Polymorphism in Java is one of the core concepts of object-oriented programming (OOP). It allows objects of different classes to be treated as objects of a common super class. The main goal of polymorphism is to write more flexible and reusable code.
+Types of Polymorphism in Java
+Compile-time polymorphism (Method Overloading)
+Runtime polymorphism (Method Overriding)
+1. Compile-Time Polymorphism (Method Overloading)
+This occurs when multiple methods have the same name but different parameter lists in the same class.
+Example:
+class MathUtils {
+   // Method with 1 int parameter
+   int add(int a) {
+       return a + 0;
+   }
+ 
+   // Method with 2 int parameters
+   int add(int a, int b) {
+       return a + b;
+   }
+ 
+   // Method with 3 int parameters
+   int add(int a, int b, int c) {
+       return a + b + c;
+   }
+}
+ 
+public class Main {
+   public static void main(String[] args) {
+       MathUtils mu = new MathUtils();
+      System.out.println(mu.add(5));           // Output: 5
+      System.out.println(mu.add(5, 10));       // Output: 15
+      System.out.println(mu.add(5, 10, 15));   // Output: 30
+   }
+}
+2. Runtime Polymorphism (Method Overriding)
+This occurs when a subclass provides a specific implementation of a method already defined in its superclass.
+Example:
+class Animal {
+   void sound() {
+      System.out.println("Animal makes a sound");
+   }
+}
+ 
+class Dog extends Animal {
+   @Override
+   void sound() {
+      System.out.println("Dog barks");
+   }
+}
+ 
+class Cat extends Animal {
+   @Override
+   void sound() {
+      System.out.println("Cat meows");
+   }
+}
+ 
+public class Main {
+   public static void main(String[] args) {
+       Animal a; // reference of superclass
+ 
+      
+a = new Dog();
+       a.sound(); // Output: Dog barks
+ 
+       a = new Cat();
+       a.sound(); // Output: Cat meows
+   }
+}
+Key Benefits of Polymorphism
+Code reusability
+Loose coupling
+Easy to scale and maintain
+ 
+ package pkg_oops;
+ 
+public class SplitMethod {
+	public static void main(String[] arhs) {
+		String cars ="Audi,BMW,Mercedez,Range Rover";
+		String[] favcars= cars.split(",");
+		for(String mycars:favcars) {
+			System.out.println(mycars);
+		}
+	}
+}

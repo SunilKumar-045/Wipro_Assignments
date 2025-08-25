@@ -1,0 +1,1677 @@
+30/07/2025
+
+In HashSet always override the hashcode and equals methods to avoid duplicates in sets
+HashSet
+HashSet again a part of Java's Collections Framework and implements the Set interface. It is used to create a collection that does not allow duplicate elements. (Because it is a part of Set interface)
+Internally, HashSet uses a HashMap to store its elements.
+Key Features of HashSet
+Feature
+	
+Description
+
+
+No duplicates
+	
+Only unique elements are allowed
+
+
+No ordering
+	
+Elements are not stored in the order they were inserted
+
+
+Allows null
+	
+Only one null element is allowed
+
+
+Not synchronized
+	
+Use Collections.synchronizedSet() for thread safety
+
+
+NOTE: Backed by HashMap
+	
+Uses hashing mechanism for storage
+Class Declaration
+public class HashSet<E> extends AbstractSet<E>
+   implements Set<E>, Cloneable, Serializable
+Commonly Used Constructors
+HashSet()                         // Default initial capacity (16) and load factor (0.75)
+HashSet(int initialCapacity)     // Set initial capacity
+HashSet(int initialCapacity, float loadFactor)
+HashSet(Collection<? extends E> c) // Create set with elements from a collection
+
+Common Methods in HashSet
+Method
+	
+Description
+
+
+add(E e)
+	
+Adds the specified element
+
+
+remove(Object o)
+	
+Removes the specified element
+
+
+contains(Object o)
+	
+Returns true if element exists
+
+
+size()
+	
+Returns number of elements
+
+
+isEmpty()
+	
+Checks if the set is empty
+
+
+clear()
+	
+Removes all elements
+
+
+iterator()
+	
+Returns an iterator over elements
+
+
+clone()
+	
+Returns a shallow copy
+
+
+toArray()
+	
+Converts the HashSet to an array
+
+Example of HashSet
+import java.util.*;
+public class HashSetExample {
+   public static void main(String[] args) {
+       // Create HashSet
+      HashSet<String> set = new HashSet<>();
+ 
+       // Add elements
+      set.add("Apple");
+      set.add("Banana");
+       set.add("Orange");
+      set.add("Apple"); // duplicate, will not be added
+ 
+       // Print HashSet
+      System.out.println("HashSet: " + set);
+ 
+       // Check if element exists
+      System.out.println("Contains 'Banana'? " + set.contains("Banana"));
+ 
+       // Remove an element
+      set.remove("Banana");
+ 
+       // Size of set
+      System.out.println("Size: " + set.size());
+ 
+ 
+ 
+ 
+      // Iterate using for-each
+       for (String fruit : set) {
+          System.out.println(fruit);
+       }
+ 
+       // Clear the set
+       set.clear();
+              System.out.println(fruits);
+      System.out.println("Is empty? " + set.isEmpty());
+   }
+
+}
+How HashSet Works
+HashSet uses a HashMap to store elements.
+When you call add(element), it actually does:
+map.put(Banana, PRESENT);
+Here, PRESENT is a dummy constant value.
+
+Example: HashSet with Custom Objects
+To use custom objects in a HashSet, override equals() and hashCode() methods.
+import java.util.*;
+class Student {
+   private int id;
+   private String name;
+ 
+   public Student(int id, String name) {
+       this.id = id;
+       this.name = name;
+   }
+ 
+  
+ 
+ 
+// Override hashCode and equals
+   @Override
+   public int hashCode() {
+       return Objects.hash(id, name);
+   }
+ 
+   @Override
+   public boolean equals(Object obj) {
+       if (this == obj) return true;
+       if (!(obj instanceof Student)) return false;
+       Student other = (Student) obj;
+       return id == other.id && Objects.equals(name, other.name);
+   }
+ 
+   @Override
+   public String toString() {
+       return id + " - " + name;
+   }
+}
+ 
+public class CustomHashSet {
+   public static void main(String[] args) {
+      HashSet<Student> students = new HashSet<>();
+ 
+      students.add(new Student(1, "Steven"));
+      students.add(new Student(2, "Harry"));
+      students.add(new Student(1, "Harry")); // Duplicate
+ 
+       for (Student s : students) {
+          System.out.println(s);
+       }
+   }
+}
+Limitations of HashSet
+No ordering: Use LinkedHashSet if order matters.
+Not thread-safe: Use Collections.synchronizedSet() for thread safety.
+Poor performance if hashCode() is not well-distributed.
+Best Practices
+Always override equals() and hashCode() in custom classes.
+Use TreeSet if you need sorted elements.
+ 
+ Why hashCode() is Important in HashSet
+In Java, HashSet uses the hashCode() and equals() methods to determine whether two objects are the same (i.e., duplicates).
+hashCode() is used to find the bucket in which the object may be stored.
+equals() is used to compare the actual content for equality.
+Example: hashCode() in a Custom Class with HashSet
+import java.util.HashSet;
+import java.util.Objects;
+class Person {
+   private String name;
+   private int age;
+ 
+   Person(String name, int age) {
+       this.name = name;
+       this.age = age;
+   }
+ 
+   // Override hashCode() and equals()
+   @Override
+   public int hashCode() {
+       return Objects.hash(name, age); // Combines both fields
+   }
+ 
+   @Override
+   public boolean equals(Object obj) {
+       if (this == obj) return true;
+       if (!(obj instanceof Person)) return false;
+       Person p = (Person) obj;
+       return age == p.age && Objects.equals(name, p.name);
+   }
+ 
+  
+ 
+@Override
+   public String toString() {
+       return name + " (" + age + ")";
+   }
+}
+ 
+public class HashCodeDemo {
+   public static void main(String[] args) {
+      HashSet<Person> people = new HashSet<>();
+ 
+       Person p1 = new Person("Harry", 25);
+       Person p2 = new Person("Steven", 30);
+       Person p3 = new Person("Harry", 25); // Same as p1
+ 
+      people.add(p1);   // p1 is sharing a different memory loc
+      people.add(p2);
+      people.add(p3); // Will NOT be added (duplicate) // // p3 is sharing a different memory loc
+ 
+ 
+      System.out.println("People in HashSet:");
+       for (Person p : people) {
+          System.out.println(p + " - hashCode: " + p.hashCode());
+       }
+   }
+}
+Output
+People in HashSet:
+P1-Steven(25) - hashCode: 356573597
+P2=Harry(30) - hashCode: 1735600054
+P3 =Harry(25) is only added once, even though p3 is a separate object with the same data.
+ 
+ 
+ 
+Explanation
+Even though p1 and p3 are two different instances, hashCode() and equals() make them behave as the same in a HashSet.
+If you don't override hashCode() and equals(), both objects will be treated as different — leading to duplicates.
+What Happens Without hashCode() and equals()?
+If you remove or comment out those methods:
+@Override
+public int hashCode() { ... }
+@Override
+public boolean equals(Object obj) { ... }
+IMPORTANT:
+Then both p1 and p3 would be stored in the HashSet as different elements, because the default Object methods compare by memory address.
+ 
+When we do not override equals method checks for #hashcode so p1 and p3 has different address duplicate is possible.
+if we override equals method check for the content of p1 and p3 so duplicate is not possible
+
+
+
+ 
+TreeSet
+A TreeSet in Java is a NavigableSet implementation based on a Red-Black Tree (a self-balancing binary search tree). It stores elements in sorted (ascending) order and does not allow duplicates.
+What is a Red-Black Tree?
+A Red-Black Tree is a binary search tree (BST) with an added set of coloring rules (red or black) that ensure the tree remains balanced for insert, delete, and search operations.
+TreeSet Class Declaration
+public class TreeSet<E> extends AbstractSet<E>
+       implements NavigableSet<E>, Cloneable, Serializable
+
+Key Features of TreeSet
+Feature
+	
+Description
+
+
+Sorted
+	
+Maintains elements in natural order
+
+
+No Duplicates
+	
+Like other Set implementations
+
+
+Null Handling
+	
+Does not allow null in non-empty sets (throws NullPointerException)
+
+
+Not Thread-Safe
+	
+Use Collections.synchronizedSortedSet() if needed
+
+
+Backed by
+	
+Red-Black Tree
+Constructors
+TreeSet()                             // Natural ordering
+TreeSet(Comparator<? super E> comp)  // Custom comparator
+TreeSet(Collection<? extends E> c)   // Elements from a collection
+TreeSet(SortedSet<E> s)              // Elements from another sorted set
+Basic Example
+import java.util.TreeSet;
+public class TreeSet {
+   public static void main(String[] args) {
+      TreeSet<Integer> numbers = new TreeSet<>();
+      numbers.add(40);
+      numbers.add(10);
+      numbers.add(30);
+      numbers.add(20);
+      System.out.println("TreeSet: " + numbers); 
+      numbers.remove(30);
+      System.out.println("After removal: " + numbers);
+   }
+}
+Output:
+TreeSet: [10, 20, 30, 40]
+After removal: [10, 20, 40]
+Common TreeSet Methods
+Method
+	
+Description
+
+
+add(E e)
+	
+Adds element in sorted position
+
+
+remove(Object o)
+	
+Removes specified element
+
+
+contains(Object o)
+	
+Checks if element exists
+
+
+size()
+	
+Returns the number of elements
+
+
+clear()
+	
+Empties the set
+
+
+first() / last()
+	
+Returns first or last (smallest/largest) element
+
+
+ceiling(E e)
+	
+Least element ≥ given element
+
+
+ceil(floor(E e)
+	
+Greatest element ≤ given element
+
+
+higher(E e)
+	
+Strictly greater element
+
+
+lower(E e)
+	
+Strictly smaller element
+
+
+headSet(E to)
+	
+Elements < given value
+
+
+tailSet(E from)
+	
+Elements ≥ given value
+
+
+subSet(E from, E to)
+	
+Elements between values
+
+
+descendingSet()
+	
+Returns elements in descending order
+
+
+iterator()
+	
+Returns iterator in ascending order
+
+
+descendingIterator()
+	
+Iterator in descending order
+ 
+ 
+Example with Navigable Methods
+import java.util.TreeSet;
+public class TreeSetNavigation {
+   public static void main(String[] args) {
+      TreeSet<Integer> tree = new TreeSet<>();
+ 
+       tree.add(10);
+       tree.add(20);
+       tree.add(30);
+       tree.add(40);
+ 
+      System.out.println("TreeSet: " + tree);
+ 
+      System.out.println("First: " + tree.first());       // 10
+      System.out.println("Last: " + tree.last());         // 40
+      System.out.println("Higher than 20: " + tree.higher(20)); // 30
+      System.out.println("Lower than 20: " + tree.lower(20));   // 10
+      System.out.println("Ceiling of 25: " + tree.ceiling(25)); // 30
+      System.out.println("Floor of 25: " + tree.floor(25));     // 20
+   }
+}
+ 
+ collections.sort does not support custom class
+
+public class NameComparator implements Comparator<Student>{
+
+	public int compare(Student s1,Student s2) {
+
+		return s1.getName().compareTo(s2.getName());
+
+	}
+
+}
+ 
+public class AgeComparator implements Comparator<Student>{
+
+	public int compare(Student s1,Student s2) {
+
+		return Integer.compare(s1.getAge(),s2.getAge());
+
+	}
+
+}
+ 
+package pkg_comparator;
+ 
+public class Student {
+
+	private String name;
+
+	private int age;
+
+	public Student() {
+
+		super();
+
+		// TODO Auto-generated constructor stub
+
+	}
+ 
+	public Student(String name, int age) {
+
+		super();
+
+		this.name = name;
+
+		this.age = age;
+
+	}
+
+	public String getName() {
+
+		return name;
+
+	}
+ 
+	public int getAge() {
+
+		return age;
+
+	}
+ 
+	@Override
+
+	public String toString() {
+
+		return "Student [name=" + name + ", age=" + age + "]";
+
+	}
+
+}
+
+ 
+package pkg_comparator;
+ 
+import java.util.ArrayList;
+
+import java.util.Collections;
+
+import java.util.List;
+ 
+public class StudentMain {
+ 
+	public static void main(String[] args) {
+
+		// TODO Auto-generated method stub
+
+		List<Student> list = new ArrayList<>();
+
+		list.add(new Student("Garry",21));
+
+		list.add(new Student("Binny",26));
+
+		list.add(new Student("Fenny",22));
+
+		//SortByAge
+
+		System.out.println("Before sorting: The age of the Students");
+
+		for(Student sage:list) {
+
+			System.out.println(sage.getAge());
+
+		}
+
+		System.out.println("After sorting: The age of the Students");
+
+		Collections.sort(list,new AgeComparator());
+
+		for(Student sage:list) {
+
+			System.out.println(sage.getAge());
+
+		}
+
+		//SortByName
+
+		System.out.println("Before sorting: The name of the Students");
+
+		for(Student name:list) {
+
+			System.out.println(name.getName());
+
+		}
+
+		System.out.println("After sorting: The name of the Students");
+
+		Collections.sort(list, new NameComparator());
+
+		for(Student name:list) {
+
+			System.out.println(name.getName());
+
+		}
+
+	}
+ 
+}
+
+ 
+ 
+Comparator Interface
+The Comparator interface in Java is part of the java.util package and is used to define custom sorting logic for objects.
+It allows you to compare two objects of the same type to determine their order.
+Purpose:
+To control the order of objects in a collection (like List, Set, Map) without modifying the actual class of those objects.
+It is useful when:
+You can't modify the object's class to implement Comparable
+You need multiple different ways to sort the same type of objects
+Syntax:
+//Functional Interface
+public interface Comparator<T> {
+   int compare(T o1, T o2);
+}
+Returns:
+Negative int if o1 < o2
+Zero if o1 == o2
+Positive int if o1 > o2
+Example:
+import java.util.*;
+ 
+class Student {
+   private String name;
+   private int age;
+ 
+   Student(String name, int age) {
+       this.name = name;
+       this.age = age;
+   }
+ 
+   public String toString() {
+       return name + " (" + age + ")";
+   }
+}
+//FIRST APPROACH
+class AgeComparator implements Comparator<Student> {
+   public int compare(Student s1, Student s2) {
+       return Integer.compare(s1.age, s2.age);
+   }
+}
+ 
+public class Main {
+   public static void main(String[] args) {
+      List<Student> list = new ArrayList<>();
+       list.add(new Student("Harry", 18));
+       list.add(new Student("Garry", 23));
+       list.add(new Student("Rocky", 16));
+ 
+      Collections.sort(list, new AgeComparator());
+ 
+      System.out.println(list);
+   }
+}
+When to Use Comparator?
+Use Comparator when:
+You want multiple ways to sort (e.g., by name, salary, or ID).
+You can't modify the original class (e.g., the class is from a library).
+You want to separate comparison logic from the object itself.
+Define an Employee class, and two comparators:
+SortBySalary (ascending)
+SortByName (alphabetical)
+
+
+ 
+Employee.java
+class Employee {
+   int id;
+   String name;
+   double salary;
+ 
+   Employee(int id, String name, double salary) {
+       this.id = id;
+       this.name = name;
+       this.salary = salary;
+   }
+ 
+   public String toString() {
+       return id + " - " + name + " - $" + salary;
+   }
+}
+import java.util.Comparator;
+class SortBySalary implements Comparator<Employee> {
+   public int compare(Employee e1, Employee e2) {
+       return Double.compare(e1.salary, e2.salary);
+   }
+}
+ 
+class SortByName implements Comparator<Employee> {
+   public int compare(Employee e1, Employee e2) {
+       return e1.name.compareTo(e2.name);
+   }
+}
+Example
+import java.util.ArrayList;
+import java.util.Collections;
+public class ComparatorExample {
+   public static void main(String[] args) {
+      ArrayList<Employee> list = new ArrayList<>();
+       list.add(new Employee(101, "Jack", 5000));
+       list.add(new Employee(102, "Garry", 3000));
+       list.add(new Employee(103, "Brown", 6000));
+ 
+      System.out.println("Original List:");
+       for (Employee e : list) {
+          System.out.println(e);
+       }
+ 
+       // Sort by salary
+       Collections.sort(list, new SortBySalary());
+      System.out.println("\nSorted by Salary:");
+       for (Employee e : list) {
+          System.out.println(e);
+       }
+ 
+       // Sort by name
+       Collections.sort(list, new SortByName());
+      System.out.println("\nSorted by Name:");
+       for (Employee e : list) {
+          System.out.println(e);
+       }
+   }
+}
+ 
+
+import java.util.ArrayList;
+
+import java.util.Collections;
+
+import java.util.Comparator;
+
+import java.util.List;
+ 
+class Student {
+
+	private String name;
+
+	private int age;
+
+	public Student() {
+
+		super();
+
+		// TODO Auto-generated constructor stub
+
+	}
+ 
+	public Student(String name, int age) {
+
+		super();
+
+		this.name = name;
+
+		this.age = age;
+
+	}
+
+	public String getName() {
+
+		return name;
+
+	}
+ 
+	public int getAge() {
+
+		return age;
+
+	}
+ 
+	@Override
+
+	public String toString() {
+
+		return "Student [name=" + name + ", age=" + age + "]";
+
+	}
+
+}
+ 
+ 
+class StudentMain {
+ 
+	public static void main(String[] args) {
+
+		// TODO Auto-generated method stub
+
+		List<Student> list = new ArrayList<>();
+
+		list.add(new Student("Garry",21));
+
+		list.add(new Student("Binny",26));
+
+		list.add(new Student("Fenny",22));
+
+		/*
+
+		//FirstApproach
+
+		//SortByAge
+
+		System.out.println("Before sorting: The age of the Students");
+
+		for(Student sage:list) {
+
+			System.out.println(sage.getAge());
+
+		}
+
+		System.out.println("After sorting: The age of the Students");
+
+		Collections.sort(list,new AgeComparator());
+
+		for(Student sage:list) {
+
+			System.out.println(sage.getAge());
+
+		}
+
+		//SortByName
+
+		System.out.println("Before sorting: The name of the Students");
+
+		for(Student name:list) {
+
+			System.out.println(name.getName());
+
+		}
+
+		System.out.println("After sorting: The name of the Students");
+
+		Collections.sort(list, new NameComparator());
+
+		for(Student name:list) {
+
+			System.out.println(name.getName());
+
+		}*/
+
+	/*
+
+		//Second Approach
+
+		//Using Anonymous class
+
+		System.out.println("After sorting: The age of the Students...");
+
+		Collections.sort(list,new Comparator<Student>() {
+
+			public int compare(Student s1,Student s2) {
+
+				return Integer.compare(s1.getAge(), s2.getAge());
+
+			}});
+
+		for(Student sage:list) {
+
+			System.out.println(sage.getAge());
+
+		}
+
+		*/
+
+		//Third Approach
+
+		//Using Lambda Expression
+
+		list.sort((s1,s2)->Integer.compare(s1.getAge(),s2.getAge()));
+
+		// To iterate the elements of the ArrayList
+
+		list.forEach(System.out::println);
+
+	}
+ 
+}
+
+ //Sort the ArrayList According to the last 
+//digit of the number 
+//23 45 67 28 6 4
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+ 
+class SortByLastDigit{
+	public static void main(String[] args){
+	ArrayList<Integer> nums = new ArrayList<>(Arrays.asList(23,45,67,28,6,4));
+	System.out.println("Before sorting the Original List: ");
+	System.out.println(nums);
+	//Using anonymous class
+	nums.sort(new Comparator<Integer>(){
+		public int compare(Integer a,Integer b){
+			return Integer.compare(a%10,b%10); 
+	}});
+	System.out.println("After sorting the List: ");
+	System.out.println(nums);
+	//Using Lambda Expression
+	System.out.println("Custom sorting using Comparator and  Lambda Expression");
+	nums.sort((x,y)->Integer.compare(x%10,y%10));
+	System.out.println(nums);
+
+	}
+}	
+
+ 
+Comparable Interface
+The Comparable interface is used to define the natural ordering of objects. A class that implements Comparable must override the compareTo() method.
+Syntax:
+public class MyClass implements Comparable<MyClass> {
+   @Override
+   public int compareTo(MyClass other) {
+       // return negative, zero, or positive
+   }
+}
+Rules:
+Returns:
+negative → this < other
+zero → this == other
+positive → this > other
+Example: Using Comparable
+import java.util.*;
+class Student implements Comparable<Student> {
+   private int id;
+   private String name;
+   Student(int id, String name) {
+       this.id = id;
+       this.name = name;
+   }
+ 
+
+
+ 
+    // Natural ordering by id
+   public int compareTo(Student s) {
+              return this.id - s.id;   
+   }
+ 
+   public String toString() {
+       return this.id + " " + this.name;
+   }
+}
+ 
+public class Main {
+   public static void main(String[] args) {
+      List<Student> list = new ArrayList<>();
+       list.add(new Student(3, "Garry"));
+       list.add(new Student(1, "Jane"));
+       list.add(new Student(2, "Jackson"));
+ 
+Collections.sort(list); 
+// Bydefault the sort() static method of Collections class internally calls    //compareTo() method //to compare the 2 objects.
+ 
+       for (Student s : list) {
+          System.out.println(s);
+       }
+   }
+}
+ 
+ 
+Feature
+	
+Comparable
+	
+Comparator
+
+
+Interface in package
+	
+java.lang
+	
+java.util
+
+
+Method
+	
+int compareTo(T o)
+	
+int compare(T o1, T o2)
+
+
+Used for
+	
+Natural ordering
+	
+Custom ordering
+
+
+Modify source class?
+	
+Yes (implements Comparable)
+	
+No (can sort externally)
+
+
+Can define multiple?
+	
+No (only one compareTo)
+	
+Yes (multiple comparators for flexibility)
+
+
+Java 8+ enhancements
+	
+None
+	
+Lambdas, Comparator.comparing(), etc.
+ 
+ 
+ 
+//Natural sorting usinmg Comparable
+ 
+import java.util.List;
+
+import java.util.ArrayList;
+
+import java.util.Collections;
+
+class Student implements Comparable<Student> {
+
+    private int id;
+
+    private String name;
+
+    Student(int id, String name) {
+
+        this.id = id;
+
+        this.name = name;
+
+    }
+ 
+ 
+    // Natural ordering by id
+
+    public int compareTo(Student s) {
+
+	return this.id - s.id;   
+
+    }
+ 
+    public String toString() {
+
+        return this.id + " " + this.name;
+
+    }
+
+}
+ 
+class Main {
+
+    public static void main(String[] args) {
+
+        List<Student> list = new ArrayList<>();
+
+        list.add(new Student(3, "Garry"));
+
+        list.add(new Student(1, "Jane"));
+
+        list.add(new Student(2, "Jackson"));
+ 
+	Collections.sort(list); 
+
+// Bydefault the sort() static method of Collections class internally calls    //compareTo() method //to compare the 2 objects.
+ 
+        for (Student s : list) {
+
+            System.out.println(s);
+
+        }
+
+    }
+
+}
+
+ F
+MCQ – CollectionsFramework
+Which interface allows duplicate elements and maintains insertion order?
+
+a) Set b) List c) Queue d) Map
+Answer: b
+ArrayList is backed by a:
+
+a) Linked list b) Array c) Hash table d) Balanced tree
+Answer: b
+Which List implementation is best for frequent random access?
+
+a) LinkedList b) ArrayList c) Vector d) Stack
+Answer: b
+Which List implementation is optimized for frequent insertions/removals at both ends?
+
+a) ArrayList b) Vector c) LinkedList d) CopyOnWriteArrayList
+Answer: c
+Calling list.get(i) on a LinkedList runs in:
+
+a) O(1) b) O(log n) c) O(n) d) O(n²)
+Answer: c
+To ensure thread safety, you should use:
+
+a) ArrayList b) LinkedList c) Vector d) HashSet
+Answer: c
+Which method on ArrayList doubles its capacity when needed?
+
+a) ensureCapacity() b) grow() c) resize() d) expand()
+Answer: b (internally grow())
+Which supports null elements?
+
+a) ArrayList b) LinkedList c) HashSet d) All of the above
+Answer: d
+add(index, element) in ArrayList runs in:
+
+a) O(1) b) O(log n) c) O(n) d) O(n log n)
+Answer: c
+The default capacity of a new ArrayList is:
+
+a) 8 b) 10 c) 16 d) 0
+Answer: b
+Which interface prevents duplicate elements?
+a) List b) Set c) Collection d) Iterable
+Answer: b
+HashSet does not guarantee:
+a) No duplicates b) Constant-time add/remove c) Insertion order d) Null element support
+Answer: c
+TreeSet keeps elements in:
+a) Insertion order b) Sorted order c) Reverse insertion order d) Random order
+Answer: b
+If two objects are “equal” via equals(), they must have equal:
+a) hashCode() b) size c) compareTo() d) toString()
+Answer: a
+What structure underlies TreeSet?
+a) Hash table b) Linked list c) Binary search tree d) Balanced tree (Red‑Black)
+Answer: d
+To iterate in insertion order with no duplicates, use:
+a) TreeSet b) HashSet c) LinkedHashSet d) ArrayList
+Answer: c
+If you add duplicates to a Set, what happens?
+a) Throws exception b) Keeps all c) Keeps first or last only d) Ignores duplicates
+Answer: d
+TreeSet requires that elements be:
+a) Serializable b) Comparable or Comparator provided c) Cloneable d) Iterable
+Answer: b
+Which yields higher lookup performance for HashSet?
+a) O(log n) b) O(n) c) O(1) average d) O(n log n)
+Answer: c
+A null element in TreeSet will cause:
+a) It works fine b) Runtime exception c) Ignored safely d) Stored at root
+Answer: b (NullPointerException for comparison)
+Comparable<T> defines a method:
+a) compare(a, b) b) compareTo(T o) c) equals(T o) d) hashCode()
+Answer: b
+compareTo() should return > 0 if the current object is:
+a) Less than b) Equal c) Greater than d) None
+Answer: c
+If a.compareTo(b) == 0, then a and b are:
+a) Equal by equals() necessarily b) Possibly equal c) Not equal d) Always different
+Answer: b (should be consistent with equals but not enforced)
+Which signature correctly implements Comparable?
+a) class A implements Comparable<A> { public int compareTo(A o) {...} }
+b) class A implements Comparable { public int compare(Object o) {...} }
+c) class A implements Comparable<A> { public void compareTo(A o) {...} }
+d) class A implements Comparable<?> { … }
+Answer: a
+When sorting with Collections.sort(list), the list elements must implement:
+a) Serializable b) Cloneable c) Comparable(compareTo) d) Comparator
+Answer: c
+Violating compareTo() contract may cause:
+a) Logical errors in sorting/searching b) Compile errors c) Runtime casting errors d) Memory leaks
+Answer: a
+Which return value means “this < other”?
+a) Positive b) Zero c) Negative d) Infinity
+Answer: c
+Comparable is located in package:
+a) java.util b) java.lang c) java.io d) java.lang.reflect
+Answer: b
+********Built‑in Comparable support:
+a) String b) Integer c) Date d) All of the above
+Answer: d
+Natural ordering means ordering defined by:
+a) Comparator b) equals() c) compareTo() d) hashCode()
+Answer: c (Collections.sort(list);
+Comparator<T> defines:
+a) compareTo(T o) b) compare(T a, T b) c) equals(T o) d) hashCode()
+Answer: b
+Using Comparator avoids modifying the class:
+a) True b) False
+Answer: a
+Collections.sort(list, comp) requires:
+a) list elements implement Comparable b) comp implements Comparator c) list is Set d) no nulls
+Answer: b
+Comparator.comparing() returns a:
+a) Comparable b) Comparator c) Function d) Collector
+Answer: b
+Chaining comparators using .thenComparing(...) allows:
+a) Multi-level sorting b) Reversing order c) Filtering duplicates d) Ignoring nulls
+Answer: a
+To sort descending you can use:
+a) comp.reversed() b) comp.negate() c) comp.invert() d) comp.backward()
+Answer: a
+A Comparator must be:
+a) Serializable b) Cloneable c) Stateless (ideally) d) Iterable
+Answer: c
+A comparator that is inconsistent with equals may:
+a) Cause strange Set behavior b) Compile error c) Better performance d) UnsupportedOperationException
+Answer: a
+TreeSet<>(comp) uses comp to:
+a) Check nulls b) Compare elements for ordering c) Manage hash buckets d) Handle serialization
+Answer: b
+To compare strings ignoring case, you’d use:
+a) Comparable<String> b) String.CASE_INSENSITIVE_ORDER c) Collections.reverseOrder() d) Collator
+Answer: b
+Which will fail fast on concurrent modification?
+a) LinkedList iterator b) HashSet iterator c) ArrayList iterator d) All of the above
+Answer: d
+Calling TreeSet.first() on an empty TreeSet:
+a) Returns null b) Throws NoSuchElementException c) Returns default value d) Infinite loop
+Answer: b
+HashSet initial capacity defaults to:
+a) 8 b) 16 c) 32 d) 64
+Answer: b
+HashSet.contains(element) average complexity:
+a) O(1) b) O(n) c) O(log n) d) O(n log n)
+Answer: a
+LinkedList implements:
+a) List, Queue, Deque b) List only c) Deque only d) List, Set
+Answer: a
+You can convert ArrayList to an Array using:
+a) list.toArr() b) list.toArray() c) list.copyOf() d) list.asList()
+Answer: b
+Which code sorts strings in reverse alphabetical using Comparator?
+a) sort(list, Comparator.reverseOrder())
+b) sort(list, Comparator.naturalOrder().reversed())
+c) Both a and b
+d) Neither
+Answer: c
+Which Set isn't ordered?
+a) TreeSet b) LinkedHashSet c) HashSet d) SortedSet
+Answer: c
+Comparator.nullsFirst(Comparator.naturalOrder()) ensures:
+a) Nulls thrown exception b) Nulls never appear c) Null elements sorted first d) Nulls at end
+Answer: c
+ 
+ MultiLevel Sorting
+import java.util.*;
+
+class Person{
+
+	private String name;
+
+	private int age;
+
+	public String getName() {
+
+		return name;
+
+	}
+ 
+	public int getAge() {
+
+		return age;
+
+	}
+
+
+	public Person(String name,int age){
+
+		this.name=name;
+
+		this.age=age;
+
+	}
+
+	public String toString(){
+
+		return this.name + " " + this.age;
+
+	}
+
+}
+ 
+class PersonMain{
+
+	public static void main(String[] args){
+
+		List<Person> person = Arrays.asList(
+
+			new Person("Brian",30),
+
+			new Person("Harry",23),
+
+			new Person("Brian",25)
+
+		);
+
+		System.out.println("Original List");
+
+		System.out.println(person);
+
+		person.sort(Comparator.comparing((Person p)->p.getName()).thenComparing(p->p.getAge()));
+
+		System.out.println("Sorted list by name then by age: ");
+
+		for(Person p:person){
+
+			System.out.println(p);
+
+		}	
+
+	}
+
+}	
+
+ Map Interface
+The Map interface is part of the Java Collections Framework and represents a data structure that maps keys to values. It is not a class but an interface that several classes like HashMap, TreeMap, and LinkedHashMap implement.
+Map Interface Overview
+Key Characteristics:
+A map cannot contain duplicate keys.
+Each key maps to exactly one value.
+A key can map to null, and a Map can contain multiple null values, but only one null key (in HashMap).
+Common Implementations:
+Class
+	
+Description
+
+
+HashMap
+	
+Unordered, allows one null key and many null values
+
+
+TreeMap
+	
+Sorted by natural order or a custom Comparator; doesn’t allow null keys
+
+
+ 
+	
+ 
+Common Methods in Map<K, V>:
+V put(K key, V value);           // Adds or replaces a key-value pair
+V get(Object key);                // Returns value for the key
+V remove(Object key);            // Removes the key-value pair
+boolean containsKey(Object key); // Checks if key exists
+boolean containsValue(Object value);
+Set<K> keySet();                 // Returns set of keys
+Collection<V> values();         // Returns collection of values
+Set<Map.Entry<K, V>> entrySet(); // Returns set of key-value pairs
+void clear();                   // Removes all entries
+int size();                     // Number of entries
+boolean isEmpty();              // Checks if empty
+
+
+ 
+Example
+import java.util.*;
+public class MapExample {
+   public static void main(String[] args) {
+       Map<String, Integer> map = new HashMap<>();
+ 
+      map.put("Apple", 10);
+      map.put("Banana", 20);
+      map.put("Orange", 30);
+ 
+      System.out.println("Value for 'Apple': " + map.get("Apple"));
+ 
+       for (Map.Entry<String, Integer> entry : map.entrySet()) {
+          System.out.println(entry.getKey() + " => " + entry.getValue());
+       }
+ 
+      map.remove("Banana");
+      System.out.println("After removal: " + map);
+   }
+}
+When to Use Which Map
+HashMap: Best general-purpose map.
+TreeMap: When you need sorted keys.
+
+HashMap in Java
+HashMap is a class in Java that implements the Map interface and uses a hash table for storing key-value pairs.
+Key Features of HashMap:
+Stores key-value pairs
+Allows one null key and multiple null values
+Does not maintain order
+Non-synchronized (not thread-safe by default)
+Offers constant-time performance (O(1)) for basic operations: put, get, remove
+Syntax:
+import java.util.HashMap;
+HashMap<KeyType, ValueType> map = new HashMap<>();
+Example:
+HashMap<String, Integer> map = new HashMap<>();
+Common Methods:
+Method
+	
+Description
+
+
+put(K key, V value)
+	
+Adds or updates a key-value pair
+
+
+get(Object key)
+	
+Returns the value for the given key
+
+
+remove(Object key)
+	
+Removes the entry with the given key
+
+
+containsKey(Object key)
+	
+Checks if a key exists
+
+
+containsValue(Object value)
+	
+Checks if a value exists
+
+
+size()
+	
+Returns the number of entries
+
+
+clear()
+	
+Removes all entries
+
+
+isEmpty()
+	
+Checks if the map is empty
+
+
+keySet()
+	
+Returns a set of keys
+
+
+values()
+	
+Returns a collection of values
+
+
+entrySet()
+	
+Returns a set of key-value pairs (Map.Entry)
+ 
+ 
+Example: HashMap
+import java.util.HashMap;
+import java.util.Map;
+ 
+public class HashMapExample {
+   public static void main(String[] args) {
+      HashMap<String, Integer> map = new HashMap<>();
+ 
+      map.put("Apple", 50);
+      map.put("Banana", 20);
+      map.put("Orange", 30);
+      map.put("Banana", 25); // Overwrites old value
+ 
+      System.out.println("Apple Price: " + map.get("Apple"));
+ 
+       for (Map.Entry<String, Integer> entry : map.entrySet()) {
+          System.out.println(entry.getKey() + " => " + entry.getValue());
+       }
+ 
+      map.remove("Orange");
+      System.out.println("Map after removal: " + map);
+   }
+}
+ 
+ 
+Internal Working of HashMap
+Uses buckets internally, where each bucket is a LinkedList or a TreeNode (after Java 8, for high-collision buckets).
+A key's hashCode() determines the bucket index.
+Important Notes
+Not thread-safe
+Always override equals() and hashCode() in custom key classes.
+ 
+import java.util.TreeMap;
+
+import java.util.Map;
+
+class TreeMapExample {
+
+    public static void main(String[] args) {
+
+        TreeMap<String, Integer> map = new TreeMap<>();
+ 
+        map.put("Banana", 20);
+
+        map.put("Apple", 50);
+
+        map.put("Orange", 30);
+ 
+        System.out.println("Sorted Map:");
+
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+
+            System.out.println(entry.getKey() + " => " + entry.getValue());
+
+        }
+ 
+        System.out.println("First Key: " + map.firstKey());
+
+        System.out.println("Last Key: " + map.lastKey());
+
+        System.out.println("Higher Key than 'Apple': " + map.higherKey("Apple"));
+
+    }
+
+}
+
+ 
+TreeMap in Java
+A TreeMap is a part of Java’s java.util package, and it implements the Map interface. Unlike HashMap, it stores keys in a sorted (natural or custom) order using a Red-Black Tree, which is a self-balancing binary search tree.
+Features of TreeMap:
+Stores key-value pairs sorted by keys
+No null keys allowed (throws NullPointerException)
+Allows multiple null values
+Implements NavigableMap and SortedMap interfaces
+Not synchronized (not thread-safe by default)
+Logarithmic time complexity: O(log n) for get, put, remove
+Declaration:
+import java.util.TreeMap;
+TreeMap<KeyType, ValueType> map = new TreeMap<>();
+Example:
+TreeMap<String, Integer> map = new TreeMap<>();
+Common Methods:
+Method
+	
+Description
+
+
+put(K key, V value)
+	
+Adds or updates a key-value pair
+
+
+get(Object key)
+	
+Retrieves value associated with key
+
+
+remove(Object key)
+	
+Removes entry by key
+
+
+firstKey() / lastKey()
+	
+Returns first/last key in sorted order
+
+
+higherKey(K key)
+	
+Returns next greater key
+
+
+lowerKey(K key)
+	
+Returns previous lesser key
+
+
+keySet()
+	
+Returns keys in ascending order
+
+
+entrySet()
+	
+Returns sorted set of key-value pairs
+
+
+headMap(K toKey)
+	
+Returns map with keys less than toKey
+
+
+tailMap(K fromKey)
+	
+Returns map with keys greater than or equal to fromKey
+
+
+subMap(K fromKey, K toKey)
+	
+Returns map within the key range
+Example: Basic TreeMap
+import java.util.TreeMap;
+import java.util.Map;
+public class TreeMapExample {
+   public static void main(String[] args) {
+      TreeMap<String, Integer> map = new TreeMap<>();
+ 
+      map.put("Banana", 20);
+      map.put("Apple", 50);
+      map.put("Orange", 30);
+ 
+      System.out.println("Sorted Map:");
+       for (Map.Entry<String, Integer> entry : map.entrySet()) {
+          System.out.println(entry.getKey() + " => " + entry.getValue());
+       }
+ 
+      System.out.println("First Key: " + map.firstKey());
+      System.out.println("Last Key: " + map.lastKey());
+      System.out.println("Higher Key than 'Apple': " + map.higherKey("Apple"));
+   }
+}
+
+
+ 
+Example with Custom Comparator (Reverse Order):
+import java.util.*;
+public class TreeMapCustomSort {
+   public static void main(String[] args) {
+      TreeMap<String, Integer> map = new TreeMap<>(Collections.reverseOrder());
+ 
+      map.put("Banana", 20);
+      map.put("Apple", 50);
+      map.put("Orange", 30);
+ 
+      System.out.println("Reverse Sorted Map:");
+       for (Map.Entry<String, Integer> entry : map.entrySet()) {
+          System.out.println(entry.getKey() + " => " + entry.getValue());
+       }
+   }
+}
+TreeMap vs HashMap
+Feature
+	
+HashMap
+	
+TreeMap
+
+
+Order
+	
+Unordered
+	
+Sorted by key
+
+
+Null keys
+	
+Allows one null key
+	
+ No null keys
+
+
+Performance
+	
+O(1) for get/put
+	
+O(log n) for get/put
+
+
+Thread-safe
+	
+No
+	
+No
+
+
+Backed by
+	
+Hash table
+	
+Red-Black Tree
+ 
+ import java.util.TreeMap;
+import java.util.Map;
+import java.util.Collections;
+class TreeMapExample {
+    public static void main(String[] args) {
+       TreeMap<String, Integer> map = new TreeMap<>(Collections.reverseOrder());
+ 
+ 
+        map.put("Banana", 20);
+        map.put("Apple", 50);
+        map.put("Orange", 30);
+ 
+        System.out.println("Reverse Sorted Map:");
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + " => " + entry.getValue());
+        }
+ 
+        System.out.println("First Key: " + map.firstKey());
+        System.out.println("Last Key: " + map.lastKey());
+        System.out.println("Higher Key than 'Apple': " + map.higherKey("Apple"));
+    }
+}
+
+==============================================================================
