@@ -1,0 +1,1219 @@
+25/08/2025
+
+MCQ – File Handling & JDBC
+File Handling in Java
+1. Which class is used to read data from a file?
+FileReader->It is used to read text from a file
+
+2. Which class is used to write data into a file?
+FileWriter->It is used to write text from a file
+
+3. Which method is used to read a single character from a FileReader?
+read()->This method read a single character from a fildreader
+
+4. Which of the following is not a class for file handling?
+FileRequest->No such class present for file handling
+
+5. What does the File.exists() method do?
+Checks if the file exists->it only checks and return true if the file is present or else false if not present
+
+6. What is the return type of read() method in FileReader?
+int-> the read() method only reads one character and returns int value
+
+7. Which exception must be handled while working with files in Java?
+IOException->this are the expections that are raised while working the files because we use io package for files
+
+8. Which of the following is used to create a new file?
+createNewFile()->It creates new file and returns true if the file is created successfully
+
+9. File handling in Java is part of which package?
+java.io->file handling is the part of io package
+
+10. What is the purpose of BufferedReader?
+To read text efficiently->BufferedReader reads the text efficiently and speed than the filereader
+
+11. Which method is used to close a file?
+close()->this method is used to close a file completely
+
+12. FileWriter writes data in:
+Character form->used to write characters(text)
+
+13. What is the default buffer size for BufferedReader?
+8192->the default buffer size 8192kb if not specifed
+
+14. Which method reads a line from the file?
+readLine()->This method is used to read the entire line from the file
+
+15. What does File.length() return?
+File size in bytes->It returns file size in bytes
+
+16. Which keyword is used to handle file exceptions?
+try-catch->is used to handle file exceptions
+
+17. To write binary data, we should use:
+FileOutputStream->It used to write binary data
+
+18. Which class allows both reading and writing to a random access file?
+RandomAccessFile->this allows both reading and writing to random access file
+
+19. Which method is used to delete a file?
+delete()->It deletes the file and returns true if file is deleted successfully and false if not
+
+20. What does flush() do in FileWriter?
+Clears stream buffer->this method forces the buffer to write the data to the file and clears 
+
+21. Which stream handles primitive data types?
+DataOutputStream->this is used to handle primitive data types like int,float,char,boolean
+
+22. Which of the following is a checked exception?
+IOException->the expections are raised in the compile time 
+
+23. Which class is used to serialize an object?
+C. ObjectOutputStream->it is used to convert object into bytes to store data into file and sent over a netword
+
+24. Which class is used to deserialize an object?
+B. ObjectInputStream->it is used to convert bytes into object
+
+25. Which method is used to check if it is a directory?
+C. isDirectory()->is used to check it is a directory and return true if it is directory
+
+26. What does JDBC stand for?
+C. Java Database Connectivity->it is used to connect the javafile to the database
+
+27. Which package contains JDBC classes?
+java.sql->JDBC classes are the part of java.sql
+
+28. Which interface is used to execute SQL queries?
+C. Statement->it is used to execute sql queries from the java file
+
+29. What is the purpose of DriverManager?
+A. Create connection->It is used to create connection to the database
+
+30. Which method is used to load a driver?
+A. Class.forName()->this methods load a required driver to connect to that database
+
+31. Which method establishes a connection to the database?
+B. getConnection()->this method establishes the connection to the required database
+
+32. Which of the following executes a SQL SELECT query?
+B. executeQuery()->it is used to execute a select query and return the rows into the resultset object
+
+33. Which method is used for INSERT, UPDATE or DELETE?
+B. executeUpdate()->is used for insert,update and delete and returns the int value
+
+34. What is the return type of executeQuery()?
+B. ResultSet->it is the return type and stores the rows that are exectued by select query
+
+35. What is ResultSet?
+B. Object holding result of query->It holds the rows that are exectued by select query
+
+36. Which interface provides methods for transaction management?
+A. Connection->Connection interface provides methods for transaction management such as:commit()
+
+37. What does setAutoCommit(false) do?
+C. Manual transaction management-It disables autocommit in manual transaction management
+
+38. Which method is used to commit a transaction?
+B. commit()->this method commits a transaction
+
+39. Which method is used to rollback a transaction?
+C. rollback()->This method rollback the transaction when transaction fails
+
+40. How to prevent SQL injection?
+B. Use PreparedStatement->using this we can prevent sql injection by providing placeholders
+
+41. Which of these is a sub-interface of Statement?
+A. PreparedStatement->Sub-interface of Statement. It allows you to pre-compile SQL queries and set parameters dynamically using (?)
+
+42. Which method in PreparedStatement is used to set integer value?
+B. setInt()->Sets an int value at the given parameter index
+
+43. What does next() in ResultSet do?
+B. Moves to next row->and returns true if there is a row or false if there is no row
+
+44. What is JDBC driver?
+B. Interface to connect Java to DB ->this driver helps to connection java file to db
+
+45. Which type of JDBC driver is Pure Java driver?
+B. Type-4->Thin driver/pure java driver
+
+46. How many types of JDBC drivers are there?
+C. 4->there are 4 the latest driver is type 4
+
+47. Which method is used to close a Connection?
+B. close()->this mthod closes the connection and query is executed after that
+
+48. Can we execute multiple queries in a Statement object?
+A. Yes->Statement object in JDBC can execute multiple SQL queries but only one at a time
+
+49. Which JDBC driver type translates JDBC calls to native calls?
+B. Type-2-> Native API driver translates jdbc calls to native calls
+
+50. Which JDBC driver is best suited for web-based applications?
+D. Type-4->which thin layer and pure java driver
+ 
+========================================================================================================================
+Jenkins
+--------
+Jenkins is an open-source automation server widely used to automate the building, testing, and deployment of software projects. 
+It helps developers integrate changes more easily and deliver updates more frequently by automating parts of the software development lifecycle (SDLC), especially in Continuous Integration (CI) and Continuous Delivery/Deployment (CD).
+
+Key Features of Jenkins:
+Continuous Integration & Continuous Delivery (CI/CD):
+Jenkins automatically builds and tests code whenever developers push changes to the repository.
+Extensible with Plugins:
+Jenkins has over 1,800+ plugins for integrating with various tools (Git, Maven, Docker, Kubernetes, etc.).
+Distributed Builds:
+Jenkins can distribute tasks across multiple machines, speeding up builds and tests.
+
+Pipeline Support:
+Jenkins supports declarative and scripted pipelines to define end-to-end workflows in code (Jenkinsfile).
+
+Web-based Interface:
+It provides a user-friendly dashboard to monitor builds, pipelines, and logs.
+Integration with Version Control:
+Supports tools like Git, SVN, and Mercurial.
+
+Use Cases:
+Automating the build process after each code change
+Running unit and integration tests automatically
+Deploying applications to servers or cloud environments
+Monitoring long-running jobs (e.g., cron jobs or scheduled tasks)
+
+Example Workflow in Jenkins:
+Developer pushes code to GitHub.
+Jenkins detects the change using a webhook.
+Jenkins pulls the code and runs a build script (e.g., Maven, Gradle).
+Jenkins runs automated tests.
+If successful, Jenkins deploys the code to staging or production.
+
+
+ 
+Summary:
+Feature			Description	Type	Language					License
+	
+Automation server	Main Use	CI/CD	Java (but supports all languages like Python)	Open Source (MIT License)
+
+
+Interface
+	
+Web-based UI + CLI + APIs
+==================================
+How to Configure Git path with Jenkins job
+===========================================
+1.Create a sample program 
+- Create a simple java file
+- Right Click to open the Git Bash in File Explorer
+- In Git Bash write the following commands:
+			- git init
+			- git status
+			- git add . OR git add Sample.java
+			- git status
+			- git commit -m "Changes Committed"
+Add this program to Github
+			- 	Goto your git PUBLIC repository and 
+				Add NEW repository
+			- NAme: gitjenkinsintegration
+			- Upload the file - 
+				git remote add origin "public repo URL"
+			- git push -u origin master
+			- Refresh yout github repo page and 
+				will find Sample.java
+
+
+How to Configure Git path with Jenkins job
+
+===========================================
+
+1.Create a sample program 
+
+- Create a simple java file
+
+- Right Click to open the Git Bash in File Explorer
+
+- In Git Bash write the following commands:
+
+			- git init
+
+			- git status
+
+			- git add . OR git add Sample.java
+
+			- git status
+
+			- git commit -m "Changes Committed"
+
+Add this program to Github
+
+			- 	Goto your git PUBLIC repository and 
+
+				Add NEW repository
+
+			- NAme: gitjenkinsintegration
+
+			- Upload the file -
+https://github.com/gituserprof/gitjenkinsintegration.git			
+
+				git remote add origin "public repo URL"
+
+			- git push -u origin master
+
+			- Refresh yout github repo page and 
+
+				will find Sample.java
+
+
+2.	Create a JEnkins job - 
+
+	- login to jenkins homepage localhost:9090/login...
+
+	- create a New Item(job) -jenkinsgitdemo
+
+	- choose the fresstyle project, click OK
+
+	Now you have to download plugins
+
+		- Click on Manage Jenkinks
+
+		- Then click on Manage plugin
+
+	Add Git plugin to jenkins
+
+		- Download the git pugin ---see on available tab
+
+ 
+5.	Configure jenkins job
+
+	-Click on configure
+
+	- Click on Source Code Management
+
+			Select Git
+
+	- Enter the repository URL
+
+	- Clcik on Apply
+
+	- Click Build Triggers tab
+
+	- Select Poll SCM
+
+	- Write ***** in schedule - Click Apply
+
+	- Under Build- click "Add build step and 
+
+		select execute Windows Batch Command
+
+	- In Command Window write:  java Sample
+
+	- Click Apply and Save
+
+	- Click " Build Now" - see the Console Output
+
+	- Do some changes in Sample.java
+
+	- Open gitbash again
+
+	- $ git status	
+
+			modified: Sample.java
+
+	- git add Sample.java
+
+	- git status
+
+	- git commit -m "Changes Committed Again"
+
+	- git push -u origin master
+
+	- Refresh your git repository to see the changes
+
+	- Goto Jenkins click Build Now
+
+	- See the Console Output - Change in the source code
+
+		triggered the jenkins job
+
+
+ 
+ =================================================================
+How to Configure Git path with Jenkins job
+===========================================
+1.Create a sample program 
+- Create a simple java file
+- Right Click to open the Git Bash in File Explorer
+- In Git Bash write the following commands:
+			- git init
+			- git status
+			- git add . OR git add Sample.java
+			- git status
+			- git commit -m "Changes Committed"
+Add this program to Github
+			- 	Goto your git PUBLIC repository and 
+				Add NEW repository
+			- NAme: gitjenkinsintegration
+			- Upload the file -
+https://github.com/gituserprof/gitjenkinsintegration.git			
+				git remote add origin "public repo URL"
+			- git push -u origin master
+			- Refresh yout github repo page and 
+				will find Sample.java
+
+2.	Create a JEnkins job - 
+	- login to jenkins homepage localhost:9090/login...
+	- create a New Item(job) -jenkinsgitdemo
+	- choose the fresstyle project, click OK
+	Now you have to download plugins
+		- Click on Manage Jenkinks
+		- Then click on Manage plugin
+	Add Git plugin to jenkins
+		- Download the git pugin ---see on available tab
+
+ 
+5.	Configure jenkins job
+	-Click on configure
+	- Click on Source Code Management
+			Select Git
+	- Enter the repository URL
+	- Clcik on Apply
+	- Click Build Triggers tab
+	- Select Poll SCM
+	- Write ***** in schedule - Click Apply
+	- Under Build- click "Add build step and 
+		select execute Windows Batch Command
+	- In Command Window write:  java Sample
+	- Click Apply and Save
+	- Click " Build Now" - see the Console Output
+	- Do some changes in Sample.java and then re-compile
+	- Open gitbash again
+	- $ git status	
+			modified: Sample.java
+	- git add Sample.java
+	- git status
+	- git commit -m "Changes Committed Again"
+	- git push -u origin master
+	- Refresh your git repository to see the changes
+	- Goto Jenkins click Build Now
+	- See the Console Output - Change in the source code
+		triggered the jenkins job
+==========================================================================================================================
+Introduction to Apache Maven
+Apache Maven is a build automation and project management tool primarily used for Java projects, though it can be used with other programming languages. It simplifies the build process (compiling code, packaging binaries, running tests, etc.) and manages dependencies and project configurations in a standardized way.
+What Is Maven?
+Maven helps developers:
+Manage project builds
+Handle dependencies
+Generate documentation
+Run tests
+Manage project versions
+Standardize project structures
+Key Concepts
+1. POM (Project Object Model)
+The heart of every Maven project is the pom.xml file.
+It defines:
+Project metadata (name, version, description)
+Dependencies (external libraries)
+Build settings and plugins
+Repositories
+Project hierarchy (if using modules or parent-child structure)
+Example:
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                           http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+ 
+   <groupId>com.example</groupId>
+  <artifactId>my-app</artifactId>
+  <version>1.0.0</version>
+ 
+  <dependencies>
+      <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <version>4.13.2</version>
+          <scope>test</scope>
+      </dependency>
+  </dependencies>
+</project>
+2. Standard Directory Structure
+Maven expects a consistent project layout:
+my-app/
+├── pom.xml
+└── src/
+   ├── main/
+   │   └── java/         → Application source code
+   └── test/
+       └── java/         → Test source code
+3. Lifecycle Phases
+Maven has predefined build lifecycle phases, like:
+validate – Check project structure
+compile – Compile source code
+test – Run unit tests
+package – Package code (e.g., JAR)
+verify – Run integration checks
+install – Install the package into local repository
+deploy – Deploy to remote repository
+
+Run using:
+mvn compile
+mvn test
+mvn package
+
+4. Dependency Management
+Instead of downloading and managing JAR files manually, you just declare them in pom.xml, and Maven handles the rest.
+5. Repositories
+Local repository: On your machine (e.g., ~/.m2/repository)
+Central repository: Public repository of libraries (https://search.maven.org/)
+Remote repositories: Custom or private repositories (e.g., corporate Nexus/Artifactory)
+
+Benefits of Maven
+Declarative, consistent build processes
+Easy dependency management
+Powerful plugin system
+Supports large, modular projects
+Integrates well with CI/CD tools (e.g., Jenkins, GitHub Actions)
+Getting Started
+Install Maven:
+Download from https://maven.apache.org
+Unzip and set MAVEN_HOME
+Add bin to your PATH
+Run:
+mvn -v
+Create a new project:
+mvn archetype:generate -DgroupId=com.example \
+                     -DartifactId=my-app \
+                     -DarchetypeArtifactId=maven-archetype-quickstart \
+                     -DinteractiveMode=false
+ 
+                                                                          ---------------
+ Configure jar file in Maven project
+
+==================================
+
+src
+
+	java
+
+		UtilityClass.java
+
+test
+
+	java
+
+		UtilityTest.java
+
+UtilityClass.java
+
+=================
+ 
+public 	class UtilityClass{
+ 
+	public static int add(int x,int y){
+
+		return (x+y);
+
+	}	
+
+	public ststic int sub(int x,int y){
+
+		return (x-y);
+
+	}
+
+	public static int mul(int x,int y){
+
+		return (x*y);
+
+	}
+
+	public static int div(int x,int y){
+
+		return (x/y);
+
+	}
+
+}
+ 
+Right Click on "UtilityClass.java" and 
+
+Run as---> Maven install
+ 
+This will create a (jar file) "UtilityClass.jar" in your targets folder
+ 
+1.	Create a New Project----> ImplUClass	  
+
+2.	Create a main class with the name ImplUtlityClass.java
+
+3.	Right Click on the project folder and click on:
+
+4.	Build Path--->Configure Bu8ild Path--->Libraries--->
+
+	ClassPath---> Add External jar(UtilityClass.jar)
+
+5.	Update your Maven Project.
+ 
+ 
+In your ImplUtlityClass.java write the following code.
+
+import com.example.UtilityClass;
+ 
+class ImplUtlityClass{
+
+	public static void main(String[] args){
+
+		int result =  UtilityClass.add(3433,33);
+
+		System.out.println("Addition is: "+result);
+
+		.
+
+		.
+
+		.
+
+		.
+
+		.
+
+	}
+
+}
+
+}	
+ 
+ 
+	  
+
+ ==============================================
+ 
+ 
+Development Env: We actually develop the project and whatever changes we want to implement, we do those changes in the Development environment. And when a developer has made all the changes and he/she is sure enough that the product is ready, only then they think of deploying the product on the PRODUCTION ENVIRONMENT.
+ 
+Build profiles
+Build profiles in Maven allow you to customize the build process for different environments or scenarios — such as development, testing, production, or CI/CD.
+They let you define different configurations like:
+Dependencies
+Plugins
+Properties
+JVM options
+Resource filtering
+Build directories
+Why Use Build Profiles?
+Imagine you have:
+Different database settings for dev and prod
+Optional dependencies or plugins that only apply in certain environments
+Different JVM memory settings for test and production
+Instead of manually changing pom.xml, you can define profiles to switch between configurations.
+Where Can You Define Profiles?
+Inside pom.xml – Most common
+In ~/.m2/settings.xml – For user-specific or secure settings (e.g., credentials)
+From the command line – Temporary activation
+
+
+ 
+Example: Profile in pom.xml
+<project>
+ ...
+ <profiles>
+   <profile>
+    <id>dev</id>
+    <properties>
+      <env>development</env>
+    </properties>
+    <activation>
+      <activeByDefault>true</activeByDefault>
+    </activation>
+   </profile>
+ 
+   <profile>
+    <id>prod</id>
+    <properties>
+      <env>production</env>
+    </properties>
+   </profile>
+ </profiles>
+</project>
+application.properties
+env=prod
+You can use ${env} in your config (like src/main/resources/application-${env}.properties).
+Goal
+Use Maven profiles to:
+Build your Java project differently for development and production environments.
+Change settings like a system property or resource file based on the profile.
+
+
+ 
+Project Structure
+my-maven-app/
+├── pom.xml
+└── src/
+   └── main/
+       └── java/
+           └── com/
+               └── example/
+                  └── App.java
+1. App.java
+package com.example;
+ 
+public class App {
+   public static void main(String[] args) {
+       String env = System.getProperty("env");
+      System.out.println("Running in environment: " + env);
+   }
+}
+This reads a system property named env(application.properties).
+2. pom.xml with Profiles
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+       http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+ 
+   <groupId>com.example</groupId>
+   <artifactId>my-maven-app</artifactId>
+   <version>1.0-SNAPSHOT</version>
+ 
+   <build>
+       <plugins>
+           <!-- Plugin to set system properties -->
+           <plugin>
+               <groupId>org.codehaus.mojo</groupId>
+               <artifactId>exec-maven-plugin</artifactId>
+               <version>3.1.0</version>
+               <configuration>
+                  <mainClass>com.example.App</mainClass>
+               </configuration>
+           </plugin>
+       </plugins>
+   </build>
+ 
+   <profiles>
+       <profile>
+           <id>dev</id>
+           <activation>
+               <activeByDefault>true</activeByDefault>
+           </activation>
+           <properties>
+               <env>development</env>
+           </properties>
+       </profile>
+ 
+       <profile>
+           <id>prod</id>
+           <properties>
+               <env>production</env>
+           </properties>
+       </profile>
+   </profiles>
+</project>
+ 
+3. Running with Profiles
+Compile
+mvn clean compile
+Run with dev profile (default)
+mvn exec:java -Denv=development
+Run with prod profile
+mvn exec:java -Pprod -Denv=production
+ 
+ ============================================================================
+The Project Object Model (POM) in Maven
+The Project Object Model (POM) is the core of every Maven project. It's defined in a file named pom.xml, located at the root of your project.
+This file describes everything about your project — structure, dependencies, plugins, build settings, versioning, and more.
+What is pom.xml?
+It's an XML configuration file that tells Maven:
+What the project is (name, version, etc.)
+What libraries it needs
+How it should be built (compile, test, package)
+Where to find or deploy artifacts
+And more
+Key Elements of a POM
+Here’s a breakdown of the most important parts of pom.xml:
+1. <project> (Root tag)
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                           https://maven.apache.org/xsd/maven-4.0.0.xsd">
+   ...
+</project>
+2. Basic Project Coordinates
+These define your project’s identity in the Maven ecosystem.
+<groupId>com.example</groupId>         <!-- Usually your domain or organization -->
+<artifactId>my-app</artifactId>        <!-- Unique name of the project/module -->
+<version>1.0.0</version>               <!-- Project version -->
+
+
+ 
+3. <dependencies>
+Used to declare external libraries your project needs.
+<dependencies>
+ <dependency>
+   <groupId>org.apache.commons</groupId>
+  <artifactId>commons-lang3</artifactId>
+  <version>3.12.0</version>
+ </dependency>
+</dependencies>
+4. <build>
+Defines build-related settings, like plugins, directories, and resource filtering.
+<build>
+ <plugins>
+   <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>3.8.1</version>
+    <configuration>
+      <source>1.8</source>
+      <target>1.8</target>
+    </configuration>
+   </plugin>
+ </plugins>
+</build>
+5. <repositories>
+Specifies additional remote repositories to search for dependencies.
+<repositories>
+ <repository>
+  <id>my-repo</id>
+  <url>https://repo.mycompany.com/maven2</url>
+ </repository>
+</repositories>
+6. <properties>
+Custom variables used throughout the POM for reusability.
+<properties>
+<java.version>17</java.version>
+</properties>
+You can then use ${java.version} elsewhere in the file.
+7. <profiles>
+Conditional configurations for different environments or use cases (dev/test/prod).
+<profiles>
+ <profile>
+  <id>dev</id>
+   <properties>
+    <env>development</env>
+  </properties>
+ </profile>
+</profiles>
+Minimal Example pom.xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                           https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
+ 
+<groupId>com.example</groupId>
+<artifactId>hello-world</artifactId>
+<version>1.0.0</version>
+<packaging>jar</packaging>
+ 
+ <dependencies>
+   <dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.13.2</version>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+ 
+ <build>
+   <plugins>
+     <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>3.8.1</version>
+      <configuration>
+        <source>11</source>
+        <target>11</target>
+      </configuration>
+     </plugin>
+   </plugins>
+ </build>
+</project>
+Summary Table
+Element
+	
+Purpose
+
+
+<groupId>
+	
+Organization or project namespace
+
+
+<artifactId>
+	
+Name of the project/module
+
+
+<version>
+	
+Version of the build artifact
+
+
+<dependencies>
+	
+External libraries
+
+
+<build>
+	
+Build process config (plugins, dirs)
+
+
+<profiles>
+	
+Environment-specific configurations
+
+
+<properties>
+	
+Custom reusable variables
+ 
+ ===================================================================
+
+Maven Build Lifecycle
+In Apache Maven, the build lifecycle is a series of phases that define the steps Maven takes to build and deploy your project.
+Instead of writing custom scripts for compiling, testing, packaging, and installing your project, Maven provides standard lifecycles that handle all of that automatically.
+What Is a Build Lifecycle?
+A build lifecycle is a sequence of build phases, and each phase can execute one or more plugins or tasks.
+When you run:
+mvn package
+Maven executes all phases before and including package.
+The 3 Built-in Lifecycles
+Lifecycle
+	
+Purpose
+
+
+default
+	
+Builds the application (most used)
+
+
+clean
+	
+Cleans up the workspace
+
+
+site
+	
+Generates project documentation
+The default Lifecycle — Most Important
+This is the main lifecycle used to build your application.
+Here are its key phases, in order:
+Phase
+	
+Description
+
+
+validate
+	
+Validates the project structure and POM
+
+
+compile
+	
+Compiles the source code
+
+
+test
+	
+Runs unit tests (using Surefire plugin by default)
+
+
+package
+	
+Packages the code into a JAR, WAR, etc.
+
+
+verify
+	
+Runs additional checks (e.g., integration tests)
+
+
+install
+	
+Installs the package to your local repository
+
+
+deploy
+	
+Deploys the artifact to a remote repository
+ 
+
+
+ 
+Example:
+mvn install
+This runs:
+validate → compile → test → package → verify → install
+The clean Lifecycle
+Used to remove build artifacts.
+Phase
+	
+Description
+
+
+pre-clean
+	
+Runs tasks before cleaning
+
+
+clean
+	
+Deletes the target/ directory
+
+
+post-clean
+	
+Tasks to do after clean
+Example:
+mvn clean
+The site Lifecycle
+Used to generate documentation and reports for the project.
+Phase
+	
+Description
+
+
+pre-site
+	
+Prepares the documentation
+
+
+Site
+	
+Generates the project’s site
+
+
+post-site
+	
+Finalizes site processing
+
+
+site-deploy
+	
+Deploys the site to a web server
+Example:
+mvn site
+How Does It All Work?
+Each phase is associated with plugins (and goals). When you invoke a phase, Maven:
+Runs all previous phases in that lifecycle
+Executes configured plugins tied to that phase
+
+
+ 
+Example for package phase:
+<build>
+ <plugins>
+   <plugin>
+    <artifactId>maven-jar-plugin</artifactId>
+    <version>3.2.0</version>
+    <executions>
+      <execution>
+        <phase>package</phase>
+        <goals>
+          <goal>jar</goal>
+        </goals>
+      </execution>
+    </executions>
+   </plugin>
+ </plugins>
+</build>
+Summary of Common Lifecycle Commands
+Command
+	
+What It Does
+
+
+mvn compile
+	
+Compiles source code
+
+
+mvn test
+	
+Compiles and runs tests
+
+
+mvn package
+	
+Compiles, tests, and packages the code
+
+
+mvn install
+	
+Installs the package to local repo
+
+
+mvn deploy
+	
+Deploys to a remote repo (e.g., Nexus)
+
+
+mvn clean
+	
+Deletes target/ and cleans the project
+
+
+mvn site
+	
+Builds project documentation
+ 
+ ===========================================================================================
+Wrapper Classes in Java – MCQs
+1. Which of the following is not a wrapper class in Java?
+A. Integer
+B. Double
+C. String
+D. Float
+2. Wrapper classes are part of which Java package?
+A. java.lang
+B. java.util
+C. java.io
+D. java.wrapper
+3. Which method is used to convert a String to an int using a wrapper class?
+A. Integer.convert()
+B. Integer.valueOf()
+C. Integer.parse()
+D. Integer.parseInt()
+4. Which of these is the correct way to create an Integer object in Java?
+A. Integer i = 10;
+B. Integer i = Integer.valueOf(10);
+C. Integer i = new int(10);
+D. Integer i = valueOf(10);
+5. What will Integer.valueOf("123") return?
+A. 123 (primitive)
+B. Integer object with value 123
+C. "123"
+D. Compilation error
+6. What is the size (in bits) of the Integer wrapper class?
+A. 8
+B. 16
+C. 32
+D. 64
+7. Which of the following is true about autoboxing?
+A. Converting wrapper to primitive
+B. Converting primitive to wrapper automatically
+C. Requires explicit casting
+D. Not supported in Java
+8. Unboxing refers to:
+A. Converting wrapper to String
+B. Converting wrapper to primitive
+C. Converting primitive to wrapper
+D. None of the above
+9. Which statement is valid?
+A. int a = new Integer(5);
+B. Integer a = 5.5;
+C. Integer a = 5;
+D. Integer a = "5";
+10. Which wrapper class wraps a char primitive?
+A. CharacterWrapper
+B. Character
+C. Char
+D. ChWrapper
+11. What is the output of Integer.parseInt("123abc")?
+A. 123
+B. NumberFormatException
+C. 0
+D. Compilation error
+12. Which method converts a wrapper object to a string?
+A. toInt()
+B. valueOf()
+C. toString()
+D. parseInt()
+13. Which of the following is not a method in the Integer class?
+A. parseInt()
+B. valueOf()
+C. parseString()
+D. toString()
+14. Which wrapper class represents boolean values?
+A. Bool
+B. BooleanWrapper
+C. Boolean
+D. Logic
+15. Which method is used to convert an Integer to int?
+A. intValueOf()
+B. intValue()
+C. parseInt()
+D. toInt()
+16. What is returned by Double.valueOf("3.14")?
+A. 3.14 (primitive)
+B. Double object with value 3.14
+C. Error
+D. String
+*******17. Autoboxing was introduced in which Java version?
+A. Java 1.3
+B. Java 1.4
+C. Java 1.5
+D. Java 1.6
+18. Which method converts a string to a float primitive?
+A. Float.toFloat()
+B. Float.parseFloat()
+C. Float.convert()
+D. Float.valueOf()
+19. Which method is used to compare two wrapper objects?
+A. equals()
+B. compare()
+C. isEqual()
+D. checkEquals()
+20. What will new Integer(128) == new Integer(128) return?
+A. true
+B. false
+C. Compilation error
+D. Runtime exception
+21. What will Integer i = 100; Integer j = 100; i == j return?
+A. true
+B. false
+C. Error
+D. Depends on JVM
+
+
+ 
+22. What will Integer i = 200; Integer j = 200; i == j return?
+A. true
+B. false
+C. Error
+D. Compilation error
+23. What is the range of values cached by Integer wrapper in Java?
+A. -128 to 255
+B. -128 to 127 
+C. 0 to 127
+D. -256 to 255
+24. Which method returns a primitive value from the wrapper object?
+A. intValue()
+B. getValue()
+C. returnValue()
+D. parseInt()
+25. Which of the following are immutable?
+A. Primitives
+B. Wrapper classes
+C. Arrays
+D. None
+26. Boolean wrapper class can store how many distinct values?
+A. 1
+B. 2
+C. 3
+D. Unlimited
+27. What is the wrapper class for short primitive type?
+A. Small
+B. ShortWrapper
+C. Short
+D. S
+28. Which wrapper class is used for long data type?
+A. Large
+B. LongInt
+C. Long
+D. BigInteger
+
+
+ 
+29. What will new Boolean("true") return?
+A. false
+B. true
+C. Error
+D. Null
+30. What is the output of Boolean.parseBoolean("TRUE")?
+A. false
+B. true
+C. Error
+D. Compilation Error
+ 
